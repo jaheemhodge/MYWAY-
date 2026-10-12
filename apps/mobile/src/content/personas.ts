@@ -41,6 +41,27 @@ const DEMO_CLEAR_ANSWERS: Answers = {
 
 export const PERSONAS: DemoPersona[] = [
   {
+    id: "preview-day-1",
+    firstName: "Sam",
+    age: 62,
+    currentDay: 1,
+    primaryGoal: "walks",
+    pathwayId: "walk_capacity",
+    motivation: "I want to try the Day 1 internal preview.",
+    motivations: ["everyday"],
+    completedDays: [],
+    note: "Internal preview profile for Day 1. Content and safety approvals are not complete.",
+    answers: {
+      ...DEMO_CLEAR_ANSWERS,
+      age: 62,
+      primary_goal: "walks",
+      first_name: "Sam",
+      symptom_areas: ["limited_walking"],
+      usual_activity: "walks_sometimes",
+      walk_tolerance: "10_20",
+    },
+  },
+  {
     id: "demo-carol",
     firstName: "Carol",
     age: 68,

@@ -10,6 +10,7 @@ import {
 import { PERSONAS, type DemoPersona } from "../content/personas";
 import { evaluateCheckIn, evaluateIntake, type Answers, type SafetyOutcome } from "../lib/safety";
 import { clearState, loadState, saveState } from "../lib/persistence";
+import { day1IsInternalPreview } from "../content/day01";
 import { buildPlan, pathwayForGoal, type PathwayId, type SessionDay } from "../lib/program";
 import { syncCheckIn, syncCompletion, syncIntake } from "../api/client";
 
@@ -255,7 +256,8 @@ export function completeSession(
       blockNextSession: evaluation.blockNextSession,
     },
   });
-  if (!evaluation.blockNextSession && day === state.currentDay) {
+  const holdDayOne = day === 1 && day1IsInternalPreview();
+  if (!evaluation.blockNextSession && day === state.currentDay && !holdDayOne) {
     dispatch({ type: "ADVANCE_DAY" });
   }
   void syncCompletion({ profile_id: state.profile?.id, day, session_id: `day-${day}` });

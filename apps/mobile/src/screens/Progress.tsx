@@ -1,4 +1,5 @@
 import { PHASE_COPY } from "../content/calendar";
+import { clipStatusLabel, day1Steps } from "../content/day01";
 import { useApp } from "../store/AppState";
 
 export function Progress() {
@@ -47,6 +48,22 @@ export function Progress() {
           </div>
         </div>
       </div>
+      {state.completedDays.includes(1) ? (
+        <div className="card">
+          <strong>Day 1 internal preview</strong>
+          <p className="muted">
+            Day 1 can be marked done in this profile. That does not approve the session. These clips stay unfinished until the video files are uploaded.
+          </p>
+          <ul className="clip-status-list">
+            {day1Steps().map((step) => (
+              <li key={step.sceneId}>
+                <span>{step.title}</span>
+                <small>{clipStatusLabel(step)}</small>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ) : null}
       <h2 className="section-label">Toward {goalWords(state.profile?.primaryGoal)}</h2>
       <p className="muted">From your own weekly reflections. We do not invent improvement.</p>
       <div className="card">

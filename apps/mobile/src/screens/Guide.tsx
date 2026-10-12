@@ -1,7 +1,9 @@
 import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import { ChairFigure } from "../components/illustrations";
 import { Button } from "../components/ui/Primitives";
+import { day1ExerciseForMovement } from "../content/day01";
 import { MOVEMENTS } from "../content/movements";
+import { Day1Guide } from "./Day1";
 
 export function Guide() {
   const { exerciseId = "assisted_sit_stand" } = useParams();
@@ -10,6 +12,7 @@ export function Guide() {
   const movement = MOVEMENTS[exerciseId];
   const navigate = useNavigate();
 
+  if (day === "1" && day1ExerciseForMovement(exerciseId)) return <Day1Guide movementId={exerciseId} />;
   if (!movement) return <section className="screen">Unknown movement.</section>;
 
   return (
