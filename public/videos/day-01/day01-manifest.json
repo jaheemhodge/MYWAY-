@@ -1,0 +1,344 @@
+{
+  "schemaVersion": 1,
+  "dayId": "day-01",
+  "dayNumber": 1,
+  "sessionTitle": "Build Stronger Support for Your Knees",
+  "description": "An introduction to how the hips and leg muscles work with the knee during everyday movement, followed by three gentle, supported strengthening movements: seated knee extension, supported standing hip extension, and supported sit-to-stand.",
+  "audience": "Adults aged 50-70, including beginners",
+  "plannedTotalDurationSec": 478,
+  "contentStatus": "draft",
+  "publish": false,
+  "exerciseIds": [
+    "ex-seated-knee-extension",
+    "ex-supported-standing-hip-extension",
+    "ex-supported-sit-to-stand"
+  ],
+  "exercises": [
+    {
+      "id": "ex-seated-knee-extension",
+      "name": "Seated Knee Extension",
+      "sceneId": "knee-extension",
+      "sides": [
+        "right",
+        "left"
+      ],
+      "proposedDose": {
+        "sets": 1,
+        "reps": 5,
+        "perSide": true,
+        "tempo": "~2 s lift, 1 s pause, ~3 s lower",
+        "status": "draft - pending clinical review"
+      },
+      "equipment": [
+        "sturdy non-wheeled chair, ideally against a wall"
+      ],
+      "sourceRefs": [
+        {
+          "id": "src-seated-knee-strengthening",
+          "title": "Seated knee-strengthening transcript (previously supplied by producer)",
+          "transcriptOnFile": false
+        }
+      ],
+      "safetyNotes": [
+        "Use a stable chair without wheels; place it against a wall if possible.",
+        "Straighten only as far as feels comfortable; full straightening is not required.",
+        "Lower the leg with control rather than letting it drop.",
+        "Stop if you feel sharp pain, pain that builds, or cramping."
+      ]
+    },
+    {
+      "id": "ex-supported-standing-hip-extension",
+      "name": "Supported Standing Hip Extension",
+      "sceneId": "hip-extension",
+      "sides": [
+        "right",
+        "left"
+      ],
+      "proposedDose": {
+        "sets": 1,
+        "reps": 5,
+        "perSide": true,
+        "tempo": "~2 s back, 1 s pause, ~3 s return",
+        "status": "draft - pending clinical review"
+      },
+      "equipment": [
+        "stable kitchen counter or fixed surface at about hip height"
+      ],
+      "sourceRefs": [
+        {
+          "id": "src-ed-deboo-home-strengthening",
+          "title": "Ed Deboo home-strengthening transcript (previously supplied by producer)",
+          "transcriptOnFile": false
+        }
+      ],
+      "safetyNotes": [
+        "Keep both hands on a stable, fixed surface throughout.",
+        "Move the leg only a short distance; avoid arching the lower back or leaning the trunk forward.",
+        "Wear supportive footwear on a non-slip floor.",
+        "Stop if you feel unsteady, dizzy, or experience sharp pain."
+      ]
+    },
+    {
+      "id": "ex-supported-sit-to-stand",
+      "name": "Supported Sit-to-Stand",
+      "sceneId": "sit-to-stand",
+      "sides": [
+        "both"
+      ],
+      "proposedDose": {
+        "sets": 1,
+        "reps": 5,
+        "perSide": false,
+        "tempo": "~3 s up, 1 s pause, ~4 s down",
+        "condition": "when appropriate; fewer repetitions are acceptable",
+        "status": "draft - pending clinical review"
+      },
+      "equipment": [
+        "sturdy non-wheeled chair against a wall; armrests optional"
+      ],
+      "sourceRefs": [
+        {
+          "id": "src-functional-strength-sit-to-stand",
+          "title": "Functional-strength and sit-to-stand transcripts (previously supplied by producer)",
+          "transcriptOnFile": false
+        }
+      ],
+      "safetyNotes": [
+        "Chair must not move: no wheels, back against a wall.",
+        "Use hands on the seat or armrests for support as needed.",
+        "Lower slowly; avoid dropping into the seat.",
+        "Do fewer repetitions or skip if standing up causes sharp pain, dizziness, or unsteadiness."
+      ]
+    }
+  ],
+  "sourceReferences": [
+    {
+      "id": "src-tone-and-tighten-knee-hip",
+      "title": "Tone and Tighten - knee strengthening video presented by Dr. Jared, PT",
+      "role": "Primary educational concept (hip/ankle influence on knee, strengthening over stretching-only, controlled technique) and future exercise library: single-leg bridge, lateral hip hike, lateral band walk, single-leg balance with reaches, single-leg deadlift.",
+      "usage": "Concept reference only. No narration, footage, identity or branding reproduced.",
+      "url": null,
+      "transcriptOnFile": false
+    },
+    {
+      "id": "src-seated-knee-strengthening",
+      "title": "Seated knee-strengthening transcript (previously supplied by producer)",
+      "transcriptOnFile": false
+    },
+    {
+      "id": "src-ed-deboo-home-strengthening",
+      "title": "Ed Deboo home-strengthening transcript (previously supplied by producer)",
+      "transcriptOnFile": false
+    },
+    {
+      "id": "src-functional-strength-sit-to-stand",
+      "title": "Functional-strength and sit-to-stand transcripts (previously supplied by producer)",
+      "transcriptOnFile": false
+    }
+  ],
+  "media": {
+    "clips": [
+      {
+        "sceneId": "intro",
+        "title": "Introduction",
+        "file": null,
+        "targetFileName": "day01-introduction.mp4",
+        "timelineStart": 0,
+        "timelineEnd": 40,
+        "plannedDurationSec": 40,
+        "actualDurationSec": null,
+        "narration": "Welcome to Day 1. When everyday movements start feeling harder on your knees, it's worth looking beyond the knee itself. Your hips and leg muscles also play an important role in how you stand, walk, and move. Today, we'll introduce three gentle strengthening movements to help you begin building that support. Go at your own pace, and feel free to pause at any time.",
+        "mediaGenerationStatus": "not_generated",
+        "movementQualityApproval": {
+          "status": "unapproved",
+          "reviewedBy": null,
+          "reviewedAt": null,
+          "notes": null
+        },
+        "higgsfieldShotIds": [
+          "S1-A",
+          "S1-B",
+          "S1-C"
+        ]
+      },
+      {
+        "sceneId": "education",
+        "title": "How the hip, knee and ankle work together",
+        "file": null,
+        "targetFileName": null,
+        "timelineStart": 40,
+        "timelineEnd": 105,
+        "plannedDurationSec": 65,
+        "actualDurationSec": null,
+        "narration": "Your knee works mostly like a hinge. It bends and straightens as you sit down, stand up, walk, and climb stairs. But it doesn't work on its own. Above it is your hip, and below it is your ankle. How these joints move, and how well the surrounding muscles support them, can influence how your knee is guided through each step. Knee discomfort can have many different causes, and this video can't tell you what is behind yours. What we can do is gently build strength in the muscles around your hips and thighs. Stretching has its place, but strengthening helps those muscles support you during everyday movement. We'll keep every movement slow, controlled, and within a range that feels comfortable for you.",
+        "mediaGenerationStatus": "not_generated",
+        "movementQualityApproval": {
+          "status": "unapproved",
+          "reviewedBy": null,
+          "reviewedAt": null,
+          "notes": null
+        },
+        "higgsfieldShotIds": [
+          "S2-A",
+          "S2-B",
+          "S2-C",
+          "S2-D"
+        ],
+        "notes": "Recommended as motion-graphics diagrams (not AI video) for anatomical accuracy. Edit into the start of day01-introduction.mp4 or export as day01-education.mp4 and add to this manifest."
+      },
+      {
+        "sceneId": "knee-extension",
+        "title": "Seated Knee Extension",
+        "file": null,
+        "targetFileName": "day01-knee-extension.mp4",
+        "timelineStart": 105,
+        "timelineEnd": 230,
+        "plannedDurationSec": 125,
+        "actualDurationSec": null,
+        "narration": "Our first movement is the seated knee extension. Choose a sturdy chair without wheels, ideally placed against a wall so it can't slide. Sit tall toward the front of the seat, with both feet flat on the floor and your hands resting on the seat or your thighs. Slowly straighten your right knee, lifting your foot until your leg is as straight as feels comfortable. Pause briefly, then lower it back down with control. One. Two. Three. Four. Five. Rest your foot on the floor. Now let's switch to the left leg. Same slow lift, brief pause, and controlled return. One. Two. Three. Four. Five. Nicely done. Take a breath before we stand up.",
+        "mediaGenerationStatus": "not_generated",
+        "movementQualityApproval": {
+          "status": "unapproved",
+          "reviewedBy": null,
+          "reviewedAt": null,
+          "notes": null
+        },
+        "higgsfieldShotIds": [
+          "S3-A",
+          "S3-B",
+          "S3-C",
+          "S3-D",
+          "S3-E"
+        ]
+      },
+      {
+        "sceneId": "hip-extension",
+        "title": "Supported Standing Hip Extension",
+        "file": null,
+        "targetFileName": "day01-hip-extension.mp4",
+        "timelineStart": 230,
+        "timelineEnd": 350,
+        "plannedDurationSec": 120,
+        "actualDurationSec": null,
+        "narration": "Next is the supported standing hip extension. Stand facing a sturdy counter, with both hands resting on it for support. Stand tall, feet about hip-width apart, knees soft. Keeping your upper body upright, gently move your right leg backward, just a short distance. You don't need to go far. Then slowly bring it back. One. Two. Three. Four. Five. Bring that foot back beside the other one. Now the left leg. Keep your chest lifted and avoid leaning forward. One. Two. Three. Four. Five. Well done. If you'd like, take a short rest before the last movement.",
+        "mediaGenerationStatus": "not_generated",
+        "movementQualityApproval": {
+          "status": "unapproved",
+          "reviewedBy": null,
+          "reviewedAt": null,
+          "notes": null
+        },
+        "higgsfieldShotIds": [
+          "S4-A",
+          "S4-B",
+          "S4-C",
+          "S4-D",
+          "S4-E"
+        ]
+      },
+      {
+        "sceneId": "sit-to-stand",
+        "title": "Supported Sit-to-Stand",
+        "file": null,
+        "targetFileName": "day01-sit-to-stand.mp4",
+        "timelineStart": 350,
+        "timelineEnd": 450,
+        "plannedDurationSec": 100,
+        "actualDurationSec": null,
+        "narration": "Our final movement is the supported sit-to-stand. Use the same sturdy chair, placed against a wall. Move toward the front of the seat, feet flat and about hip-width apart, slightly behind your knees. You're welcome to use your hands on the seat or armrests for support. Lean your chest slightly forward, press through your feet, and stand up tall. Then reach back for the chair and lower yourself slowly to the seat. One. Two. Three. Four. Five. If five feels like too many today, it's fine to do fewer. Stop if anything feels sharp or unsteady.",
+        "mediaGenerationStatus": "not_generated",
+        "movementQualityApproval": {
+          "status": "unapproved",
+          "reviewedBy": null,
+          "reviewedAt": null,
+          "notes": null
+        },
+        "higgsfieldShotIds": [
+          "S5-A",
+          "S5-B",
+          "S5-C",
+          "S5-D"
+        ]
+      },
+      {
+        "sceneId": "closing",
+        "title": "Closing",
+        "file": null,
+        "targetFileName": "day01-closing.mp4",
+        "timelineStart": 450,
+        "timelineEnd": 478,
+        "plannedDurationSec": 28,
+        "actualDurationSec": null,
+        "narration": "That's Day 1 complete. A few gentle, consistent sessions are often more useful than trying to do everything at once. Before you go, please take a moment to complete today's check-in in the app. It helps shape what comes next for you. See you tomorrow.",
+        "mediaGenerationStatus": "not_generated",
+        "movementQualityApproval": {
+          "status": "unapproved",
+          "reviewedBy": null,
+          "reviewedAt": null,
+          "notes": null
+        },
+        "higgsfieldShotIds": [
+          "S6-A",
+          "S6-B"
+        ]
+      }
+    ],
+    "complete": {
+      "file": null,
+      "targetFileName": "day01-complete.mp4",
+      "mediaGenerationStatus": "not_produced"
+    },
+    "poster": {
+      "file": "public/videos/day-01/day01-poster.jpg",
+      "type": "typographic placeholder (no AI imagery)",
+      "notes": "Replace with a still from approved footage once available."
+    },
+    "captions": {
+      "file": "public/videos/day-01/day01-captions.vtt",
+      "language": "en",
+      "status": "draft - timed to planned timeline, not to recorded audio"
+    },
+    "script": "public/videos/day-01/day01-script.md",
+    "higgsfieldPrompts": "public/videos/day-01/day01-higgsfield-prompts.md"
+  },
+  "generalSafetyNotes": [
+    "This session is educational and does not diagnose or treat any condition.",
+    "Knee discomfort can have many causes. Check with a doctor or physical therapist before starting, especially after recent injury, surgery, or joint replacement, or if you have balance concerns.",
+    "Move within a comfortable range. Stop if you feel sharp pain, pain that builds, dizziness, chest discomfort, or unsteadiness.",
+    "Use only stable, non-wheeled chairs and fixed support surfaces.",
+    "No exercise is suitable for everyone; fewer repetitions or skipping an exercise is always acceptable."
+  ],
+  "generation": {
+    "tool": "Higgsfield",
+    "connectorCapabilities": "read-only (catalog, balance, history); cannot generate media",
+    "mediaGenerationStatus": "not_generated",
+    "recommendedVideoModel": "seedance_2_0 (Bytedance) via Higgsfield web app",
+    "recommendedImageModel": "soul_2 or nano_banana_pro for instructor/set reference stills"
+  },
+  "approvals": {
+    "movementQuality": {
+      "status": "unapproved",
+      "reviewedBy": null,
+      "reviewedAt": null,
+      "notes": null
+    },
+    "clinicalContent": {
+      "status": "unapproved",
+      "reviewedBy": null,
+      "reviewedAt": null,
+      "notes": null
+    },
+    "safetyCopy": {
+      "status": "unapproved",
+      "reviewedBy": null,
+      "reviewedAt": null,
+      "notes": null
+    },
+    "captions": {
+      "status": "unapproved",
+      "reviewedBy": null,
+      "reviewedAt": null,
+      "notes": null
+    }
+  }
+}
