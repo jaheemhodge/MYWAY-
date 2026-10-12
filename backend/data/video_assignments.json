@@ -1,0 +1,35 @@
+{
+  "version": "0.1.0-demo",
+  "note": "Replace placeholder URLs with original filmed assets. Do not point at copyrighted YouTube media.",
+  "exercises": {
+    "seated_knee_extension": {
+      "url": "/videos/movement-placeholder.mp4",
+      "alt_url": "/videos/movement-placeholder.mp4",
+      "captions_url": null,
+      "version": "placeholder-1",
+      "status": "placeholder"
+    },
+    "supported_hip_extension": {
+      "url": "/videos/movement-placeholder.mp4",
+      "alt_url": null,
+      "captions_url": null,
+      "version": "placeholder-1",
+      "status": "placeholder"
+    },
+    "assisted_sit_stand": {
+      "url": "/videos/movement-placeholder.mp4",
+      "alt_url": "/videos/movement-placeholder.mp4",
+      "captions_url": null,
+      "version": "placeholder-1",
+      "status": "placeholder"
+    }
+  },
+  "education": {
+    "day1_knees": {
+      "url": "/videos/education-placeholder.mp4",
+      "title": "Build Stronger Support for Your Knees",
+      "version": "placeholder-1",
+      "status": "placeholder"
+    }
+  }
+}

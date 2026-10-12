@@ -1,0 +1,1853 @@
+[
+  {
+    "id": "seated_march",
+    "name": "Seated marching",
+    "source_transcript_ids": [
+      "T06"
+    ],
+    "category": "mobility",
+    "ability": "warmup",
+    "tier": 1,
+    "equipment": [
+      "chair"
+    ],
+    "risk_gate": "GENERAL_CANDIDATE",
+    "eligible_when": "Independently mobile, no concerning screen answers, and clinician-approved suitability for this exact movement.",
+    "provisional_dosage_NOT_PRESCRIPTION": "Candidate research range: 3\u20138 gentle, comfortable repetitions; no forced end range. NOT APPROVED.",
+    "modification_to_review": "Seated or supported range, fewer reps and shorter movement where applicable; exercise-specific technique pending video and clinician review.",
+    "safety_considerations": [
+      "Screen injury/recent surgery and relevant restrictions; avoid forced or uncontrolled movements."
+    ],
+    "stop_rule": "Stop immediately for chest pain, fainting, severe breathlessness, sudden neurologic change, or severe new pain; escalate per approved protocol.",
+    "source_evidence": "YouTube transcript technique only; not independent efficacy evidence. Compare authoritative guideline and specific exercise evidence during clinical audit.",
+    "clinical_approval": "PENDING",
+    "media_verified": false,
+    "contraindications_signed_off": false,
+    "v2_mvp_classification": "INTRODUCTORY_CANDIDATE_REVIEW_REQUIRED",
+    "deliverable_in_research_build": false,
+    "starting_dose_design_only": "1 set of 5 controlled repetitions (or 20\u201330 seconds for easy seated marching); no added weight; pause between activities. Individual clinician to set final dose.",
+    "source_dosage_preserved_in_original_audit": true,
+    "risk_notes_v2": "Do not use without screening and clinical content approval; avoid forcing motion; report new or unusual pain, dizziness, weakness, imbalance or other concerning symptoms."
+  },
+  {
+    "id": "seated_knee_extension",
+    "name": "Seated knee extension",
+    "source_transcript_ids": [
+      "T06",
+      "T11"
+    ],
+    "category": "strength",
+    "ability": "chair_rise",
+    "tier": 1,
+    "equipment": [
+      "chair"
+    ],
+    "risk_gate": "GENERAL_CANDIDATE",
+    "eligible_when": "Independently mobile, no concerning screen answers, and clinician-approved suitability for this exact movement.",
+    "provisional_dosage_NOT_PRESCRIPTION": "Candidate research range: 1 set of 5\u201310 controlled reps initially; possible progression to 2 sets, 2 days/week. NOT APPROVED; individualize.",
+    "modification_to_review": "Seated or supported range, fewer reps and shorter movement where applicable; exercise-specific technique pending video and clinician review.",
+    "safety_considerations": [
+      "Screen injury/recent surgery and relevant restrictions; avoid forced or uncontrolled movements."
+    ],
+    "stop_rule": "Stop immediately for chest pain, fainting, severe breathlessness, sudden neurologic change, or severe new pain; escalate per approved protocol.",
+    "source_evidence": "YouTube transcript technique only; not independent efficacy evidence. Compare authoritative guideline and specific exercise evidence during clinical audit.",
+    "clinical_approval": "PENDING",
+    "media_verified": false,
+    "contraindications_signed_off": false,
+    "v2_mvp_classification": "INTRODUCTORY_CANDIDATE_REVIEW_REQUIRED",
+    "deliverable_in_research_build": false,
+    "starting_dose_design_only": "1 set of 5 controlled repetitions (or 20\u201330 seconds for easy seated marching); no added weight; pause between activities. Individual clinician to set final dose.",
+    "source_dosage_preserved_in_original_audit": true,
+    "risk_notes_v2": "Do not use without screening and clinical content approval; avoid forcing motion; report new or unusual pain, dizziness, weakness, imbalance or other concerning symptoms."
+  },
+  {
+    "id": "seated_calf_toe_raise",
+    "name": "Seated heel and toe raises",
+    "source_transcript_ids": [
+      "T06"
+    ],
+    "category": "strength",
+    "ability": "walking",
+    "tier": 1,
+    "equipment": [
+      "chair"
+    ],
+    "risk_gate": "GENERAL_CANDIDATE",
+    "eligible_when": "Independently mobile, no concerning screen answers, and clinician-approved suitability for this exact movement.",
+    "provisional_dosage_NOT_PRESCRIPTION": "Candidate research range: 1 set of 5\u201310 controlled reps initially; possible progression to 2 sets, 2 days/week. NOT APPROVED; individualize.",
+    "modification_to_review": "Seated or supported range, fewer reps and shorter movement where applicable; exercise-specific technique pending video and clinician review.",
+    "safety_considerations": [
+      "Screen injury/recent surgery and relevant restrictions; avoid forced or uncontrolled movements."
+    ],
+    "stop_rule": "Stop immediately for chest pain, fainting, severe breathlessness, sudden neurologic change, or severe new pain; escalate per approved protocol.",
+    "source_evidence": "YouTube transcript technique only; not independent efficacy evidence. Compare authoritative guideline and specific exercise evidence during clinical audit.",
+    "clinical_approval": "PENDING",
+    "media_verified": false,
+    "contraindications_signed_off": false,
+    "v2_mvp_classification": "INTRODUCTORY_CANDIDATE_REVIEW_REQUIRED",
+    "deliverable_in_research_build": false,
+    "starting_dose_design_only": "1 set of 5 controlled repetitions (or 20\u201330 seconds for easy seated marching); no added weight; pause between activities. Individual clinician to set final dose.",
+    "source_dosage_preserved_in_original_audit": true,
+    "risk_notes_v2": "Do not use without screening and clinical content approval; avoid forcing motion; report new or unusual pain, dizziness, weakness, imbalance or other concerning symptoms."
+  },
+  {
+    "id": "seated_thigh_squeeze",
+    "name": "Seated adductor squeeze",
+    "source_transcript_ids": [
+      "T06"
+    ],
+    "category": "strength",
+    "ability": "chair_rise",
+    "tier": 1,
+    "equipment": [
+      "chair",
+      "pillow"
+    ],
+    "risk_gate": "GENERAL_CANDIDATE",
+    "eligible_when": "Independently mobile, no concerning screen answers, and clinician-approved suitability for this exact movement.",
+    "provisional_dosage_NOT_PRESCRIPTION": "Candidate research range: 1 set of 5\u201310 controlled reps initially; possible progression to 2 sets, 2 days/week. NOT APPROVED; individualize.",
+    "modification_to_review": "Seated or supported range, fewer reps and shorter movement where applicable; exercise-specific technique pending video and clinician review.",
+    "safety_considerations": [
+      "Screen injury/recent surgery and relevant restrictions; avoid forced or uncontrolled movements."
+    ],
+    "stop_rule": "Stop immediately for chest pain, fainting, severe breathlessness, sudden neurologic change, or severe new pain; escalate per approved protocol.",
+    "source_evidence": "YouTube transcript technique only; not independent efficacy evidence. Compare authoritative guideline and specific exercise evidence during clinical audit.",
+    "clinical_approval": "PENDING",
+    "media_verified": false,
+    "contraindications_signed_off": false,
+    "v2_mvp_classification": "NOT_IN_STARTER_REQUIRES_REVIEW",
+    "deliverable_in_research_build": false,
+    "starting_dose_design_only": "No automatic dosage or assignment in starter pathway.",
+    "source_dosage_preserved_in_original_audit": true,
+    "risk_notes_v2": "Not automatically delivered. Requires indication-specific screening, technique and safety approval."
+  },
+  {
+    "id": "assisted_sit_stand",
+    "name": "Arm-assisted sit-to-stand",
+    "source_transcript_ids": [
+      "T07",
+      "T08"
+    ],
+    "category": "strength",
+    "ability": "chair_rise",
+    "tier": 1,
+    "equipment": [
+      "chair"
+    ],
+    "risk_gate": "GENERAL_CANDIDATE",
+    "eligible_when": "Independently mobile, no concerning screen answers, and clinician-approved suitability for this exact movement.",
+    "provisional_dosage_NOT_PRESCRIPTION": "Candidate research range: 1 set of 5\u201310 controlled reps initially; possible progression to 2 sets, 2 days/week. NOT APPROVED; individualize.",
+    "modification_to_review": "Seated or supported range, fewer reps and shorter movement where applicable; exercise-specific technique pending video and clinician review.",
+    "safety_considerations": [
+      "Screen injury/recent surgery and relevant restrictions; avoid forced or uncontrolled movements."
+    ],
+    "stop_rule": "Stop immediately for chest pain, fainting, severe breathlessness, sudden neurologic change, or severe new pain; escalate per approved protocol.",
+    "source_evidence": "YouTube transcript technique only; not independent efficacy evidence. Compare authoritative guideline and specific exercise evidence during clinical audit.",
+    "clinical_approval": "PENDING",
+    "media_verified": false,
+    "contraindications_signed_off": false,
+    "v2_mvp_classification": "INTRODUCTORY_CANDIDATE_REVIEW_REQUIRED",
+    "deliverable_in_research_build": false,
+    "starting_dose_design_only": "1 set of 5 controlled repetitions (or 20\u201330 seconds for easy seated marching); no added weight; pause between activities. Individual clinician to set final dose.",
+    "source_dosage_preserved_in_original_audit": true,
+    "risk_notes_v2": "Do not use without screening and clinical content approval; avoid forcing motion; report new or unusual pain, dizziness, weakness, imbalance or other concerning symptoms."
+  },
+  {
+    "id": "sit_stand",
+    "name": "Sit-to-stand",
+    "source_transcript_ids": [
+      "T07",
+      "T08"
+    ],
+    "category": "strength",
+    "ability": "chair_rise",
+    "tier": 2,
+    "equipment": [
+      "chair"
+    ],
+    "risk_gate": "GENERAL_CANDIDATE",
+    "eligible_when": "Independently mobile, no concerning screen answers, and clinician-approved suitability for this exact movement.",
+    "provisional_dosage_NOT_PRESCRIPTION": "Candidate research range: 1 set of 5\u201310 controlled reps initially; possible progression to 2 sets, 2 days/week. NOT APPROVED; individualize.",
+    "modification_to_review": "Seated or supported range, fewer reps and shorter movement where applicable; exercise-specific technique pending video and clinician review.",
+    "safety_considerations": [
+      "Screen injury/recent surgery and relevant restrictions; avoid forced or uncontrolled movements."
+    ],
+    "stop_rule": "Stop immediately for chest pain, fainting, severe breathlessness, sudden neurologic change, or severe new pain; escalate per approved protocol.",
+    "source_evidence": "YouTube transcript technique only; not independent efficacy evidence. Compare authoritative guideline and specific exercise evidence during clinical audit.",
+    "clinical_approval": "PENDING",
+    "media_verified": false,
+    "contraindications_signed_off": false,
+    "v2_mvp_classification": "NOT_IN_STARTER_REQUIRES_REVIEW",
+    "deliverable_in_research_build": false,
+    "starting_dose_design_only": "No automatic dosage or assignment in starter pathway.",
+    "source_dosage_preserved_in_original_audit": true,
+    "risk_notes_v2": "Not automatically delivered. Requires indication-specific screening, technique and safety approval."
+  },
+  {
+    "id": "loaded_sit_stand",
+    "name": "Lightly loaded sit-to-stand",
+    "source_transcript_ids": [
+      "T07",
+      "T08"
+    ],
+    "category": "strength",
+    "ability": "chair_rise",
+    "tier": 3,
+    "equipment": [
+      "chair",
+      "light_weight"
+    ],
+    "risk_gate": "GENERAL_CANDIDATE",
+    "eligible_when": "Independently mobile, no concerning screen answers, and clinician-approved suitability for this exact movement.",
+    "provisional_dosage_NOT_PRESCRIPTION": "Candidate research range: 1 set of 5\u201310 controlled reps initially; possible progression to 2 sets, 2 days/week. NOT APPROVED; individualize.",
+    "modification_to_review": "Consider lower-tier movement of same ability; no unsupervised downgrade unless explicitly mapped and reviewed.",
+    "safety_considerations": [
+      "Screen injury/recent surgery and relevant restrictions; avoid forced or uncontrolled movements."
+    ],
+    "stop_rule": "Stop immediately for chest pain, fainting, severe breathlessness, sudden neurologic change, or severe new pain; escalate per approved protocol.",
+    "source_evidence": "YouTube transcript technique only; not independent efficacy evidence. Compare authoritative guideline and specific exercise evidence during clinical audit.",
+    "clinical_approval": "PENDING",
+    "media_verified": false,
+    "contraindications_signed_off": false,
+    "v2_mvp_classification": "NOT_IN_STARTER_REQUIRES_REVIEW",
+    "deliverable_in_research_build": false,
+    "starting_dose_design_only": "No automatic dosage or assignment in starter pathway.",
+    "source_dosage_preserved_in_original_audit": true,
+    "risk_notes_v2": "Not automatically delivered. Requires indication-specific screening, technique and safety approval."
+  },
+  {
+    "id": "mini_squat",
+    "name": "Supported mini squat",
+    "source_transcript_ids": [
+      "T05",
+      "T15"
+    ],
+    "category": "strength",
+    "ability": "chair_rise",
+    "tier": 2,
+    "equipment": [
+      "counter"
+    ],
+    "risk_gate": "GENERAL_CANDIDATE",
+    "eligible_when": "Independently mobile, no concerning screen answers, and clinician-approved suitability for this exact movement.",
+    "provisional_dosage_NOT_PRESCRIPTION": "Candidate research range: 1 set of 5\u201310 controlled reps initially; possible progression to 2 sets, 2 days/week. NOT APPROVED; individualize.",
+    "modification_to_review": "Seated or supported range, fewer reps and shorter movement where applicable; exercise-specific technique pending video and clinician review.",
+    "safety_considerations": [
+      "Screen injury/recent surgery and relevant restrictions; avoid forced or uncontrolled movements."
+    ],
+    "stop_rule": "Stop immediately for chest pain, fainting, severe breathlessness, sudden neurologic change, or severe new pain; escalate per approved protocol.",
+    "source_evidence": "YouTube transcript technique only; not independent efficacy evidence. Compare authoritative guideline and specific exercise evidence during clinical audit.",
+    "clinical_approval": "PENDING",
+    "media_verified": false,
+    "contraindications_signed_off": false,
+    "v2_mvp_classification": "INTRODUCTORY_CANDIDATE_REVIEW_REQUIRED",
+    "deliverable_in_research_build": false,
+    "starting_dose_design_only": "1 set of 5 controlled repetitions (or 20\u201330 seconds for easy seated marching); no added weight; pause between activities. Individual clinician to set final dose.",
+    "source_dosage_preserved_in_original_audit": true,
+    "risk_notes_v2": "Do not use without screening and clinical content approval; avoid forcing motion; report new or unusual pain, dizziness, weakness, imbalance or other concerning symptoms."
+  },
+  {
+    "id": "horse_stance",
+    "name": "Modified supported horse stance",
+    "source_transcript_ids": [
+      "T05"
+    ],
+    "category": "strength",
+    "ability": "chair_rise",
+    "tier": 2,
+    "equipment": [
+      "chair"
+    ],
+    "risk_gate": "GENERAL_CANDIDATE",
+    "eligible_when": "Independently mobile, no concerning screen answers, and clinician-approved suitability for this exact movement.",
+    "provisional_dosage_NOT_PRESCRIPTION": "Candidate research range: 1 set of 5\u201310 controlled reps initially; possible progression to 2 sets, 2 days/week. NOT APPROVED; individualize.",
+    "modification_to_review": "Seated or supported range, fewer reps and shorter movement where applicable; exercise-specific technique pending video and clinician review.",
+    "safety_considerations": [
+      "Screen injury/recent surgery and relevant restrictions; avoid forced or uncontrolled movements."
+    ],
+    "stop_rule": "Stop immediately for chest pain, fainting, severe breathlessness, sudden neurologic change, or severe new pain; escalate per approved protocol.",
+    "source_evidence": "YouTube transcript technique only; not independent efficacy evidence. Compare authoritative guideline and specific exercise evidence during clinical audit.",
+    "clinical_approval": "PENDING",
+    "media_verified": false,
+    "contraindications_signed_off": false,
+    "v2_mvp_classification": "NOT_IN_STARTER_REQUIRES_REVIEW",
+    "deliverable_in_research_build": false,
+    "starting_dose_design_only": "No automatic dosage or assignment in starter pathway.",
+    "source_dosage_preserved_in_original_audit": true,
+    "risk_notes_v2": "Not automatically delivered. Requires indication-specific screening, technique and safety approval."
+  },
+  {
+    "id": "supported_hip_hinge",
+    "name": "Supported hip hinge",
+    "source_transcript_ids": [
+      "T07",
+      "T11"
+    ],
+    "category": "strength",
+    "ability": "bend_lift",
+    "tier": 1,
+    "equipment": [
+      "counter"
+    ],
+    "risk_gate": "GENERAL_CANDIDATE",
+    "eligible_when": "Independently mobile, no concerning screen answers, and clinician-approved suitability for this exact movement.",
+    "provisional_dosage_NOT_PRESCRIPTION": "Candidate research range: 1 set of 5\u201310 controlled reps initially; possible progression to 2 sets, 2 days/week. NOT APPROVED; individualize.",
+    "modification_to_review": "Seated or supported range, fewer reps and shorter movement where applicable; exercise-specific technique pending video and clinician review.",
+    "safety_considerations": [
+      "Screen injury/recent surgery and relevant restrictions; avoid forced or uncontrolled movements."
+    ],
+    "stop_rule": "Stop immediately for chest pain, fainting, severe breathlessness, sudden neurologic change, or severe new pain; escalate per approved protocol.",
+    "source_evidence": "YouTube transcript technique only; not independent efficacy evidence. Compare authoritative guideline and specific exercise evidence during clinical audit.",
+    "clinical_approval": "PENDING",
+    "media_verified": false,
+    "contraindications_signed_off": false,
+    "v2_mvp_classification": "INTRODUCTORY_CANDIDATE_REVIEW_REQUIRED",
+    "deliverable_in_research_build": false,
+    "starting_dose_design_only": "1 set of 5 controlled repetitions (or 20\u201330 seconds for easy seated marching); no added weight; pause between activities. Individual clinician to set final dose.",
+    "source_dosage_preserved_in_original_audit": true,
+    "risk_notes_v2": "Do not use without screening and clinical content approval; avoid forcing motion; report new or unusual pain, dizziness, weakness, imbalance or other concerning symptoms."
+  },
+  {
+    "id": "hip_hinge",
+    "name": "Unloaded hip hinge",
+    "source_transcript_ids": [
+      "T07",
+      "T11"
+    ],
+    "category": "strength",
+    "ability": "bend_lift",
+    "tier": 2,
+    "equipment": [
+      "none"
+    ],
+    "risk_gate": "GENERAL_CANDIDATE",
+    "eligible_when": "Independently mobile, no concerning screen answers, and clinician-approved suitability for this exact movement.",
+    "provisional_dosage_NOT_PRESCRIPTION": "Candidate research range: 1 set of 5\u201310 controlled reps initially; possible progression to 2 sets, 2 days/week. NOT APPROVED; individualize.",
+    "modification_to_review": "Seated or supported range, fewer reps and shorter movement where applicable; exercise-specific technique pending video and clinician review.",
+    "safety_considerations": [
+      "Check spine-related symptoms, fracture risk and clinician restrictions; no automatic directional-preference test."
+    ],
+    "stop_rule": "Stop immediately for chest pain, fainting, severe breathlessness, sudden neurologic change, or severe new pain; escalate per approved protocol.",
+    "source_evidence": "YouTube transcript technique only; not independent efficacy evidence. Compare authoritative guideline and specific exercise evidence during clinical audit.",
+    "clinical_approval": "PENDING",
+    "media_verified": false,
+    "contraindications_signed_off": false,
+    "v2_mvp_classification": "NOT_IN_STARTER_REQUIRES_REVIEW",
+    "deliverable_in_research_build": false,
+    "starting_dose_design_only": "No automatic dosage or assignment in starter pathway.",
+    "source_dosage_preserved_in_original_audit": true,
+    "risk_notes_v2": "Not automatically delivered. Requires indication-specific screening, technique and safety approval."
+  },
+  {
+    "id": "light_rdl",
+    "name": "Light Romanian deadlift",
+    "source_transcript_ids": [
+      "T13"
+    ],
+    "category": "strength",
+    "ability": "bend_lift",
+    "tier": 3,
+    "equipment": [
+      "light_weight"
+    ],
+    "risk_gate": "GENERAL_CANDIDATE",
+    "eligible_when": "Independently mobile, no concerning screen answers, and clinician-approved suitability for this exact movement.",
+    "provisional_dosage_NOT_PRESCRIPTION": "Candidate research range: 1 set of 5\u201310 controlled reps initially; possible progression to 2 sets, 2 days/week. NOT APPROVED; individualize.",
+    "modification_to_review": "Consider lower-tier movement of same ability; no unsupervised downgrade unless explicitly mapped and reviewed.",
+    "safety_considerations": [
+      "Check spine-related symptoms, fracture risk and clinician restrictions; no automatic directional-preference test."
+    ],
+    "stop_rule": "Stop immediately for chest pain, fainting, severe breathlessness, sudden neurologic change, or severe new pain; escalate per approved protocol.",
+    "source_evidence": "YouTube transcript technique only; not independent efficacy evidence. Compare authoritative guideline and specific exercise evidence during clinical audit.",
+    "clinical_approval": "PENDING",
+    "media_verified": false,
+    "contraindications_signed_off": false,
+    "v2_mvp_classification": "NOT_IN_STARTER_REQUIRES_REVIEW",
+    "deliverable_in_research_build": false,
+    "starting_dose_design_only": "No automatic dosage or assignment in starter pathway.",
+    "source_dosage_preserved_in_original_audit": true,
+    "risk_notes_v2": "Not automatically delivered. Requires indication-specific screening, technique and safety approval."
+  },
+  {
+    "id": "wall_pushup",
+    "name": "Wall push-up",
+    "source_transcript_ids": [
+      "T07"
+    ],
+    "category": "strength",
+    "ability": "push",
+    "tier": 1,
+    "equipment": [
+      "wall"
+    ],
+    "risk_gate": "GENERAL_CANDIDATE",
+    "eligible_when": "Independently mobile, no concerning screen answers, and clinician-approved suitability for this exact movement.",
+    "provisional_dosage_NOT_PRESCRIPTION": "Candidate research range: 1 set of 5\u201310 controlled reps initially; possible progression to 2 sets, 2 days/week. NOT APPROVED; individualize.",
+    "modification_to_review": "Seated or supported range, fewer reps and shorter movement where applicable; exercise-specific technique pending video and clinician review.",
+    "safety_considerations": [
+      "Screen injury/recent surgery and relevant restrictions; avoid forced or uncontrolled movements."
+    ],
+    "stop_rule": "Stop immediately for chest pain, fainting, severe breathlessness, sudden neurologic change, or severe new pain; escalate per approved protocol.",
+    "source_evidence": "YouTube transcript technique only; not independent efficacy evidence. Compare authoritative guideline and specific exercise evidence during clinical audit.",
+    "clinical_approval": "PENDING",
+    "media_verified": false,
+    "contraindications_signed_off": false,
+    "v2_mvp_classification": "INTRODUCTORY_CANDIDATE_REVIEW_REQUIRED",
+    "deliverable_in_research_build": false,
+    "starting_dose_design_only": "1 set of 5 controlled repetitions (or 20\u201330 seconds for easy seated marching); no added weight; pause between activities. Individual clinician to set final dose.",
+    "source_dosage_preserved_in_original_audit": true,
+    "risk_notes_v2": "Do not use without screening and clinical content approval; avoid forcing motion; report new or unusual pain, dizziness, weakness, imbalance or other concerning symptoms."
+  },
+  {
+    "id": "counter_pushup",
+    "name": "Countertop push-up",
+    "source_transcript_ids": [
+      "T07"
+    ],
+    "category": "strength",
+    "ability": "push",
+    "tier": 2,
+    "equipment": [
+      "counter"
+    ],
+    "risk_gate": "GENERAL_CANDIDATE",
+    "eligible_when": "Independently mobile, no concerning screen answers, and clinician-approved suitability for this exact movement.",
+    "provisional_dosage_NOT_PRESCRIPTION": "Candidate research range: 1 set of 5\u201310 controlled reps initially; possible progression to 2 sets, 2 days/week. NOT APPROVED; individualize.",
+    "modification_to_review": "Seated or supported range, fewer reps and shorter movement where applicable; exercise-specific technique pending video and clinician review.",
+    "safety_considerations": [
+      "Screen injury/recent surgery and relevant restrictions; avoid forced or uncontrolled movements."
+    ],
+    "stop_rule": "Stop immediately for chest pain, fainting, severe breathlessness, sudden neurologic change, or severe new pain; escalate per approved protocol.",
+    "source_evidence": "YouTube transcript technique only; not independent efficacy evidence. Compare authoritative guideline and specific exercise evidence during clinical audit.",
+    "clinical_approval": "PENDING",
+    "media_verified": false,
+    "contraindications_signed_off": false,
+    "v2_mvp_classification": "NOT_IN_STARTER_REQUIRES_REVIEW",
+    "deliverable_in_research_build": false,
+    "starting_dose_design_only": "No automatic dosage or assignment in starter pathway.",
+    "source_dosage_preserved_in_original_audit": true,
+    "risk_notes_v2": "Not automatically delivered. Requires indication-specific screening, technique and safety approval."
+  },
+  {
+    "id": "light_row",
+    "name": "Standing bent-over row",
+    "source_transcript_ids": [
+      "T07"
+    ],
+    "category": "strength",
+    "ability": "pull",
+    "tier": 2,
+    "equipment": [
+      "light_weight"
+    ],
+    "risk_gate": "GENERAL_CANDIDATE",
+    "eligible_when": "Independently mobile, no concerning screen answers, and clinician-approved suitability for this exact movement.",
+    "provisional_dosage_NOT_PRESCRIPTION": "Candidate research range: 1 set of 5\u201310 controlled reps initially; possible progression to 2 sets, 2 days/week. NOT APPROVED; individualize.",
+    "modification_to_review": "Seated or supported range, fewer reps and shorter movement where applicable; exercise-specific technique pending video and clinician review.",
+    "safety_considerations": [
+      "Screen injury/recent surgery and relevant restrictions; avoid forced or uncontrolled movements."
+    ],
+    "stop_rule": "Stop immediately for chest pain, fainting, severe breathlessness, sudden neurologic change, or severe new pain; escalate per approved protocol.",
+    "source_evidence": "YouTube transcript technique only; not independent efficacy evidence. Compare authoritative guideline and specific exercise evidence during clinical audit.",
+    "clinical_approval": "PENDING",
+    "media_verified": false,
+    "contraindications_signed_off": false,
+    "v2_mvp_classification": "NOT_IN_STARTER_REQUIRES_REVIEW",
+    "deliverable_in_research_build": false,
+    "starting_dose_design_only": "No automatic dosage or assignment in starter pathway.",
+    "source_dosage_preserved_in_original_audit": true,
+    "risk_notes_v2": "Not automatically delivered. Requires indication-specific screening, technique and safety approval."
+  },
+  {
+    "id": "standing_march",
+    "name": "Supported standing march",
+    "source_transcript_ids": [
+      "T10"
+    ],
+    "category": "balance",
+    "ability": "walking",
+    "tier": 1,
+    "equipment": [
+      "counter"
+    ],
+    "risk_gate": "FALL_RISK_REVIEW",
+    "eligible_when": "Not auto-eligible; obtain pathway-specific clinician clearance or remove from automated offer.",
+    "provisional_dosage_NOT_PRESCRIPTION": "Candidate research range: short supported practice only. Exact holds/reps and supervision MUST be set by clinician.",
+    "modification_to_review": "Seated or supported range, fewer reps and shorter movement where applicable; exercise-specific technique pending video and clinician review.",
+    "safety_considerations": [
+      "Risk of falls; stable surface and environment assessment; no automatic withdrawal of hand support."
+    ],
+    "stop_rule": "Stop immediately for chest pain, fainting, severe breathlessness, sudden neurologic change, or severe new pain; escalate per approved protocol.",
+    "source_evidence": "YouTube transcript technique only; not independent efficacy evidence. Compare authoritative guideline and specific exercise evidence during clinical audit.",
+    "clinical_approval": "PENDING",
+    "media_verified": false,
+    "contraindications_signed_off": false,
+    "v2_mvp_classification": "SPECIALIST_REVIEW_ONLY",
+    "deliverable_in_research_build": false,
+    "starting_dose_design_only": "No automatic dosage or assignment in starter pathway.",
+    "source_dosage_preserved_in_original_audit": true,
+    "risk_notes_v2": "Not automatically delivered. Requires indication-specific screening, technique and safety approval."
+  },
+  {
+    "id": "supported_hip_extension",
+    "name": "Supported hip extension",
+    "source_transcript_ids": [
+      "T10"
+    ],
+    "category": "strength",
+    "ability": "walking",
+    "tier": 1,
+    "equipment": [
+      "counter"
+    ],
+    "risk_gate": "GENERAL_CANDIDATE",
+    "eligible_when": "Independently mobile, no concerning screen answers, and clinician-approved suitability for this exact movement.",
+    "provisional_dosage_NOT_PRESCRIPTION": "Candidate research range: 1 set of 5\u201310 controlled reps initially; possible progression to 2 sets, 2 days/week. NOT APPROVED; individualize.",
+    "modification_to_review": "Seated or supported range, fewer reps and shorter movement where applicable; exercise-specific technique pending video and clinician review.",
+    "safety_considerations": [
+      "Screen injury/recent surgery and relevant restrictions; avoid forced or uncontrolled movements."
+    ],
+    "stop_rule": "Stop immediately for chest pain, fainting, severe breathlessness, sudden neurologic change, or severe new pain; escalate per approved protocol.",
+    "source_evidence": "YouTube transcript technique only; not independent efficacy evidence. Compare authoritative guideline and specific exercise evidence during clinical audit.",
+    "clinical_approval": "PENDING",
+    "media_verified": false,
+    "contraindications_signed_off": false,
+    "v2_mvp_classification": "INTRODUCTORY_CANDIDATE_REVIEW_REQUIRED",
+    "deliverable_in_research_build": false,
+    "starting_dose_design_only": "1 set of 5 controlled repetitions (or 20\u201330 seconds for easy seated marching); no added weight; pause between activities. Individual clinician to set final dose.",
+    "source_dosage_preserved_in_original_audit": true,
+    "risk_notes_v2": "Do not use without screening and clinical content approval; avoid forcing motion; report new or unusual pain, dizziness, weakness, imbalance or other concerning symptoms."
+  },
+  {
+    "id": "heel_raise",
+    "name": "Supported standing heel raise",
+    "source_transcript_ids": [
+      "T06"
+    ],
+    "category": "strength",
+    "ability": "walking",
+    "tier": 2,
+    "equipment": [
+      "counter"
+    ],
+    "risk_gate": "GENERAL_CANDIDATE",
+    "eligible_when": "Independently mobile, no concerning screen answers, and clinician-approved suitability for this exact movement.",
+    "provisional_dosage_NOT_PRESCRIPTION": "Candidate research range: 1 set of 5\u201310 controlled reps initially; possible progression to 2 sets, 2 days/week. NOT APPROVED; individualize.",
+    "modification_to_review": "Seated or supported range, fewer reps and shorter movement where applicable; exercise-specific technique pending video and clinician review.",
+    "safety_considerations": [
+      "Screen injury/recent surgery and relevant restrictions; avoid forced or uncontrolled movements."
+    ],
+    "stop_rule": "Stop immediately for chest pain, fainting, severe breathlessness, sudden neurologic change, or severe new pain; escalate per approved protocol.",
+    "source_evidence": "YouTube transcript technique only; not independent efficacy evidence. Compare authoritative guideline and specific exercise evidence during clinical audit.",
+    "clinical_approval": "PENDING",
+    "media_verified": false,
+    "contraindications_signed_off": false,
+    "v2_mvp_classification": "NOT_IN_STARTER_REQUIRES_REVIEW",
+    "deliverable_in_research_build": false,
+    "starting_dose_design_only": "No automatic dosage or assignment in starter pathway.",
+    "source_dosage_preserved_in_original_audit": true,
+    "risk_notes_v2": "Not automatically delivered. Requires indication-specific screening, technique and safety approval."
+  },
+  {
+    "id": "side_step",
+    "name": "Supported side stepping",
+    "source_transcript_ids": [
+      "T11"
+    ],
+    "category": "balance",
+    "ability": "balance",
+    "tier": 2,
+    "equipment": [
+      "counter"
+    ],
+    "risk_gate": "FALL_RISK_REVIEW",
+    "eligible_when": "Not auto-eligible; obtain pathway-specific clinician clearance or remove from automated offer.",
+    "provisional_dosage_NOT_PRESCRIPTION": "Candidate research range: short supported practice only. Exact holds/reps and supervision MUST be set by clinician.",
+    "modification_to_review": "Seated or supported range, fewer reps and shorter movement where applicable; exercise-specific technique pending video and clinician review.",
+    "safety_considerations": [
+      "Risk of falls; stable surface and environment assessment; no automatic withdrawal of hand support."
+    ],
+    "stop_rule": "Stop immediately for chest pain, fainting, severe breathlessness, sudden neurologic change, or severe new pain; escalate per approved protocol.",
+    "source_evidence": "YouTube transcript technique only; not independent efficacy evidence. Compare authoritative guideline and specific exercise evidence during clinical audit.",
+    "clinical_approval": "PENDING",
+    "media_verified": false,
+    "contraindications_signed_off": false,
+    "v2_mvp_classification": "SPECIALIST_REVIEW_ONLY",
+    "deliverable_in_research_build": false,
+    "starting_dose_design_only": "No automatic dosage or assignment in starter pathway.",
+    "source_dosage_preserved_in_original_audit": true,
+    "risk_notes_v2": "Not automatically delivered. Requires indication-specific screening, technique and safety approval."
+  },
+  {
+    "id": "clock_taps",
+    "name": "Supported clock taps",
+    "source_transcript_ids": [
+      "T11"
+    ],
+    "category": "balance",
+    "ability": "balance",
+    "tier": 2,
+    "equipment": [
+      "counter"
+    ],
+    "risk_gate": "FALL_RISK_REVIEW",
+    "eligible_when": "Not auto-eligible; obtain pathway-specific clinician clearance or remove from automated offer.",
+    "provisional_dosage_NOT_PRESCRIPTION": "Candidate research range: short supported practice only. Exact holds/reps and supervision MUST be set by clinician.",
+    "modification_to_review": "Seated or supported range, fewer reps and shorter movement where applicable; exercise-specific technique pending video and clinician review.",
+    "safety_considerations": [
+      "Risk of falls; stable surface and environment assessment; no automatic withdrawal of hand support."
+    ],
+    "stop_rule": "Stop immediately for chest pain, fainting, severe breathlessness, sudden neurologic change, or severe new pain; escalate per approved protocol.",
+    "source_evidence": "YouTube transcript technique only; not independent efficacy evidence. Compare authoritative guideline and specific exercise evidence during clinical audit.",
+    "clinical_approval": "PENDING",
+    "media_verified": false,
+    "contraindications_signed_off": false,
+    "v2_mvp_classification": "SPECIALIST_REVIEW_ONLY",
+    "deliverable_in_research_build": false,
+    "starting_dose_design_only": "No automatic dosage or assignment in starter pathway.",
+    "source_dosage_preserved_in_original_audit": true,
+    "risk_notes_v2": "Not automatically delivered. Requires indication-specific screening, technique and safety approval."
+  },
+  {
+    "id": "kickstand_stance",
+    "name": "Supported kickstand stance",
+    "source_transcript_ids": [
+      "T11"
+    ],
+    "category": "balance",
+    "ability": "balance",
+    "tier": 1,
+    "equipment": [
+      "counter"
+    ],
+    "risk_gate": "FALL_RISK_REVIEW",
+    "eligible_when": "Not auto-eligible; obtain pathway-specific clinician clearance or remove from automated offer.",
+    "provisional_dosage_NOT_PRESCRIPTION": "Candidate research range: short supported practice only. Exact holds/reps and supervision MUST be set by clinician.",
+    "modification_to_review": "Seated or supported range, fewer reps and shorter movement where applicable; exercise-specific technique pending video and clinician review.",
+    "safety_considerations": [
+      "Risk of falls; stable surface and environment assessment; no automatic withdrawal of hand support."
+    ],
+    "stop_rule": "Stop immediately for chest pain, fainting, severe breathlessness, sudden neurologic change, or severe new pain; escalate per approved protocol.",
+    "source_evidence": "YouTube transcript technique only; not independent efficacy evidence. Compare authoritative guideline and specific exercise evidence during clinical audit.",
+    "clinical_approval": "PENDING",
+    "media_verified": false,
+    "contraindications_signed_off": false,
+    "v2_mvp_classification": "SPECIALIST_REVIEW_ONLY",
+    "deliverable_in_research_build": false,
+    "starting_dose_design_only": "No automatic dosage or assignment in starter pathway.",
+    "source_dosage_preserved_in_original_audit": true,
+    "risk_notes_v2": "Not automatically delivered. Requires indication-specific screening, technique and safety approval."
+  },
+  {
+    "id": "supported_single_leg",
+    "name": "Supported one-leg stance",
+    "source_transcript_ids": [
+      "T07",
+      "T11"
+    ],
+    "category": "balance",
+    "ability": "balance",
+    "tier": 3,
+    "equipment": [
+      "counter"
+    ],
+    "risk_gate": "CLINICIAN_SUPERVISION",
+    "eligible_when": "Not auto-eligible; obtain pathway-specific clinician clearance or remove from automated offer.",
+    "provisional_dosage_NOT_PRESCRIPTION": "Not delivered by automated MVP; clinician-directed protocol only.",
+    "modification_to_review": "Consider lower-tier movement of same ability; no unsupervised downgrade unless explicitly mapped and reviewed.",
+    "safety_considerations": [
+      "Risk of falls; stable surface and environment assessment; no automatic withdrawal of hand support."
+    ],
+    "stop_rule": "Stop immediately for chest pain, fainting, severe breathlessness, sudden neurologic change, or severe new pain; escalate per approved protocol.",
+    "source_evidence": "YouTube transcript technique only; not independent efficacy evidence. Compare authoritative guideline and specific exercise evidence during clinical audit.",
+    "clinical_approval": "PENDING",
+    "media_verified": false,
+    "contraindications_signed_off": false,
+    "v2_mvp_classification": "SPECIALIST_REVIEW_ONLY",
+    "deliverable_in_research_build": false,
+    "starting_dose_design_only": "No automatic dosage or assignment in starter pathway.",
+    "source_dosage_preserved_in_original_audit": true,
+    "risk_notes_v2": "Not automatically delivered. Requires indication-specific screening, technique and safety approval."
+  },
+  {
+    "id": "narrow_walk",
+    "name": "Supported narrow-base walking",
+    "source_transcript_ids": [
+      "T11"
+    ],
+    "category": "balance",
+    "ability": "balance",
+    "tier": 3,
+    "equipment": [
+      "counter"
+    ],
+    "risk_gate": "CLINICIAN_SUPERVISION",
+    "eligible_when": "Not auto-eligible; obtain pathway-specific clinician clearance or remove from automated offer.",
+    "provisional_dosage_NOT_PRESCRIPTION": "Not delivered by automated MVP; clinician-directed protocol only.",
+    "modification_to_review": "Consider lower-tier movement of same ability; no unsupervised downgrade unless explicitly mapped and reviewed.",
+    "safety_considerations": [
+      "Risk of falls; stable surface and environment assessment; no automatic withdrawal of hand support."
+    ],
+    "stop_rule": "Stop immediately for chest pain, fainting, severe breathlessness, sudden neurologic change, or severe new pain; escalate per approved protocol.",
+    "source_evidence": "YouTube transcript technique only; not independent efficacy evidence. Compare authoritative guideline and specific exercise evidence during clinical audit.",
+    "clinical_approval": "PENDING",
+    "media_verified": false,
+    "contraindications_signed_off": false,
+    "v2_mvp_classification": "SPECIALIST_REVIEW_ONLY",
+    "deliverable_in_research_build": false,
+    "starting_dose_design_only": "No automatic dosage or assignment in starter pathway.",
+    "source_dosage_preserved_in_original_audit": true,
+    "risk_notes_v2": "Not automatically delivered. Requires indication-specific screening, technique and safety approval."
+  },
+  {
+    "id": "weight_shift",
+    "name": "Supported front-back weight shift",
+    "source_transcript_ids": [
+      "T11"
+    ],
+    "category": "balance",
+    "ability": "balance",
+    "tier": 1,
+    "equipment": [
+      "counter"
+    ],
+    "risk_gate": "FALL_RISK_REVIEW",
+    "eligible_when": "Not auto-eligible; obtain pathway-specific clinician clearance or remove from automated offer.",
+    "provisional_dosage_NOT_PRESCRIPTION": "Candidate research range: short supported practice only. Exact holds/reps and supervision MUST be set by clinician.",
+    "modification_to_review": "Seated or supported range, fewer reps and shorter movement where applicable; exercise-specific technique pending video and clinician review.",
+    "safety_considerations": [
+      "Risk of falls; stable surface and environment assessment; no automatic withdrawal of hand support."
+    ],
+    "stop_rule": "Stop immediately for chest pain, fainting, severe breathlessness, sudden neurologic change, or severe new pain; escalate per approved protocol.",
+    "source_evidence": "YouTube transcript technique only; not independent efficacy evidence. Compare authoritative guideline and specific exercise evidence during clinical audit.",
+    "clinical_approval": "PENDING",
+    "media_verified": false,
+    "contraindications_signed_off": false,
+    "v2_mvp_classification": "SPECIALIST_REVIEW_ONLY",
+    "deliverable_in_research_build": false,
+    "starting_dose_design_only": "No automatic dosage or assignment in starter pathway.",
+    "source_dosage_preserved_in_original_audit": true,
+    "risk_notes_v2": "Not automatically delivered. Requires indication-specific screening, technique and safety approval."
+  },
+  {
+    "id": "four_step_turn",
+    "name": "Supported four-step turn",
+    "source_transcript_ids": [
+      "T11"
+    ],
+    "category": "balance",
+    "ability": "balance",
+    "tier": 3,
+    "equipment": [
+      "counter"
+    ],
+    "risk_gate": "CLINICIAN_SUPERVISION",
+    "eligible_when": "Not auto-eligible; obtain pathway-specific clinician clearance or remove from automated offer.",
+    "provisional_dosage_NOT_PRESCRIPTION": "Not delivered by automated MVP; clinician-directed protocol only.",
+    "modification_to_review": "Consider lower-tier movement of same ability; no unsupervised downgrade unless explicitly mapped and reviewed.",
+    "safety_considerations": [
+      "Risk of falls; stable surface and environment assessment; no automatic withdrawal of hand support."
+    ],
+    "stop_rule": "Stop immediately for chest pain, fainting, severe breathlessness, sudden neurologic change, or severe new pain; escalate per approved protocol.",
+    "source_evidence": "YouTube transcript technique only; not independent efficacy evidence. Compare authoritative guideline and specific exercise evidence during clinical audit.",
+    "clinical_approval": "PENDING",
+    "media_verified": false,
+    "contraindications_signed_off": false,
+    "v2_mvp_classification": "SPECIALIST_REVIEW_ONLY",
+    "deliverable_in_research_build": false,
+    "starting_dose_design_only": "No automatic dosage or assignment in starter pathway.",
+    "source_dosage_preserved_in_original_audit": true,
+    "risk_notes_v2": "Not automatically delivered. Requires indication-specific screening, technique and safety approval."
+  },
+  {
+    "id": "quick_lateral_step",
+    "name": "Quick lateral response step",
+    "source_transcript_ids": [
+      "T11"
+    ],
+    "category": "balance",
+    "ability": "balance",
+    "tier": 3,
+    "equipment": [
+      "counter"
+    ],
+    "risk_gate": "CLINICIAN_SUPERVISION",
+    "eligible_when": "Not auto-eligible; obtain pathway-specific clinician clearance or remove from automated offer.",
+    "provisional_dosage_NOT_PRESCRIPTION": "Not delivered by automated MVP; clinician-directed protocol only.",
+    "modification_to_review": "Consider lower-tier movement of same ability; no unsupervised downgrade unless explicitly mapped and reviewed.",
+    "safety_considerations": [
+      "Risk of falls; stable surface and environment assessment; no automatic withdrawal of hand support."
+    ],
+    "stop_rule": "Stop immediately for chest pain, fainting, severe breathlessness, sudden neurologic change, or severe new pain; escalate per approved protocol.",
+    "source_evidence": "YouTube transcript technique only; not independent efficacy evidence. Compare authoritative guideline and specific exercise evidence during clinical audit.",
+    "clinical_approval": "PENDING",
+    "media_verified": false,
+    "contraindications_signed_off": false,
+    "v2_mvp_classification": "SPECIALIST_REVIEW_ONLY",
+    "deliverable_in_research_build": false,
+    "starting_dose_design_only": "No automatic dosage or assignment in starter pathway.",
+    "source_dosage_preserved_in_original_audit": true,
+    "risk_notes_v2": "Not automatically delivered. Requires indication-specific screening, technique and safety approval."
+  },
+  {
+    "id": "step_up_low",
+    "name": "Supported low step-up",
+    "source_transcript_ids": [
+      "T04"
+    ],
+    "category": "strength",
+    "ability": "stairs",
+    "tier": 2,
+    "equipment": [
+      "step",
+      "rail"
+    ],
+    "risk_gate": "GENERAL_CANDIDATE",
+    "eligible_when": "Independently mobile, no concerning screen answers, and clinician-approved suitability for this exact movement.",
+    "provisional_dosage_NOT_PRESCRIPTION": "Candidate research range: 1 set of 5\u201310 controlled reps initially; possible progression to 2 sets, 2 days/week. NOT APPROVED; individualize.",
+    "modification_to_review": "Seated or supported range, fewer reps and shorter movement where applicable; exercise-specific technique pending video and clinician review.",
+    "safety_considerations": [
+      "Screen injury/recent surgery and relevant restrictions; avoid forced or uncontrolled movements."
+    ],
+    "stop_rule": "Stop immediately for chest pain, fainting, severe breathlessness, sudden neurologic change, or severe new pain; escalate per approved protocol.",
+    "source_evidence": "YouTube transcript technique only; not independent efficacy evidence. Compare authoritative guideline and specific exercise evidence during clinical audit.",
+    "clinical_approval": "PENDING",
+    "media_verified": false,
+    "contraindications_signed_off": false,
+    "v2_mvp_classification": "NOT_IN_STARTER_REQUIRES_REVIEW",
+    "deliverable_in_research_build": false,
+    "starting_dose_design_only": "No automatic dosage or assignment in starter pathway.",
+    "source_dosage_preserved_in_original_audit": true,
+    "risk_notes_v2": "Not automatically delivered. Requires indication-specific screening, technique and safety approval."
+  },
+  {
+    "id": "step_tap",
+    "name": "Step-up plus tap",
+    "source_transcript_ids": [
+      "T04"
+    ],
+    "category": "strength",
+    "ability": "stairs",
+    "tier": 3,
+    "equipment": [
+      "step",
+      "rail"
+    ],
+    "risk_gate": "CLINICIAN_SUPERVISION",
+    "eligible_when": "Not auto-eligible; obtain pathway-specific clinician clearance or remove from automated offer.",
+    "provisional_dosage_NOT_PRESCRIPTION": "Not delivered by automated MVP; clinician-directed protocol only.",
+    "modification_to_review": "Consider lower-tier movement of same ability; no unsupervised downgrade unless explicitly mapped and reviewed.",
+    "safety_considerations": [
+      "Screen injury/recent surgery and relevant restrictions; avoid forced or uncontrolled movements."
+    ],
+    "stop_rule": "Stop immediately for chest pain, fainting, severe breathlessness, sudden neurologic change, or severe new pain; escalate per approved protocol.",
+    "source_evidence": "YouTube transcript technique only; not independent efficacy evidence. Compare authoritative guideline and specific exercise evidence during clinical audit.",
+    "clinical_approval": "PENDING",
+    "media_verified": false,
+    "contraindications_signed_off": false,
+    "v2_mvp_classification": "SPECIALIST_REVIEW_ONLY",
+    "deliverable_in_research_build": false,
+    "starting_dose_design_only": "No automatic dosage or assignment in starter pathway.",
+    "source_dosage_preserved_in_original_audit": true,
+    "risk_notes_v2": "Not automatically delivered. Requires indication-specific screening, technique and safety approval."
+  },
+  {
+    "id": "walk_comfortable",
+    "name": "Comfortable walking",
+    "source_transcript_ids": [
+      "T02",
+      "T05",
+      "T07",
+      "T08"
+    ],
+    "category": "aerobic",
+    "ability": "walking",
+    "tier": 1,
+    "equipment": [
+      "safe_walking_area"
+    ],
+    "risk_gate": "GENERAL_CANDIDATE",
+    "eligible_when": "Independently mobile, no concerning screen answers, and clinician-approved suitability for this exact movement.",
+    "provisional_dosage_NOT_PRESCRIPTION": "Candidate research range: a tolerable walk with rest as needed; no automatic duration increase. NOT APPROVED.",
+    "modification_to_review": "Seated or supported range, fewer reps and shorter movement where applicable; exercise-specific technique pending video and clinician review.",
+    "safety_considerations": [
+      "Screen injury/recent surgery and relevant restrictions; avoid forced or uncontrolled movements."
+    ],
+    "stop_rule": "Stop immediately for chest pain, fainting, severe breathlessness, sudden neurologic change, or severe new pain; escalate per approved protocol.",
+    "source_evidence": "YouTube transcript technique only; not independent efficacy evidence. Compare authoritative guideline and specific exercise evidence during clinical audit.",
+    "clinical_approval": "PENDING",
+    "media_verified": false,
+    "contraindications_signed_off": false,
+    "v2_mvp_classification": "INTRODUCTORY_CANDIDATE_REVIEW_REQUIRED",
+    "deliverable_in_research_build": false,
+    "starting_dose_design_only": "1 set of 5 controlled repetitions (or 20\u201330 seconds for easy seated marching); no added weight; pause between activities. Individual clinician to set final dose.",
+    "source_dosage_preserved_in_original_audit": true,
+    "risk_notes_v2": "Do not use without screening and clinical content approval; avoid forcing motion; report new or unusual pain, dizziness, weakness, imbalance or other concerning symptoms."
+  },
+  {
+    "id": "seated_side_bend",
+    "name": "Gentle seated side bend",
+    "source_transcript_ids": [
+      "T09"
+    ],
+    "category": "mobility",
+    "ability": "trunk",
+    "tier": 1,
+    "equipment": [
+      "chair"
+    ],
+    "risk_gate": "CONDITION_REVIEW",
+    "eligible_when": "Not auto-eligible; obtain pathway-specific clinician clearance or remove from automated offer.",
+    "provisional_dosage_NOT_PRESCRIPTION": "Candidate research range: 3\u20138 gentle, comfortable repetitions; no forced end range. NOT APPROVED.",
+    "modification_to_review": "Seated or supported range, fewer reps and shorter movement where applicable; exercise-specific technique pending video and clinician review.",
+    "safety_considerations": [
+      "Screen injury/recent surgery and relevant restrictions; avoid forced or uncontrolled movements."
+    ],
+    "stop_rule": "Stop immediately for chest pain, fainting, severe breathlessness, sudden neurologic change, or severe new pain; escalate per approved protocol.",
+    "source_evidence": "YouTube transcript technique only; not independent efficacy evidence. Compare authoritative guideline and specific exercise evidence during clinical audit.",
+    "clinical_approval": "PENDING",
+    "media_verified": false,
+    "contraindications_signed_off": false,
+    "v2_mvp_classification": "SPECIALIST_REVIEW_ONLY",
+    "deliverable_in_research_build": false,
+    "starting_dose_design_only": "No automatic dosage or assignment in starter pathway.",
+    "source_dosage_preserved_in_original_audit": true,
+    "risk_notes_v2": "Not automatically delivered. Requires indication-specific screening, technique and safety approval."
+  },
+  {
+    "id": "mermaid_stretch",
+    "name": "Floor mermaid side stretch",
+    "source_transcript_ids": [
+      "T09"
+    ],
+    "category": "mobility",
+    "ability": "trunk",
+    "tier": 3,
+    "equipment": [
+      "mat"
+    ],
+    "risk_gate": "CLINICIAN_SUPERVISION",
+    "eligible_when": "Not auto-eligible; obtain pathway-specific clinician clearance or remove from automated offer.",
+    "provisional_dosage_NOT_PRESCRIPTION": "Not delivered by automated MVP; clinician-directed protocol only.",
+    "modification_to_review": "Consider lower-tier movement of same ability; no unsupervised downgrade unless explicitly mapped and reviewed.",
+    "safety_considerations": [
+      "Screen injury/recent surgery and relevant restrictions; avoid forced or uncontrolled movements."
+    ],
+    "stop_rule": "Stop immediately for chest pain, fainting, severe breathlessness, sudden neurologic change, or severe new pain; escalate per approved protocol.",
+    "source_evidence": "YouTube transcript technique only; not independent efficacy evidence. Compare authoritative guideline and specific exercise evidence during clinical audit.",
+    "clinical_approval": "PENDING",
+    "media_verified": false,
+    "contraindications_signed_off": false,
+    "v2_mvp_classification": "SPECIALIST_REVIEW_ONLY",
+    "deliverable_in_research_build": false,
+    "starting_dose_design_only": "No automatic dosage or assignment in starter pathway.",
+    "source_dosage_preserved_in_original_audit": true,
+    "risk_notes_v2": "Not automatically delivered. Requires indication-specific screening, technique and safety approval."
+  },
+  {
+    "id": "sidelying_open_book",
+    "name": "Side-lying trunk rotation",
+    "source_transcript_ids": [
+      "T09"
+    ],
+    "category": "mobility",
+    "ability": "trunk",
+    "tier": 2,
+    "equipment": [
+      "bed"
+    ],
+    "risk_gate": "CONDITION_REVIEW",
+    "eligible_when": "Not auto-eligible; obtain pathway-specific clinician clearance or remove from automated offer.",
+    "provisional_dosage_NOT_PRESCRIPTION": "Candidate research range: 3\u20138 gentle, comfortable repetitions; no forced end range. NOT APPROVED.",
+    "modification_to_review": "Seated or supported range, fewer reps and shorter movement where applicable; exercise-specific technique pending video and clinician review.",
+    "safety_considerations": [
+      "Check spine-related symptoms, fracture risk and clinician restrictions; no automatic directional-preference test."
+    ],
+    "stop_rule": "Stop immediately for chest pain, fainting, severe breathlessness, sudden neurologic change, or severe new pain; escalate per approved protocol.",
+    "source_evidence": "YouTube transcript technique only; not independent efficacy evidence. Compare authoritative guideline and specific exercise evidence during clinical audit.",
+    "clinical_approval": "PENDING",
+    "media_verified": false,
+    "contraindications_signed_off": false,
+    "v2_mvp_classification": "SPECIALIST_REVIEW_ONLY",
+    "deliverable_in_research_build": false,
+    "starting_dose_design_only": "No automatic dosage or assignment in starter pathway.",
+    "source_dosage_preserved_in_original_audit": true,
+    "risk_notes_v2": "Not automatically delivered. Requires indication-specific screening, technique and safety approval."
+  },
+  {
+    "id": "foam_roll_chest",
+    "name": "Supine chest opening on foam roller",
+    "source_transcript_ids": [
+      "T09"
+    ],
+    "category": "mobility",
+    "ability": "shoulder",
+    "tier": 3,
+    "equipment": [
+      "foam_roller"
+    ],
+    "risk_gate": "CLINICIAN_SUPERVISION",
+    "eligible_when": "Not auto-eligible; obtain pathway-specific clinician clearance or remove from automated offer.",
+    "provisional_dosage_NOT_PRESCRIPTION": "Not delivered by automated MVP; clinician-directed protocol only.",
+    "modification_to_review": "Consider lower-tier movement of same ability; no unsupervised downgrade unless explicitly mapped and reviewed.",
+    "safety_considerations": [
+      "Screen injury/recent surgery and relevant restrictions; avoid forced or uncontrolled movements."
+    ],
+    "stop_rule": "Stop immediately for chest pain, fainting, severe breathlessness, sudden neurologic change, or severe new pain; escalate per approved protocol.",
+    "source_evidence": "YouTube transcript technique only; not independent efficacy evidence. Compare authoritative guideline and specific exercise evidence during clinical audit.",
+    "clinical_approval": "PENDING",
+    "media_verified": false,
+    "contraindications_signed_off": false,
+    "v2_mvp_classification": "SPECIALIST_REVIEW_ONLY",
+    "deliverable_in_research_build": false,
+    "starting_dose_design_only": "No automatic dosage or assignment in starter pathway.",
+    "source_dosage_preserved_in_original_audit": true,
+    "risk_notes_v2": "Not automatically delivered. Requires indication-specific screening, technique and safety approval."
+  },
+  {
+    "id": "foam_roll_thoracic",
+    "name": "Thoracic foam rolling",
+    "source_transcript_ids": [
+      "T09"
+    ],
+    "category": "mobility",
+    "ability": "trunk",
+    "tier": 3,
+    "equipment": [
+      "foam_roller"
+    ],
+    "risk_gate": "CLINICIAN_SUPERVISION",
+    "eligible_when": "Not auto-eligible; obtain pathway-specific clinician clearance or remove from automated offer.",
+    "provisional_dosage_NOT_PRESCRIPTION": "Not delivered by automated MVP; clinician-directed protocol only.",
+    "modification_to_review": "Consider lower-tier movement of same ability; no unsupervised downgrade unless explicitly mapped and reviewed.",
+    "safety_considerations": [
+      "Screen injury/recent surgery and relevant restrictions; avoid forced or uncontrolled movements."
+    ],
+    "stop_rule": "Stop immediately for chest pain, fainting, severe breathlessness, sudden neurologic change, or severe new pain; escalate per approved protocol.",
+    "source_evidence": "YouTube transcript technique only; not independent efficacy evidence. Compare authoritative guideline and specific exercise evidence during clinical audit.",
+    "clinical_approval": "PENDING",
+    "media_verified": false,
+    "contraindications_signed_off": false,
+    "v2_mvp_classification": "SPECIALIST_REVIEW_ONLY",
+    "deliverable_in_research_build": false,
+    "starting_dose_design_only": "No automatic dosage or assignment in starter pathway.",
+    "source_dosage_preserved_in_original_audit": true,
+    "risk_notes_v2": "Not automatically delivered. Requires indication-specific screening, technique and safety approval."
+  },
+  {
+    "id": "chin_retraction",
+    "name": "Gentle chin retraction",
+    "source_transcript_ids": [
+      "T10"
+    ],
+    "category": "mobility",
+    "ability": "neck",
+    "tier": 1,
+    "equipment": [
+      "none"
+    ],
+    "risk_gate": "GENERAL_CANDIDATE",
+    "eligible_when": "Independently mobile, no concerning screen answers, and clinician-approved suitability for this exact movement.",
+    "provisional_dosage_NOT_PRESCRIPTION": "Candidate research range: 3\u20138 gentle, comfortable repetitions; no forced end range. NOT APPROVED.",
+    "modification_to_review": "Seated or supported range, fewer reps and shorter movement where applicable; exercise-specific technique pending video and clinician review.",
+    "safety_considerations": [
+      "Screen injury/recent surgery and relevant restrictions; avoid forced or uncontrolled movements."
+    ],
+    "stop_rule": "Stop immediately for chest pain, fainting, severe breathlessness, sudden neurologic change, or severe new pain; escalate per approved protocol.",
+    "source_evidence": "YouTube transcript technique only; not independent efficacy evidence. Compare authoritative guideline and specific exercise evidence during clinical audit.",
+    "clinical_approval": "PENDING",
+    "media_verified": false,
+    "contraindications_signed_off": false,
+    "v2_mvp_classification": "INTRODUCTORY_CANDIDATE_REVIEW_REQUIRED",
+    "deliverable_in_research_build": false,
+    "starting_dose_design_only": "1 set of 5 controlled repetitions (or 20\u201330 seconds for easy seated marching); no added weight; pause between activities. Individual clinician to set final dose.",
+    "source_dosage_preserved_in_original_audit": true,
+    "risk_notes_v2": "Do not use without screening and clinical content approval; avoid forcing motion; report new or unusual pain, dizziness, weakness, imbalance or other concerning symptoms."
+  },
+  {
+    "id": "scapular_w",
+    "name": "Scapular W movement",
+    "source_transcript_ids": [
+      "T10"
+    ],
+    "category": "strength",
+    "ability": "pull",
+    "tier": 1,
+    "equipment": [
+      "none"
+    ],
+    "risk_gate": "GENERAL_CANDIDATE",
+    "eligible_when": "Independently mobile, no concerning screen answers, and clinician-approved suitability for this exact movement.",
+    "provisional_dosage_NOT_PRESCRIPTION": "Candidate research range: 1 set of 5\u201310 controlled reps initially; possible progression to 2 sets, 2 days/week. NOT APPROVED; individualize.",
+    "modification_to_review": "Seated or supported range, fewer reps and shorter movement where applicable; exercise-specific technique pending video and clinician review.",
+    "safety_considerations": [
+      "Do not use as treatment for undiagnosed shoulder pain or after recent shoulder surgery."
+    ],
+    "stop_rule": "Stop immediately for chest pain, fainting, severe breathlessness, sudden neurologic change, or severe new pain; escalate per approved protocol.",
+    "source_evidence": "YouTube transcript technique only; not independent efficacy evidence. Compare authoritative guideline and specific exercise evidence during clinical audit.",
+    "clinical_approval": "PENDING",
+    "media_verified": false,
+    "contraindications_signed_off": false,
+    "v2_mvp_classification": "INTRODUCTORY_CANDIDATE_REVIEW_REQUIRED",
+    "deliverable_in_research_build": false,
+    "starting_dose_design_only": "1 set of 5 controlled repetitions (or 20\u201330 seconds for easy seated marching); no added weight; pause between activities. Individual clinician to set final dose.",
+    "source_dosage_preserved_in_original_audit": true,
+    "risk_notes_v2": "Do not use without screening and clinical content approval; avoid forcing motion; report new or unusual pain, dizziness, weakness, imbalance or other concerning symptoms."
+  },
+  {
+    "id": "pelvic_tilt_heel_slide",
+    "name": "Pelvic tilt with heel slide",
+    "source_transcript_ids": [
+      "T10"
+    ],
+    "category": "strength",
+    "ability": "trunk",
+    "tier": 2,
+    "equipment": [
+      "bed"
+    ],
+    "risk_gate": "GENERAL_CANDIDATE",
+    "eligible_when": "Independently mobile, no concerning screen answers, and clinician-approved suitability for this exact movement.",
+    "provisional_dosage_NOT_PRESCRIPTION": "Candidate research range: 1 set of 5\u201310 controlled reps initially; possible progression to 2 sets, 2 days/week. NOT APPROVED; individualize.",
+    "modification_to_review": "Seated or supported range, fewer reps and shorter movement where applicable; exercise-specific technique pending video and clinician review.",
+    "safety_considerations": [
+      "Screen injury/recent surgery and relevant restrictions; avoid forced or uncontrolled movements."
+    ],
+    "stop_rule": "Stop immediately for chest pain, fainting, severe breathlessness, sudden neurologic change, or severe new pain; escalate per approved protocol.",
+    "source_evidence": "YouTube transcript technique only; not independent efficacy evidence. Compare authoritative guideline and specific exercise evidence during clinical audit.",
+    "clinical_approval": "PENDING",
+    "media_verified": false,
+    "contraindications_signed_off": false,
+    "v2_mvp_classification": "INTRODUCTORY_CANDIDATE_REVIEW_REQUIRED",
+    "deliverable_in_research_build": false,
+    "starting_dose_design_only": "1 set of 5 controlled repetitions (or 20\u201330 seconds for easy seated marching); no added weight; pause between activities. Individual clinician to set final dose.",
+    "source_dosage_preserved_in_original_audit": true,
+    "risk_notes_v2": "Do not use without screening and clinical content approval; avoid forcing motion; report new or unusual pain, dizziness, weakness, imbalance or other concerning symptoms."
+  },
+  {
+    "id": "supine_y",
+    "name": "Supine W-to-Y shoulder movement",
+    "source_transcript_ids": [
+      "T14"
+    ],
+    "category": "mobility",
+    "ability": "shoulder",
+    "tier": 2,
+    "equipment": [
+      "bed"
+    ],
+    "risk_gate": "CONDITION_REVIEW",
+    "eligible_when": "Not auto-eligible; obtain pathway-specific clinician clearance or remove from automated offer.",
+    "provisional_dosage_NOT_PRESCRIPTION": "Candidate research range: 3\u20138 gentle, comfortable repetitions; no forced end range. NOT APPROVED.",
+    "modification_to_review": "Seated or supported range, fewer reps and shorter movement where applicable; exercise-specific technique pending video and clinician review.",
+    "safety_considerations": [
+      "Do not use as treatment for undiagnosed shoulder pain or after recent shoulder surgery."
+    ],
+    "stop_rule": "Stop immediately for chest pain, fainting, severe breathlessness, sudden neurologic change, or severe new pain; escalate per approved protocol.",
+    "source_evidence": "YouTube transcript technique only; not independent efficacy evidence. Compare authoritative guideline and specific exercise evidence during clinical audit.",
+    "clinical_approval": "PENDING",
+    "media_verified": false,
+    "contraindications_signed_off": false,
+    "v2_mvp_classification": "SPECIALIST_REVIEW_ONLY",
+    "deliverable_in_research_build": false,
+    "starting_dose_design_only": "No automatic dosage or assignment in starter pathway.",
+    "source_dosage_preserved_in_original_audit": true,
+    "risk_notes_v2": "Not automatically delivered. Requires indication-specific screening, technique and safety approval."
+  },
+  {
+    "id": "knee_roll",
+    "name": "Supine knees-side-to-side",
+    "source_transcript_ids": [
+      "T08",
+      "T14"
+    ],
+    "category": "mobility",
+    "ability": "trunk",
+    "tier": 1,
+    "equipment": [
+      "bed"
+    ],
+    "risk_gate": "CONDITION_REVIEW",
+    "eligible_when": "Not auto-eligible; obtain pathway-specific clinician clearance or remove from automated offer.",
+    "provisional_dosage_NOT_PRESCRIPTION": "Candidate research range: 3\u20138 gentle, comfortable repetitions; no forced end range. NOT APPROVED.",
+    "modification_to_review": "Seated or supported range, fewer reps and shorter movement where applicable; exercise-specific technique pending video and clinician review.",
+    "safety_considerations": [
+      "Check spine-related symptoms, fracture risk and clinician restrictions; no automatic directional-preference test."
+    ],
+    "stop_rule": "Stop immediately for chest pain, fainting, severe breathlessness, sudden neurologic change, or severe new pain; escalate per approved protocol.",
+    "source_evidence": "YouTube transcript technique only; not independent efficacy evidence. Compare authoritative guideline and specific exercise evidence during clinical audit.",
+    "clinical_approval": "PENDING",
+    "media_verified": false,
+    "contraindications_signed_off": false,
+    "v2_mvp_classification": "SPECIALIST_REVIEW_ONLY",
+    "deliverable_in_research_build": false,
+    "starting_dose_design_only": "No automatic dosage or assignment in starter pathway.",
+    "source_dosage_preserved_in_original_audit": true,
+    "risk_notes_v2": "Not automatically delivered. Requires indication-specific screening, technique and safety approval."
+  },
+  {
+    "id": "cat_cow",
+    "name": "Cat-cow",
+    "source_transcript_ids": [
+      "T14"
+    ],
+    "category": "mobility",
+    "ability": "trunk",
+    "tier": 3,
+    "equipment": [
+      "mat"
+    ],
+    "risk_gate": "CLINICIAN_SUPERVISION",
+    "eligible_when": "Not auto-eligible; obtain pathway-specific clinician clearance or remove from automated offer.",
+    "provisional_dosage_NOT_PRESCRIPTION": "Not delivered by automated MVP; clinician-directed protocol only.",
+    "modification_to_review": "Consider lower-tier movement of same ability; no unsupervised downgrade unless explicitly mapped and reviewed.",
+    "safety_considerations": [
+      "Check spine-related symptoms, fracture risk and clinician restrictions; no automatic directional-preference test."
+    ],
+    "stop_rule": "Stop immediately for chest pain, fainting, severe breathlessness, sudden neurologic change, or severe new pain; escalate per approved protocol.",
+    "source_evidence": "YouTube transcript technique only; not independent efficacy evidence. Compare authoritative guideline and specific exercise evidence during clinical audit.",
+    "clinical_approval": "PENDING",
+    "media_verified": false,
+    "contraindications_signed_off": false,
+    "v2_mvp_classification": "SPECIALIST_REVIEW_ONLY",
+    "deliverable_in_research_build": false,
+    "starting_dose_design_only": "No automatic dosage or assignment in starter pathway.",
+    "source_dosage_preserved_in_original_audit": true,
+    "risk_notes_v2": "Not automatically delivered. Requires indication-specific screening, technique and safety approval."
+  },
+  {
+    "id": "thread_needle",
+    "name": "Thread the needle",
+    "source_transcript_ids": [
+      "T14"
+    ],
+    "category": "mobility",
+    "ability": "trunk",
+    "tier": 3,
+    "equipment": [
+      "mat"
+    ],
+    "risk_gate": "CLINICIAN_SUPERVISION",
+    "eligible_when": "Not auto-eligible; obtain pathway-specific clinician clearance or remove from automated offer.",
+    "provisional_dosage_NOT_PRESCRIPTION": "Not delivered by automated MVP; clinician-directed protocol only.",
+    "modification_to_review": "Consider lower-tier movement of same ability; no unsupervised downgrade unless explicitly mapped and reviewed.",
+    "safety_considerations": [
+      "Check spine-related symptoms, fracture risk and clinician restrictions; no automatic directional-preference test."
+    ],
+    "stop_rule": "Stop immediately for chest pain, fainting, severe breathlessness, sudden neurologic change, or severe new pain; escalate per approved protocol.",
+    "source_evidence": "YouTube transcript technique only; not independent efficacy evidence. Compare authoritative guideline and specific exercise evidence during clinical audit.",
+    "clinical_approval": "PENDING",
+    "media_verified": false,
+    "contraindications_signed_off": false,
+    "v2_mvp_classification": "SPECIALIST_REVIEW_ONLY",
+    "deliverable_in_research_build": false,
+    "starting_dose_design_only": "No automatic dosage or assignment in starter pathway.",
+    "source_dosage_preserved_in_original_audit": true,
+    "risk_notes_v2": "Not automatically delivered. Requires indication-specific screening, technique and safety approval."
+  },
+  {
+    "id": "seated_figure_four",
+    "name": "Seated glute stretch",
+    "source_transcript_ids": [
+      "T14"
+    ],
+    "category": "mobility",
+    "ability": "hip",
+    "tier": 2,
+    "equipment": [
+      "chair"
+    ],
+    "risk_gate": "CONDITION_REVIEW",
+    "eligible_when": "Not auto-eligible; obtain pathway-specific clinician clearance or remove from automated offer.",
+    "provisional_dosage_NOT_PRESCRIPTION": "Candidate research range: 3\u20138 gentle, comfortable repetitions; no forced end range. NOT APPROVED.",
+    "modification_to_review": "Seated or supported range, fewer reps and shorter movement where applicable; exercise-specific technique pending video and clinician review.",
+    "safety_considerations": [
+      "Screen injury/recent surgery and relevant restrictions; avoid forced or uncontrolled movements."
+    ],
+    "stop_rule": "Stop immediately for chest pain, fainting, severe breathlessness, sudden neurologic change, or severe new pain; escalate per approved protocol.",
+    "source_evidence": "YouTube transcript technique only; not independent efficacy evidence. Compare authoritative guideline and specific exercise evidence during clinical audit.",
+    "clinical_approval": "PENDING",
+    "media_verified": false,
+    "contraindications_signed_off": false,
+    "v2_mvp_classification": "SPECIALIST_REVIEW_ONLY",
+    "deliverable_in_research_build": false,
+    "starting_dose_design_only": "No automatic dosage or assignment in starter pathway.",
+    "source_dosage_preserved_in_original_audit": true,
+    "risk_notes_v2": "Not automatically delivered. Requires indication-specific screening, technique and safety approval."
+  },
+  {
+    "id": "supported_sit_back",
+    "name": "Supported sit-back squat stretch",
+    "source_transcript_ids": [
+      "T12"
+    ],
+    "category": "mobility",
+    "ability": "hip",
+    "tier": 2,
+    "equipment": [
+      "counter"
+    ],
+    "risk_gate": "GENERAL_CANDIDATE",
+    "eligible_when": "Independently mobile, no concerning screen answers, and clinician-approved suitability for this exact movement.",
+    "provisional_dosage_NOT_PRESCRIPTION": "Candidate research range: 3\u20138 gentle, comfortable repetitions; no forced end range. NOT APPROVED.",
+    "modification_to_review": "Seated or supported range, fewer reps and shorter movement where applicable; exercise-specific technique pending video and clinician review.",
+    "safety_considerations": [
+      "Screen injury/recent surgery and relevant restrictions; avoid forced or uncontrolled movements."
+    ],
+    "stop_rule": "Stop immediately for chest pain, fainting, severe breathlessness, sudden neurologic change, or severe new pain; escalate per approved protocol.",
+    "source_evidence": "YouTube transcript technique only; not independent efficacy evidence. Compare authoritative guideline and specific exercise evidence during clinical audit.",
+    "clinical_approval": "PENDING",
+    "media_verified": false,
+    "contraindications_signed_off": false,
+    "v2_mvp_classification": "INTRODUCTORY_CANDIDATE_REVIEW_REQUIRED",
+    "deliverable_in_research_build": false,
+    "starting_dose_design_only": "1 set of 5 controlled repetitions (or 20\u201330 seconds for easy seated marching); no added weight; pause between activities. Individual clinician to set final dose.",
+    "source_dosage_preserved_in_original_audit": true,
+    "risk_notes_v2": "Do not use without screening and clinical content approval; avoid forcing motion; report new or unusual pain, dizziness, weakness, imbalance or other concerning symptoms."
+  },
+  {
+    "id": "wall_finger_walk",
+    "name": "Finger walk up wall",
+    "source_transcript_ids": [
+      "T12"
+    ],
+    "category": "mobility",
+    "ability": "shoulder",
+    "tier": 1,
+    "equipment": [
+      "wall"
+    ],
+    "risk_gate": "CONDITION_REVIEW",
+    "eligible_when": "Not auto-eligible; obtain pathway-specific clinician clearance or remove from automated offer.",
+    "provisional_dosage_NOT_PRESCRIPTION": "Candidate research range: 3\u20138 gentle, comfortable repetitions; no forced end range. NOT APPROVED.",
+    "modification_to_review": "Seated or supported range, fewer reps and shorter movement where applicable; exercise-specific technique pending video and clinician review.",
+    "safety_considerations": [
+      "Do not use as treatment for undiagnosed shoulder pain or after recent shoulder surgery."
+    ],
+    "stop_rule": "Stop immediately for chest pain, fainting, severe breathlessness, sudden neurologic change, or severe new pain; escalate per approved protocol.",
+    "source_evidence": "YouTube transcript technique only; not independent efficacy evidence. Compare authoritative guideline and specific exercise evidence during clinical audit.",
+    "clinical_approval": "PENDING",
+    "media_verified": false,
+    "contraindications_signed_off": false,
+    "v2_mvp_classification": "SPECIALIST_REVIEW_ONLY",
+    "deliverable_in_research_build": false,
+    "starting_dose_design_only": "No automatic dosage or assignment in starter pathway.",
+    "source_dosage_preserved_in_original_audit": true,
+    "risk_notes_v2": "Not automatically delivered. Requires indication-specific screening, technique and safety approval."
+  },
+  {
+    "id": "overhead_wall_lift",
+    "name": "Wall overhead lift-off",
+    "source_transcript_ids": [
+      "T12"
+    ],
+    "category": "strength",
+    "ability": "shoulder",
+    "tier": 3,
+    "equipment": [
+      "wall"
+    ],
+    "risk_gate": "CLINICIAN_SUPERVISION",
+    "eligible_when": "Not auto-eligible; obtain pathway-specific clinician clearance or remove from automated offer.",
+    "provisional_dosage_NOT_PRESCRIPTION": "Not delivered by automated MVP; clinician-directed protocol only.",
+    "modification_to_review": "Consider lower-tier movement of same ability; no unsupervised downgrade unless explicitly mapped and reviewed.",
+    "safety_considerations": [
+      "Do not use as treatment for undiagnosed shoulder pain or after recent shoulder surgery."
+    ],
+    "stop_rule": "Stop immediately for chest pain, fainting, severe breathlessness, sudden neurologic change, or severe new pain; escalate per approved protocol.",
+    "source_evidence": "YouTube transcript technique only; not independent efficacy evidence. Compare authoritative guideline and specific exercise evidence during clinical audit.",
+    "clinical_approval": "PENDING",
+    "media_verified": false,
+    "contraindications_signed_off": false,
+    "v2_mvp_classification": "SPECIALIST_REVIEW_ONLY",
+    "deliverable_in_research_build": false,
+    "starting_dose_design_only": "No automatic dosage or assignment in starter pathway.",
+    "source_dosage_preserved_in_original_audit": true,
+    "risk_notes_v2": "Not automatically delivered. Requires indication-specific screening, technique and safety approval."
+  },
+  {
+    "id": "supine_hip_rotation",
+    "name": "Supine hip rotation",
+    "source_transcript_ids": [
+      "T12"
+    ],
+    "category": "mobility",
+    "ability": "hip",
+    "tier": 2,
+    "equipment": [
+      "bed"
+    ],
+    "risk_gate": "CONDITION_REVIEW",
+    "eligible_when": "Not auto-eligible; obtain pathway-specific clinician clearance or remove from automated offer.",
+    "provisional_dosage_NOT_PRESCRIPTION": "Candidate research range: 3\u20138 gentle, comfortable repetitions; no forced end range. NOT APPROVED.",
+    "modification_to_review": "Seated or supported range, fewer reps and shorter movement where applicable; exercise-specific technique pending video and clinician review.",
+    "safety_considerations": [
+      "Screen injury/recent surgery and relevant restrictions; avoid forced or uncontrolled movements."
+    ],
+    "stop_rule": "Stop immediately for chest pain, fainting, severe breathlessness, sudden neurologic change, or severe new pain; escalate per approved protocol.",
+    "source_evidence": "YouTube transcript technique only; not independent efficacy evidence. Compare authoritative guideline and specific exercise evidence during clinical audit.",
+    "clinical_approval": "PENDING",
+    "media_verified": false,
+    "contraindications_signed_off": false,
+    "v2_mvp_classification": "SPECIALIST_REVIEW_ONLY",
+    "deliverable_in_research_build": false,
+    "starting_dose_design_only": "No automatic dosage or assignment in starter pathway.",
+    "source_dosage_preserved_in_original_audit": true,
+    "risk_notes_v2": "Not automatically delivered. Requires indication-specific screening, technique and safety approval."
+  },
+  {
+    "id": "pendulum",
+    "name": "Supported shoulder pendulum",
+    "source_transcript_ids": [
+      "T01"
+    ],
+    "category": "mobility",
+    "ability": "shoulder",
+    "tier": 1,
+    "equipment": [
+      "counter"
+    ],
+    "risk_gate": "CONDITION_REVIEW",
+    "eligible_when": "Not auto-eligible; obtain pathway-specific clinician clearance or remove from automated offer.",
+    "provisional_dosage_NOT_PRESCRIPTION": "Candidate research range: 3\u20138 gentle, comfortable repetitions; no forced end range. NOT APPROVED.",
+    "modification_to_review": "Seated or supported range, fewer reps and shorter movement where applicable; exercise-specific technique pending video and clinician review.",
+    "safety_considerations": [
+      "Do not use as treatment for undiagnosed shoulder pain or after recent shoulder surgery."
+    ],
+    "stop_rule": "Stop immediately for chest pain, fainting, severe breathlessness, sudden neurologic change, or severe new pain; escalate per approved protocol.",
+    "source_evidence": "YouTube transcript technique only; not independent efficacy evidence. Compare authoritative guideline and specific exercise evidence during clinical audit.",
+    "clinical_approval": "PENDING",
+    "media_verified": false,
+    "contraindications_signed_off": false,
+    "v2_mvp_classification": "SPECIALIST_REVIEW_ONLY",
+    "deliverable_in_research_build": false,
+    "starting_dose_design_only": "No automatic dosage or assignment in starter pathway.",
+    "source_dosage_preserved_in_original_audit": true,
+    "risk_notes_v2": "Not automatically delivered. Requires indication-specific screening, technique and safety approval."
+  },
+  {
+    "id": "wall_slide",
+    "name": "Shoulder wall slide",
+    "source_transcript_ids": [
+      "T01"
+    ],
+    "category": "mobility",
+    "ability": "shoulder",
+    "tier": 2,
+    "equipment": [
+      "wall"
+    ],
+    "risk_gate": "CONDITION_REVIEW",
+    "eligible_when": "Not auto-eligible; obtain pathway-specific clinician clearance or remove from automated offer.",
+    "provisional_dosage_NOT_PRESCRIPTION": "Candidate research range: 3\u20138 gentle, comfortable repetitions; no forced end range. NOT APPROVED.",
+    "modification_to_review": "Seated or supported range, fewer reps and shorter movement where applicable; exercise-specific technique pending video and clinician review.",
+    "safety_considerations": [
+      "Do not use as treatment for undiagnosed shoulder pain or after recent shoulder surgery."
+    ],
+    "stop_rule": "Stop immediately for chest pain, fainting, severe breathlessness, sudden neurologic change, or severe new pain; escalate per approved protocol.",
+    "source_evidence": "YouTube transcript technique only; not independent efficacy evidence. Compare authoritative guideline and specific exercise evidence during clinical audit.",
+    "clinical_approval": "PENDING",
+    "media_verified": false,
+    "contraindications_signed_off": false,
+    "v2_mvp_classification": "SPECIALIST_REVIEW_ONLY",
+    "deliverable_in_research_build": false,
+    "starting_dose_design_only": "No automatic dosage or assignment in starter pathway.",
+    "source_dosage_preserved_in_original_audit": true,
+    "risk_notes_v2": "Not automatically delivered. Requires indication-specific screening, technique and safety approval."
+  },
+  {
+    "id": "shoulder_isometric",
+    "name": "Shoulder isometrics",
+    "source_transcript_ids": [
+      "T01"
+    ],
+    "category": "strength",
+    "ability": "shoulder",
+    "tier": 2,
+    "equipment": [
+      "wall"
+    ],
+    "risk_gate": "CONDITION_REVIEW",
+    "eligible_when": "Not auto-eligible; obtain pathway-specific clinician clearance or remove from automated offer.",
+    "provisional_dosage_NOT_PRESCRIPTION": "Candidate research range: 1 set of 5\u201310 controlled reps initially; possible progression to 2 sets, 2 days/week. NOT APPROVED; individualize.",
+    "modification_to_review": "Seated or supported range, fewer reps and shorter movement where applicable; exercise-specific technique pending video and clinician review.",
+    "safety_considerations": [
+      "Do not use as treatment for undiagnosed shoulder pain or after recent shoulder surgery."
+    ],
+    "stop_rule": "Stop immediately for chest pain, fainting, severe breathlessness, sudden neurologic change, or severe new pain; escalate per approved protocol.",
+    "source_evidence": "YouTube transcript technique only; not independent efficacy evidence. Compare authoritative guideline and specific exercise evidence during clinical audit.",
+    "clinical_approval": "PENDING",
+    "media_verified": false,
+    "contraindications_signed_off": false,
+    "v2_mvp_classification": "SPECIALIST_REVIEW_ONLY",
+    "deliverable_in_research_build": false,
+    "starting_dose_design_only": "No automatic dosage or assignment in starter pathway.",
+    "source_dosage_preserved_in_original_audit": true,
+    "risk_notes_v2": "Not automatically delivered. Requires indication-specific screening, technique and safety approval."
+  },
+  {
+    "id": "band_rotation",
+    "name": "Band external shoulder rotation",
+    "source_transcript_ids": [
+      "T01"
+    ],
+    "category": "strength",
+    "ability": "shoulder",
+    "tier": 3,
+    "equipment": [
+      "band"
+    ],
+    "risk_gate": "CONDITION_REVIEW",
+    "eligible_when": "Not auto-eligible; obtain pathway-specific clinician clearance or remove from automated offer.",
+    "provisional_dosage_NOT_PRESCRIPTION": "Candidate research range: 1 set of 5\u201310 controlled reps initially; possible progression to 2 sets, 2 days/week. NOT APPROVED; individualize.",
+    "modification_to_review": "Consider lower-tier movement of same ability; no unsupervised downgrade unless explicitly mapped and reviewed.",
+    "safety_considerations": [
+      "Do not use as treatment for undiagnosed shoulder pain or after recent shoulder surgery."
+    ],
+    "stop_rule": "Stop immediately for chest pain, fainting, severe breathlessness, sudden neurologic change, or severe new pain; escalate per approved protocol.",
+    "source_evidence": "YouTube transcript technique only; not independent efficacy evidence. Compare authoritative guideline and specific exercise evidence during clinical audit.",
+    "clinical_approval": "PENDING",
+    "media_verified": false,
+    "contraindications_signed_off": false,
+    "v2_mvp_classification": "SPECIALIST_REVIEW_ONLY",
+    "deliverable_in_research_build": false,
+    "starting_dose_design_only": "No automatic dosage or assignment in starter pathway.",
+    "source_dosage_preserved_in_original_audit": true,
+    "risk_notes_v2": "Not automatically delivered. Requires indication-specific screening, technique and safety approval."
+  },
+  {
+    "id": "band_scaption",
+    "name": "Scaption to shoulder height",
+    "source_transcript_ids": [
+      "T01"
+    ],
+    "category": "strength",
+    "ability": "shoulder",
+    "tier": 3,
+    "equipment": [
+      "band"
+    ],
+    "risk_gate": "CONDITION_REVIEW",
+    "eligible_when": "Not auto-eligible; obtain pathway-specific clinician clearance or remove from automated offer.",
+    "provisional_dosage_NOT_PRESCRIPTION": "Candidate research range: 1 set of 5\u201310 controlled reps initially; possible progression to 2 sets, 2 days/week. NOT APPROVED; individualize.",
+    "modification_to_review": "Consider lower-tier movement of same ability; no unsupervised downgrade unless explicitly mapped and reviewed.",
+    "safety_considerations": [
+      "Do not use as treatment for undiagnosed shoulder pain or after recent shoulder surgery."
+    ],
+    "stop_rule": "Stop immediately for chest pain, fainting, severe breathlessness, sudden neurologic change, or severe new pain; escalate per approved protocol.",
+    "source_evidence": "YouTube transcript technique only; not independent efficacy evidence. Compare authoritative guideline and specific exercise evidence during clinical audit.",
+    "clinical_approval": "PENDING",
+    "media_verified": false,
+    "contraindications_signed_off": false,
+    "v2_mvp_classification": "SPECIALIST_REVIEW_ONLY",
+    "deliverable_in_research_build": false,
+    "starting_dose_design_only": "No automatic dosage or assignment in starter pathway.",
+    "source_dosage_preserved_in_original_audit": true,
+    "risk_notes_v2": "Not automatically delivered. Requires indication-specific screening, technique and safety approval."
+  },
+  {
+    "id": "seated_lumbar_flexion",
+    "name": "Seated lumbar flexion",
+    "source_transcript_ids": [
+      "T08"
+    ],
+    "category": "mobility",
+    "ability": "trunk",
+    "tier": 2,
+    "equipment": [
+      "chair"
+    ],
+    "risk_gate": "CONDITION_REVIEW",
+    "eligible_when": "Not auto-eligible; obtain pathway-specific clinician clearance or remove from automated offer.",
+    "provisional_dosage_NOT_PRESCRIPTION": "Candidate research range: 3\u20138 gentle, comfortable repetitions; no forced end range. NOT APPROVED.",
+    "modification_to_review": "Seated or supported range, fewer reps and shorter movement where applicable; exercise-specific technique pending video and clinician review.",
+    "safety_considerations": [
+      "Check spine-related symptoms, fracture risk and clinician restrictions; no automatic directional-preference test."
+    ],
+    "stop_rule": "Stop immediately for chest pain, fainting, severe breathlessness, sudden neurologic change, or severe new pain; escalate per approved protocol.",
+    "source_evidence": "YouTube transcript technique only; not independent efficacy evidence. Compare authoritative guideline and specific exercise evidence during clinical audit.",
+    "clinical_approval": "PENDING",
+    "media_verified": false,
+    "contraindications_signed_off": false,
+    "v2_mvp_classification": "SPECIALIST_REVIEW_ONLY",
+    "deliverable_in_research_build": false,
+    "starting_dose_design_only": "No automatic dosage or assignment in starter pathway.",
+    "source_dosage_preserved_in_original_audit": true,
+    "risk_notes_v2": "Not automatically delivered. Requires indication-specific screening, technique and safety approval."
+  },
+  {
+    "id": "standing_extension",
+    "name": "Standing lumbar extension",
+    "source_transcript_ids": [
+      "T08"
+    ],
+    "category": "mobility",
+    "ability": "trunk",
+    "tier": 2,
+    "equipment": [
+      "none"
+    ],
+    "risk_gate": "CONDITION_REVIEW",
+    "eligible_when": "Not auto-eligible; obtain pathway-specific clinician clearance or remove from automated offer.",
+    "provisional_dosage_NOT_PRESCRIPTION": "Candidate research range: 3\u20138 gentle, comfortable repetitions; no forced end range. NOT APPROVED.",
+    "modification_to_review": "Seated or supported range, fewer reps and shorter movement where applicable; exercise-specific technique pending video and clinician review.",
+    "safety_considerations": [
+      "Check spine-related symptoms, fracture risk and clinician restrictions; no automatic directional-preference test."
+    ],
+    "stop_rule": "Stop immediately for chest pain, fainting, severe breathlessness, sudden neurologic change, or severe new pain; escalate per approved protocol.",
+    "source_evidence": "YouTube transcript technique only; not independent efficacy evidence. Compare authoritative guideline and specific exercise evidence during clinical audit.",
+    "clinical_approval": "PENDING",
+    "media_verified": false,
+    "contraindications_signed_off": false,
+    "v2_mvp_classification": "SPECIALIST_REVIEW_ONLY",
+    "deliverable_in_research_build": false,
+    "starting_dose_design_only": "No automatic dosage or assignment in starter pathway.",
+    "source_dosage_preserved_in_original_audit": true,
+    "risk_notes_v2": "Not automatically delivered. Requires indication-specific screening, technique and safety approval."
+  },
+  {
+    "id": "modified_crunch",
+    "name": "Modified abdominal crunch",
+    "source_transcript_ids": [
+      "T08"
+    ],
+    "category": "strength",
+    "ability": "trunk",
+    "tier": 3,
+    "equipment": [
+      "mat"
+    ],
+    "risk_gate": "CLINICIAN_SUPERVISION",
+    "eligible_when": "Not auto-eligible; obtain pathway-specific clinician clearance or remove from automated offer.",
+    "provisional_dosage_NOT_PRESCRIPTION": "Not delivered by automated MVP; clinician-directed protocol only.",
+    "modification_to_review": "Consider lower-tier movement of same ability; no unsupervised downgrade unless explicitly mapped and reviewed.",
+    "safety_considerations": [
+      "Check spine-related symptoms, fracture risk and clinician restrictions; no automatic directional-preference test."
+    ],
+    "stop_rule": "Stop immediately for chest pain, fainting, severe breathlessness, sudden neurologic change, or severe new pain; escalate per approved protocol.",
+    "source_evidence": "YouTube transcript technique only; not independent efficacy evidence. Compare authoritative guideline and specific exercise evidence during clinical audit.",
+    "clinical_approval": "PENDING",
+    "media_verified": false,
+    "contraindications_signed_off": false,
+    "v2_mvp_classification": "SPECIALIST_REVIEW_ONLY",
+    "deliverable_in_research_build": false,
+    "starting_dose_design_only": "No automatic dosage or assignment in starter pathway.",
+    "source_dosage_preserved_in_original_audit": true,
+    "risk_notes_v2": "Not automatically delivered. Requires indication-specific screening, technique and safety approval."
+  },
+  {
+    "id": "heel_slide",
+    "name": "Supine heel slide for knee bending",
+    "source_transcript_ids": [
+      "T15"
+    ],
+    "category": "mobility",
+    "ability": "knee",
+    "tier": 1,
+    "equipment": [
+      "bed"
+    ],
+    "risk_gate": "CONDITION_REVIEW",
+    "eligible_when": "Not auto-eligible; obtain pathway-specific clinician clearance or remove from automated offer.",
+    "provisional_dosage_NOT_PRESCRIPTION": "Candidate research range: 3\u20138 gentle, comfortable repetitions; no forced end range. NOT APPROVED.",
+    "modification_to_review": "Seated or supported range, fewer reps and shorter movement where applicable; exercise-specific technique pending video and clinician review.",
+    "safety_considerations": [
+      "Screen injury/recent surgery and relevant restrictions; avoid forced or uncontrolled movements."
+    ],
+    "stop_rule": "Stop immediately for chest pain, fainting, severe breathlessness, sudden neurologic change, or severe new pain; escalate per approved protocol.",
+    "source_evidence": "YouTube transcript technique only; not independent efficacy evidence. Compare authoritative guideline and specific exercise evidence during clinical audit.",
+    "clinical_approval": "PENDING",
+    "media_verified": false,
+    "contraindications_signed_off": false,
+    "v2_mvp_classification": "SPECIALIST_REVIEW_ONLY",
+    "deliverable_in_research_build": false,
+    "starting_dose_design_only": "No automatic dosage or assignment in starter pathway.",
+    "source_dosage_preserved_in_original_audit": true,
+    "risk_notes_v2": "Not automatically delivered. Requires indication-specific screening, technique and safety approval."
+  },
+  {
+    "id": "assisted_lunge",
+    "name": "Supported reverse mini lunge",
+    "source_transcript_ids": [
+      "T15"
+    ],
+    "category": "strength",
+    "ability": "kneeling",
+    "tier": 3,
+    "equipment": [
+      "counter"
+    ],
+    "risk_gate": "CLINICIAN_SUPERVISION",
+    "eligible_when": "Not auto-eligible; obtain pathway-specific clinician clearance or remove from automated offer.",
+    "provisional_dosage_NOT_PRESCRIPTION": "Not delivered by automated MVP; clinician-directed protocol only.",
+    "modification_to_review": "Consider lower-tier movement of same ability; no unsupervised downgrade unless explicitly mapped and reviewed.",
+    "safety_considerations": [
+      "Floor/kneeling access and exit can be hazardous; recent surgery and fall risk require review."
+    ],
+    "stop_rule": "Stop immediately for chest pain, fainting, severe breathlessness, sudden neurologic change, or severe new pain; escalate per approved protocol.",
+    "source_evidence": "YouTube transcript technique only; not independent efficacy evidence. Compare authoritative guideline and specific exercise evidence during clinical audit.",
+    "clinical_approval": "PENDING",
+    "media_verified": false,
+    "contraindications_signed_off": false,
+    "v2_mvp_classification": "SPECIALIST_REVIEW_ONLY",
+    "deliverable_in_research_build": false,
+    "starting_dose_design_only": "No automatic dosage or assignment in starter pathway.",
+    "source_dosage_preserved_in_original_audit": true,
+    "risk_notes_v2": "Not automatically delivered. Requires indication-specific screening, technique and safety approval."
+  },
+  {
+    "id": "supported_kneel",
+    "name": "Assisted kneeling / split squat",
+    "source_transcript_ids": [
+      "T15"
+    ],
+    "category": "strength",
+    "ability": "kneeling",
+    "tier": 3,
+    "equipment": [
+      "counter",
+      "padding"
+    ],
+    "risk_gate": "CLINICIAN_SUPERVISION",
+    "eligible_when": "Not auto-eligible; obtain pathway-specific clinician clearance or remove from automated offer.",
+    "provisional_dosage_NOT_PRESCRIPTION": "Not delivered by automated MVP; clinician-directed protocol only.",
+    "modification_to_review": "Consider lower-tier movement of same ability; no unsupervised downgrade unless explicitly mapped and reviewed.",
+    "safety_considerations": [
+      "Floor/kneeling access and exit can be hazardous; recent surgery and fall risk require review."
+    ],
+    "stop_rule": "Stop immediately for chest pain, fainting, severe breathlessness, sudden neurologic change, or severe new pain; escalate per approved protocol.",
+    "source_evidence": "YouTube transcript technique only; not independent efficacy evidence. Compare authoritative guideline and specific exercise evidence during clinical audit.",
+    "clinical_approval": "PENDING",
+    "media_verified": false,
+    "contraindications_signed_off": false,
+    "v2_mvp_classification": "SPECIALIST_REVIEW_ONLY",
+    "deliverable_in_research_build": false,
+    "starting_dose_design_only": "No automatic dosage or assignment in starter pathway.",
+    "source_dosage_preserved_in_original_audit": true,
+    "risk_notes_v2": "Not automatically delivered. Requires indication-specific screening, technique and safety approval."
+  },
+  {
+    "id": "floor_transfer",
+    "name": "Floor-to-stand transfer",
+    "source_transcript_ids": [
+      "T03",
+      "T07"
+    ],
+    "category": "skill",
+    "ability": "floor_transfer",
+    "tier": 3,
+    "equipment": [
+      "mat",
+      "supervisor"
+    ],
+    "risk_gate": "CLINICIAN_SUPERVISION",
+    "eligible_when": "Not auto-eligible; obtain pathway-specific clinician clearance or remove from automated offer.",
+    "provisional_dosage_NOT_PRESCRIPTION": "Not delivered by automated MVP; clinician-directed protocol only.",
+    "modification_to_review": "Consider lower-tier movement of same ability; no unsupervised downgrade unless explicitly mapped and reviewed.",
+    "safety_considerations": [
+      "Floor/kneeling access and exit can be hazardous; recent surgery and fall risk require review."
+    ],
+    "stop_rule": "Stop immediately for chest pain, fainting, severe breathlessness, sudden neurologic change, or severe new pain; escalate per approved protocol.",
+    "source_evidence": "YouTube transcript technique only; not independent efficacy evidence. Compare authoritative guideline and specific exercise evidence during clinical audit.",
+    "clinical_approval": "PENDING",
+    "media_verified": false,
+    "contraindications_signed_off": false,
+    "v2_mvp_classification": "SPECIALIST_REVIEW_ONLY",
+    "deliverable_in_research_build": false,
+    "starting_dose_design_only": "No automatic dosage or assignment in starter pathway.",
+    "source_dosage_preserved_in_original_audit": true,
+    "risk_notes_v2": "Not automatically delivered. Requires indication-specific screening, technique and safety approval."
+  },
+  {
+    "id": "closed_eye_balance",
+    "name": "Eyes-closed balance drills",
+    "source_transcript_ids": [
+      "T11"
+    ],
+    "category": "balance",
+    "ability": "balance",
+    "tier": 3,
+    "equipment": [
+      "counter",
+      "supervisor"
+    ],
+    "risk_gate": "PROHIBITED_MVP",
+    "eligible_when": "Not auto-eligible; obtain pathway-specific clinician clearance or remove from automated offer.",
+    "provisional_dosage_NOT_PRESCRIPTION": "Not delivered in MVP.",
+    "modification_to_review": "Consider lower-tier movement of same ability; no unsupervised downgrade unless explicitly mapped and reviewed.",
+    "safety_considerations": [
+      "Risk of falls; stable surface and environment assessment; no automatic withdrawal of hand support."
+    ],
+    "stop_rule": "Stop immediately for chest pain, fainting, severe breathlessness, sudden neurologic change, or severe new pain; escalate per approved protocol.",
+    "source_evidence": "YouTube transcript technique only; not independent efficacy evidence. Compare authoritative guideline and specific exercise evidence during clinical audit.",
+    "clinical_approval": "PENDING",
+    "media_verified": false,
+    "contraindications_signed_off": false,
+    "v2_mvp_classification": "EXCLUDED",
+    "deliverable_in_research_build": false,
+    "starting_dose_design_only": "No automatic dosage or assignment in starter pathway.",
+    "source_dosage_preserved_in_original_audit": true,
+    "risk_notes_v2": "Not automatically delivered. Requires indication-specific screening, technique and safety approval."
+  },
+  {
+    "id": "eccentric_calf_step",
+    "name": "Eccentric step calf raise",
+    "source_transcript_ids": [
+      "T13"
+    ],
+    "category": "strength",
+    "ability": "walking",
+    "tier": 3,
+    "equipment": [
+      "step",
+      "rail"
+    ],
+    "risk_gate": "CLINICIAN_SUPERVISION",
+    "eligible_when": "Not auto-eligible; obtain pathway-specific clinician clearance or remove from automated offer.",
+    "provisional_dosage_NOT_PRESCRIPTION": "Not delivered by automated MVP; clinician-directed protocol only.",
+    "modification_to_review": "Consider lower-tier movement of same ability; no unsupervised downgrade unless explicitly mapped and reviewed.",
+    "safety_considerations": [
+      "Screen injury/recent surgery and relevant restrictions; avoid forced or uncontrolled movements."
+    ],
+    "stop_rule": "Stop immediately for chest pain, fainting, severe breathlessness, sudden neurologic change, or severe new pain; escalate per approved protocol.",
+    "source_evidence": "YouTube transcript technique only; not independent efficacy evidence. Compare authoritative guideline and specific exercise evidence during clinical audit.",
+    "clinical_approval": "PENDING",
+    "media_verified": false,
+    "contraindications_signed_off": false,
+    "v2_mvp_classification": "SPECIALIST_REVIEW_ONLY",
+    "deliverable_in_research_build": false,
+    "starting_dose_design_only": "No automatic dosage or assignment in starter pathway.",
+    "source_dosage_preserved_in_original_audit": true,
+    "risk_notes_v2": "Not automatically delivered. Requires indication-specific screening, technique and safety approval."
+  },
+  {
+    "id": "eccentric_shoulder",
+    "name": "Weighted eccentric shoulder rotation",
+    "source_transcript_ids": [
+      "T13"
+    ],
+    "category": "strength",
+    "ability": "shoulder",
+    "tier": 3,
+    "equipment": [
+      "light_weight"
+    ],
+    "risk_gate": "CLINICIAN_SUPERVISION",
+    "eligible_when": "Not auto-eligible; obtain pathway-specific clinician clearance or remove from automated offer.",
+    "provisional_dosage_NOT_PRESCRIPTION": "Not delivered by automated MVP; clinician-directed protocol only.",
+    "modification_to_review": "Consider lower-tier movement of same ability; no unsupervised downgrade unless explicitly mapped and reviewed.",
+    "safety_considerations": [
+      "Do not use as treatment for undiagnosed shoulder pain or after recent shoulder surgery."
+    ],
+    "stop_rule": "Stop immediately for chest pain, fainting, severe breathlessness, sudden neurologic change, or severe new pain; escalate per approved protocol.",
+    "source_evidence": "YouTube transcript technique only; not independent efficacy evidence. Compare authoritative guideline and specific exercise evidence during clinical audit.",
+    "clinical_approval": "PENDING",
+    "media_verified": false,
+    "contraindications_signed_off": false,
+    "v2_mvp_classification": "SPECIALIST_REVIEW_ONLY",
+    "deliverable_in_research_build": false,
+    "starting_dose_design_only": "No automatic dosage or assignment in starter pathway.",
+    "source_dosage_preserved_in_original_audit": true,
+    "risk_notes_v2": "Not automatically delivered. Requires indication-specific screening, technique and safety approval."
+  }
+]

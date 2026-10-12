@@ -1,0 +1,290 @@
+[
+  {
+    "id": "age",
+    "prompt": "What is your age?",
+    "response_type": "number",
+    "show_if": "all",
+    "domain": "scope",
+    "required": true
+  },
+  {
+    "id": "goals",
+    "prompt": "Which everyday activities would you most like to improve?",
+    "response_type": "multi",
+    "show_if": "all",
+    "domain": "goals",
+    "required": true
+  },
+  {
+    "id": "primary_goal",
+    "prompt": "Which one matters most?",
+    "response_type": "single",
+    "show_if": "all",
+    "domain": "goals",
+    "required": true
+  },
+  {
+    "id": "baseline",
+    "prompt": "How difficult is that activity now? (0 none to 10 cannot do)",
+    "response_type": "scale",
+    "show_if": "all",
+    "domain": "baseline",
+    "required": true
+  },
+  {
+    "id": "usual_activity",
+    "prompt": "How much activity do you typically do in a week?",
+    "response_type": "single",
+    "show_if": "all",
+    "domain": "baseline",
+    "required": true
+  },
+  {
+    "id": "walk_tolerance",
+    "prompt": "How long can you usually walk comfortably?",
+    "response_type": "single",
+    "show_if": "all",
+    "domain": "baseline",
+    "required": true
+  },
+  {
+    "id": "chair_difficulty",
+    "prompt": "How difficult is it to stand from your usual chair?",
+    "response_type": "single",
+    "show_if": "all",
+    "domain": "baseline",
+    "required": true
+  },
+  {
+    "id": "session_preferences",
+    "prompt": "How much time could you realistically spend in a session?",
+    "response_type": "single",
+    "show_if": "all",
+    "domain": "preference",
+    "required": false
+  },
+  {
+    "id": "equipment",
+    "prompt": "What stable equipment and space do you have?",
+    "response_type": "multi",
+    "show_if": "all",
+    "domain": "environment",
+    "required": true
+  },
+  {
+    "id": "support_nearby",
+    "prompt": "Do you have secure supports and someone nearby if needed?",
+    "response_type": "single",
+    "show_if": "all",
+    "domain": "environment",
+    "required": true
+  },
+  {
+    "id": "symptom_areas",
+    "prompt": "Where, if anywhere, do you experience discomfort?",
+    "response_type": "multi",
+    "show_if": "all",
+    "domain": "symptoms",
+    "required": true
+  },
+  {
+    "id": "symptom_duration",
+    "prompt": "How long have you had these symptoms?",
+    "response_type": "single",
+    "show_if": "symptoms",
+    "domain": "symptoms",
+    "required": false
+  },
+  {
+    "id": "symptom_level",
+    "prompt": "Rate usual discomfort over the past week from 0 to 10",
+    "response_type": "scale",
+    "show_if": "symptoms",
+    "domain": "symptoms",
+    "required": false
+  },
+  {
+    "id": "symptom_trend",
+    "prompt": "In the last 2 weeks, have symptoms improved, stayed similar, or worsened?",
+    "response_type": "single",
+    "show_if": "symptoms",
+    "domain": "symptoms",
+    "required": false
+  },
+  {
+    "id": "symptom_onset",
+    "prompt": "Did symptoms begin after a fall, injury or accident?",
+    "response_type": "yes_no_unsure",
+    "show_if": "symptoms",
+    "domain": "escalation",
+    "required": false
+  },
+  {
+    "id": "provider_restrictions",
+    "prompt": "Has a clinician told you to avoid certain movements, exercise or exertion?",
+    "response_type": "yes_no_unsure",
+    "show_if": "all",
+    "domain": "restriction",
+    "required": true
+  },
+  {
+    "id": "recent_surgery",
+    "prompt": "Have you had surgery or a procedure affecting movement in the past 6 months?",
+    "response_type": "yes_no_unsure",
+    "show_if": "all",
+    "domain": "restriction",
+    "required": true
+  },
+  {
+    "id": "recent_injury",
+    "prompt": "Have you had a recent fracture, significant injury or immobilization?",
+    "response_type": "yes_no_unsure",
+    "show_if": "all",
+    "domain": "restriction",
+    "required": true
+  },
+  {
+    "id": "diagnosed_conditions",
+    "prompt": "Have you been diagnosed with any condition affecting your joints, bones, nerves, heart, lungs, balance, or exercise safety?",
+    "response_type": "multi_unsure",
+    "show_if": "all",
+    "domain": "restriction",
+    "required": true
+  },
+  {
+    "id": "bone_health",
+    "prompt": "Have you been told you have osteoporosis, a fragility fracture, or a high fracture risk?",
+    "response_type": "yes_no_unsure",
+    "show_if": "all",
+    "domain": "restriction",
+    "required": true
+  },
+  {
+    "id": "falls_last_year",
+    "prompt": "Have you fallen in the last 12 months?",
+    "response_type": "yes_no_unsure",
+    "show_if": "all",
+    "domain": "falls",
+    "required": true
+  },
+  {
+    "id": "falls_injury",
+    "prompt": "If you fell, were you hurt or did you need assistance?",
+    "response_type": "yes_no_unsure",
+    "show_if": "falls_last_year=yes",
+    "domain": "falls",
+    "required": false
+  },
+  {
+    "id": "unsteady",
+    "prompt": "Do you feel unsteady when standing or walking?",
+    "response_type": "yes_no_unsure",
+    "show_if": "all",
+    "domain": "falls",
+    "required": true
+  },
+  {
+    "id": "fear_falling",
+    "prompt": "Are you worried about falling?",
+    "response_type": "yes_no_unsure",
+    "show_if": "all",
+    "domain": "falls",
+    "required": true
+  },
+  {
+    "id": "assistive_device",
+    "prompt": "Do you use a cane, walker, wheelchair or similar mobility aid?",
+    "response_type": "single",
+    "show_if": "all",
+    "domain": "falls",
+    "required": true
+  },
+  {
+    "id": "dizziness",
+    "prompt": "Do you experience unexplained dizziness, fainting or sudden loss of balance?",
+    "response_type": "yes_no_unsure",
+    "show_if": "all",
+    "domain": "escalation",
+    "required": true
+  },
+  {
+    "id": "chest_symptoms",
+    "prompt": "Have you had chest pressure/pain or unusual breathlessness with activity?",
+    "response_type": "yes_no_unsure",
+    "show_if": "all",
+    "domain": "red_flag",
+    "required": true
+  },
+  {
+    "id": "new_weakness",
+    "prompt": "Have you developed new or rapidly worsening weakness in an arm or leg, or sudden trouble walking?",
+    "response_type": "yes_no_unsure",
+    "show_if": "all",
+    "domain": "red_flag",
+    "required": true
+  },
+  {
+    "id": "back_bladder",
+    "prompt": "With back symptoms, have you developed new trouble controlling or emptying your bladder or bowels?",
+    "response_type": "yes_no_unsure",
+    "show_if": "back_symptoms",
+    "domain": "red_flag",
+    "required": false
+  },
+  {
+    "id": "saddle_numbness",
+    "prompt": "Have you developed new numbness around the groin, inner thighs or buttocks?",
+    "response_type": "yes_no_unsure",
+    "show_if": "all",
+    "domain": "red_flag",
+    "required": true
+  },
+  {
+    "id": "acute_neurologic",
+    "prompt": "Have you had sudden face drooping, difficulty speaking, or sudden one-sided weakness?",
+    "response_type": "yes_no_unsure",
+    "show_if": "all",
+    "domain": "red_flag",
+    "required": true
+  },
+  {
+    "id": "infection_trauma",
+    "prompt": "Do you currently have a fever with severe new back/joint pain, or severe pain following injury?",
+    "response_type": "yes_no_unsure",
+    "show_if": "all",
+    "domain": "red_flag",
+    "required": true
+  },
+  {
+    "id": "unexplained_pain",
+    "prompt": "Do you have severe, unexplained, or rapidly worsening pain, especially at rest or at night?",
+    "response_type": "yes_no_unsure",
+    "show_if": "all",
+    "domain": "escalation",
+    "required": true
+  },
+  {
+    "id": "exercise_advice",
+    "prompt": "Do you currently have a clinician-approved home exercise program?",
+    "response_type": "yes_no_unsure",
+    "show_if": "all",
+    "domain": "context",
+    "required": false
+  },
+  {
+    "id": "consent_limits",
+    "prompt": "Do you understand the app offers general wellness guidance, not diagnosis or emergency monitoring?",
+    "response_type": "agreement",
+    "show_if": "all",
+    "domain": "consent",
+    "required": true
+  },
+  {
+    "id": "privacy_consent",
+    "prompt": "Do you consent to storing sensitive information for personalization, under the privacy policy?",
+    "response_type": "agreement",
+    "show_if": "all",
+    "domain": "consent",
+    "required": true
+  }
+]

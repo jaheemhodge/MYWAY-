@@ -1,0 +1,13 @@
+node_modules
+dist
+.DS_Store
+*.sqlite
+.vite
+apps/mobile/ios/App/Pods
+apps/mobile/ios/App/build
+backend/.pytest_cache
+backend/__pycache__
+**/__pycache__
+*.pyc
+.env
+.coverage

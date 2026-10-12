@@ -1,0 +1,161 @@
+@import "./tokens.css";
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  min-height: 100%;
+}
+
+html {
+  font-size: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  color: var(--ink);
+  background: var(--cream);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+button {
+  min-height: var(--touch);
+  min-width: var(--touch);
+}
+
+a {
+  color: inherit;
+}
+
+h1,
+h2,
+h3,
+.serif {
+  font-family: var(--font-serif);
+  font-weight: 500;
+  letter-spacing: -0.03em;
+  line-height: 1.08;
+}
+
+p {
+  line-height: 1.45;
+}
+
+.phone-shell {
+  width: min(430px, 100%);
+  min-height: 100dvh;
+  margin: 0 auto;
+  position: relative;
+  background: var(--cream);
+}
+
+.screen {
+  min-height: 100dvh;
+  padding: calc(var(--safe-top) + 18px) 22px calc(var(--safe-bottom) + 28px);
+  display: flex;
+  flex-direction: column;
+}
+
+.screen.tabbed {
+  padding-bottom: calc(var(--safe-bottom) + var(--tab-height) + 18px);
+}
+
+.screen.dark {
+  background:
+    radial-gradient(120% 70% at 50% 0%, #6b7464 0%, #2a332c 38%, #15231c 100%);
+  color: #f6f3ee;
+}
+
+.screen.lavender {
+  background: var(--lavender);
+}
+
+.display {
+  font-size: clamp(2.1rem, 8vw, 3.3rem);
+  margin: 0 0 0.7rem;
+}
+
+.lede {
+  font-size: 1.05rem;
+  color: var(--muted);
+  margin: 0 0 1.6rem;
+}
+
+.screen.dark .lede {
+  color: rgba(246, 243, 238, 0.78);
+}
+
+.stack {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.grow {
+  flex: 1;
+}
+
+.row {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
+.demo-banner {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px;
+  border-radius: var(--radius-pill);
+  background: rgba(255, 255, 255, 0.16);
+  border: 1px dashed rgba(255, 255, 255, 0.45);
+  font-size: 0.78rem;
+  letter-spacing: 0.02em;
+}
+
+.card {
+  background: var(--white);
+  border-radius: var(--radius-xl);
+  padding: 18px;
+  box-shadow: var(--shadow);
+}
+
+.muted {
+  color: var(--muted);
+}
+
+@media (min-width: 768px) {
+  body {
+    background: #d8d3c8;
+  }
+
+  .phone-shell {
+    min-height: 100dvh;
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.12);
+  }
+}

@@ -1,0 +1,61 @@
+day,phase,day_type,goal_focus,checkin,status
+1,baseline,strength_design,baseline and purpose,functional baseline/review,research planning only - no exercise prescription
+2,baseline,education,baseline and purpose,optional,research planning only - no exercise prescription
+3,baseline,activity_design,baseline and purpose,functional baseline/review,research planning only - no exercise prescription
+4,foundation,recovery,movement habits,optional,research planning only - no exercise prescription
+5,foundation,strength_design,movement habits,short tolerability reflection,research planning only - no exercise prescription
+6,foundation,activity_design,movement habits,short tolerability reflection,research planning only - no exercise prescription
+7,foundation,review,movement habits,optional,research planning only - no exercise prescription
+8,foundation,strength_design,movement habits,short tolerability reflection,research planning only - no exercise prescription
+9,foundation,education,movement habits,optional,research planning only - no exercise prescription
+10,foundation,activity_design,movement habits,short tolerability reflection,research planning only - no exercise prescription
+11,foundation,recovery,movement habits,optional,research planning only - no exercise prescription
+12,foundation,strength_design,movement habits,short tolerability reflection,research planning only - no exercise prescription
+13,foundation,activity_design,movement habits,short tolerability reflection,research planning only - no exercise prescription
+14,foundation,review,movement habits,functional baseline/review,research planning only - no exercise prescription
+15,strength,strength_design,foundational capacity,short tolerability reflection,research planning only - no exercise prescription
+16,strength,education,foundational capacity,optional,research planning only - no exercise prescription
+17,strength,activity_design,foundational capacity,short tolerability reflection,research planning only - no exercise prescription
+18,strength,recovery,foundational capacity,optional,research planning only - no exercise prescription
+19,strength,strength_design,foundational capacity,short tolerability reflection,research planning only - no exercise prescription
+20,strength,activity_design,foundational capacity,short tolerability reflection,research planning only - no exercise prescription
+21,strength,review,foundational capacity,optional,research planning only - no exercise prescription
+22,strength,strength_design,foundational capacity,short tolerability reflection,research planning only - no exercise prescription
+23,strength,education,foundational capacity,optional,research planning only - no exercise prescription
+24,strength,activity_design,foundational capacity,short tolerability reflection,research planning only - no exercise prescription
+25,strength,recovery,foundational capacity,optional,research planning only - no exercise prescription
+26,strength,strength_design,foundational capacity,short tolerability reflection,research planning only - no exercise prescription
+27,strength,activity_design,foundational capacity,short tolerability reflection,research planning only - no exercise prescription
+28,strength,review,foundational capacity,optional,research planning only - no exercise prescription
+29,strength,strength_design,foundational capacity,short tolerability reflection,research planning only - no exercise prescription
+30,strength,education,foundational capacity,functional baseline/review,research planning only - no exercise prescription
+31,capacity,activity_design,goal-relevant function,short tolerability reflection,research planning only - no exercise prescription
+32,capacity,recovery,goal-relevant function,optional,research planning only - no exercise prescription
+33,capacity,strength_design,goal-relevant function,short tolerability reflection,research planning only - no exercise prescription
+34,capacity,activity_design,goal-relevant function,short tolerability reflection,research planning only - no exercise prescription
+35,capacity,review,goal-relevant function,optional,research planning only - no exercise prescription
+36,capacity,strength_design,goal-relevant function,short tolerability reflection,research planning only - no exercise prescription
+37,capacity,education,goal-relevant function,optional,research planning only - no exercise prescription
+38,capacity,activity_design,goal-relevant function,short tolerability reflection,research planning only - no exercise prescription
+39,capacity,recovery,goal-relevant function,optional,research planning only - no exercise prescription
+40,capacity,strength_design,goal-relevant function,short tolerability reflection,research planning only - no exercise prescription
+41,capacity,activity_design,goal-relevant function,short tolerability reflection,research planning only - no exercise prescription
+42,capacity,review,goal-relevant function,optional,research planning only - no exercise prescription
+43,capacity,strength_design,goal-relevant function,short tolerability reflection,research planning only - no exercise prescription
+44,capacity,education,goal-relevant function,optional,research planning only - no exercise prescription
+45,capacity,activity_design,goal-relevant function,functional baseline/review,research planning only - no exercise prescription
+46,application,recovery,maintain and apply ability,optional,research planning only - no exercise prescription
+47,application,strength_design,maintain and apply ability,short tolerability reflection,research planning only - no exercise prescription
+48,application,activity_design,maintain and apply ability,short tolerability reflection,research planning only - no exercise prescription
+49,application,review,maintain and apply ability,optional,research planning only - no exercise prescription
+50,application,strength_design,maintain and apply ability,short tolerability reflection,research planning only - no exercise prescription
+51,application,education,maintain and apply ability,optional,research planning only - no exercise prescription
+52,application,activity_design,maintain and apply ability,short tolerability reflection,research planning only - no exercise prescription
+53,application,recovery,maintain and apply ability,optional,research planning only - no exercise prescription
+54,application,strength_design,maintain and apply ability,short tolerability reflection,research planning only - no exercise prescription
+55,application,activity_design,maintain and apply ability,short tolerability reflection,research planning only - no exercise prescription
+56,application,review,maintain and apply ability,optional,research planning only - no exercise prescription
+57,application,strength_design,maintain and apply ability,short tolerability reflection,research planning only - no exercise prescription
+58,application,education,maintain and apply ability,optional,research planning only - no exercise prescription
+59,application,activity_design,maintain and apply ability,short tolerability reflection,research planning only - no exercise prescription
+60,application,recovery,maintain and apply ability,functional baseline/review,research planning only - no exercise prescription

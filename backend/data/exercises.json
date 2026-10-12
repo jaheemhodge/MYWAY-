@@ -1,0 +1,1060 @@
+[
+  {
+    "id": "seated_march",
+    "name": "Seated marching",
+    "category": "mobility",
+    "primary_ability": "warmup",
+    "tier": 1,
+    "equipment": [
+      "chair"
+    ],
+    "transcript_ids": [
+      "T06"
+    ],
+    "approval": "candidate",
+    "video_url": null,
+    "clinical_notes": "Draft candidate: technique, contraindications and dosage require review.",
+    "dosage_reviewed": false
+  },
+  {
+    "id": "seated_knee_extension",
+    "name": "Seated knee extension",
+    "category": "strength",
+    "primary_ability": "chair_rise",
+    "tier": 1,
+    "equipment": [
+      "chair"
+    ],
+    "transcript_ids": [
+      "T06",
+      "T11"
+    ],
+    "approval": "candidate",
+    "video_url": null,
+    "clinical_notes": "Draft candidate: technique, contraindications and dosage require review.",
+    "dosage_reviewed": false
+  },
+  {
+    "id": "seated_calf_toe_raise",
+    "name": "Seated heel and toe raises",
+    "category": "strength",
+    "primary_ability": "walking",
+    "tier": 1,
+    "equipment": [
+      "chair"
+    ],
+    "transcript_ids": [
+      "T06"
+    ],
+    "approval": "candidate",
+    "video_url": null,
+    "clinical_notes": "Draft candidate: technique, contraindications and dosage require review.",
+    "dosage_reviewed": false
+  },
+  {
+    "id": "seated_thigh_squeeze",
+    "name": "Seated adductor squeeze",
+    "category": "strength",
+    "primary_ability": "chair_rise",
+    "tier": 1,
+    "equipment": [
+      "chair",
+      "pillow"
+    ],
+    "transcript_ids": [
+      "T06"
+    ],
+    "approval": "candidate",
+    "video_url": null,
+    "clinical_notes": "Draft candidate: technique, contraindications and dosage require review.",
+    "dosage_reviewed": false
+  },
+  {
+    "id": "assisted_sit_stand",
+    "name": "Arm-assisted sit-to-stand",
+    "category": "strength",
+    "primary_ability": "chair_rise",
+    "tier": 1,
+    "equipment": [
+      "chair"
+    ],
+    "transcript_ids": [
+      "T07",
+      "T08"
+    ],
+    "approval": "candidate",
+    "video_url": null,
+    "clinical_notes": "Draft candidate: technique, contraindications and dosage require review.",
+    "dosage_reviewed": false
+  },
+  {
+    "id": "sit_stand",
+    "name": "Sit-to-stand",
+    "category": "strength",
+    "primary_ability": "chair_rise",
+    "tier": 2,
+    "equipment": [
+      "chair"
+    ],
+    "transcript_ids": [
+      "T07",
+      "T08"
+    ],
+    "approval": "candidate",
+    "video_url": null,
+    "clinical_notes": "Draft candidate: technique, contraindications and dosage require review.",
+    "dosage_reviewed": false
+  },
+  {
+    "id": "loaded_sit_stand",
+    "name": "Lightly loaded sit-to-stand",
+    "category": "strength",
+    "primary_ability": "chair_rise",
+    "tier": 3,
+    "equipment": [
+      "chair",
+      "light_weight"
+    ],
+    "transcript_ids": [
+      "T07",
+      "T08"
+    ],
+    "approval": "review_required",
+    "video_url": null,
+    "clinical_notes": "Draft candidate: technique, contraindications and dosage require review.",
+    "dosage_reviewed": false
+  },
+  {
+    "id": "mini_squat",
+    "name": "Supported mini squat",
+    "category": "strength",
+    "primary_ability": "chair_rise",
+    "tier": 2,
+    "equipment": [
+      "counter"
+    ],
+    "transcript_ids": [
+      "T05",
+      "T15"
+    ],
+    "approval": "candidate",
+    "video_url": null,
+    "clinical_notes": "Draft candidate: technique, contraindications and dosage require review.",
+    "dosage_reviewed": false
+  },
+  {
+    "id": "horse_stance",
+    "name": "Modified supported horse stance",
+    "category": "strength",
+    "primary_ability": "chair_rise",
+    "tier": 2,
+    "equipment": [
+      "chair"
+    ],
+    "transcript_ids": [
+      "T05"
+    ],
+    "approval": "review_required",
+    "video_url": null,
+    "clinical_notes": "Draft candidate: technique, contraindications and dosage require review.",
+    "dosage_reviewed": false
+  },
+  {
+    "id": "supported_hip_hinge",
+    "name": "Supported hip hinge",
+    "category": "strength",
+    "primary_ability": "bend_lift",
+    "tier": 1,
+    "equipment": [
+      "counter"
+    ],
+    "transcript_ids": [
+      "T07",
+      "T11"
+    ],
+    "approval": "candidate",
+    "video_url": null,
+    "clinical_notes": "Draft candidate: technique, contraindications and dosage require review.",
+    "dosage_reviewed": false
+  },
+  {
+    "id": "hip_hinge",
+    "name": "Unloaded hip hinge",
+    "category": "strength",
+    "primary_ability": "bend_lift",
+    "tier": 2,
+    "equipment": [
+      "none"
+    ],
+    "transcript_ids": [
+      "T07",
+      "T11"
+    ],
+    "approval": "candidate",
+    "video_url": null,
+    "clinical_notes": "Draft candidate: technique, contraindications and dosage require review.",
+    "dosage_reviewed": false
+  },
+  {
+    "id": "light_rdl",
+    "name": "Light Romanian deadlift",
+    "category": "strength",
+    "primary_ability": "bend_lift",
+    "tier": 3,
+    "equipment": [
+      "light_weight"
+    ],
+    "transcript_ids": [
+      "T13"
+    ],
+    "approval": "review_required",
+    "video_url": null,
+    "clinical_notes": "Draft candidate: technique, contraindications and dosage require review.",
+    "dosage_reviewed": false
+  },
+  {
+    "id": "wall_pushup",
+    "name": "Wall push-up",
+    "category": "strength",
+    "primary_ability": "push",
+    "tier": 1,
+    "equipment": [
+      "wall"
+    ],
+    "transcript_ids": [
+      "T07"
+    ],
+    "approval": "candidate",
+    "video_url": null,
+    "clinical_notes": "Draft candidate: technique, contraindications and dosage require review.",
+    "dosage_reviewed": false
+  },
+  {
+    "id": "counter_pushup",
+    "name": "Countertop push-up",
+    "category": "strength",
+    "primary_ability": "push",
+    "tier": 2,
+    "equipment": [
+      "counter"
+    ],
+    "transcript_ids": [
+      "T07"
+    ],
+    "approval": "candidate",
+    "video_url": null,
+    "clinical_notes": "Draft candidate: technique, contraindications and dosage require review.",
+    "dosage_reviewed": false
+  },
+  {
+    "id": "light_row",
+    "name": "Standing bent-over row",
+    "category": "strength",
+    "primary_ability": "pull",
+    "tier": 2,
+    "equipment": [
+      "light_weight"
+    ],
+    "transcript_ids": [
+      "T07"
+    ],
+    "approval": "candidate",
+    "video_url": null,
+    "clinical_notes": "Draft candidate: technique, contraindications and dosage require review.",
+    "dosage_reviewed": false
+  },
+  {
+    "id": "standing_march",
+    "name": "Supported standing march",
+    "category": "balance",
+    "primary_ability": "walking",
+    "tier": 1,
+    "equipment": [
+      "counter"
+    ],
+    "transcript_ids": [
+      "T10"
+    ],
+    "approval": "candidate",
+    "video_url": null,
+    "clinical_notes": "Draft candidate: technique, contraindications and dosage require review.",
+    "dosage_reviewed": false
+  },
+  {
+    "id": "supported_hip_extension",
+    "name": "Supported hip extension",
+    "category": "strength",
+    "primary_ability": "walking",
+    "tier": 1,
+    "equipment": [
+      "counter"
+    ],
+    "transcript_ids": [
+      "T10"
+    ],
+    "approval": "candidate",
+    "video_url": null,
+    "clinical_notes": "Draft candidate: technique, contraindications and dosage require review.",
+    "dosage_reviewed": false
+  },
+  {
+    "id": "heel_raise",
+    "name": "Supported standing heel raise",
+    "category": "strength",
+    "primary_ability": "walking",
+    "tier": 2,
+    "equipment": [
+      "counter"
+    ],
+    "transcript_ids": [
+      "T06"
+    ],
+    "approval": "candidate",
+    "video_url": null,
+    "clinical_notes": "Draft candidate: technique, contraindications and dosage require review.",
+    "dosage_reviewed": false
+  },
+  {
+    "id": "side_step",
+    "name": "Supported side stepping",
+    "category": "balance",
+    "primary_ability": "balance",
+    "tier": 2,
+    "equipment": [
+      "counter"
+    ],
+    "transcript_ids": [
+      "T11"
+    ],
+    "approval": "review_required",
+    "video_url": null,
+    "clinical_notes": "Draft candidate: technique, contraindications and dosage require review.",
+    "dosage_reviewed": false
+  },
+  {
+    "id": "clock_taps",
+    "name": "Supported clock taps",
+    "category": "balance",
+    "primary_ability": "balance",
+    "tier": 2,
+    "equipment": [
+      "counter"
+    ],
+    "transcript_ids": [
+      "T11"
+    ],
+    "approval": "review_required",
+    "video_url": null,
+    "clinical_notes": "Draft candidate: technique, contraindications and dosage require review.",
+    "dosage_reviewed": false
+  },
+  {
+    "id": "kickstand_stance",
+    "name": "Supported kickstand stance",
+    "category": "balance",
+    "primary_ability": "balance",
+    "tier": 1,
+    "equipment": [
+      "counter"
+    ],
+    "transcript_ids": [
+      "T11"
+    ],
+    "approval": "review_required",
+    "video_url": null,
+    "clinical_notes": "Draft candidate: technique, contraindications and dosage require review.",
+    "dosage_reviewed": false
+  },
+  {
+    "id": "supported_single_leg",
+    "name": "Supported one-leg stance",
+    "category": "balance",
+    "primary_ability": "balance",
+    "tier": 3,
+    "equipment": [
+      "counter"
+    ],
+    "transcript_ids": [
+      "T07",
+      "T11"
+    ],
+    "approval": "review_required",
+    "video_url": null,
+    "clinical_notes": "Draft candidate: technique, contraindications and dosage require review.",
+    "dosage_reviewed": false
+  },
+  {
+    "id": "narrow_walk",
+    "name": "Supported narrow-base walking",
+    "category": "balance",
+    "primary_ability": "balance",
+    "tier": 3,
+    "equipment": [
+      "counter"
+    ],
+    "transcript_ids": [
+      "T11"
+    ],
+    "approval": "review_required",
+    "video_url": null,
+    "clinical_notes": "Draft candidate: technique, contraindications and dosage require review.",
+    "dosage_reviewed": false
+  },
+  {
+    "id": "weight_shift",
+    "name": "Supported front-back weight shift",
+    "category": "balance",
+    "primary_ability": "balance",
+    "tier": 1,
+    "equipment": [
+      "counter"
+    ],
+    "transcript_ids": [
+      "T11"
+    ],
+    "approval": "review_required",
+    "video_url": null,
+    "clinical_notes": "Draft candidate: technique, contraindications and dosage require review.",
+    "dosage_reviewed": false
+  },
+  {
+    "id": "four_step_turn",
+    "name": "Supported four-step turn",
+    "category": "balance",
+    "primary_ability": "balance",
+    "tier": 3,
+    "equipment": [
+      "counter"
+    ],
+    "transcript_ids": [
+      "T11"
+    ],
+    "approval": "review_required",
+    "video_url": null,
+    "clinical_notes": "Draft candidate: technique, contraindications and dosage require review.",
+    "dosage_reviewed": false
+  },
+  {
+    "id": "quick_lateral_step",
+    "name": "Quick lateral response step",
+    "category": "balance",
+    "primary_ability": "balance",
+    "tier": 3,
+    "equipment": [
+      "counter"
+    ],
+    "transcript_ids": [
+      "T11"
+    ],
+    "approval": "review_required",
+    "video_url": null,
+    "clinical_notes": "Draft candidate: technique, contraindications and dosage require review.",
+    "dosage_reviewed": false
+  },
+  {
+    "id": "step_up_low",
+    "name": "Supported low step-up",
+    "category": "strength",
+    "primary_ability": "stairs",
+    "tier": 2,
+    "equipment": [
+      "step",
+      "rail"
+    ],
+    "transcript_ids": [
+      "T04"
+    ],
+    "approval": "review_required",
+    "video_url": null,
+    "clinical_notes": "Draft candidate: technique, contraindications and dosage require review.",
+    "dosage_reviewed": false
+  },
+  {
+    "id": "step_tap",
+    "name": "Step-up plus tap",
+    "category": "strength",
+    "primary_ability": "stairs",
+    "tier": 3,
+    "equipment": [
+      "step",
+      "rail"
+    ],
+    "transcript_ids": [
+      "T04"
+    ],
+    "approval": "review_required",
+    "video_url": null,
+    "clinical_notes": "Draft candidate: technique, contraindications and dosage require review.",
+    "dosage_reviewed": false
+  },
+  {
+    "id": "walk_comfortable",
+    "name": "Comfortable walking",
+    "category": "aerobic",
+    "primary_ability": "walking",
+    "tier": 1,
+    "equipment": [
+      "safe_walking_area"
+    ],
+    "transcript_ids": [
+      "T02",
+      "T05",
+      "T07",
+      "T08"
+    ],
+    "approval": "candidate",
+    "video_url": null,
+    "clinical_notes": "Draft candidate: technique, contraindications and dosage require review.",
+    "dosage_reviewed": false
+  },
+  {
+    "id": "seated_side_bend",
+    "name": "Gentle seated side bend",
+    "category": "mobility",
+    "primary_ability": "trunk",
+    "tier": 1,
+    "equipment": [
+      "chair"
+    ],
+    "transcript_ids": [
+      "T09"
+    ],
+    "approval": "candidate",
+    "video_url": null,
+    "clinical_notes": "Draft candidate: technique, contraindications and dosage require review.",
+    "dosage_reviewed": false
+  },
+  {
+    "id": "mermaid_stretch",
+    "name": "Floor mermaid side stretch",
+    "category": "mobility",
+    "primary_ability": "trunk",
+    "tier": 3,
+    "equipment": [
+      "mat"
+    ],
+    "transcript_ids": [
+      "T09"
+    ],
+    "approval": "review_required",
+    "video_url": null,
+    "clinical_notes": "Draft candidate: technique, contraindications and dosage require review.",
+    "dosage_reviewed": false
+  },
+  {
+    "id": "sidelying_open_book",
+    "name": "Side-lying trunk rotation",
+    "category": "mobility",
+    "primary_ability": "trunk",
+    "tier": 2,
+    "equipment": [
+      "bed"
+    ],
+    "transcript_ids": [
+      "T09"
+    ],
+    "approval": "candidate",
+    "video_url": null,
+    "clinical_notes": "Draft candidate: technique, contraindications and dosage require review.",
+    "dosage_reviewed": false
+  },
+  {
+    "id": "foam_roll_chest",
+    "name": "Supine chest opening on foam roller",
+    "category": "mobility",
+    "primary_ability": "shoulder",
+    "tier": 3,
+    "equipment": [
+      "foam_roller"
+    ],
+    "transcript_ids": [
+      "T09"
+    ],
+    "approval": "review_required",
+    "video_url": null,
+    "clinical_notes": "Draft candidate: technique, contraindications and dosage require review.",
+    "dosage_reviewed": false
+  },
+  {
+    "id": "foam_roll_thoracic",
+    "name": "Thoracic foam rolling",
+    "category": "mobility",
+    "primary_ability": "trunk",
+    "tier": 3,
+    "equipment": [
+      "foam_roller"
+    ],
+    "transcript_ids": [
+      "T09"
+    ],
+    "approval": "review_required",
+    "video_url": null,
+    "clinical_notes": "Draft candidate: technique, contraindications and dosage require review.",
+    "dosage_reviewed": false
+  },
+  {
+    "id": "chin_retraction",
+    "name": "Gentle chin retraction",
+    "category": "mobility",
+    "primary_ability": "neck",
+    "tier": 1,
+    "equipment": [
+      "none"
+    ],
+    "transcript_ids": [
+      "T10"
+    ],
+    "approval": "candidate",
+    "video_url": null,
+    "clinical_notes": "Draft candidate: technique, contraindications and dosage require review.",
+    "dosage_reviewed": false
+  },
+  {
+    "id": "scapular_w",
+    "name": "Scapular W movement",
+    "category": "strength",
+    "primary_ability": "pull",
+    "tier": 1,
+    "equipment": [
+      "none"
+    ],
+    "transcript_ids": [
+      "T10"
+    ],
+    "approval": "candidate",
+    "video_url": null,
+    "clinical_notes": "Draft candidate: technique, contraindications and dosage require review.",
+    "dosage_reviewed": false
+  },
+  {
+    "id": "pelvic_tilt_heel_slide",
+    "name": "Pelvic tilt with heel slide",
+    "category": "strength",
+    "primary_ability": "trunk",
+    "tier": 2,
+    "equipment": [
+      "bed"
+    ],
+    "transcript_ids": [
+      "T10"
+    ],
+    "approval": "candidate",
+    "video_url": null,
+    "clinical_notes": "Draft candidate: technique, contraindications and dosage require review.",
+    "dosage_reviewed": false
+  },
+  {
+    "id": "supine_y",
+    "name": "Supine W-to-Y shoulder movement",
+    "category": "mobility",
+    "primary_ability": "shoulder",
+    "tier": 2,
+    "equipment": [
+      "bed"
+    ],
+    "transcript_ids": [
+      "T14"
+    ],
+    "approval": "candidate",
+    "video_url": null,
+    "clinical_notes": "Draft candidate: technique, contraindications and dosage require review.",
+    "dosage_reviewed": false
+  },
+  {
+    "id": "knee_roll",
+    "name": "Supine knees-side-to-side",
+    "category": "mobility",
+    "primary_ability": "trunk",
+    "tier": 1,
+    "equipment": [
+      "bed"
+    ],
+    "transcript_ids": [
+      "T08",
+      "T14"
+    ],
+    "approval": "candidate",
+    "video_url": null,
+    "clinical_notes": "Draft candidate: technique, contraindications and dosage require review.",
+    "dosage_reviewed": false
+  },
+  {
+    "id": "cat_cow",
+    "name": "Cat-cow",
+    "category": "mobility",
+    "primary_ability": "trunk",
+    "tier": 3,
+    "equipment": [
+      "mat"
+    ],
+    "transcript_ids": [
+      "T14"
+    ],
+    "approval": "review_required",
+    "video_url": null,
+    "clinical_notes": "Draft candidate: technique, contraindications and dosage require review.",
+    "dosage_reviewed": false
+  },
+  {
+    "id": "thread_needle",
+    "name": "Thread the needle",
+    "category": "mobility",
+    "primary_ability": "trunk",
+    "tier": 3,
+    "equipment": [
+      "mat"
+    ],
+    "transcript_ids": [
+      "T14"
+    ],
+    "approval": "review_required",
+    "video_url": null,
+    "clinical_notes": "Draft candidate: technique, contraindications and dosage require review.",
+    "dosage_reviewed": false
+  },
+  {
+    "id": "seated_figure_four",
+    "name": "Seated glute stretch",
+    "category": "mobility",
+    "primary_ability": "hip",
+    "tier": 2,
+    "equipment": [
+      "chair"
+    ],
+    "transcript_ids": [
+      "T14"
+    ],
+    "approval": "candidate",
+    "video_url": null,
+    "clinical_notes": "Draft candidate: technique, contraindications and dosage require review.",
+    "dosage_reviewed": false
+  },
+  {
+    "id": "supported_sit_back",
+    "name": "Supported sit-back squat stretch",
+    "category": "mobility",
+    "primary_ability": "hip",
+    "tier": 2,
+    "equipment": [
+      "counter"
+    ],
+    "transcript_ids": [
+      "T12"
+    ],
+    "approval": "candidate",
+    "video_url": null,
+    "clinical_notes": "Draft candidate: technique, contraindications and dosage require review.",
+    "dosage_reviewed": false
+  },
+  {
+    "id": "wall_finger_walk",
+    "name": "Finger walk up wall",
+    "category": "mobility",
+    "primary_ability": "shoulder",
+    "tier": 1,
+    "equipment": [
+      "wall"
+    ],
+    "transcript_ids": [
+      "T12"
+    ],
+    "approval": "candidate",
+    "video_url": null,
+    "clinical_notes": "Draft candidate: technique, contraindications and dosage require review.",
+    "dosage_reviewed": false
+  },
+  {
+    "id": "overhead_wall_lift",
+    "name": "Wall overhead lift-off",
+    "category": "strength",
+    "primary_ability": "shoulder",
+    "tier": 3,
+    "equipment": [
+      "wall"
+    ],
+    "transcript_ids": [
+      "T12"
+    ],
+    "approval": "review_required",
+    "video_url": null,
+    "clinical_notes": "Draft candidate: technique, contraindications and dosage require review.",
+    "dosage_reviewed": false
+  },
+  {
+    "id": "supine_hip_rotation",
+    "name": "Supine hip rotation",
+    "category": "mobility",
+    "primary_ability": "hip",
+    "tier": 2,
+    "equipment": [
+      "bed"
+    ],
+    "transcript_ids": [
+      "T12"
+    ],
+    "approval": "candidate",
+    "video_url": null,
+    "clinical_notes": "Draft candidate: technique, contraindications and dosage require review.",
+    "dosage_reviewed": false
+  },
+  {
+    "id": "pendulum",
+    "name": "Supported shoulder pendulum",
+    "category": "mobility",
+    "primary_ability": "shoulder",
+    "tier": 1,
+    "equipment": [
+      "counter"
+    ],
+    "transcript_ids": [
+      "T01"
+    ],
+    "approval": "candidate",
+    "video_url": null,
+    "clinical_notes": "Draft candidate: technique, contraindications and dosage require review.",
+    "dosage_reviewed": false
+  },
+  {
+    "id": "wall_slide",
+    "name": "Shoulder wall slide",
+    "category": "mobility",
+    "primary_ability": "shoulder",
+    "tier": 2,
+    "equipment": [
+      "wall"
+    ],
+    "transcript_ids": [
+      "T01"
+    ],
+    "approval": "candidate",
+    "video_url": null,
+    "clinical_notes": "Draft candidate: technique, contraindications and dosage require review.",
+    "dosage_reviewed": false
+  },
+  {
+    "id": "shoulder_isometric",
+    "name": "Shoulder isometrics",
+    "category": "strength",
+    "primary_ability": "shoulder",
+    "tier": 2,
+    "equipment": [
+      "wall"
+    ],
+    "transcript_ids": [
+      "T01"
+    ],
+    "approval": "review_required",
+    "video_url": null,
+    "clinical_notes": "Draft candidate: technique, contraindications and dosage require review.",
+    "dosage_reviewed": false
+  },
+  {
+    "id": "band_rotation",
+    "name": "Band external shoulder rotation",
+    "category": "strength",
+    "primary_ability": "shoulder",
+    "tier": 3,
+    "equipment": [
+      "band"
+    ],
+    "transcript_ids": [
+      "T01"
+    ],
+    "approval": "review_required",
+    "video_url": null,
+    "clinical_notes": "Draft candidate: technique, contraindications and dosage require review.",
+    "dosage_reviewed": false
+  },
+  {
+    "id": "band_scaption",
+    "name": "Scaption to shoulder height",
+    "category": "strength",
+    "primary_ability": "shoulder",
+    "tier": 3,
+    "equipment": [
+      "band"
+    ],
+    "transcript_ids": [
+      "T01"
+    ],
+    "approval": "review_required",
+    "video_url": null,
+    "clinical_notes": "Draft candidate: technique, contraindications and dosage require review.",
+    "dosage_reviewed": false
+  },
+  {
+    "id": "seated_lumbar_flexion",
+    "name": "Seated lumbar flexion",
+    "category": "mobility",
+    "primary_ability": "trunk",
+    "tier": 2,
+    "equipment": [
+      "chair"
+    ],
+    "transcript_ids": [
+      "T08"
+    ],
+    "approval": "review_required",
+    "video_url": null,
+    "clinical_notes": "Draft candidate: technique, contraindications and dosage require review.",
+    "dosage_reviewed": false
+  },
+  {
+    "id": "standing_extension",
+    "name": "Standing lumbar extension",
+    "category": "mobility",
+    "primary_ability": "trunk",
+    "tier": 2,
+    "equipment": [
+      "none"
+    ],
+    "transcript_ids": [
+      "T08"
+    ],
+    "approval": "review_required",
+    "video_url": null,
+    "clinical_notes": "Draft candidate: technique, contraindications and dosage require review.",
+    "dosage_reviewed": false
+  },
+  {
+    "id": "modified_crunch",
+    "name": "Modified abdominal crunch",
+    "category": "strength",
+    "primary_ability": "trunk",
+    "tier": 3,
+    "equipment": [
+      "mat"
+    ],
+    "transcript_ids": [
+      "T08"
+    ],
+    "approval": "review_required",
+    "video_url": null,
+    "clinical_notes": "Draft candidate: technique, contraindications and dosage require review.",
+    "dosage_reviewed": false
+  },
+  {
+    "id": "heel_slide",
+    "name": "Supine heel slide for knee bending",
+    "category": "mobility",
+    "primary_ability": "knee",
+    "tier": 1,
+    "equipment": [
+      "bed"
+    ],
+    "transcript_ids": [
+      "T15"
+    ],
+    "approval": "candidate",
+    "video_url": null,
+    "clinical_notes": "Draft candidate: technique, contraindications and dosage require review.",
+    "dosage_reviewed": false
+  },
+  {
+    "id": "assisted_lunge",
+    "name": "Supported reverse mini lunge",
+    "category": "strength",
+    "primary_ability": "kneeling",
+    "tier": 3,
+    "equipment": [
+      "counter"
+    ],
+    "transcript_ids": [
+      "T15"
+    ],
+    "approval": "review_required",
+    "video_url": null,
+    "clinical_notes": "Draft candidate: technique, contraindications and dosage require review.",
+    "dosage_reviewed": false
+  },
+  {
+    "id": "supported_kneel",
+    "name": "Assisted kneeling / split squat",
+    "category": "strength",
+    "primary_ability": "kneeling",
+    "tier": 3,
+    "equipment": [
+      "counter",
+      "padding"
+    ],
+    "transcript_ids": [
+      "T15"
+    ],
+    "approval": "clinical_only",
+    "video_url": null,
+    "clinical_notes": "Draft candidate: technique, contraindications and dosage require review.",
+    "dosage_reviewed": false
+  },
+  {
+    "id": "floor_transfer",
+    "name": "Floor-to-stand transfer",
+    "category": "skill",
+    "primary_ability": "floor_transfer",
+    "tier": 3,
+    "equipment": [
+      "mat",
+      "supervisor"
+    ],
+    "transcript_ids": [
+      "T03",
+      "T07"
+    ],
+    "approval": "clinical_only",
+    "video_url": null,
+    "clinical_notes": "Draft candidate: technique, contraindications and dosage require review.",
+    "dosage_reviewed": false
+  },
+  {
+    "id": "closed_eye_balance",
+    "name": "Eyes-closed balance drills",
+    "category": "balance",
+    "primary_ability": "balance",
+    "tier": 3,
+    "equipment": [
+      "counter",
+      "supervisor"
+    ],
+    "transcript_ids": [
+      "T11"
+    ],
+    "approval": "clinical_only",
+    "video_url": null,
+    "clinical_notes": "Draft candidate: technique, contraindications and dosage require review.",
+    "dosage_reviewed": false
+  },
+  {
+    "id": "eccentric_calf_step",
+    "name": "Eccentric step calf raise",
+    "category": "strength",
+    "primary_ability": "walking",
+    "tier": 3,
+    "equipment": [
+      "step",
+      "rail"
+    ],
+    "transcript_ids": [
+      "T13"
+    ],
+    "approval": "review_required",
+    "video_url": null,
+    "clinical_notes": "Draft candidate: technique, contraindications and dosage require review.",
+    "dosage_reviewed": false
+  },
+  {
+    "id": "eccentric_shoulder",
+    "name": "Weighted eccentric shoulder rotation",
+    "category": "strength",
+    "primary_ability": "shoulder",
+    "tier": 3,
+    "equipment": [
+      "light_weight"
+    ],
+    "transcript_ids": [
+      "T13"
+    ],
+    "approval": "clinical_only",
+    "video_url": null,
+    "clinical_notes": "Draft candidate: technique, contraindications and dosage require review.",
+    "dosage_reviewed": false
+  }
+]
