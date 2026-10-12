@@ -117,11 +117,9 @@ export function Player() {
           ref={videoRef}
           src={easier && current.altVideoUrl ? current.altVideoUrl : current.videoUrl}
           playsInline
-          poster=""
           onPlay={() => setPlaying(true)}
           onPause={() => setPlaying(false)}
           controls={false}
-          style={{ width: "100%", borderRadius: 24, minHeight: 180, objectFit: "cover" }}
         />
         <ChairFigure />
       </div>

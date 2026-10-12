@@ -62,7 +62,9 @@ function summaryFor(day: CalendarDay): string {
   if (day.day === 1) {
     return "An introduction to how leg, hip, and ankle strength support everyday knee function. Demonstration only — not a diagnosis.";
   }
-  if (day.dayType === "strength_design") return "A calm, chair-supported session. Take it at your own pace.";
+  if (day.day === 14 || day.dayType === "strength_design") {
+    return "A calm, chair-supported session. Take it at your own pace.";
+  }
   if (day.dayType === "activity_design") return "Comfortable walking or easy movement, only as long as it feels right.";
   if (day.dayType === "education") return EDUCATION_THEMES[(day.day - 1) % EDUCATION_THEMES.length][1];
   if (day.dayType === "recovery") return "A lighter day. Rest is part of getting stronger, not a gap in the plan.";
@@ -78,7 +80,12 @@ export function buildPlan(pathway: PathwayId, locked: boolean): SessionDay[] {
       ...day,
       title: titleFor(day, pathway),
       summary: summaryFor(day),
-      durationLabel: day.dayType === "strength_design" ? "About 10 min" : day.dayType === "activity_design" ? "As tolerated" : "5–8 min",
+      durationLabel:
+        day.day === 14 || day.dayType === "strength_design"
+          ? "About 10 min"
+          : day.dayType === "activity_design"
+            ? "As tolerated"
+            : "5–8 min",
       equipmentLabel: movements[0]?.equipment.includes("chair") ? "Sturdy chair" : "None required",
       demonstration: true,
       approvedPrescription: false,

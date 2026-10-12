@@ -138,7 +138,7 @@ export function Onboarding() {
   const showBackBladder = Array.isArray(answers.symptom_areas) && answers.symptom_areas.includes("lower_back");
   const extraSafety = showBackBladder ? 1 : 0;
   const safetyTotal = SAFETY_PAGES.length + 2 + extraSafety;
-  const lastSafetyStep = 4 + safetyTotal;
+  const lastSafetyStep = 5 + safetyTotal;
   const totalChrome = 6;
 
   const chromeStep = stepNum <= 4 ? stepNum : stepNum < lastSafetyStep ? 5 : 6;

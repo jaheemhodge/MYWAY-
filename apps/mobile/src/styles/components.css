@@ -190,6 +190,7 @@ textarea.text-input {
 
 .demo-badge {
   display: inline-flex;
+  width: fit-content;
   padding: 5px 10px;
   border-radius: 999px;
   background: #efe6c9;
@@ -279,7 +280,7 @@ textarea.text-input {
   background:
     linear-gradient(180deg, rgba(23, 22, 20, 0.05), rgba(23, 22, 20, 0.55)),
     linear-gradient(180deg, #d8d3c8, #9aa094);
-  min-height: 260px;
+  min-height: 190px;
   color: white;
   display: flex;
   flex-direction: column;
@@ -304,9 +305,9 @@ textarea.text-input {
 }
 
 .chair-figure {
-  width: min(220px, 70%);
+  width: min(150px, 52%);
   align-self: center;
-  margin: auto;
+  margin: 8px auto;
 }
 
 .progress-ring {

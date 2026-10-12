@@ -68,10 +68,11 @@ p {
   padding: calc(var(--safe-top) + 18px) 22px calc(var(--safe-bottom) + 28px);
   display: flex;
   flex-direction: column;
+  overflow-y: auto;
 }
 
 .screen.tabbed {
-  padding-bottom: calc(var(--safe-bottom) + var(--tab-height) + 18px);
+  padding-bottom: calc(var(--safe-bottom) + var(--tab-height) + 36px);
 }
 
 .screen.dark {

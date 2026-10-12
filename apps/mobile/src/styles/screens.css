@@ -173,6 +173,25 @@
   font-size: 0.8rem;
 }
 
+.player .hero-media {
+  min-height: 240px;
+  max-height: 280px;
+}
+
+.player video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.35;
+}
+
+.player .chair-figure {
+  position: relative;
+  z-index: 1;
+}
+
 .rep-row {
   display: flex;
   justify-content: space-between;

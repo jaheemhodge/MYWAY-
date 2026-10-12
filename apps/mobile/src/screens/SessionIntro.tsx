@@ -16,7 +16,7 @@ export function SessionIntro() {
 
   return (
     <section className="screen">
-      <div className="hero-media">
+      <div className="hero-media" style={{ minHeight: 220, paddingTop: 56 }}>
         <button className="icon-btn light" onClick={() => navigate(-1)} aria-label="Close">
           ×
         </button>
@@ -28,7 +28,8 @@ export function SessionIntro() {
       </p>
       <h1 className="display">{session.title}</h1>
       <p className="lede">
-        {session.summary} {state.profile?.firstName ? `Take it at your own pace, ${state.profile.firstName}.` : ""}
+        {session.summary}
+        {state.profile?.firstName ? ` This one is for you, ${state.profile.firstName}.` : ""}
       </p>
       <DemoBadge>Demonstration · not a prescribed workout</DemoBadge>
       <div className="stat-pills">
@@ -37,15 +38,15 @@ export function SessionIntro() {
           <span>Time</span>
         </div>
         <div>
-          <strong>{session.movements.length || (session.dayType === "strength_design" ? 0 : 1)}</strong>
-          <span>{session.dayType === "strength_design" ? "movements" : "focus"}</span>
+          <strong>{session.movements.length || 1}</strong>
+          <span>{session.movements.length ? "movements" : "focus"}</span>
         </div>
         <div>
           <strong>{session.equipmentLabel}</strong>
           <span>Setup</span>
         </div>
       </div>
-      {session.dayType === "strength_design" ? (
+      {session.movements.length > 0 ? (
         <div className="card">
           <strong>What this session trains</strong>
           <ul>
@@ -74,7 +75,7 @@ export function SessionIntro() {
 }
 
 function label(type: string) {
-  if (type === "strength_design") return "Strength";
+  if (type === "strength_design" || type === "review") return "Strength";
   if (type === "activity_design") return "Activity";
   if (type === "education") return "Education";
   if (type === "recovery") return "Recovery";

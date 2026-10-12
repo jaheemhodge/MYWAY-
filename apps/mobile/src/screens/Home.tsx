@@ -36,7 +36,7 @@ export function Home() {
       <article className="video-card">
         <span className="pill light">{today ? typeLabel(today.dayType) : "Session"}</span>
         <span className="placeholder-tag">Video placeholder</span>
-        <ChairFigure variant="tall" />
+        <ChairFigure variant="sit" />
         <h2>{today?.title ?? "Today’s session"}</h2>
         <p>
           {today?.durationLabel} · {today?.movements.length || 0} movements · {today?.equipmentLabel}
@@ -74,6 +74,7 @@ export function Home() {
 
 function typeLabel(type: string) {
   if (type === "strength_design") return "Strength day";
+  if (type === "review") return "Strength day";
   if (type === "activity_design") return "Movement day";
   if (type === "education") return "Education day";
   if (type === "recovery") return "Recovery day";
