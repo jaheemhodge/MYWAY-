@@ -108,7 +108,7 @@ export function Player() {
         </span>
         <span className="pill">{state.settings.audio ? "Voice on" : "Voice off"}</span>
       </div>
-      <div className="hero-media" style={{ minHeight: 280 }}>
+      <div className="hero-media">
         <span className="placeholder-tag">Video placeholder</span>
         <span className="pill light" style={{ position: "absolute", top: 14, left: 14 }}>
           {playing ? "Playing" : "Paused"}

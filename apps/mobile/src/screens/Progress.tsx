@@ -47,36 +47,38 @@ export function Progress() {
           </div>
         </div>
       </div>
-      <h2>Toward {goalWords(state.profile?.primaryGoal)}</h2>
+      <h2 className="section-label">Toward {goalWords(state.profile?.primaryGoal)}</h2>
       <p className="muted">From your own weekly reflections. We do not invent improvement.</p>
-      {start?.walkMinutes != null && latest?.walkMinutes != null ? (
-        <div className="card">
-          <strong>Comfortable walking time</strong>
-          <Bar label="When you started" value={`${start.walkMinutes} min`} pct={(start.walkMinutes / 40) * 100} />
-          <Bar label="Now" value={`${latest.walkMinutes} min`} pct={(latest.walkMinutes / 40) * 100} strong />
-          {walkDelta != null ? (
-            <p className="muted">
-              {walkDelta === 0
-                ? "No change recorded yet — that is still useful information."
-                : walkDelta > 0
-                  ? `About ${walkDelta} minutes longer than when you began.`
-                  : `About ${Math.abs(walkDelta)} minutes less than when you began.`}
-            </p>
-          ) : null}
-        </div>
-      ) : (
-        <div className="card">
-          <strong>No comparison yet</strong>
-          <p className="muted">Complete a review day to record walking time or confidence in your own words.</p>
-        </div>
-      )}
-      {latest?.confidence != null && start?.confidence != null ? (
-        <div className="card">
-          <strong>Movement confidence</strong>
-          <Bar label="When you started" value={`${start.confidence}/10`} pct={start.confidence * 10} />
-          <Bar label="Now" value={`${latest.confidence}/10`} pct={latest.confidence * 10} strong />
-        </div>
-      ) : null}
+      <div className="card">
+        {start?.walkMinutes != null && latest?.walkMinutes != null ? (
+          <>
+            <strong>Comfortable walking time</strong>
+            <Bar label="When you started" value={`${start.walkMinutes} min`} pct={(start.walkMinutes / 40) * 100} />
+            <Bar label="Now" value={`${latest.walkMinutes} min`} pct={(latest.walkMinutes / 40) * 100} strong />
+            {walkDelta != null ? (
+              <p className="muted">
+                {walkDelta === 0
+                  ? "No change recorded yet — that is still useful information."
+                  : walkDelta > 0
+                    ? `About ${walkDelta} minutes longer than when you began.`
+                    : `About ${Math.abs(walkDelta)} minutes less than when you began.`}
+              </p>
+            ) : null}
+          </>
+        ) : (
+          <>
+            <strong>No comparison yet</strong>
+            <p className="muted">Complete a review day to record walking time or confidence in your own words.</p>
+          </>
+        )}
+        {latest?.confidence != null && start?.confidence != null ? (
+          <>
+            <strong style={{ display: "block", marginTop: 14 }}>Movement confidence</strong>
+            <Bar label="When you started" value={`${start.confidence}/10`} pct={start.confidence * 10} />
+            <Bar label="Now" value={`${latest.confidence}/10`} pct={latest.confidence * 10} strong />
+          </>
+        ) : null}
+      </div>
       <p className="muted">
         Current phase: {plan[state.currentDay - 1] ? PHASE_COPY[plan[state.currentDay - 1].uiPhase].title : "Foundation"}.
         Consistency is {completed} of {state.currentDay} scheduled days so far.
@@ -87,7 +89,7 @@ export function Progress() {
 
 function Bar({ label, value, pct, strong }: { label: string; value: string; pct: number; strong?: boolean }) {
   return (
-    <div style={{ marginTop: 12 }}>
+    <div style={{ marginTop: 10 }}>
       <div className="row" style={{ justifyContent: "space-between" }}>
         <span>{label}</span>
         <strong>{value}</strong>

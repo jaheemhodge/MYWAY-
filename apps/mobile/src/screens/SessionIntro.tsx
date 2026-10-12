@@ -16,7 +16,7 @@ export function SessionIntro() {
 
   return (
     <section className="screen">
-      <div className="hero-media" style={{ minHeight: 220, paddingTop: 56 }}>
+      <div className="hero-media session-hero">
         <button className="icon-btn light" onClick={() => navigate(-1)} aria-label="Close">
           ×
         </button>

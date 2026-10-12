@@ -11,7 +11,7 @@ export function Plan() {
   const week = useMemo(() => plan.filter((day) => day.day >= start && day.day < start + 7), [plan, start]);
 
   return (
-    <section className="screen tabbed lavender">
+    <section className="screen tabbed lavender plan-screen">
       <p className="muted">Everyday Mobility and Strength</p>
       <h1 className="display">My Plan</h1>
       <div className="card">
@@ -56,7 +56,7 @@ export function Plan() {
           </button>
         </div>
       </div>
-      <div className="stack">
+      <div className="stack week-scroll">
         {week.map((day) => (
           <button
             key={day.day}

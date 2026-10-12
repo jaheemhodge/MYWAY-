@@ -22,25 +22,29 @@ export function Home() {
   const blocked = state.blockedUntilReview && state.outcome !== "provisionally_eligible";
 
   return (
-    <section className="screen tabbed lavender">
-      <p className="muted">
-        {weekdayForProgramDay(day, day)} · Day {day} of 60
-      </p>
-      <h1 className="display">
-        {greeting()},
-        <br />
-        {name}.
-      </h1>
-      {state.profile?.demo ? <DemoBadge>Demo profile</DemoBadge> : null}
-      <h2 style={{ fontSize: "1.1rem", margin: "22px 0 10px" }}>Today</h2>
-      <article className="video-card">
+    <section className="screen tabbed lavender home-screen">
+      <header className="home-header">
+        <p className="muted">
+          {weekdayForProgramDay(day, day)} · Day {day} of 60
+        </p>
+        <h1 className="display">
+          {greeting()},
+          <br />
+          {name}.
+        </h1>
+        {state.profile?.demo ? <DemoBadge>Demo profile</DemoBadge> : null}
+      </header>
+      <p className="section-label">Today</p>
+      <article className="video-card home-session">
         <span className="pill light">{today ? typeLabel(today.dayType) : "Session"}</span>
         <span className="placeholder-tag">Video placeholder</span>
         <ChairFigure variant="sit" />
-        <h2>{today?.title ?? "Today’s session"}</h2>
-        <p>
-          {today?.durationLabel} · {today?.movements.length || 0} movements · {today?.equipmentLabel}
-        </p>
+        <div className="home-session-copy">
+          <h2>{today?.title ?? "Today’s session"}</h2>
+          <p>
+            {today?.durationLabel} · {today?.movements.length || 0} movements · {today?.equipmentLabel}
+          </p>
+        </div>
         <Button
           variant="light"
           disabled={Boolean(blocked || today?.locked)}
@@ -52,12 +56,12 @@ export function Home() {
       {blocked ? (
         <p className="muted">Sessions stay locked until a clinician review path is complete.</p>
       ) : null}
-      <div className="card" style={{ marginTop: 16 }}>
+      <div className="journey-card">
         <div className="row" style={{ justifyContent: "space-between" }}>
           <strong>Your 60-day journey</strong>
           <span>Day {day}</span>
         </div>
-        <div className="progress-ring" style={{ margin: "12px 0" }}>
+        <div className="progress-ring">
           <span style={{ width: `${(day / 60) * 100}%` }} />
         </div>
         <p>
@@ -65,7 +69,9 @@ export function Home() {
           {day === 14 ? ", final day" : ""}
         </p>
         <p className="muted">
-          {next ? `${PHASE_COPY[next.uiPhase].title} continues next, at the level that suits you.` : "You are on the last day of this journey."}
+          {next
+            ? `${PHASE_COPY[next.uiPhase].title} continues next, at the level that suits you.`
+            : "You are on the last day of this journey."}
         </p>
       </div>
     </section>

@@ -201,16 +201,16 @@ textarea.text-input {
 }
 
 .tab-bar {
-  position: fixed;
-  left: 50%;
-  transform: translateX(-50%);
-  bottom: calc(var(--safe-bottom) + 12px);
-  width: min(390px, calc(100% - 24px));
+  position: absolute;
+  left: 12px;
+  right: 12px;
+  bottom: calc(var(--safe-bottom) + 10px);
+  width: auto;
   background: white;
   border-radius: 28px;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  padding: 8px 6px 10px;
+  padding: 6px 4px 8px;
   box-shadow: 0 10px 40px rgba(23, 22, 20, 0.12);
   z-index: 20;
 }
@@ -280,12 +280,12 @@ textarea.text-input {
   background:
     linear-gradient(180deg, rgba(23, 22, 20, 0.05), rgba(23, 22, 20, 0.55)),
     linear-gradient(180deg, #d8d3c8, #9aa094);
-  min-height: 190px;
+  min-height: 0;
   color: white;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  padding: 18px;
+  padding: 14px;
 }
 
 .video-card h2,
@@ -305,9 +305,12 @@ textarea.text-input {
 }
 
 .chair-figure {
-  width: min(150px, 52%);
+  width: min(128px, 48%);
   align-self: center;
-  margin: 8px auto;
+  margin: 6px auto;
+  flex: 1 1 auto;
+  min-height: 72px;
+  max-height: 140px;
 }
 
 .progress-ring {

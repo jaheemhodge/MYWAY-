@@ -5,7 +5,7 @@ import { useApp } from "../store/AppState";
 export function AppShell() {
   const { state } = useApp();
   return (
-    <div className={state.settings.largeText ? "large-text" : ""}>
+    <div className={`app-shell ${state.settings.largeText ? "large-text" : ""}`}>
       <Outlet />
       <TabBar />
     </div>
