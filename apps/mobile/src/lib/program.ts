@@ -1,4 +1,5 @@
 import { CALENDAR, PHASE_COPY, type CalendarDay, type UiPhase } from "../content/calendar";
+import { DAY1_MANIFEST, day1DurationLabel, day1EquipmentLabel } from "../content/day01";
 import {
   DAY1_MOVEMENTS,
   EDUCATION_THEMES,
@@ -59,9 +60,7 @@ function titleFor(day: CalendarDay, pathway: PathwayId): string {
 }
 
 function summaryFor(day: CalendarDay): string {
-  if (day.day === 1) {
-    return "An introduction to how leg, hip, and ankle strength support everyday knee function. Demonstration only — not a diagnosis.";
-  }
+  if (day.day === 1) return DAY1_MANIFEST.description;
   if (day.day === 14 || day.dayType === "strength_design") {
     return "A calm, chair-supported session. Take it at your own pace.";
   }
@@ -81,12 +80,14 @@ export function buildPlan(pathway: PathwayId, locked: boolean): SessionDay[] {
       title: titleFor(day, pathway),
       summary: summaryFor(day),
       durationLabel:
-        day.day === 14 || day.dayType === "strength_design"
-          ? "About 10 min"
-          : day.dayType === "activity_design"
-            ? "As tolerated"
-            : "5–8 min",
-      equipmentLabel: movements[0]?.equipment.includes("chair") ? "Sturdy chair" : "None required",
+        day.day === 1
+          ? day1DurationLabel()
+          : day.day === 14 || day.dayType === "strength_design"
+            ? "About 10 min"
+            : day.dayType === "activity_design"
+              ? "As tolerated"
+              : "5–8 min",
+      equipmentLabel: day.day === 1 ? day1EquipmentLabel() : movements[0]?.equipment.includes("chair") ? "Sturdy chair" : "None required",
       demonstration: true,
       approvedPrescription: false,
       locked,

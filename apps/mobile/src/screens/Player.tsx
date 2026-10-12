@@ -3,9 +3,23 @@ import { useNavigate, useParams } from "react-router-dom";
 import { ChairFigure } from "../components/illustrations";
 import { Button } from "../components/ui/Primitives";
 import { MOVEMENTS } from "../content/movements";
+import { Day1Player } from "./Day1";
 import { useApp } from "../store/AppState";
 
 export function Player() {
+  const { day = "1" } = useParams();
+  if (Number(day) === 1) return <Day1PlayerRoute />;
+  return <LegacyPlayer />;
+}
+
+function Day1PlayerRoute() {
+  const { plan, state } = useApp();
+  const session = plan.find((item) => item.day === 1);
+  const locked = !session || session.locked || (state.blockedUntilReview && 1 > state.currentDay);
+  return <Day1Player locked={locked} />;
+}
+
+function LegacyPlayer() {
   const { day = "1" } = useParams();
   const dayNum = Number(day);
   const { plan, state, dispatch } = useApp();

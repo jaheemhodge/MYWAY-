@@ -1,6 +1,7 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { ChairFigure } from "../components/illustrations";
 import { Button, DemoBadge } from "../components/ui/Primitives";
+import { Day1Intro } from "./Day1";
 import { useApp } from "../store/AppState";
 
 export function SessionIntro() {
@@ -13,6 +14,7 @@ export function SessionIntro() {
   if (!session) return null;
 
   const locked = session.locked || (state.blockedUntilReview && dayNum > state.currentDay);
+  if (dayNum === 1) return <Day1Intro locked={locked} />;
 
   return (
     <section className="screen">

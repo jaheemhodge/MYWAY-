@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { Button, ChoiceRow, Field } from "../components/ui/Primitives";
+import { day1IsInternalPreview } from "../content/day01";
 import { evaluateCheckIn } from "../lib/safety";
 import { completeSession, useApp } from "../store/AppState";
 
@@ -38,6 +39,9 @@ export function CheckIn() {
     <section className="screen lavender">
       <p className="muted">{session?.title ?? "Session"}, done</p>
       <h1 className="display">How did that feel?</h1>
+      {dayNum === 1 && day1IsInternalPreview() ? (
+        <p className="lede">This records your Day 1 preview. It does not approve the session or mark any missing clip complete.</p>
+      ) : null}
       <p className="lede">
         Two quick questions{state.profile?.firstName ? `, ${state.profile.firstName}` : ""}. There are no right answers.
       </p>
@@ -86,6 +90,10 @@ export function CheckIn() {
           });
           if (evaluation.blockNextSession) {
             navigate("/hold");
+            return;
+          }
+          if (dayNum === 1) {
+            navigate("/app/progress");
             return;
           }
           if (dayNum === 14 && !state.seenMilestones.includes("foundation")) {
