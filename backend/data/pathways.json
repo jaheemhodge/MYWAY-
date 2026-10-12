@@ -1,0 +1,38 @@
+{
+  "walk_capacity": {
+    "goal": "Build comfortable walking tolerance",
+    "base": "Self-reported walking duration and activity interference",
+    "entry": "Independently mobile, no red flags, no relevant restrictions or unassessed falls",
+    "start": "Brief comfortable walking; optional low-tier chair strength after approval",
+    "advance": "After repeated tolerable sessions and stable baseline, clinician-approved small change to ONE parameter",
+    "regress": "Shorter walking duration, more recovery, supported alternatives",
+    "stop": "New chest symptoms, dizziness, worsening weakness, serious pain or new falls; referral"
+  },
+  "chair_rise": {
+    "goal": "Make standing from chairs easier",
+    "base": "Self-reported chair-rise difficulty; standardized test only after clinician approval",
+    "entry": "Safe chair environment and no instability or recent surgery",
+    "start": "Arm-assisted sit-to-stand and/or seated leg exercise if approved",
+    "advance": "Progress aid, repetitions, or seat height one at a time per reviewed criteria",
+    "regress": "Higher chair, arm support, fewer repetitions",
+    "stop": "New falls/near falls, marked pain increase, buckling or concerning symptoms"
+  },
+  "workday_capacity": {
+    "goal": "Make workday standing and moving more manageable",
+    "base": "Functional interference at work; tolerable duration on feet",
+    "entry": "Screen exertional symptoms, occupational demands, pain causes and environment",
+    "start": "Gentle movement breaks, low-tier strength and comfortable activity",
+    "advance": "Increase volume on tolerated days only, not fixed 10\u201320% weekly",
+    "regress": "Shorter bouts, more breaks, fewer loaded movements",
+    "stop": "Exertional chest symptoms, faintness, marked swelling or worsening symptoms"
+  },
+  "morning_mobility": {
+    "goal": "Move more comfortably on waking",
+    "base": "Minutes until usual comfortable movement and difficulty with first daily activity",
+    "entry": "Exclude inflammatory, rapidly worsening or otherwise concerning presentations from automated pathway",
+    "start": "Low-amplitude comfortable seated movements, optional short walk",
+    "advance": "Expand comfortable range or time only as suitable",
+    "regress": "Less range, shorter duration, sitting alternatives",
+    "stop": "New neurologic symptoms, severe night/rest pain or sustained worsening stiffness"
+  }
+}
