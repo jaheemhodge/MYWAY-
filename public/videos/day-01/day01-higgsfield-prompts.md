@@ -159,3 +159,27 @@ Mark each clip **pass**, **regenerate**, or **reshoot live**:
 - [ ] Hands have five fingers; no extra limbs
 
 **Reshoot trigger:** if a clip fails any anatomy, stability, or range item after 3 regenerations, film that exercise live with a real instructor, using the same framing and wardrobe as described here.
+
+---
+
+## 5. Pilot test (generated 2026-10-18 via Higgsfield CLI, 9.5 credits)
+
+**Reference image:** `nano_banana_pro`, 16:9, 2k, 2 credits, job `99768b5a-3f7b-484f-af71-aa17abd6cc2e` saved as `day01-instructor-reference.jpg`.
+
+```
+Photorealistic full-body photograph of a friendly, healthy-looking woman about 62 years old, silver-grey shoulder-length hair loosely tied back, warm natural relaxed expression, average build, realistic natural skin texture, wearing a soft sage-green long-sleeve fitted top, charcoal straight-leg stretch pants, and white low-profile supportive sneakers. She sits upright toward the front of a sturdy solid light-oak dining chair with four straight wooden legs and no wheels, armless, the chair back placed against a plain warm off-white wall. Both feet flat on a light oak floor, hip-width apart, knees bent at about 90 degrees directly above the ankles, hands resting lightly on the front edge of the seat beside her thighs, shoulders relaxed. Three-quarter front view from her right side, camera at hip height, the entire body from head to shoes plus all four chair legs fully visible with generous space around her. Bright minimalist premium wellness living room, large window with soft natural daylight from the left, one green plant in the background, uncluttered, calm sage and warm neutral palette, soft shadows, sharp focus, realistic human anatomy and proportions, five fingers on each hand. No text, no logo, no watermark.
+```
+
+**Test clip:** `kling3_0`, mode std, 5 s, sound off, start and end frame set to the reference image, 7.5 credits, job `3273f4d4-aceb-4dbc-a078-592837d5713a`, saved as `day01-test-knee-extension-left-rep.mp4`.
+
+```
+Locked-off stationary tripod camera, no camera movement, no zoom, no cuts. The same woman sits upright on the sturdy wooden chair in the bright minimalist room. She performs exactly one slow, controlled seated knee extension with her LEFT leg (the leg nearest the camera): over about two seconds she slowly straightens the knee, lifting the foot forward and up until the leg is nearly straight, thigh staying in contact with the seat, toes pointing up. She holds briefly, then over about two seconds slowly lowers the foot back down until the shoe rests flat on the floor in exactly its starting position. The other foot stays flat and completely still. Upper body stays upright and still, hands stay resting on the seat edge. The chair does not move. Natural, anatomically realistic knee motion, real-time speed, calm expression. Realistic human proportions, full body including both feet visible the entire time. No text, no narration.
+```
+
+CLI command pattern:
+
+```
+higgsfield generate create kling3_0 --prompt "<prompt>" --start-image <ref_job_id> --end-image <ref_job_id> --duration 5 --mode std --sound off --aspect_ratio 16:9 --wait
+```
+
+Review notes are in `day01-manifest.json` under `testAssets`.
