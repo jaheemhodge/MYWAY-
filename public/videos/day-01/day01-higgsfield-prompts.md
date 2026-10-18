@@ -183,3 +183,18 @@ higgsfield generate create kling3_0 --prompt "<prompt>" --start-image <ref_job_i
 ```
 
 Review notes are in `day01-manifest.json` under `testAssets`.
+
+## 6. Corrected pilot (v2, 9.5 credits)
+
+**Reference v2:** `nano_banana_pro` edit of job `99768b5a-…` (passed as `--image-references`), 2 credits, job `65f74ef2-1c68-48ea-ba5b-dad0a682b789`, saved as `day01-instructor-reference-v2.jpg`.
+
+```
+Edit this photo. Keep the exact same woman (same face, silver-grey hair tied back, age about 62, same expression), the same clothing (sage-green long-sleeve top, charcoal straight-leg pants, white sneakers), the same light-oak four-legged armless wooden chair with no wheels, the same seated posture with both feet flat and hands resting on the front edge of the seat, the same side-on camera angle, camera height, lens, framing, floor, windows, plant, natural daylight and calm minimalist palette.
+Change only the chair placement: add a plain warm off-white wall on the right side of the room, running from the back wall toward the camera, and place the chair so its backrest rests flush and securely against that wall, with all four chair legs on the floor. The woman stays seated on the chair in the same pose. The entire body from head to shoes, both feet, and all four chair legs remain fully visible with space around them. Photorealistic, realistic anatomy and proportions, five fingers on each visible hand. No text, no logo, no watermark.
+```
+
+**Test clip v2:** `kling3_0` std, 5 s, sound off, start/end frame = reference v2, 7.5 credits, job `99922234-4fb5-4606-8154-eec5b77338b4`, saved as `day01-test-knee-extension-left-rep-v2.mp4`.
+
+```
+Locked-off stationary tripod camera, no camera movement, no zoom, no cuts. The same woman sits upright on the sturdy wooden chair whose backrest rests against the wall. She performs exactly one slow, smooth, controlled seated knee extension with her LEFT leg (the leg nearest the camera). Starting from rest, over about two seconds she gradually straightens the knee, raising the lower leg forward until the leg is close to straight but relaxed, within a comfortable range, never locked or forced. As the leg rises she gently pulls her toes up toward her shin, so the foot is flexed with the toes pointing upward and the sole of the shoe facing forward. Her thigh stays resting on the chair seat the whole time; only the lower leg moves, hinging at the knee. She holds the top position for about one second, then over about two seconds slowly lowers the foot back down until the shoe rests flat on the floor in exactly its starting spot. The right foot stays flat and completely still. Her torso stays upright and still, shoulders relaxed, hands resting on the seat edge, calm expression. The chair stays completely stationary against the wall. Natural, anatomically realistic knee and ankle motion at real-time speed, consistent body proportions, both feet and the whole body visible at all times. No text, no narration.
+```

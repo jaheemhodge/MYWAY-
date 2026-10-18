@@ -373,6 +373,66 @@
         "reviewedAt": null,
         "notes": null
       }
+    },
+    {
+      "id": "test-instructor-reference-v2",
+      "file": "public/videos/day-01/day01-instructor-reference-v2.jpg",
+      "type": "image",
+      "model": "nano_banana_pro (edit of test-instructor-reference)",
+      "higgsfieldJobId": "65f74ef2-1c68-48ea-ba5b-dad0a682b789",
+      "creditsSpent": 2,
+      "mediaGenerationStatus": "generated",
+      "supersedes": "test-instructor-reference",
+      "role": "Current instructor + set reference; start/end frame for seated exercise clips",
+      "reviewNotes": [
+        "Same face, hair, clothing, pose, camera angle and framing as v1.",
+        "Plain side wall added; chair backrest rests against it at a glance.",
+        "Perspective is ambiguous: the side-wall baseboard suggests the rear legs may sit slightly forward of the wall. Reviewer to confirm it reads as 'against the wall'.",
+        "Chair: four legs, no wheels. Full body, both feet and all chair legs visible."
+      ],
+      "approval": {
+        "status": "unapproved",
+        "reviewedBy": null,
+        "reviewedAt": null,
+        "notes": null
+      }
+    },
+    {
+      "id": "test-knee-extension-left-rep-v2",
+      "file": "public/videos/day-01/day01-test-knee-extension-left-rep-v2.mp4",
+      "type": "video",
+      "exerciseId": "ex-seated-knee-extension",
+      "side": "left",
+      "model": "kling3_0",
+      "higgsfieldJobId": "99922234-4fb5-4606-8154-eec5b77338b4",
+      "creditsSpent": 7.5,
+      "durationSec": 5.04,
+      "resolution": "1284x716 @ 24 fps, no audio",
+      "repsShown": 1,
+      "measuredTiming": {
+        "stillStart": "0.0-0.6 s",
+        "lift": "0.6-1.5 s",
+        "hold": "1.5-2.7 s",
+        "lower": "2.7-3.9 s",
+        "stillEnd": "3.9-5.0 s"
+      },
+      "loopable": true,
+      "mediaGenerationStatus": "generated",
+      "supersedes": "test-knee-extension-left-rep",
+      "reviewNotes": [
+        "Exactly one repetition; knee reaches near-straight (~160 degrees) without locking.",
+        "Toes pulled up with sole facing forward at the top, as requested.",
+        "Thigh stays on the seat; opposite foot flat and still; torso upright; hands stay on seat edge.",
+        "Camera and chair stationary (frame differences within compression noise); first/last frames match.",
+        "Lift is quick (~0.9 s) versus the requested ~2 s; lowering ~1.2 s. Movement is smooth but brisk.",
+        "No visible joint artifacts, foot sliding, shoe morphing or proportion changes."
+      ],
+      "approval": {
+        "status": "unapproved",
+        "reviewedBy": null,
+        "reviewedAt": null,
+        "notes": null
+      }
     }
   ],
   "approvals": {
