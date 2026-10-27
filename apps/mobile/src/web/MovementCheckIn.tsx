@@ -1,29 +1,39 @@
 import { useEffect, useRef, useState } from "react";
-import { Navigate, useNavigate, useParams, useSearchParams } from "react-router-dom";
+import { Link, Navigate, useNavigate, useParams, useSearchParams } from "react-router-dom";
 import { ChoiceButtons } from "./Choices";
 import {
   ACTIVITY_OPTIONS,
-  CHECKIN_STEPS,
   COMFORT_OPTIONS,
   CONFIDENCE_OPTIONS,
   EQUIPMENT_OPTIONS,
   GOAL_OPTIONS,
   TIME_OPTIONS,
   adjacentStep,
+  applyLandingAnswer,
   checkInStep,
+  confidenceLabel,
+  landingQuestion,
   continueHint,
   continueLabel,
   createMovementCheckIn,
   isStepComplete,
   parseOccasion,
   toggleSelection,
+  visibleSteps,
   type ConfidenceAnswer,
   type EquipmentId,
   type GoalId,
   type MovementCheckInRecord,
 } from "./model";
 import { checkInPath, routes } from "./routes";
-import { loadMovementCheckIn, saveMovementCheckIn, safetyAllowsCheckIn, submitMovementCheckIn } from "./storage";
+import {
+  clearLandingAnswer,
+  loadLandingAnswer,
+  loadMovementCheckIn,
+  saveMovementCheckIn,
+  safetyAllowsCheckIn,
+  submitMovementCheckIn,
+} from "./storage";
 
 export function MovementCheckIn() {
   const [searchParams] = useSearchParams();
@@ -37,8 +47,11 @@ function MovementCheckInFlow({ occasion }: { occasion: NonNullable<ReturnType<ty
   const navigate = useNavigate();
   const step = checkInStep(stepId);
   const headingRef = useRef<HTMLHeadingElement>(null);
-  const [record, setRecord] = useState<MovementCheckInRecord>(
-    () => loadMovementCheckIn(occasion) ?? createMovementCheckIn(occasion),
+  // An answer given on the landing page is carried in, and that question is not asked again.
+  const [landing] = useState(() => (occasion === "baseline" ? loadLandingAnswer() : null));
+  const skip = landing ? [landing.taskId] : [];
+  const [record, setRecord] = useState<MovementCheckInRecord>(() =>
+    applyLandingAnswer(loadMovementCheckIn(occasion) ?? createMovementCheckIn(occasion), landing),
   );
   const [storageNote, setStorageNote] = useState("");
   const [saving, setSaving] = useState(false);
@@ -53,7 +66,8 @@ function MovementCheckInFlow({ occasion }: { occasion: NonNullable<ReturnType<ty
 
   if (!step) return <Navigate to={checkInPath("intro", occasion)} replace />;
 
-  const index = CHECKIN_STEPS.findIndex((item) => item.id === step.id);
+  const steps = visibleSteps(skip, step.id);
+  const index = steps.findIndex((item) => item.id === step.id);
   const ready = isStepComplete(record, step);
   const hint = continueHint(step, ready);
 
@@ -67,11 +81,12 @@ function MovementCheckInFlow({ occasion }: { occasion: NonNullable<ReturnType<ty
 
   const goNext = async () => {
     if (!ready || saving) return;
-    const nextStep = adjacentStep(step.id, 1);
+    const nextStep = adjacentStep(step.id, 1, skip);
     if (!nextStep) {
       setSaving(true);
       const completed = persist({ ...record, completedAt: new Date().toISOString() });
       await submitMovementCheckIn(completed);
+      clearLandingAnswer();
       navigate(routes.plan, { state: { checkIn: completed } });
       return;
     }
@@ -80,7 +95,7 @@ function MovementCheckInFlow({ occasion }: { occasion: NonNullable<ReturnType<ty
   };
 
   const goBack = () => {
-    const previous = adjacentStep(step.id, -1);
+    const previous = adjacentStep(step.id, -1, skip);
     navigate(previous ? checkInPath(previous.id, occasion) : routes.safety);
   };
 
@@ -92,14 +107,14 @@ function MovementCheckInFlow({ occasion }: { occasion: NonNullable<ReturnType<ty
           className="web-progress"
           role="progressbar"
           aria-valuemin={1}
-          aria-valuemax={CHECKIN_STEPS.length}
+          aria-valuemax={steps.length}
           aria-valuenow={index + 1}
-          aria-valuetext={`Step ${index + 1} of ${CHECKIN_STEPS.length}`}
+          aria-valuetext={`Step ${index + 1} of ${steps.length}`}
         >
-          <span style={{ width: `${((index + 1) / CHECKIN_STEPS.length) * 100}%` }} />
+          <span style={{ width: `${((index + 1) / steps.length) * 100}%` }} />
         </div>
         <p className="web-step-count">
-          Step {index + 1} of {CHECKIN_STEPS.length}
+          Step {index + 1} of {steps.length}
         </p>
         <h1 id="checkin-question" ref={headingRef} tabIndex={-1}>
           {step.title}
@@ -109,6 +124,15 @@ function MovementCheckInFlow({ occasion }: { occasion: NonNullable<ReturnType<ty
             {step.body.map((paragraph) => (
               <p key={paragraph}>{paragraph}</p>
             ))}
+            {landing && record.confidence[landing.taskId] ? (
+              <p className="web-carried">
+                You already answered one question on the first page.{" "}
+                <strong>
+                  {landingQuestion().summary}: {confidenceLabel(record.confidence[landing.taskId]!)}.
+                </strong>{" "}
+                We won’t ask it again. <Link to={checkInPath(landing.taskId, occasion)}>Change that answer</Link>
+              </p>
+            ) : null}
           </div>
         ) : (
           <p className="web-intro">{step.help}</p>

@@ -1,0 +1,210 @@
+.section {
+  position: relative;
+  background:
+    radial-gradient(55% 45% at 0% 100%, var(--glow) 0%, transparent 70%),
+    var(--forest);
+}
+
+.track {
+  position: relative;
+}
+
+/* Pinned: the stage stays put with plain CSS sticky while the page scrolls past. No scroll-jacking. */
+.pinned {
+  height: 300vh;
+}
+
+.pinned .stage {
+  position: sticky;
+  top: 4.75rem;
+  min-height: calc(100vh - 4.75rem);
+  display: flex;
+  align-items: center;
+}
+
+.inner {
+  padding-block: clamp(3.5rem, 7vw, 5rem);
+}
+
+.pinned .inner {
+  padding-block: 2rem;
+}
+
+.top {
+  display: grid;
+  gap: 1.5rem 4rem;
+}
+
+@media (min-width: 900px) {
+  .top {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
+    align-items: end;
+  }
+}
+
+.now {
+  display: flex;
+  align-items: flex-end;
+  gap: 1.5rem;
+}
+
+.dayNumber.dayNumber {
+  flex: none;
+  margin: 0;
+  min-width: 3.4ch;
+  font-family: var(--serif);
+  font-size: clamp(3.5rem, 7vw, 5.5rem);
+  font-weight: 500;
+  line-height: 0.85;
+  letter-spacing: -0.04em;
+  font-variant-numeric: tabular-nums lining-nums;
+  color: var(--brass);
+}
+
+.dayNumber span {
+  display: block;
+  font-size: 0.32em;
+  letter-spacing: 0;
+  color: var(--light-soft);
+  margin-bottom: 0.2em;
+}
+
+.note {
+  padding-left: 1.25rem;
+  border-left: 1px solid var(--line-dark);
+  min-height: 7.5rem;
+}
+
+.noteTitle.noteTitle {
+  margin: 0;
+  font-weight: 700;
+  color: var(--light-ink);
+}
+
+.noteBody {
+  margin: 0.35rem 0 0;
+  font-size: 1.15rem;
+  line-height: 1.5;
+}
+
+.lineWrap {
+  position: relative;
+  margin-top: clamp(2rem, 4vw, 3rem);
+  padding-top: 3rem;
+}
+
+.recheckLabels span {
+  position: absolute;
+  top: 0;
+  transform: translateX(-50%);
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--light-ink);
+  white-space: nowrap;
+}
+
+.recheckLabels span:last-child {
+  transform: translateX(-100%);
+}
+
+.pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-top: 1.5rem;
+}
+
+.pill {
+  appearance: none;
+  min-height: 3rem;
+  padding: 0.4rem 1.15rem;
+  border-radius: 999px;
+  border: 1.5px solid rgba(247, 243, 236, 0.55);
+  background: transparent;
+  color: var(--light-ink);
+  font: inherit;
+  font-size: 1.15rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    background-color 200ms var(--ease),
+    color 200ms var(--ease),
+    border-color 200ms var(--ease);
+}
+
+.pill:hover {
+  border-color: var(--light-ink);
+}
+
+.pillActive,
+.pillActive:hover {
+  background: var(--light-ink);
+  border-color: var(--light-ink);
+  color: var(--forest);
+}
+
+.phases {
+  list-style: none;
+  margin: 2rem 0 0;
+  padding: 0;
+  display: grid;
+  gap: 1.5rem;
+  border-top: 1px solid var(--line-dark);
+}
+
+@media (min-width: 900px) {
+  .phases {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 2.5rem;
+  }
+}
+
+.phase {
+  padding-top: 1.25rem;
+  border-top: 3px solid transparent;
+  margin-top: -2px;
+  transition: border-color 300ms var(--ease);
+}
+
+.phaseActive {
+  border-top-color: var(--brass);
+}
+
+.range.range {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--light-soft);
+}
+
+.phaseTitle.phaseTitle {
+  margin: 0.2rem 0 0;
+  font-family: var(--serif);
+  font-size: 1.7rem;
+  font-weight: 500;
+  line-height: 1.1;
+  color: var(--light-ink);
+}
+
+.phaseBody {
+  margin: 0.5rem 0 0;
+  font-size: 1.15rem;
+  line-height: 1.5;
+}
+
+/* When pinned, keep the phase bodies short enough to fit one screen. */
+.pinned .phaseBody {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.pinned .phaseActive .phaseBody {
+  display: block;
+  overflow: visible;
+}
+
+.pinned .phase:not(.phaseActive) .phaseBody {
+  -webkit-line-clamp: 2;
+}

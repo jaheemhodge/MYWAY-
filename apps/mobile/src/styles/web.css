@@ -161,10 +161,6 @@ body:has(.web-root),
   border-color: var(--web-ink);
 }
 
-.web-btn-block {
-  width: 100%;
-}
-
 .web-btn:disabled {
   background: transparent;
   color: var(--web-ink);
@@ -172,178 +168,58 @@ body:has(.web-root),
   cursor: not-allowed;
 }
 
-.web-hero {
-  background:
-    radial-gradient(80% 70% at 100% 0%, #2c4a3b 0%, transparent 58%),
-    var(--web-forest);
-  color: #f7f3ec;
-  padding: 2.75rem 0 3.5rem;
-}
-
-.web-hero h1,
-.web-hero p,
-.web-close h2,
-.web-close p,
-.web-footer,
-.web-footer p,
 .web-next-step,
 .web-next-step h2,
 .web-next-step p {
   color: #f7f3ec;
 }
 
-.web-hero h1 {
-  font-size: clamp(3rem, 8vw, 6.1rem);
-  line-height: 0.95;
-  font-weight: 500;
-  letter-spacing: -0.04em;
-  margin: 0.35rem 0 1.1rem;
-}
-
-.web-hero h1 em {
-  font-style: italic;
-  font-weight: 500;
-}
-
-.web-eyebrow,
 .web-kicker {
   margin: 0 0 0.55rem;
   font-size: 1.2rem;
   font-weight: 700;
 }
 
-.web-hero .web-eyebrow {
-  color: #f7f3ec;
-}
-
 .web-kicker {
   color: var(--web-forest);
 }
 
-.web-lede,
 .web-intro {
   font-size: 1.35rem;
   max-width: 40rem;
   margin-top: 0;
 }
 
-.web-hero-actions {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 0.35rem;
-  margin-top: 1.5rem;
-}
-
-.web-hero-actions .web-btn {
-  width: 100%;
-  max-width: 28rem;
-}
-
-.web-hero-link {
-  min-height: 3.5rem;
-  display: inline-flex;
-  align-items: center;
-  font-size: 1.25rem;
-  font-weight: 600;
-  color: #f7f3ec;
-}
-
-.web-hero-note {
-  font-size: 1.15rem;
-  margin-bottom: 0;
-}
-
-.web-hero-art {
-  display: none;
-}
-
-.web-hero-svg {
-  width: min(100%, 420px);
-  height: auto;
-  display: block;
-}
-
-.web-hero-art p {
-  font-size: 1.15rem;
-  margin: 0.75rem 0 0;
-}
-
-.web-section {
-  padding: 4.25rem 0;
-}
-
-.web-section-paper {
-  background: var(--web-paper);
-}
-
-.web-section h2,
-.web-flow h1,
-.web-close h2 {
+.web-flow h1 {
   font-size: clamp(2.15rem, 4.4vw, 3.5rem);
   line-height: 1.05;
   letter-spacing: -0.03em;
   margin: 0 0 0.9rem;
 }
 
-.web-steps,
-.web-phases,
-.web-sources,
-.web-promise,
-.web-plain-list {
+.web-phases {
   margin: 1.5rem 0 0;
   padding: 0;
 }
 
-.web-steps,
-.web-phases,
-.web-sources,
-.web-promise {
+.web-phases {
   list-style: none;
   display: grid;
   gap: 1rem;
 }
 
-.web-steps li {
-  border-top: 2px solid var(--web-forest);
-  padding-top: 1rem;
-}
-
-.web-steps span {
-  display: block;
-  font-family: var(--font-serif);
-  font-size: 2.1rem;
-  margin-bottom: 0.65rem;
-}
-
-.web-steps h3,
-.web-phases h3,
-.web-sources h3 {
+.web-phases h3 {
   font-size: 1.7rem;
   margin: 0 0 0.55rem;
 }
 
-.web-steps p,
 .web-phases p,
-.web-sources p,
-.web-plain-list,
-.web-faq p,
-.web-session p,
 .web-flow p,
 .web-prose-stack p {
   font-size: 1.25rem;
 }
 
-.web-plain-list {
-  padding-left: 1.25rem;
-}
-
-.web-plain-list li + li {
-  margin-top: 0.45rem;
-}
-
-.web-phases li,
-.web-sources li {
+.web-phases li {
   background: #fff;
   border: 1px solid var(--web-line);
   border-radius: 22px;
@@ -363,136 +239,6 @@ body:has(.web-root),
   font-size: 1.85rem;
   font-weight: 500;
   color: var(--web-ink);
-}
-
-.web-session {
-  display: grid;
-  gap: 2rem;
-  align-items: center;
-}
-
-.web-poster {
-  margin: 0;
-}
-
-.web-poster img {
-  width: min(100%, 420px);
-  height: auto;
-  display: block;
-  border-radius: 20px;
-  border: 1px solid var(--web-line);
-  background: #fff;
-}
-
-.web-poster figcaption {
-  font-size: 1.15rem;
-  margin-top: 0.75rem;
-  max-width: 32rem;
-}
-
-.web-safety {
-  display: grid;
-  gap: 1.5rem;
-}
-
-.web-promise li {
-  background: #fff;
-  border: 2px solid var(--web-forest);
-  border-radius: 18px;
-  padding: 1rem 1.15rem;
-  font-size: 1.25rem;
-  font-weight: 600;
-}
-
-.web-faq-wrap {
-  max-width: 48rem;
-}
-
-.web-faq details {
-  border-top: 1px solid var(--web-line);
-}
-
-.web-faq details:last-child {
-  border-bottom: 1px solid var(--web-line);
-}
-
-.web-faq summary {
-  min-height: 4rem;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
-  font-size: 1.35rem;
-  font-weight: 600;
-  cursor: pointer;
-  list-style: none;
-}
-
-.web-faq summary::-webkit-details-marker {
-  display: none;
-}
-
-.web-faq summary::after {
-  content: "+";
-  font-family: var(--font-serif);
-  font-size: 2rem;
-  line-height: 1;
-  flex: none;
-}
-
-.web-faq details[open] summary::after {
-  content: "–";
-}
-
-.web-faq p {
-  margin: 0 0 1.15rem;
-  max-width: 40rem;
-}
-
-.web-close {
-  background: var(--web-forest);
-  padding: 4rem 0;
-}
-
-.web-close .web-btn {
-  margin-top: 0.5rem;
-}
-
-.web-footer {
-  background: var(--web-forest-deep);
-  padding: 3rem 0 2.5rem;
-}
-
-.web-footer-grid {
-  display: grid;
-  gap: 1.5rem;
-}
-
-.web-footer-brand {
-  font-family: var(--font-serif);
-  font-size: 2rem;
-  margin: 0 0 0.2rem;
-}
-
-.web-footer nav {
-  display: grid;
-  align-content: start;
-  gap: 0.15rem;
-}
-
-.web-footer a {
-  font-size: 1.2rem;
-  font-weight: 600;
-  min-height: 2.85rem;
-  display: inline-flex;
-  align-items: center;
-  width: fit-content;
-}
-
-.web-footer-meta {
-  margin-top: 1.5rem;
-  font-size: 1.15rem;
-  max-width: 46rem;
 }
 
 .web-flow {
@@ -724,10 +470,6 @@ body:has(.web-root),
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
-  .web-footer-grid {
-    grid-template-columns: 1.5fr 0.7fr;
-  }
-
   .web-actions {
     grid-template-columns: 1fr 1fr;
   }
@@ -739,24 +481,7 @@ body:has(.web-root),
 }
 
 @media (min-width: 880px) {
-  .web-hero-grid,
-  .web-session,
-  .web-safety {
-    display: grid;
-    grid-template-columns: 1.15fr 0.85fr;
-    gap: 3rem;
-    align-items: center;
-  }
-
-  .web-hero-art {
-    display: block;
-    color: #f7f3ec;
-    justify-self: end;
-  }
-
-  .web-steps,
-  .web-phases,
-  .web-sources {
+  .web-phases {
     grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 1.25rem;
   }
@@ -780,8 +505,6 @@ body:has(.web-root),
     grid-template-columns: 1fr;
   }
 
-  .web-hero-actions .web-btn,
-  .web-close .web-btn,
   .web-flow .web-actions .web-btn,
   .web-next-step .web-btn,
   .web-told .web-actions .web-btn {
@@ -795,10 +518,7 @@ body:has(.web-root),
   }
 }
 
-.web-section,
-.web-flow,
-.web-close,
-.web-hero {
+.web-flow {
   scroll-margin-top: 5.5rem;
 }
 
@@ -809,4 +529,61 @@ body:has(.web-root),
 #safety-promise,
 #faq {
   scroll-margin-top: 5.5rem;
+}
+
+/* An answer carried over from the landing page. */
+.web-carried {
+  margin: 1.25rem 0 0;
+  padding: 1rem 1.15rem;
+  border: 1px solid #3d5a45;
+  border-radius: 14px;
+  background: #e4ede3;
+  color: var(--web-ink);
+  font-size: 1.2rem;
+  max-width: 40rem;
+}
+
+/* Landing page: the header joins the forest hero. */
+.web-header.is-forest {
+  background: rgba(26, 46, 36, 0.97);
+  border-bottom-color: #2c4a3b;
+}
+
+.web-header.is-forest .web-wordmark,
+.web-header.is-forest .web-nav a {
+  color: #f7f3ec;
+}
+
+.web-header.is-forest .web-btn-primary {
+  background: #f7f3ec;
+  border-color: #f7f3ec;
+  color: #1a1916;
+}
+
+.web-header.is-forest .web-btn-primary:hover {
+  background: #fff;
+}
+
+.web-header.is-forest :focus-visible {
+  outline-color: #c9a45c;
+}
+
+.web-root ::selection {
+  background: #c9a45c;
+  color: #1a1916;
+}
+
+/* The window is the scroller on public pages, so sticky headers and pinned sections work. */
+body:has(.web-root),
+#root:has(.web-root) {
+  overflow: visible;
+}
+
+.web-header.is-forest .web-nav a {
+  text-decoration: none;
+}
+
+.web-header.is-forest .web-nav a:hover {
+  text-decoration: underline;
+  text-underline-offset: 0.3em;
 }

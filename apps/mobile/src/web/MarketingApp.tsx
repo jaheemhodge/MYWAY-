@@ -1,5 +1,5 @@
 import { Navigate, Route, Routes } from "react-router-dom";
-import { Landing } from "./Landing";
+import { Landing } from "./landing/Landing";
 import { MovementCheckIn } from "./MovementCheckIn";
 import { PlanPreview } from "./PlanPreview";
 import { routes } from "./routes";

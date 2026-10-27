@@ -37,47 +37,76 @@ export const SOURCES = [
   },
 ] as const;
 
-export const FAQ = [
+export const FAQ_GROUPS = [
+  { id: "safety", label: "Safety" },
+  { id: "program", label: "The program" },
+  { id: "sessions", label: "Sessions" },
+] as const;
+
+export type FaqGroupId = (typeof FAQ_GROUPS)[number]["id"];
+
+export const FAQ: readonly { id: string; group: FaqGroupId; question: string; answer: string }[] = [
+  {
+    id: "safe",
+    group: "safety",
+    question: "Is it safe for me?",
+    answer:
+      "The movements are conservative and supported, and every session has the same stop rules. A short safety screen comes before the check-in. Yes, or I’m not sure, to any of its questions asks you to check with your doctor first. If you are unsure for any other reason, check with your doctor before you start. The screen is not a medical clearance.",
+  },
   {
     id: "medical",
-    question: "Is this medical advice?",
+    group: "safety",
+    question: "Is this physical therapy or medical advice?",
     answer:
-      "No. Mobility is a general movement program. It does not diagnose, treat, or tell you the cause of pain. It does not replace a doctor or a physiotherapist, and it is not emergency care.",
+      "No. Mobility is a general movement program. It is not physiotherapy and not medical treatment. It does not diagnose, treat, or tell you the cause of pain. It does not replace a doctor or a physiotherapist, and it is not emergency care.",
+  },
+  {
+    id: "stop",
+    group: "safety",
+    question: "What if I should not exercise right now?",
+    answer:
+      "The safety screen asks about recent surgery, a clinician’s advice to avoid exercise, chest pain or dizziness with activity, falls or unsteadiness, and symptoms that are new or getting worse. Yes, or I’m not sure, stops the check-in so you can talk with a doctor first.",
   },
   {
     id: "score",
+    group: "program",
     question: "Will I get a score?",
     answer:
       "No. The check-in saves the answers you choose. It does not compare you with other people, give a percentile, or decide what is wrong.",
   },
   {
-    id: "equipment",
-    question: "What do I need at home?",
-    answer:
-      "Day 1 uses a sturdy chair without wheels and a fixed surface such as a kitchen counter. The check-in asks what you actually have. You do not need a gym.",
-  },
-  {
-    id: "time",
-    question: "How long is a session?",
-    answer:
-      "Day 1 is planned for about 8 minutes. Sessions are meant to stay short enough to do at home. Later sessions are still being prepared.",
-  },
-  {
     id: "coach",
+    group: "program",
     question: "Do I need a coach with me?",
     answer:
       "No. The videos are the guide. You practice on your own, and you can pause. That is not the same as having a clinician clear you to exercise.",
   },
   {
     id: "price",
+    group: "program",
     question: "When do I see a price?",
     answer:
       "After the free check-in, on the sign-up page. Pricing is not final in this preview, and nothing on that page is a live offer.",
   },
   {
-    id: "stop",
-    question: "What if I should not exercise right now?",
+    id: "equipment",
+    group: "sessions",
+    question: "What equipment do I need?",
     answer:
-      "The safety screen asks about recent surgery, a clinician’s advice to avoid exercise, chest pain or dizziness with activity, falls or unsteadiness, and symptoms that are new or getting worse. Yes, or I’m not sure, stops the check-in so you can talk with a doctor first.",
+      "Day 1 uses a sturdy chair without wheels and a fixed surface such as a kitchen counter. The check-in asks what you actually have. You do not need a gym.",
   },
-] as const;
+  {
+    id: "time",
+    group: "sessions",
+    question: "How long is a session?",
+    answer:
+      "Day 1 is planned for about 8 minutes. Sessions are meant to stay short enough to do at home. Later sessions are still being prepared.",
+  },
+  {
+    id: "missed",
+    group: "sessions",
+    question: "What if I miss a day?",
+    answer:
+      "Pick up where you left off. A missed day never makes the next session longer or harder to catch up.",
+  },
+];

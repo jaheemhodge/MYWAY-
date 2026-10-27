@@ -1,7 +1,9 @@
 import {
   type CheckInOccasion,
+  type LandingAnswerRecord,
   type MovementCheckInRecord,
   type SafetyScreenRecord,
+  normalizeLandingAnswer,
   normalizeMovementCheckIn,
   normalizeSafetyScreen,
 } from "./model";
@@ -19,6 +21,8 @@ import {
 
 export const CHECKIN_STORAGE_KEY = "mobility.movement-checkin.v1";
 export const SAFETY_STORAGE_KEY = "mobility.safety-screen.v1";
+/** The one check-in answer given on the landing page, waiting for the check-in to pick it up. */
+export const LANDING_ANSWER_STORAGE_KEY = "mobility.landing-answer.v1";
 
 interface CheckInFile {
   schemaVersion: 1;
@@ -68,6 +72,32 @@ export function clearMovementCheckIn(occasion: CheckInOccasion): void {
     localStorage.setItem(CHECKIN_STORAGE_KEY, JSON.stringify(file));
   } catch {
     // The in-memory page can still continue without storage.
+  }
+}
+
+export function loadLandingAnswer(): LandingAnswerRecord | null {
+  try {
+    const raw = localStorage.getItem(LANDING_ANSWER_STORAGE_KEY);
+    return raw ? normalizeLandingAnswer(JSON.parse(raw)) : null;
+  } catch {
+    return null;
+  }
+}
+
+export function saveLandingAnswer(record: LandingAnswerRecord): boolean {
+  try {
+    localStorage.setItem(LANDING_ANSWER_STORAGE_KEY, JSON.stringify(record));
+    return true;
+  } catch {
+    return false;
+  }
+}
+
+export function clearLandingAnswer(): void {
+  try {
+    localStorage.removeItem(LANDING_ANSWER_STORAGE_KEY);
+  } catch {
+    // Nothing to clear when storage is unavailable.
   }
 }
 

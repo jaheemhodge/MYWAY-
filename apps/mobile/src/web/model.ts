@@ -309,10 +309,70 @@ export function checkInStep(stepId: string | undefined): CheckInStep | null {
   return CHECKIN_STEPS.find((step) => step.id === stepId) ?? null;
 }
 
-export function adjacentStep(stepId: string, direction: -1 | 1): CheckInStep | null {
-  const index = CHECKIN_STEPS.findIndex((step) => step.id === stepId);
+/**
+ * The next or previous step, passing over any step ids in `skip`.
+ * `skip` holds questions already answered on the landing page, so they are not asked twice.
+ * A skipped step can still be opened directly (to change the answer); moving on from it works normally.
+ */
+export function adjacentStep(stepId: string, direction: -1 | 1, skip: readonly string[] = []): CheckInStep | null {
+  let index = CHECKIN_STEPS.findIndex((step) => step.id === stepId);
   if (index < 0) return null;
-  return CHECKIN_STEPS[index + direction] ?? null;
+  for (index += direction; index >= 0 && index < CHECKIN_STEPS.length; index += direction) {
+    const candidate = CHECKIN_STEPS[index];
+    if (!skip.includes(candidate.id)) return candidate;
+  }
+  return null;
+}
+
+/** The steps this person will actually see, keeping `current` visible even when it is skipped. */
+export function visibleSteps(skip: readonly string[], current?: string): readonly CheckInStep[] {
+  return CHECKIN_STEPS.filter((step) => step.id === current || !skip.includes(step.id));
+}
+
+/**
+ * One check-in question answered on the landing page, before the safety screen.
+ * It is carried into the baseline check-in so the question is not asked twice.
+ */
+export const LANDING_QUESTION_ID = "chair" as const satisfies ConfidenceTaskId;
+
+export interface LandingAnswerRecord {
+  schemaVersion: 1;
+  taskId: ConfidenceTaskId;
+  answer: ConfidenceAnswer;
+  answeredAt: string;
+}
+
+export function landingQuestion() {
+  return CONFIDENCE_TASKS.find((task) => task.id === LANDING_QUESTION_ID)!;
+}
+
+export function createLandingAnswer(answer: ConfidenceAnswer, now = new Date()): LandingAnswerRecord {
+  return { schemaVersion: 1, taskId: LANDING_QUESTION_ID, answer, answeredAt: now.toISOString() };
+}
+
+export function normalizeLandingAnswer(value: unknown): LandingAnswerRecord | null {
+  if (!value || typeof value !== "object") return null;
+  const raw = value as Partial<LandingAnswerRecord>;
+  if (raw.schemaVersion !== 1) return null;
+  if (!CONFIDENCE_TASKS.some((task) => task.id === raw.taskId)) return null;
+  if (!isListed(raw.answer, CONFIDENCE_OPTIONS)) return null;
+  if (typeof raw.answeredAt !== "string" || Number.isNaN(Date.parse(raw.answeredAt))) return null;
+  return { schemaVersion: 1, taskId: raw.taskId as ConfidenceTaskId, answer: raw.answer, answeredAt: raw.answeredAt };
+}
+
+/**
+ * Put the landing answer into a check-in record, unless the record was changed after it
+ * (for example, the person reopened that question inside the check-in and chose again).
+ */
+export function applyLandingAnswer(record: MovementCheckInRecord, landing: LandingAnswerRecord | null): MovementCheckInRecord {
+  if (!landing || record.occasion !== "baseline" || record.completedAt) return record;
+  const current = record.confidence[landing.taskId];
+  if (current && Date.parse(record.updatedAt) > Date.parse(landing.answeredAt)) return record;
+  return { ...record, confidence: { ...record.confidence, [landing.taskId]: landing.answer } };
+}
+
+export function confidenceLabel(answer: ConfidenceAnswer): string {
+  return optionLabel(CONFIDENCE_OPTIONS, answer);
 }
 
 export function isStepComplete(record: MovementCheckInRecord, step: CheckInStep): boolean {

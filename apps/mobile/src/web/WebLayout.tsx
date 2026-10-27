@@ -1,6 +1,7 @@
 import { useEffect, useLayoutEffect } from "react";
 import { Link, Outlet, useLocation } from "react-router-dom";
 import { LogoMark } from "../components/illustrations";
+import { SiteFooter } from "./landing/SiteFooter";
 import { routes } from "./routes";
 
 export function usePageTitle(title: string) {
@@ -16,7 +17,7 @@ export function usePageTitle(title: string) {
 const NAV = [
   { href: "#how", label: "How it works" },
   { href: "#days", label: "60 days" },
-  { href: "#sources", label: "References" },
+  { href: "#session", label: "A session" },
   { href: "#safety-promise", label: "Safety" },
   { href: "#faq", label: "FAQ" },
 ];
@@ -42,10 +43,10 @@ export function WebLayout() {
       <a className="web-skip" href="#content">
         Skip to content
       </a>
-      <header className="web-header">
+      <header className={`web-header ${onLanding ? "is-forest" : ""}`}>
         <div className="web-wrap web-header-inner">
           <Link to={routes.landing} className="web-wordmark" aria-label="Mobility, home">
-            <LogoMark />
+            <LogoMark light={onLanding} />
           </Link>
           {onLanding ? (
             <nav className="web-nav" aria-label="On this page">
@@ -70,33 +71,7 @@ export function WebLayout() {
       <main id="content">
         <Outlet />
       </main>
-      <footer className="web-footer">
-        <div className="web-wrap web-footer-grid">
-          <div>
-            <p className="web-footer-brand">Mobility</p>
-            <p>Feel like yourself again.</p>
-            <p>
-              A 60-day home movement program for adults about 50 to 70. It is not medical advice, not
-              physiotherapy, not a diagnosis, and not emergency care. It does not tell you the cause of pain,
-              and it does not clear you to exercise.
-            </p>
-          </div>
-          <nav aria-label="Footer">
-            <Link to={routes.safety}>Safety screen</Link>
-            <Link to={routes.checkIn}>Free check-in</Link>
-            <Link to={routes.plan}>Plan preview</Link>
-            <Link to={routes.signUp}>Sign up</Link>
-            <Link to={routes.welcome}>In-app preview</Link>
-            <Link to={routes.legal}>Privacy note</Link>
-          </nav>
-        </div>
-        <div className="web-wrap">
-          <p className="web-footer-meta">
-            Educational references on this site are sources only. They are not endorsements, partnerships, or a
-            review of Mobility. If you might be having an emergency, contact local emergency services.
-          </p>
-        </div>
-      </footer>
+      <SiteFooter />
     </div>
   );
 }

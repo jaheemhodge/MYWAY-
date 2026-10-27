@@ -10,7 +10,7 @@ import {
   type SafetyAnswers,
 } from "./model";
 import { routes } from "./routes";
-import { loadSafetyScreen, saveSafetyScreen } from "./storage";
+import { loadLandingAnswer, loadSafetyScreen, saveSafetyScreen } from "./storage";
 import { usePageTitle } from "./WebLayout";
 
 export function SafetyScreen() {
@@ -18,6 +18,7 @@ export function SafetyScreen() {
   const navigate = useNavigate();
   const [answers, setAnswers] = useState<SafetyAnswers>(() => loadSafetyScreen()?.answers ?? emptySafetyAnswers());
   const outcome = safetyOutcome(answers);
+  const [carried] = useState(() => loadLandingAnswer());
 
   const choose = (id: keyof SafetyAnswers, value: SafetyAnswer) => {
     setAnswers((current) => ({ ...current, [id]: value }));
@@ -43,6 +44,12 @@ export function SafetyScreen() {
           Six questions. Answer each one. Yes, or I’m not sure, means we stop here and ask you to check with
           your doctor first.
         </p>
+        {carried ? (
+          <p className="web-carried">
+            Your answer from the first page is saved. These safety questions come first, then the check-in
+            continues without asking it again.
+          </p>
+        ) : null}
         <aside className="web-callout">
           <strong>This is not medical advice.</strong>
           <p>
