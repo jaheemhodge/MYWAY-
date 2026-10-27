@@ -1,4 +1,4 @@
-import { useState, type CSSProperties } from "react";
+import { useState, type CSSProperties, type ReactNode } from "react";
 import { routes } from "../routes";
 import { DayTicks } from "./DayTicks";
 import { LiquidMetalLink } from "./LiquidMetalLink";
@@ -17,6 +17,13 @@ const HERO_PORTRAIT = {
   backdrop: "#6c765d",
   glow: "#757f66",
   alt: "A smiling woman in her sixties with long grey hair.",
+} as const;
+
+/** The same portrait as a short silent loop (public/hero/). Decorative; the still above stays as the fallback. */
+const HERO_VIDEO = {
+  webm: "/hero/hero-portrait-woman.webm",
+  mp4: "/hero/hero-portrait-woman.mp4",
+  poster: "/hero/hero-portrait-woman-poster.jpg",
 } as const;
 
 const PROOF = [
@@ -101,13 +108,50 @@ export function Hero() {
   );
 }
 
-/** Anchored to the bottom of the hero like a studio portrait: shoulders run off the bottom edge, only the left and top-right edges fade. No card, no frame. If the photo fails, the glow stays and nothing else shows. */
+/**
+ * Anchored to the bottom of the hero like a studio portrait: shoulders run off the bottom edge, only the left and
+ * top-right edges fade. No card, no frame. A silent looping video plays in the slot; with reduced motion only its
+ * poster shows. If the video can't load, the still portrait takes its place, and if that fails too the glow stays.
+ */
 function Portrait() {
-  const [failed, setFailed] = useState(false);
-  if (failed) return null;
+  const reduced = useReducedMotion();
+  const [videoFailed, setVideoFailed] = useState(false);
+  const [stillFailed, setStillFailed] = useState(false);
   const { base, width, height, alt } = HERO_PORTRAIT;
-  return (
-    <figure className={styles.portrait}>
+
+  let media: ReactNode;
+  if (!videoFailed && reduced) {
+    media = (
+      <img
+        src={HERO_VIDEO.poster}
+        alt=""
+        aria-hidden="true"
+        onError={() => setVideoFailed(true)}
+      />
+    );
+  } else if (!videoFailed) {
+    media = (
+      <video
+        autoPlay
+        muted
+        loop
+        playsInline
+        preload="auto"
+        poster={HERO_VIDEO.poster}
+        aria-hidden="true"
+        tabIndex={-1}
+        onError={() => setVideoFailed(true)}
+      >
+        <source src={HERO_VIDEO.webm} type="video/webm" />
+        <source
+          src={HERO_VIDEO.mp4}
+          type="video/mp4"
+          onError={() => setVideoFailed(true)}
+        />
+      </video>
+    );
+  } else if (!stillFailed) {
+    media = (
       <picture>
         <source
           media="(max-width: 899px)"
@@ -126,10 +170,17 @@ function Portrait() {
           width={width}
           height={height}
           decoding="async"
-          fetchPriority="high"
-          onError={() => setFailed(true)}
+          onError={() => setStillFailed(true)}
         />
       </picture>
+    );
+  } else {
+    return null;
+  }
+
+  return (
+    <figure className={styles.portrait}>
+      {media}
       <figcaption className={styles.caption}>AI-generated portrait</figcaption>
     </figure>
   );

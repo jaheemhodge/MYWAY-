@@ -70,7 +70,8 @@
 
 /* Scaled so her shoulders run off the bottom edge. The bottom stays solid; only the left edge (into the text side)
    and a soft top-right corner fade, with eased stops so loose hair dissolves rather than cuts off. */
-.portrait img {
+.portrait img,
+.portrait video {
   position: absolute;
   right: max(0px, calc((100vw - 1500px) / 2));
   bottom: -9%;
@@ -296,7 +297,8 @@
 
   /* Full-width on phones, so both sides of her hair feather out the same way; the sweater stays visible
      behind the headline and fades into the dark gradient by the subhead. */
-  .portrait img {
+  .portrait img,
+  .portrait video {
     right: auto;
     left: 50%;
     bottom: 0;
