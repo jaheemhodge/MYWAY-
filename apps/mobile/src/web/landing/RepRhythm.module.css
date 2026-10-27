@@ -1,0 +1,225 @@
+.grid {
+  display: grid;
+  gap: 2.5rem;
+}
+
+@media (min-width: 1000px) {
+  .grid {
+    grid-template-columns: minmax(0, 1fr) 22rem;
+    column-gap: 4rem;
+  }
+
+  .head {
+    grid-column: 1 / -1;
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+    gap: 4rem;
+    align-items: end;
+  }
+
+  .head > p {
+    margin: 0;
+  }
+}
+
+.player {
+  min-width: 0;
+}
+
+.film {
+  width: 100%;
+}
+
+/* The fallback placeholder keeps the film's 16:9 frame. */
+.film[role="img"] {
+  aspect-ratio: 16 / 9;
+  border: 1px solid var(--line-dark);
+}
+
+.rhythm {
+  margin-top: 1.5rem;
+}
+
+.trace {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.base {
+  stroke: var(--line-dark);
+  stroke-width: 1.6;
+}
+
+.track {
+  fill: none;
+  stroke: rgba(201, 164, 92, 0.32);
+  stroke-width: 3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.progress {
+  fill: none;
+  stroke: var(--brass);
+  stroke-width: 3.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.dot {
+  fill: var(--brass);
+  stroke: var(--forest-deep);
+  stroke-width: 3;
+}
+
+/* Labels sit under their part of the trace: 2 s, 1 s, 3 s wide. */
+.labels {
+  list-style: none;
+  margin: 0.75rem 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 2fr 1fr 3fr;
+  gap: 0.5rem;
+}
+
+.label {
+  padding-top: 0.6rem;
+  border-top: 2px solid var(--line-dark);
+  font-size: 1.25rem;
+  color: var(--light-soft);
+  transition:
+    color 200ms var(--ease),
+    border-color 200ms var(--ease);
+}
+
+.label strong {
+  display: block;
+  font-family: var(--serif);
+  font-size: 1.6rem;
+  font-weight: 500;
+  color: var(--light-ink);
+}
+
+.on {
+  border-top-color: var(--brass);
+  color: var(--light-ink);
+}
+
+.on strong {
+  color: var(--brass);
+}
+
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.play {
+  appearance: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  min-height: 3.5rem;
+  padding: 0.5rem 1.4rem 0.5rem 1.1rem;
+  border-radius: 999px;
+  border: 2px solid var(--light-ink);
+  background: transparent;
+  color: var(--light-ink);
+  font: inherit;
+  font-size: 1.2rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 200ms var(--ease);
+}
+
+.play:hover {
+  background: rgba(247, 243, 236, 0.1);
+}
+
+.play svg {
+  width: 1.4rem;
+  height: 1.4rem;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.clock.clock {
+  margin: 0;
+  font-size: 1.2rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.clock span {
+  font-family: var(--serif);
+  font-size: 1.6rem;
+  color: var(--light-ink);
+}
+
+.side {
+  border-top: 1px solid var(--line-dark);
+  padding-top: 1.5rem;
+}
+
+@media (min-width: 1000px) {
+  .side {
+    border-top: 0;
+    border-left: 1px solid var(--line-dark);
+    padding: 0 0 0 2rem;
+  }
+}
+
+.sideTitle.sideTitle {
+  margin: 0;
+  font-family: var(--serif);
+  font-size: 1.7rem;
+  font-weight: 500;
+  line-height: 1.1;
+  color: var(--light-ink);
+}
+
+.list {
+  margin: 1rem 0 0;
+  font-size: 1.25rem;
+  padding-left: 1.25rem;
+  display: grid;
+  gap: 0.4rem;
+  color: var(--light-ink);
+}
+
+.list li::marker {
+  color: var(--brass);
+}
+
+.small.small {
+  margin: 0.75rem 0 0;
+  font-size: 1.2rem;
+}
+
+.stop {
+  margin-top: 2rem;
+  padding: 1.5rem;
+  border-radius: 22px;
+  background: var(--stop-wash);
+}
+
+.stop .sideTitle.sideTitle {
+  color: var(--stop);
+}
+
+.stop.stop p {
+  margin: 0.6rem 0 0;
+  color: var(--ink);
+}
+
+.stop .small.small {
+  color: var(--ink-soft);
+}

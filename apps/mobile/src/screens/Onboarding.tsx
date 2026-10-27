@@ -163,7 +163,7 @@ export function Onboarding() {
   const go = (next: number) => navigate(`/onboarding/${next}`);
 
   const back = () => {
-    if (stepNum <= 1) navigate("/");
+    if (stepNum <= 1) navigate("/welcome");
     else go(stepNum - 1);
   };
 

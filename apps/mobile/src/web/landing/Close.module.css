@@ -1,0 +1,34 @@
+.close {
+  background:
+    radial-gradient(70% 90% at 100% 0%, var(--glow) 0%, transparent 65%),
+    var(--forest);
+  padding-block: clamp(4.5rem, 9vw, 8rem);
+}
+
+.inner {
+  display: grid;
+  gap: 2.5rem;
+}
+
+@media (min-width: 1000px) {
+  .inner {
+    grid-template-columns: minmax(0, 1.3fr) minmax(0, 0.7fr);
+    gap: 5rem;
+    align-items: end;
+  }
+}
+
+.title.title {
+  font-size: clamp(2.6rem, 5.6vw, 4.6rem);
+  letter-spacing: -0.035em;
+}
+
+.action {
+  display: grid;
+  gap: 1rem;
+}
+
+.cta {
+  min-height: 3.75rem;
+  width: 100%;
+}

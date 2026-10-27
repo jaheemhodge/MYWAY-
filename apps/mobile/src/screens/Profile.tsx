@@ -95,7 +95,7 @@ export function Profile() {
           className="profile-row"
           onClick={async () => {
             await resetApp(dispatch);
-            navigate("/");
+            navigate("/welcome");
           }}
         >
           Sign out of this demo profile

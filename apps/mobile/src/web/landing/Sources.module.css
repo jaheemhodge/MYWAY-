@@ -1,0 +1,80 @@
+.section {
+  background: var(--paper);
+}
+
+.grid {
+  display: grid;
+  gap: 2.5rem;
+}
+
+@media (min-width: 1000px) {
+  .grid {
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+    gap: 5rem;
+    align-items: start;
+  }
+}
+
+.rows {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid var(--ink);
+}
+
+/* Qoves's thumbnail rows: a small drawing, the name, the plain label, hairline between. */
+.row {
+  display: grid;
+  grid-template-columns: 5rem minmax(0, 1fr);
+  gap: 0.5rem 1.5rem;
+  align-items: center;
+  padding: 1.5rem 0;
+  border-bottom: 1px solid var(--line);
+}
+
+@media (min-width: 700px) {
+  .row {
+    grid-template-columns: 6rem minmax(0, 1fr) 12rem;
+  }
+}
+
+.thumb {
+  width: 100%;
+  height: auto;
+  fill: none;
+  stroke: var(--sage);
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.name.name {
+  margin: 0;
+  font-family: var(--serif);
+  font-size: 1.7rem;
+  font-weight: 500;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  color: var(--ink);
+}
+
+.detail {
+  margin: 0.25rem 0 0;
+  color: var(--ink-soft);
+}
+
+.tag {
+  grid-column: 2 / -1;
+  margin: 0;
+  font-size: 1.15rem;
+  line-height: 1.35;
+  color: var(--brass-ink);
+  font-weight: 600;
+}
+
+@media (min-width: 700px) {
+  .tag {
+    grid-column: auto;
+    text-align: right;
+  }
+}

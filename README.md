@@ -35,7 +35,24 @@ npm install
 npm run dev
 ```
 
-Open http://localhost:5173. Use **I already have an account** to explore the Carol or Deb demonstration profiles, or **Get started** for a fail-closed onboarding flow.
+Open http://localhost:5173. The public front door is the landing page. The free path is `/safety`, then `/check-in`, then the `/plan` preview and `/signup` placeholder. The existing in-app preview, including Day 1, is unchanged at `/welcome` and `/session/1`.
+
+### Web funnel
+
+| Route | What it is |
+|---|---|
+| `/` | Landing page |
+| `/safety` | Safety screen before the check-in |
+| `/safety/pause` | “Please check with your doctor first” |
+| `/check-in/:step` | Free movement check-in, one question per screen |
+| `/plan` | 60-day plan preview, with “what you told us” |
+| `/signup` | Sign-up and price placeholder |
+| `/session/1` | Existing Day 1 session screen |
+| `/welcome` | Existing in-app welcome |
+
+Answers stay in this browser under `mobility.movement-checkin.v1` and `mobility.safety-screen.v1`. To POST the same check-in JSON later, set `VITE_CHECKIN_API` to the endpoint URL and rebuild. A missing or failed endpoint does not erase the local copy.
+
+`npm run build` writes a static Vite bundle. The repo `vercel.json` builds `apps/mobile` and rewrites client-side routes to `index.html`. If the Vercel project root is `apps/mobile`, that folder’s `vercel.json` does the rewrite.
 
 ### Tests
 

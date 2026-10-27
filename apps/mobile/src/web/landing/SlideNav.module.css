@@ -1,0 +1,173 @@
+/* Sits in the forest header on the landing page. Colours are the brand's: forest, cream, brass. */
+.nav {
+  --nav-forest: #1a2e24;
+  --nav-deep: #122019;
+  --nav-cream: #f7f3ec;
+  --nav-ink: #1a1916;
+  --nav-brass: #c9a45c;
+  --nav-ease: cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  align-items: center;
+  flex: 1 1 auto;
+  justify-content: center;
+  min-width: 0;
+}
+
+/* The pill row: a 2px cream outline, the sliding cream cursor inside it. */
+.tabs {
+  position: relative;
+  display: none;
+  margin: 0;
+  padding: 4px;
+  list-style: none;
+  border: 2px solid rgba(247, 243, 236, 0.85);
+  border-radius: 999px;
+  background: var(--nav-deep);
+}
+
+.tab {
+  position: relative;
+  z-index: 1;
+}
+
+.link.link {
+  display: flex;
+  align-items: center;
+  min-height: 3rem;
+  padding: 0 1.15rem;
+  border-radius: 999px;
+  color: var(--nav-cream);
+  font-size: 1.15rem;
+  font-weight: 600;
+  line-height: 1;
+  white-space: nowrap;
+  text-decoration: none !important;
+  transition: color 220ms var(--nav-ease);
+}
+
+/* Text on the cream pill turns ink, so it stays readable (the reference's blend trick, made explicit). */
+.link.onCursor {
+  color: var(--nav-ink);
+}
+
+.link:focus-visible {
+  outline: 3px solid var(--nav-brass) !important;
+  outline-offset: 2px;
+}
+
+.cursor {
+  position: absolute;
+  z-index: 0;
+  top: 4px;
+  left: 0;
+  height: 3rem;
+  border-radius: 999px;
+  background: var(--nav-cream);
+  opacity: 0;
+  pointer-events: none;
+  transition:
+    transform 320ms var(--nav-ease),
+    width 320ms var(--nav-ease),
+    opacity 200ms var(--nav-ease);
+}
+
+.cursorVisible {
+  opacity: 1;
+}
+
+/* Narrow screens: a Menu button and a full-width sheet of large links. */
+.menu {
+  margin-left: auto;
+}
+
+.menuButton {
+  appearance: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: 3.5rem;
+  padding: 0 1.15rem 0 0.95rem;
+  border-radius: 999px;
+  border: 2px solid rgba(247, 243, 236, 0.85);
+  background: transparent;
+  color: var(--nav-cream);
+  font: inherit;
+  font-size: 1.15rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.menuButton svg {
+  width: 1.4rem;
+  height: 1.4rem;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+}
+
+.menuButton:focus-visible {
+  outline: 3px solid var(--nav-brass) !important;
+  outline-offset: 2px;
+}
+
+/* Phones: the open menu covers the whole screen under the header; the page behind is locked. */
+.sheet {
+  position: fixed;
+  z-index: 30;
+  top: var(--web-header-h, 4.75rem);
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 0.5rem 1.25rem calc(1.5rem + env(safe-area-inset-bottom));
+  background: var(--nav-forest);
+}
+
+.sheetList {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.sheetLink.sheetLink {
+  display: flex;
+  align-items: center;
+  min-height: 3.75rem;
+  border-bottom: 1px solid #2c4a3b;
+  color: var(--nav-cream);
+  font-family: var(--font-serif);
+  font-size: 1.6rem;
+  font-weight: 500;
+  text-decoration: none !important;
+}
+
+.sheetCta {
+  padding-top: 1.25rem;
+}
+
+.sheetCta :global(.web-btn) {
+  width: 100%;
+}
+
+.sheetActive.sheetActive {
+  color: var(--nav-brass);
+}
+
+@media (min-width: 1000px) {
+  .tabs {
+    display: flex;
+  }
+
+  .menu {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cursor,
+  .link {
+    transition: none;
+  }
+}

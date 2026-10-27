@@ -1,4 +1,5 @@
-import { Navigate, Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes, useLocation } from "react-router-dom";
+import { PhoneFrame } from "./components/PhoneFrame";
 import { AppShell } from "./screens/AppShell";
 import { CheckIn } from "./screens/CheckIn";
 import { Guide } from "./screens/Guide";
@@ -18,39 +19,51 @@ import { SessionIntro } from "./screens/SessionIntro";
 import { SignIn } from "./screens/SignIn";
 import { Welcome } from "./screens/Welcome";
 import { useApp } from "./store/AppState";
+import { MarketingApp } from "./web/MarketingApp";
+import { isPrototypePath, routes } from "./web/routes";
 
 export function App() {
+  const { pathname } = useLocation();
+  if (!isPrototypePath(pathname)) return <MarketingApp />;
+  return <PrototypeApp />;
+}
+
+function PrototypeApp() {
   const { state } = useApp();
   if (!state.hydrated) {
     return (
-      <div className="screen">
-        <p className="muted">Loading your place in the journey…</p>
-      </div>
+      <PhoneFrame>
+        <div className="screen">
+          <p className="muted">Loading your place in the journey…</p>
+        </div>
+      </PhoneFrame>
     );
   }
 
   return (
-    <Routes>
-      <Route path="/" element={<Welcome />} />
-      <Route path="/sign-in" element={<SignIn />} />
-      <Route path="/onboarding/:step" element={<Onboarding />} />
-      <Route path="/personalizing" element={<Personalizing />} />
-      <Route path="/reveal" element={<Reveal />} />
-      <Route path="/hold" element={<Hold />} />
-      <Route path="/session/:day" element={<SessionIntro />} />
-      <Route path="/player/:day" element={<Player />} />
-      <Route path="/guide/:exerciseId" element={<Guide />} />
-      <Route path="/checkin/:day" element={<CheckIn />} />
-      <Route path="/milestone/:phase" element={<Milestone />} />
-      <Route path="/legal" element={<Legal />} />
-      <Route path="/profile/details" element={<Details />} />
-      <Route path="/app" element={<AppShell />}>
-        <Route path="home" element={<Home />} />
-        <Route path="progress" element={<Progress />} />
-        <Route path="plan" element={<Plan />} />
-        <Route path="profile" element={<Profile />} />
-      </Route>
-      <Route path="*" element={<Navigate to="/" replace />} />
-    </Routes>
+    <PhoneFrame>
+      <Routes>
+        <Route path={routes.welcome} element={<Welcome />} />
+        <Route path={routes.signIn} element={<SignIn />} />
+        <Route path="/onboarding/:step" element={<Onboarding />} />
+        <Route path="/personalizing" element={<Personalizing />} />
+        <Route path="/reveal" element={<Reveal />} />
+        <Route path="/hold" element={<Hold />} />
+        <Route path="/session/:day" element={<SessionIntro />} />
+        <Route path="/player/:day" element={<Player />} />
+        <Route path="/guide/:exerciseId" element={<Guide />} />
+        <Route path="/checkin/:day" element={<CheckIn />} />
+        <Route path="/milestone/:phase" element={<Milestone />} />
+        <Route path={routes.legal} element={<Legal />} />
+        <Route path="/profile/details" element={<Details />} />
+        <Route path="/app" element={<AppShell />}>
+          <Route path="home" element={<Home />} />
+          <Route path="progress" element={<Progress />} />
+          <Route path="plan" element={<Plan />} />
+          <Route path="profile" element={<Profile />} />
+        </Route>
+        <Route path="*" element={<Navigate to={routes.welcome} replace />} />
+      </Routes>
+    </PhoneFrame>
   );
 }

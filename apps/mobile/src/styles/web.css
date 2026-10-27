@@ -1,0 +1,601 @@
+.web-root {
+  --web-cream: #f7f4ee;
+  --web-paper: #efeae1;
+  --web-ink: #1a1916;
+  --web-forest: #1a2e24;
+  --web-forest-deep: #122019;
+  --web-line: #d9d1c4;
+  min-height: 100%;
+  background: var(--web-cream);
+  color: var(--web-ink);
+  font-family: var(--font-sans);
+  font-size: 1.25rem;
+  line-height: 1.55;
+  font-variant-numeric: lining-nums;
+}
+
+html:has(.web-root),
+body:has(.web-root),
+#root:has(.web-root) {
+  height: auto;
+  min-height: 100%;
+  overflow: auto;
+  background: var(--web-cream);
+}
+
+.web-root h1,
+.web-root h2,
+.web-root h3 {
+  color: var(--web-ink);
+}
+
+.web-root p {
+  line-height: 1.55;
+}
+
+.web-root a:not(.web-btn):not(.web-wordmark) {
+  text-decoration: underline;
+  text-underline-offset: 0.18em;
+  text-decoration-thickness: 1.5px;
+}
+
+.web-root :focus-visible {
+  outline: 3px solid var(--web-forest);
+  outline-offset: 3px;
+}
+
+.web-skip {
+  position: absolute;
+  left: 1rem;
+  top: -5rem;
+  z-index: 40;
+  background: var(--web-forest);
+  color: var(--web-cream);
+  padding: 0.75rem 1rem;
+  border-radius: 999px;
+  font-weight: 600;
+}
+
+.web-skip:focus {
+  top: 0.75rem;
+}
+
+.web-wrap {
+  width: min(1120px, calc(100% - 2.5rem));
+  margin-inline: auto;
+}
+
+.web-header {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: rgba(247, 244, 238, 0.96);
+  border-bottom: 1px solid var(--web-line);
+}
+
+.web-header-inner {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  gap: 0.75rem 1.25rem;
+  height: var(--web-header-h);
+  padding-block: 0;
+}
+
+.web-wordmark {
+  color: var(--web-ink);
+  text-decoration: none;
+}
+
+.web-wordmark .brand {
+  font-size: 1.5rem;
+}
+
+.web-header .web-btn,
+.web-header .web-textlink {
+  margin-left: auto;
+  flex: none;
+}
+
+.web-textlink {
+  font-size: 1.2rem;
+  font-weight: 600;
+  min-height: 3rem;
+  display: inline-flex;
+  align-items: center;
+}
+
+.web-btn {
+  appearance: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 3.5rem;
+  padding: 0.75rem 1.4rem;
+  border-radius: 999px;
+  border: 2px solid transparent;
+  font-weight: 600;
+  font-size: 1.2rem;
+  line-height: 1.2;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.web-btn-primary {
+  background: var(--web-forest);
+  border-color: var(--web-forest);
+  color: #f7f3ec;
+}
+
+.web-btn-primary:hover:not(:disabled) {
+  background: #243c31;
+}
+
+.web-btn-light {
+  background: #f7f3ec;
+  border-color: #f7f3ec;
+  color: var(--web-ink);
+}
+
+.web-btn-light:hover {
+  background: #fff;
+}
+
+.web-btn-secondary {
+  background: transparent;
+  color: var(--web-ink);
+  border-color: var(--web-ink);
+}
+
+.web-btn:disabled {
+  background: transparent;
+  color: var(--web-ink);
+  border-color: var(--web-ink);
+  cursor: not-allowed;
+}
+
+.web-next-step,
+.web-next-step h2,
+.web-next-step p {
+  color: #f7f3ec;
+}
+
+.web-kicker {
+  margin: 0 0 0.55rem;
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.web-kicker {
+  color: var(--web-forest);
+}
+
+.web-intro {
+  font-size: 1.35rem;
+  max-width: 40rem;
+  margin-top: 0;
+}
+
+.web-flow h1 {
+  font-size: clamp(2.15rem, 4.4vw, 3.5rem);
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  margin: 0 0 0.9rem;
+}
+
+.web-phases {
+  margin: 1.5rem 0 0;
+  padding: 0;
+}
+
+.web-phases {
+  list-style: none;
+  display: grid;
+  gap: 1rem;
+}
+
+.web-phases h3 {
+  font-size: 1.7rem;
+  margin: 0 0 0.55rem;
+}
+
+.web-phases p,
+.web-flow p,
+.web-prose-stack p {
+  font-size: 1.25rem;
+}
+
+.web-phases li {
+  background: #fff;
+  border: 1px solid var(--web-line);
+  border-radius: 22px;
+  padding: 1.35rem 1.3rem 1.2rem;
+}
+
+.web-phase-range,
+.web-source-label {
+  margin: 0 0 0.35rem;
+  font-weight: 700;
+  font-size: 1.15rem;
+  color: var(--web-forest);
+}
+
+.web-phase-range {
+  font-family: var(--font-serif);
+  font-size: 1.85rem;
+  font-weight: 500;
+  color: var(--web-ink);
+}
+
+.web-flow {
+  padding: 2.25rem 0 4rem;
+}
+
+.web-wrap.web-flow-narrow {
+  max-width: 44rem;
+}
+
+.web-callout,
+.web-price-placeholder {
+  background: #fff;
+  border: 2px solid var(--web-forest);
+  border-radius: 18px;
+  padding: 1.15rem 1.2rem;
+  margin: 1.25rem 0 1.5rem;
+}
+
+.web-price-placeholder {
+  border-style: dashed;
+}
+
+.web-callout strong {
+  display: block;
+  font-size: 1.3rem;
+  margin-bottom: 0.35rem;
+}
+
+.web-callout p,
+.web-price-placeholder p {
+  margin: 0;
+}
+
+.web-price-amount {
+  font-family: var(--font-serif);
+  font-size: 2.5rem;
+  line-height: 1.1;
+  margin: 0.35rem 0 0.6rem;
+}
+
+.web-choices {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.web-choice {
+  appearance: none;
+  width: 100%;
+  text-align: left;
+  background: #fff;
+  color: var(--web-ink);
+  border: 2px solid var(--web-ink);
+  border-radius: 16px;
+  min-height: 4.25rem;
+  padding: 0.9rem 1rem;
+  font-size: 1.25rem;
+  font-weight: 600;
+  line-height: 1.3;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.9rem;
+}
+
+.web-choice > span:first-child {
+  min-width: 0;
+}
+
+.web-choice small {
+  display: block;
+  margin-top: 0.2rem;
+  font-size: 1.125rem;
+  font-weight: 500;
+}
+
+.web-choice.is-selected {
+  background: var(--web-forest);
+  border-color: var(--web-forest);
+  color: #f7f3ec;
+}
+
+.web-choice:hover:not(.is-selected) {
+  background: #f3f6f1;
+}
+
+.web-mark {
+  width: 1.7rem;
+  height: 1.7rem;
+  border: 2px solid currentColor;
+  border-radius: 50%;
+  flex: none;
+  display: grid;
+  place-items: center;
+}
+
+.web-choice.is-multi .web-mark {
+  border-radius: 6px;
+}
+
+.web-choice.is-selected .web-mark {
+  background: #f7f3ec;
+  border-color: #f7f3ec;
+}
+
+.web-choice.is-selected .web-mark::after {
+  content: "";
+  width: 0.38rem;
+  height: 0.7rem;
+  border: solid var(--web-forest);
+  border-width: 0 3px 3px 0;
+  transform: rotate(45deg) translate(-1px, -1px);
+}
+
+.web-progress {
+  height: 0.7rem;
+  background: #e3dbd0;
+  border-radius: 999px;
+  overflow: hidden;
+  margin-top: 1.25rem;
+  border: 1px solid #cfc6b8;
+}
+
+.web-progress > span {
+  display: block;
+  height: 100%;
+  background: var(--web-forest);
+}
+
+.web-step-count {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--web-forest);
+  margin: 0.7rem 0 0.8rem;
+}
+
+.web-flow h1 {
+  margin-top: 0;
+}
+
+.web-flow h1:focus {
+  outline: none;
+}
+
+.web-hint {
+  min-height: 1.6em;
+  font-size: 1.15rem;
+  font-weight: 600;
+  margin: 0.85rem 0 0;
+}
+
+.web-actions {
+  display: grid;
+  gap: 0.75rem;
+  margin-top: 0.4rem;
+}
+
+.web-fine {
+  font-size: 1.15rem;
+  margin-top: 1.25rem;
+}
+
+.web-plan-layout {
+  display: grid;
+  gap: 2.5rem;
+  margin-top: 2rem;
+}
+
+.web-told dl {
+  margin: 1rem 0 0;
+}
+
+.web-told dl > div {
+  padding: 0.95rem 0;
+  border-top: 1px solid var(--web-line);
+}
+
+.web-told dt {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--web-forest);
+}
+
+.web-told dd {
+  margin: 0.2rem 0 0;
+  font-family: var(--font-serif);
+  font-size: 1.85rem;
+  line-height: 1.25;
+}
+
+.web-told dd span {
+  display: block;
+}
+
+.web-next-step {
+  margin-top: 2.5rem;
+  background: var(--web-forest);
+  border-radius: 24px;
+  padding: 1.5rem 1.35rem 1.6rem;
+}
+
+.web-next-step h2 {
+  font-size: clamp(1.8rem, 3vw, 2.4rem);
+}
+
+@media (min-width: 800px) {
+
+  .web-actions {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .web-actions .web-btn-primary,
+  .web-actions .web-btn-light {
+    order: 2;
+  }
+}
+
+@media (min-width: 880px) {
+  .web-phases {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.25rem;
+  }
+}
+
+@media (min-width: 960px) {
+  .web-plan-layout {
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+    align-items: start;
+  }
+}
+
+@media (max-width: 799px) {
+  .web-actions {
+    grid-template-columns: 1fr;
+  }
+
+  .web-flow .web-actions .web-btn,
+  .web-next-step .web-btn,
+  .web-told .web-actions .web-btn {
+    width: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html:has(.web-root) {
+    scroll-behavior: auto;
+  }
+}
+
+/*
+ * One header height for every public page. The window keeps that much (plus breathing room)
+ * clear at the top for anchor jumps, focus scrolling and find-in-page, so no heading lands under the header.
+ */
+:root {
+  --web-header-h: 4.75rem;
+}
+
+html:has(.web-root) {
+  scroll-padding-top: calc(var(--web-header-h) + 1.25rem);
+}
+
+/* An answer carried over from the landing page. */
+.web-carried {
+  margin: 1.25rem 0 0;
+  padding: 1rem 1.15rem;
+  border: 1px solid #3d5a45;
+  border-radius: 14px;
+  background: #e4ede3;
+  color: var(--web-ink);
+  font-size: 1.2rem;
+  max-width: 40rem;
+}
+
+/* Landing page: the header joins the forest hero. */
+.web-header.is-forest {
+  background: rgba(26, 46, 36, 0.97);
+  border-bottom-color: #2c4a3b;
+}
+
+.web-header.is-forest .web-wordmark {
+  color: #f7f3ec;
+}
+
+.web-header.is-forest .web-btn-primary {
+  background: #f7f3ec;
+  border-color: #f7f3ec;
+  color: #1a1916;
+}
+
+.web-header.is-forest .web-btn-primary:hover {
+  background: #fff;
+}
+
+.web-header.is-forest :focus-visible {
+  outline-color: #c9a45c;
+}
+
+.web-root ::selection {
+  background: #c9a45c;
+  color: #1a1916;
+}
+
+/* The window is the scroller on public pages, so sticky headers and pinned sections work. */
+body:has(.web-root),
+#root:has(.web-root) {
+  overflow: visible;
+}
+
+
+/* Phones: the header keeps the logo and the Menu; the check-in button moves into the menu sheet. */
+@media (max-width: 599px) {
+  .web-header.is-forest .web-header-cta {
+    display: none;
+  }
+}
+
+/*
+ * Safety screen and check-in: Back and Continue live in a bar that stays on screen.
+ * When the question fits, the bar sits in place; when it doesn't (a long question on a
+ * 1280x720 laptop or a phone), it pins to the bottom of the window so nobody has to scroll
+ * to find the next step. Side by side at every width: Back on the left, Continue on the right.
+ */
+.web-flow .web-actions-bar {
+  position: sticky;
+  bottom: 0;
+  z-index: 5;
+  grid-template-columns: 1fr 1fr;
+  margin: 0.75rem -1rem 0;
+  padding: 0.75rem 1rem calc(0.75rem + env(safe-area-inset-bottom));
+  background: var(--web-cream);
+  border-top: 1px solid var(--web-line);
+  box-shadow: 0 -10px 18px rgba(26, 25, 22, 0.06);
+}
+
+/* Buttons in the bar always sit on solid colour, so nothing scrolling underneath shows through. */
+.web-flow .web-actions-bar .web-btn-secondary,
+.web-flow .web-actions-bar .web-btn:disabled {
+  background: var(--web-cream);
+}
+
+.web-flow .web-actions-bar .web-btn {
+  width: 100%;
+  min-height: 3.5rem;
+  padding-inline: 0.9rem;
+}
+
+.web-flow .web-actions-bar .web-btn-primary {
+  order: 2;
+}
+
+/* Tighter vertical rhythm on the question screens so more of each fits above the bar. */
+.web-flow:has(.web-actions-bar) {
+  padding-top: 1.5rem;
+}
+
+.web-flow:has(.web-actions-bar) h1 {
+  font-size: clamp(2rem, 3.4vw, 2.75rem);
+  line-height: 1.08;
+  margin-bottom: 0.6rem;
+}
+
+.web-flow:has(.web-actions-bar) .web-intro {
+  margin-bottom: 0.9rem;
+}
+
+.web-flow:has(.web-actions-bar) .web-choices {
+  gap: 0.6rem;
+}
+
+.web-flow:has(.web-actions-bar) .web-hint {
+  margin-top: 0.6rem;
+}

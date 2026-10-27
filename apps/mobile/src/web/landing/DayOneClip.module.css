@@ -1,0 +1,102 @@
+.figure {
+  margin: 0;
+}
+
+.frame {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  width: 100%;
+  overflow: hidden;
+  border-radius: 28px;
+  border: 1px solid var(--line-dark);
+  background: var(--forest);
+}
+
+.video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 62% 50%;
+}
+
+.toggle {
+  appearance: none;
+  position: absolute;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  min-height: 3.5rem;
+  padding: 0.5rem 1.5rem 0.5rem 1.2rem;
+  border-radius: 999px;
+  border: 0;
+  background: var(--forest);
+  color: var(--light-ink);
+  font: inherit;
+  font-size: 1.2rem;
+  font-weight: 600;
+  white-space: nowrap;
+  cursor: pointer;
+  box-shadow: 0 8px 24px rgba(18, 32, 25, 0.28);
+  transition:
+    background-color 200ms var(--ease),
+    transform 200ms var(--ease);
+}
+
+.toggle:hover {
+  background: var(--forest-hover);
+}
+
+.toggle svg {
+  width: 1.4rem;
+  height: 1.4rem;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* Paused: one clear button over the poster. Playing: it steps aside to a corner. */
+.toggleCenter {
+  left: 50%;
+  bottom: 1.5rem;
+  transform: translateX(-50%);
+}
+
+.toggleCorner {
+  left: 1rem;
+  bottom: 1rem;
+}
+
+.caption.caption {
+  margin: 0.75rem 0 0;
+  font-size: 1.15rem;
+  line-height: 1.5;
+  color: var(--light-soft);
+}
+
+/* Phones: a small round button in the bottom-right corner, clear of the leg movement. The label stays for screen readers. */
+@media (max-width: 599px) {
+  .toggleCenter,
+  .toggleCorner {
+    left: auto;
+    right: 0.6rem;
+    bottom: 0.6rem;
+    transform: none;
+    width: 3.5rem;
+    height: 3.5rem;
+    padding: 0;
+    justify-content: center;
+    gap: 0;
+  }
+
+  .toggleLabel {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
+  }
+}

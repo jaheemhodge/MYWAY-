@@ -1,0 +1,138 @@
+.head {
+  display: grid;
+  gap: 0 4rem;
+  margin-bottom: clamp(2.5rem, 5vw, 4rem);
+}
+
+@media (min-width: 900px) {
+  .head {
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+    align-items: end;
+  }
+
+  .head > p {
+    margin: 0;
+  }
+}
+
+.row {
+  list-style: none;
+  margin: 0;
+  padding: clamp(1.5rem, 3vw, 2.25rem);
+  border-radius: 28px;
+  display: grid;
+  gap: 1.5rem;
+  position: relative;
+}
+
+.row + .row {
+  margin-top: 1rem;
+}
+
+.alone {
+  background: var(--paper);
+  color: var(--ink);
+}
+
+.mobility {
+  background:
+    radial-gradient(60% 120% at 100% 0%, var(--glow) 0%, transparent 70%),
+    var(--forest);
+  color: var(--light-ink);
+}
+
+.label {
+  font-family: var(--serif);
+  font-size: 1.7rem;
+  font-weight: 500;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+.step {
+  position: relative;
+  padding-left: 2rem;
+}
+
+.dot {
+  position: absolute;
+  left: 0;
+  top: 0.45rem;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 2px solid var(--ink-soft);
+  background: var(--paper);
+}
+
+.mobility .dot {
+  border-color: var(--brass);
+  background: var(--brass);
+}
+
+/* The Mobility row is joined by a brass line; the alone row is not joined at all. */
+.mobility .step:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  left: 5px;
+  top: 1.35rem;
+  bottom: -1.5rem;
+  width: 2px;
+  background: rgba(201, 164, 92, 0.55);
+}
+
+.title.title {
+  margin: 0;
+  font-family: var(--sans);
+  font-size: 1.25rem;
+  font-weight: 700;
+  line-height: 1.3;
+  color: inherit;
+}
+
+.body {
+  margin: 0.35rem 0 0;
+  font-size: 1.15rem;
+  line-height: 1.45;
+  color: var(--ink-soft);
+}
+
+.mobility .body {
+  color: var(--light-soft);
+}
+
+@media (min-width: 1000px) {
+  .row {
+    grid-template-columns: 11rem repeat(5, minmax(0, 1fr));
+    gap: 1.5rem;
+    align-items: start;
+  }
+
+  .step {
+    padding-left: 0;
+    padding-top: 2rem;
+  }
+
+  .dot {
+    top: 0;
+  }
+
+  .mobility .step:not(:last-child)::after {
+    left: 14px;
+    right: -1.5rem;
+    top: 5px;
+    bottom: auto;
+    width: auto;
+    height: 2px;
+  }
+}
+
+.foot {
+  margin-top: 2.5rem;
+}
+
+@media (max-width: 599px) {
+  .foot :global(.web-btn) {
+    width: 100%;
+  }
+}
