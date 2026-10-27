@@ -200,7 +200,7 @@ function MovementCheckInFlow({ occasion }: { occasion: NonNullable<ReturnType<ty
         <p className="web-hint" aria-live="polite">
           {hint}
         </p>
-        <div className="web-actions">
+        <div className="web-actions web-actions-bar">
           <button type="button" className="web-btn web-btn-primary" disabled={!ready || saving} onClick={() => void goNext()}>
             {saving ? "Saving…" : continueLabel(step)}
           </button>

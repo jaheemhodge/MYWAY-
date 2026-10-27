@@ -74,7 +74,7 @@ export function SafetyScreen() {
               continues without asking it again.
             </p>
           ) : null}
-          <div className="web-actions">
+          <div className="web-actions web-actions-bar">
             <button type="button" className="web-btn web-btn-primary" onClick={() => goTo(1)}>
               Start the safety questions
             </button>
@@ -134,7 +134,7 @@ export function SafetyScreen() {
               ? "We’ll stop here and show you what to do next."
               : ""}
         </p>
-        <div className="web-actions">
+        <div className="web-actions web-actions-bar">
           <button type="button" className="web-btn web-btn-primary" disabled={!answer} onClick={next}>
             {stops ? "See what to do next" : isLast ? "Continue to the check-in" : "Continue"}
           </button>

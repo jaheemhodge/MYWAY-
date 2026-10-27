@@ -76,13 +76,27 @@
   color: var(--light-soft);
 }
 
-/* Phones: the button sits bottom right, on the wall, so it never covers the instructor or her leg. */
+/* Phones: a small round button in the bottom-right corner, clear of the leg movement. The label stays for screen readers. */
 @media (max-width: 599px) {
   .toggleCenter,
   .toggleCorner {
     left: auto;
-    right: 0.75rem;
-    bottom: 0.75rem;
+    right: 0.6rem;
+    bottom: 0.6rem;
     transform: none;
+    width: 3.5rem;
+    height: 3.5rem;
+    padding: 0;
+    justify-content: center;
+    gap: 0;
+  }
+
+  .toggleLabel {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+    white-space: nowrap;
   }
 }

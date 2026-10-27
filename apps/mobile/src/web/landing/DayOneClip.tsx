@@ -67,7 +67,7 @@ export function DayOneClip({ fallbackLabel, className }: { fallbackLabel: string
               <path d="M7 4.5v15l12-7.5z" />
             </svg>
           )}
-          {playing ? "Pause the clip" : "Play the clip"}
+          <span className={styles.toggleLabel}>{playing ? "Pause the clip" : "Play the clip"}</span>
         </button>
       </div>
       <figcaption className={styles.caption}>

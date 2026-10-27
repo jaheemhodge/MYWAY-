@@ -2,6 +2,7 @@ import { routes } from "../routes";
 import { DayTicks } from "./DayTicks";
 import { LiquidMetalLink } from "./LiquidMetalLink";
 import { Placeholder } from "./Placeholder";
+import { useState } from "react";
 import { useReducedMotion } from "./hooks";
 import styles from "./Hero.module.css";
 
@@ -30,11 +31,7 @@ export function Hero() {
           </div>
           <p className={styles.note}>Free. About a dozen short screens. No account needed.</p>
         </div>
-        <Placeholder
-          className={styles.media}
-          tone="dark"
-          label="A woman about 60 to 65 rising from a sturdy dining chair by a bright window, mid-movement and at ease. Her own home, natural light."
-        />
+        <HeroStill />
       </div>
 
       <div className={styles.fold}>
@@ -56,5 +53,34 @@ export function Hero() {
         </p>
       </div>
     </section>
+  );
+}
+
+const HERO_STILL = "/videos/day-01/day01-hero-still.jpg";
+
+/**
+ * Until the commissioned photo exists, the hero shows a still from our Day 1 test clip, labelled as such.
+ * If the still is missing, the labelled photo placeholder takes its place.
+ */
+function HeroStill() {
+  const [missing, setMissing] = useState(false);
+  if (missing) {
+    return (
+      <Placeholder
+        className={styles.media}
+        tone="dark"
+        label="A woman about 60 to 65 rising from a sturdy dining chair by a bright window, mid-movement and at ease. Her own home, natural light."
+      />
+    );
+  }
+  return (
+    <figure className={`${styles.media} ${styles.still}`}>
+      <img
+        src={HERO_STILL}
+        alt="Our Day 1 instructor sitting tall on a sturdy chair against the wall, slowly straightening one knee."
+        onError={() => setMissing(true)}
+      />
+      <figcaption>Still from our Day 1 clip. AI-generated instructor; photo to come.</figcaption>
+    </figure>
   );
 }

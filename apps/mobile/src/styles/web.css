@@ -542,3 +542,60 @@ body:has(.web-root),
     display: none;
   }
 }
+
+/*
+ * Safety screen and check-in: Back and Continue live in a bar that stays on screen.
+ * When the question fits, the bar sits in place; when it doesn't (a long question on a
+ * 1280x720 laptop or a phone), it pins to the bottom of the window so nobody has to scroll
+ * to find the next step. Side by side at every width: Back on the left, Continue on the right.
+ */
+.web-flow .web-actions-bar {
+  position: sticky;
+  bottom: 0;
+  z-index: 5;
+  grid-template-columns: 1fr 1fr;
+  margin: 0.75rem -1rem 0;
+  padding: 0.75rem 1rem calc(0.75rem + env(safe-area-inset-bottom));
+  background: var(--web-cream);
+  border-top: 1px solid var(--web-line);
+  box-shadow: 0 -10px 18px rgba(26, 25, 22, 0.06);
+}
+
+/* Buttons in the bar always sit on solid colour, so nothing scrolling underneath shows through. */
+.web-flow .web-actions-bar .web-btn-secondary,
+.web-flow .web-actions-bar .web-btn:disabled {
+  background: var(--web-cream);
+}
+
+.web-flow .web-actions-bar .web-btn {
+  width: 100%;
+  min-height: 3.5rem;
+  padding-inline: 0.9rem;
+}
+
+.web-flow .web-actions-bar .web-btn-primary {
+  order: 2;
+}
+
+/* Tighter vertical rhythm on the question screens so more of each fits above the bar. */
+.web-flow:has(.web-actions-bar) {
+  padding-top: 1.5rem;
+}
+
+.web-flow:has(.web-actions-bar) h1 {
+  font-size: clamp(2rem, 3.4vw, 2.75rem);
+  line-height: 1.08;
+  margin-bottom: 0.6rem;
+}
+
+.web-flow:has(.web-actions-bar) .web-intro {
+  margin-bottom: 0.9rem;
+}
+
+.web-flow:has(.web-actions-bar) .web-choices {
+  gap: 0.6rem;
+}
+
+.web-flow:has(.web-actions-bar) .web-hint {
+  margin-top: 0.6rem;
+}
