@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState, type RefObject } from "react";
 import { PHASES } from "../copy";
 import { DayTicks, TOTAL_DAYS } from "./DayTicks";
 import { cx, useMediaQuery, useReducedMotion } from "./hooks";
@@ -38,15 +38,51 @@ function phaseIndex(day: number): number {
   return day <= 20 ? 0 : day <= 40 ? 1 : 2;
 }
 
+/** Space between the sticky header and the bottom of the window, in px. */
+function spaceBelowHeader(): number {
+  const header = document.querySelector(".web-header");
+  return window.innerHeight - (header ? header.getBoundingClientRect().height : 0);
+}
+
+const PINNED_PADDING = 32; // .pinned .inner padding-block, per side
+
+/** Whether the panel's content, at its full length, fits on one screen under the header. */
+function useFitsBelowHeader(ref: RefObject<HTMLElement>, enabled: boolean): boolean {
+  const [fits, setFits] = useState(false);
+  useEffect(() => {
+    const node = ref.current;
+    if (!enabled || !node) {
+      setFits(false);
+      return;
+    }
+    const measure = () => {
+      const style = getComputedStyle(node);
+      const content = node.offsetHeight - parseFloat(style.paddingTop) - parseFloat(style.paddingBottom);
+      setFits(content + PINNED_PADDING * 2 <= spaceBelowHeader());
+    };
+    measure();
+    const observer = typeof ResizeObserver !== "undefined" ? new ResizeObserver(measure) : null;
+    observer?.observe(node);
+    window.addEventListener("resize", measure);
+    return () => {
+      observer?.disconnect();
+      window.removeEventListener("resize", measure);
+    };
+  }, [ref, enabled]);
+  return fits;
+}
+
 function stopFor(day: number) {
   return [...STOPS].reverse().find((stop) => stop.day <= day) ?? STOPS[0];
 }
 
 export function SixtyDayLine() {
   const reduced = useReducedMotion();
-  const roomy = useMediaQuery("(min-width: 900px) and (min-height: 740px)");
-  // Pinned and scroll-driven only with motion allowed and room to show the whole panel at once.
-  const pinned = roomy && !reduced;
+  const wide = useMediaQuery("(min-width: 900px)");
+  const innerRef = useRef<HTMLDivElement>(null);
+  const fits = useFitsBelowHeader(innerRef, wide && !reduced);
+  // Pinned and scroll-driven only with motion allowed and room to show the whole panel, full copy and all.
+  const pinned = wide && !reduced && fits;
 
   const outerRef = useRef<HTMLDivElement>(null);
   const [day, setDay] = useState(1);
@@ -98,7 +134,7 @@ export function SixtyDayLine() {
     <section id="days" className={cx(ui.dark, styles.section)} aria-labelledby="days-title">
       <div ref={outerRef} className={cx(styles.track, pinned && styles.pinned)}>
         <div className={styles.stage}>
-          <div className={cx(ui.wrap, styles.inner)}>
+          <div ref={innerRef} className={cx(ui.wrap, styles.inner)}>
             <div className={styles.top}>
               <h2 id="days-title" className={ui.h2}>
                 Sixty days, <span className={ui.soft}>in a careful order.</span>

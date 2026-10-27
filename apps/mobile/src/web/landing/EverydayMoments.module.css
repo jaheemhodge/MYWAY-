@@ -29,44 +29,31 @@
   gap: 2.5rem;
 }
 
-/* Staggered editorial layout, not a row of equal cards. */
+/*
+ * Three equal cards on a three-column grid, each one step lower than the last, like a flight of stairs.
+ * Same size, same caption position on every card; the only variable is the step.
+ */
 @media (min-width: 900px) {
   .moments {
-    grid-template-columns: repeat(12, minmax(0, 1fr));
+    --step: 4rem;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     column-gap: 1.5rem;
     align-items: start;
-  }
-
-  .m0 {
-    grid-column: 1 / 6;
+    padding-bottom: calc(var(--step) * 2);
   }
 
   .m1 {
-    grid-column: 6 / 10;
-    margin-top: 6rem;
+    transform: translateY(var(--step));
   }
 
   .m2 {
-    grid-column: 10 / 13;
-    margin-top: 2.5rem;
-  }
-
-  .m0 .face {
-    height: 32rem;
-  }
-
-  .m1 .face {
-    height: 26rem;
-  }
-
-  .m2 .face {
-    height: 22rem;
+    transform: translateY(calc(var(--step) * 2));
   }
 }
 
 .face {
   position: relative;
-  height: 22rem;
+  aspect-ratio: 4 / 5;
   border-radius: 28px;
   overflow: hidden;
 }

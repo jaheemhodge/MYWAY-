@@ -126,13 +126,12 @@ function MovementCheckInFlow({ occasion }: { occasion: NonNullable<ReturnType<ty
             ))}
             {landing && record.confidence[landing.taskId] ? (
               <p className="web-carried">
-                You already answered one question on the first page.{" "}
-                <strong>
-                  {landingQuestion().summary}: {confidenceLabel(record.confidence[landing.taskId]!)}.
-                </strong>{" "}
-                We won’t ask it again. <Link to={checkInPath(landing.taskId, occasion)}>Change that answer</Link>
+                Already answered: {landingQuestion().summary.toLowerCase()},{" "}
+                <strong>{confidenceLabel(record.confidence[landing.taskId]!).toLowerCase()}</strong>.{" "}
+                <Link to={checkInPath(landing.taskId, occasion)}>Change it</Link>
               </p>
             ) : null}
+            <p className="web-fine">No score, no diagnosis, not medical advice.</p>
           </div>
         ) : (
           <p className="web-intro">{step.help}</p>
@@ -209,9 +208,11 @@ function MovementCheckInFlow({ occasion }: { occasion: NonNullable<ReturnType<ty
             Back
           </button>
         </div>
-        <p className="web-fine">
-          Not a diagnosis. Not medical advice. Your answers are not compared with a normal range.
-        </p>
+        {step.kind !== "intro" ? (
+          <p className="web-fine">
+            Not a diagnosis. Not medical advice. Your answers are not compared with a normal range.
+          </p>
+        ) : null}
       </div>
     </section>
   );

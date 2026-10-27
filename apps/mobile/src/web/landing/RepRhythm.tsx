@@ -81,8 +81,9 @@ export function RepRhythm() {
             Lift for two, hold for one, <span className={ui.soft}>lower for three.</span>
           </h2>
           <p className={ui.lede}>
-            Every movement follows the same unhurried count. In a session the count runs beside the instructor, so
-            you never have to keep it yourself.
+            Every movement follows the same unhurried count. Here it is with the seated knee extension, the first
+            movement of Day 1. In a session the count runs beside the instructor, so you never have to keep it
+            yourself.
           </p>
         </div>
 
@@ -91,7 +92,7 @@ export function RepRhythm() {
             kind="Film"
             tone="dark"
             className={styles.film}
-            label="Day 1, supported sit-to-stand. Our own instructor, a woman about 60 to 65, sturdy chair against a wall, locked-off camera, voice-over. The Day 1 film is still being prepared."
+            label="Day 1, seated knee extension. Our own instructor, a woman about 60 to 65, sits tall on a sturdy chair without wheels, its back against the wall, and slowly straightens one knee: 2 s lift, 1 s hold, 3 s lower, 5 times each side. Locked-off camera, voice-over. The Day 1 film is still being prepared."
           />
 
           <div className={styles.rhythm}>

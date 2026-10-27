@@ -145,11 +145,7 @@ export const CHECKIN_STEPS: readonly CheckInStep[] = [
     id: "intro",
     kind: "intro",
     title: "A few questions, in your own words.",
-    body: [
-      "This check-in asks about everyday tasks, how you feel today, and what you have at home.",
-      "There is no score, no comparison with other people, and no diagnosis. Your answers describe what you want support with. They do not measure you.",
-      "Answers stay on this device for now. The same questions are meant to be asked again around day 30 and day 60.",
-    ],
+    body: ["Short questions about everyday tasks. Your answers stay on this device."],
   },
   ...CONFIDENCE_TASKS.map(
     (task): CheckInStep => ({

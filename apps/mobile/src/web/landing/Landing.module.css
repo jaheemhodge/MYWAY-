@@ -22,8 +22,8 @@
   --sage: #3d5a45;
   --stop: #8a4030;
   --stop-wash: #f8efe8;
-  --serif: "Fraunces", "Times New Roman", serif;
-  --sans: "Source Sans 3", "Helvetica Neue", sans-serif;
+  --serif: var(--font-serif);
+  --sans: var(--font-sans);
   --ease: cubic-bezier(0.16, 1, 0.3, 1);
   --rail: min(1180px, calc(100% - 2.5rem));
 
@@ -38,10 +38,6 @@
 .page ::selection {
   background: var(--brass);
   color: var(--ink);
-}
-
-.page section {
-  scroll-margin-top: 5.25rem;
 }
 
 @media (prefers-reduced-motion: reduce) {

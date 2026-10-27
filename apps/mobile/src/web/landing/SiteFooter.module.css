@@ -32,7 +32,7 @@
 
 .about .tagline {
   margin-bottom: 1rem;
-  font-family: "Fraunces", "Times New Roman", serif;
+  font-family: var(--font-serif);
   font-size: 1.7rem;
   font-weight: 500;
   line-height: 1.1;
@@ -74,7 +74,7 @@
 /* The closing wordmark: decoration only, the brand name is already in the header. */
 .wordmark {
   margin: clamp(2rem, 5vw, 3.5rem) 0 0;
-  font-family: "Fraunces", "Times New Roman", serif;
+  font-family: var(--font-serif);
   font-weight: 500;
   font-size: clamp(5.5rem, 24vw, 22rem);
   line-height: 0.78;

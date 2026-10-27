@@ -8,6 +8,7 @@
   min-height: 100%;
   background: var(--web-cream);
   color: var(--web-ink);
+  font-family: var(--font-sans);
   font-size: 1.25rem;
   line-height: 1.55;
   font-variant-numeric: lining-nums;
@@ -74,11 +75,11 @@ body:has(.web-root),
 
 .web-header-inner {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   align-items: center;
   gap: 0.75rem 1.25rem;
-  min-height: 4.75rem;
-  padding-block: 0.6rem;
+  height: var(--web-header-h);
+  padding-block: 0;
 }
 
 .web-wordmark {
@@ -518,17 +519,16 @@ body:has(.web-root),
   }
 }
 
-.web-flow {
-  scroll-margin-top: 5.5rem;
+/*
+ * One header height for every public page. The window keeps that much (plus breathing room)
+ * clear at the top for anchor jumps, focus scrolling and find-in-page, so no heading lands under the header.
+ */
+:root {
+  --web-header-h: 4.75rem;
 }
 
-#how,
-#days,
-#session,
-#sources,
-#safety-promise,
-#faq {
-  scroll-margin-top: 5.5rem;
+html:has(.web-root) {
+  scroll-padding-top: calc(var(--web-header-h) + 1.25rem);
 }
 
 /* An answer carried over from the landing page. */

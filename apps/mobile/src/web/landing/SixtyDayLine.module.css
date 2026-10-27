@@ -16,8 +16,8 @@
 
 .pinned .stage {
   position: sticky;
-  top: 4.75rem;
-  min-height: calc(100vh - 4.75rem);
+  top: var(--web-header-h);
+  min-height: calc(100vh - var(--web-header-h));
   display: flex;
   align-items: center;
 }
@@ -190,21 +190,4 @@
   margin: 0.5rem 0 0;
   font-size: 1.15rem;
   line-height: 1.5;
-}
-
-/* When pinned, keep the phase bodies short enough to fit one screen. */
-.pinned .phaseBody {
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
-
-.pinned .phaseActive .phaseBody {
-  display: block;
-  overflow: visible;
-}
-
-.pinned .phase:not(.phaseActive) .phaseBody {
-  -webkit-line-clamp: 2;
 }

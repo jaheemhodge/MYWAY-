@@ -3,6 +3,7 @@ import ReactDOM from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
 import { App } from "./App";
 import { AppStateProvider } from "./store/AppState";
+import "./styles/fonts";
 import "./styles/global.css";
 import "./styles/components.css";
 import "./styles/screens.css";
