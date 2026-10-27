@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { routes } from "../routes";
-import { cx } from "./hooks";
+import { cx, useMediaQuery } from "./hooks";
 import styles from "./SlideNav.module.css";
 
 export interface NavItem {
@@ -79,6 +79,27 @@ export function SlideNav({ items }: { items: readonly NavItem[] }) {
     };
   }, [items]);
 
+  // The open menu covers the screen: lock the page behind it, move focus into it,
+  // and close it if the window grows to the desktop layout.
+  const desktop = useMediaQuery("(min-width: 1000px)");
+  const sheetRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    if (!menuOpen) return;
+    if (desktop) {
+      setMenuOpen(false);
+      return;
+    }
+    const html = document.documentElement;
+    const previous = { html: html.style.overflow, body: document.body.style.overflow };
+    html.style.overflow = "hidden";
+    document.body.style.overflow = "hidden";
+    sheetRef.current?.querySelector("a")?.focus();
+    return () => {
+      html.style.overflow = previous.html;
+      document.body.style.overflow = previous.body;
+    };
+  }, [menuOpen, desktop]);
+
   // The menu closes on Escape, returning focus to its button.
   useEffect(() => {
     if (!menuOpen) return;
@@ -135,25 +156,27 @@ export function SlideNav({ items }: { items: readonly NavItem[] }) {
           {menuOpen ? "Close" : "Menu"}
         </button>
         {menuOpen ? (
-          <ul id="section-menu" className={styles.sheet}>
-            {items.map((item, index) => (
-              <li key={item.href}>
-                <a
-                  href={item.href}
-                  className={cx(styles.sheetLink, index === active && styles.sheetActive)}
-                  aria-current={index === active ? "location" : undefined}
-                  onClick={() => setMenuOpen(false)}
-                >
-                  {item.label}
-                </a>
+          <div ref={sheetRef} id="section-menu" className={styles.sheet}>
+            <ul className={styles.sheetList}>
+              {items.map((item, index) => (
+                <li key={item.href}>
+                  <a
+                    href={item.href}
+                    className={cx(styles.sheetLink, index === active && styles.sheetActive)}
+                    aria-current={index === active ? "location" : undefined}
+                    onClick={() => setMenuOpen(false)}
+                  >
+                    {item.label}
+                  </a>
+                </li>
+              ))}
+              <li className={styles.sheetCta}>
+                <Link className="web-btn web-btn-light" to={routes.safety} onClick={() => setMenuOpen(false)}>
+                  Take the free movement check-in
+                </Link>
               </li>
-            ))}
-            <li className={styles.sheetCta}>
-              <Link className="web-btn web-btn-light" to={routes.safety} onClick={() => setMenuOpen(false)}>
-                Take the free movement check-in
-              </Link>
-            </li>
-          </ul>
+            </ul>
+          </div>
         ) : null}
       </div>
     </nav>

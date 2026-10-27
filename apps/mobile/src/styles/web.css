@@ -128,7 +128,9 @@ body:has(.web-root),
   color: #f7f3ec;
 }
 
-/* Hover tint lives in the metal-border rules at the end of this file (--metal-fill). */
+.web-btn-primary:hover:not(:disabled) {
+  background: #243c31;
+}
 
 .web-btn-light {
   background: #f7f3ec;
@@ -509,12 +511,13 @@ html:has(.web-root) {
 }
 
 .web-header.is-forest .web-btn-primary {
-  --metal-fill: #f7f3ec;
+  background: #f7f3ec;
+  border-color: #f7f3ec;
   color: #1a1916;
 }
 
 .web-header.is-forest .web-btn-primary:hover {
-  --metal-fill: #ffffff;
+  background: #fff;
 }
 
 .web-header.is-forest :focus-visible {
@@ -532,92 +535,6 @@ body:has(.web-root),
   overflow: visible;
 }
 
-
-/*
- * Liquid-metal button border, in brass. A metallic ring drawn as a conic gradient on the border box;
- * at rest it is still, on hover or keyboard focus the light runs round it, and a press settles
- * the button by a pixel. Reduced motion keeps it still. Applies to the solid primary buttons only.
- */
-@property --metal-angle {
-  syntax: "<angle>";
-  inherits: false;
-  initial-value: 135deg;
-}
-
-@keyframes web-metal-run {
-  to {
-    --metal-angle: 495deg;
-  }
-}
-
-.web-btn-primary:not(:disabled),
-.web-btn-light:not(:disabled) {
-  --metal-fill: var(--web-forest);
-  --metal-ring: conic-gradient(
-    from var(--metal-angle),
-    #6e5119 0deg,
-    #c9a45c 40deg,
-    #f6e4b0 75deg,
-    #b08a42 110deg,
-    #5f4515 160deg,
-    #c9a45c 215deg,
-    #fbeec6 250deg,
-    #9c7a35 290deg,
-    #6e5119 360deg
-  );
-  border: 2.5px solid transparent;
-  background:
-    linear-gradient(var(--metal-fill), var(--metal-fill)) padding-box,
-    var(--metal-ring) border-box;
-  box-shadow:
-    0 1px 2px rgba(18, 32, 25, 0.22),
-    0 6px 14px rgba(18, 32, 25, 0.14);
-  transition:
-    transform 150ms cubic-bezier(0.16, 1, 0.3, 1),
-    box-shadow 200ms cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.web-btn-light:not(:disabled) {
-  --metal-fill: #f7f3ec;
-}
-
-.web-btn-primary:not(:disabled):hover {
-  --metal-fill: #243c31;
-}
-
-.web-btn-light:not(:disabled):hover {
-  --metal-fill: #ffffff;
-}
-
-.web-btn-primary:not(:disabled):hover,
-.web-btn-light:not(:disabled):hover,
-.web-btn-primary:not(:disabled):focus-visible,
-.web-btn-light:not(:disabled):focus-visible {
-  animation: web-metal-run 2.4s linear infinite;
-  box-shadow:
-    0 1px 2px rgba(18, 32, 25, 0.25),
-    0 10px 22px rgba(18, 32, 25, 0.2);
-}
-
-.web-btn-primary:not(:disabled):active,
-.web-btn-light:not(:disabled):active {
-  transform: translateY(1px) scale(0.985);
-  box-shadow: 0 1px 2px rgba(18, 32, 25, 0.3);
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .web-btn-primary:not(:disabled):hover,
-  .web-btn-light:not(:disabled):hover,
-  .web-btn-primary:not(:disabled):focus-visible,
-  .web-btn-light:not(:disabled):focus-visible {
-    animation: none;
-  }
-
-  .web-btn-primary:not(:disabled):active,
-  .web-btn-light:not(:disabled):active {
-    transform: none;
-  }
-}
 
 /* Phones: the header keeps the logo and the Menu; the check-in button moves into the menu sheet. */
 @media (max-width: 599px) {

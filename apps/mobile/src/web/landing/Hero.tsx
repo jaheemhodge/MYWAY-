@@ -1,6 +1,6 @@
-import { Link } from "react-router-dom";
 import { routes } from "../routes";
 import { DayTicks } from "./DayTicks";
+import { LiquidMetalLink } from "./LiquidMetalLink";
 import { Placeholder } from "./Placeholder";
 import { useReducedMotion } from "./hooks";
 import styles from "./Hero.module.css";
@@ -21,9 +21,9 @@ export function Hero() {
             conservative movements and clear stop rules.
           </p>
           <div className={styles.actions}>
-            <Link className={`web-btn web-btn-light ${styles.cta}`} to={routes.safety}>
+            <LiquidMetalLink to={routes.safety} tone="cream">
               Take the free movement check-in
-            </Link>
+            </LiquidMetalLink>
             <a className={styles.secondary} href="#how">
               See how it works
             </a>

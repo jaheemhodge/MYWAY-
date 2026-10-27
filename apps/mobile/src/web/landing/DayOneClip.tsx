@@ -3,7 +3,8 @@ import { Placeholder } from "./Placeholder";
 import { cx } from "./hooks";
 import styles from "./DayOneClip.module.css";
 
-export const DAY1_POSTER = "/videos/day-01/day01-poster.jpg";
+/** A still from the clip (leg extended). The title card, day01-poster.jpg, carries a DRAFT stamp and stays off public pages. */
+export const DAY1_POSTER = "/videos/day-01/day01-knee-extension-poster.jpg";
 export const DAY1_CLIP = "/videos/day-01/day01-test-knee-extension-left-rep-v2.mp4";
 
 /**
