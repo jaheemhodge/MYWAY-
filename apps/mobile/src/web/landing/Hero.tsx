@@ -24,6 +24,8 @@ const HERO_VIDEO = {
   webm: "/hero/hero-portrait-woman.webm",
   mp4: "/hero/hero-portrait-woman.mp4",
   poster: "/hero/hero-portrait-woman-poster.jpg",
+  width: 834,
+  height: 1112,
 } as const;
 
 const PROOF = [
@@ -124,6 +126,8 @@ function Portrait() {
     media = (
       <img
         src={HERO_VIDEO.poster}
+        width={HERO_VIDEO.width}
+        height={HERO_VIDEO.height}
         alt=""
         aria-hidden="true"
         onError={() => setVideoFailed(true)}
@@ -138,6 +142,8 @@ function Portrait() {
         playsInline
         preload="auto"
         poster={HERO_VIDEO.poster}
+        width={HERO_VIDEO.width}
+        height={HERO_VIDEO.height}
         aria-hidden="true"
         tabIndex={-1}
         onError={() => setVideoFailed(true)}
