@@ -6,20 +6,18 @@ import { useReducedMotion } from "./hooks";
 import styles from "./Hero.module.css";
 
 /**
- * The hero portrait. Set `src` to the chosen Higgsfield portrait (2:3, at least 2000px tall,
- * seamless sage backdrop) and `backdrop` to the colour sampled from that backdrop, so the
- * page gradient and the photo meet without a seam. Until then `src` is null and the hero
- * shows the gradient alone with a labelled empty slot.
+ * The hero portrait (AI-generated, Higgsfield). Files live in public/images/hero/: WebP with a JPEG fallback,
+ * and -768 versions for phones. `backdrop` is the photo's sampled edge colour and `glow` the lighter area
+ * behind her head, so the page gradient continues the backdrop without a seam.
  */
-export const HERO_PORTRAIT: {
-  src: string | null;
-  backdrop: string;
-  alt: string;
-} = {
-  src: null,
-  backdrop: "#6f8579",
-  alt: "",
-};
+const HERO_PORTRAIT = {
+  base: "/images/hero/hero-portrait-woman",
+  width: 1536,
+  height: 2048,
+  backdrop: "#6e765e",
+  glow: "#7a8166",
+  alt: "A smiling woman in her sixties with long grey hair.",
+} as const;
 
 const PROOF = [
   "Clear stop rules in every session",
@@ -33,7 +31,12 @@ export function Hero() {
     <section
       className={styles.hero}
       aria-labelledby="hero-title"
-      style={{ "--portrait-bg": HERO_PORTRAIT.backdrop } as CSSProperties}
+      style={
+        {
+          "--portrait-bg": HERO_PORTRAIT.backdrop,
+          "--portrait-glow": HERO_PORTRAIT.glow,
+        } as CSSProperties
+      }
     >
       <div className={styles.top}>
         <div className={styles.haze} aria-hidden="true" />
@@ -97,30 +100,28 @@ export function Hero() {
   );
 }
 
-/** Full-height, bottom-aligned, edges masked into the gradient. No card, no frame. */
+/** Full-height, bottom-aligned, edges dissolving into the glow. No card, no frame. If the photo fails, the glow stays and nothing else shows. */
 function Portrait() {
   const [failed, setFailed] = useState(false);
-  const src = failed ? null : HERO_PORTRAIT.src;
+  if (failed) return null;
+  const { base, width, height, alt } = HERO_PORTRAIT;
   return (
     <figure className={styles.portrait}>
-      {src ? (
+      <picture>
+        <source media="(max-width: 899px)" type="image/webp" srcSet={`${base}-768.webp`} />
+        <source media="(max-width: 899px)" type="image/jpeg" srcSet={`${base}-768.jpg`} />
+        <source type="image/webp" srcSet={`${base}.webp`} />
         <img
-          src={src}
-          alt={HERO_PORTRAIT.alt}
+          src={`${base}.jpg`}
+          alt={alt}
+          width={width}
+          height={height}
+          decoding="async"
+          fetchPriority="high"
           onError={() => setFailed(true)}
         />
-      ) : (
-        <span
-          className={styles.slot}
-          role="img"
-          aria-label="Photo placeholder: hero portrait to come."
-        >
-          Portrait slot: your chosen Higgsfield portrait goes here
-        </span>
-      )}
-      <figcaption className={styles.caption}>
-        {src ? "AI-generated portrait" : "Photo placeholder"}
-      </figcaption>
+      </picture>
+      <figcaption className={styles.caption}>AI-generated portrait</figcaption>
     </figure>
   );
 }
