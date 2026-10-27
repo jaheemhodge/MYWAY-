@@ -1,38 +1,79 @@
+import { useState, type CSSProperties } from "react";
 import { routes } from "../routes";
 import { DayTicks } from "./DayTicks";
 import { LiquidMetalLink } from "./LiquidMetalLink";
-import { Placeholder } from "./Placeholder";
-import { useState } from "react";
 import { useReducedMotion } from "./hooks";
 import styles from "./Hero.module.css";
+
+/**
+ * The hero portrait. Set `src` to the chosen Higgsfield portrait (2:3, at least 2000px tall,
+ * seamless sage backdrop) and `backdrop` to the colour sampled from that backdrop, so the
+ * page gradient and the photo meet without a seam. Until then `src` is null and the hero
+ * shows the gradient alone with a labelled empty slot.
+ */
+export const HERO_PORTRAIT: {
+  src: string | null;
+  backdrop: string;
+  alt: string;
+} = {
+  src: null,
+  backdrop: "#6f8579",
+  alt: "",
+};
+
+const PROOF = [
+  "Clear stop rules in every session",
+  "Personal to you",
+  "At home, at your pace",
+] as const;
 
 export function Hero() {
   const reduced = useReducedMotion();
   return (
-    <section className={styles.hero} aria-labelledby="hero-title">
-      <div className={styles.grid}>
-        <div className={styles.copy}>
-          <h1 id="hero-title" className={styles.title}>
-            <span className={styles.line}>Feel like</span>
-            <em className={styles.line}>yourself</em>
-            <span className={`${styles.line} ${styles.again}`}>again.</span>
-          </h1>
-          <p className={styles.lede}>
-            Short video sessions for adults about 50 to 70. You practice at home, at your own pace, with
-            conservative movements and clear stop rules.
-          </p>
-          <div className={styles.actions}>
-            <LiquidMetalLink to={routes.safety} tone="cream">
-              Take the free movement check-in
-            </LiquidMetalLink>
-            <a className={styles.secondary} href="#how">
-              See how it works
-            </a>
+    <section
+      className={styles.hero}
+      aria-labelledby="hero-title"
+      style={{ "--portrait-bg": HERO_PORTRAIT.backdrop } as CSSProperties}
+    >
+      <div className={styles.top}>
+        <div className={styles.haze} aria-hidden="true" />
+        <Portrait />
+
+        <div className={styles.grid}>
+          <div className={styles.copy}>
+            <h1 id="hero-title" className={styles.title}>
+              <span className={styles.line}>Feel like</span>
+              <em className={styles.line}>yourself</em>
+              <span className={`${styles.line} ${styles.again}`}>again.</span>
+            </h1>
+            <p className={styles.lede}>
+              Short video sessions for adults about 50 to 70. You practice at
+              home, at your own pace, with conservative movements and clear stop
+              rules.
+            </p>
+            <div className={styles.actions}>
+              <LiquidMetalLink to={routes.safety} tone="cream">
+                Take the free movement check-in
+              </LiquidMetalLink>
+              <a className={styles.secondary} href="#how">
+                See how it works
+              </a>
+            </div>
+            <p className={styles.note}>
+              Free. About a dozen short screens. No account needed.
+            </p>
           </div>
-          <p className={styles.note}>Free. About a dozen short screens. No account needed.</p>
         </div>
-        <HeroStill />
       </div>
+
+      <ul className={styles.proof}>
+        {PROOF.map((item) => (
+          <li key={item}>
+            <span className={styles.proofDot} aria-hidden="true" />
+            {item}
+          </li>
+        ))}
+      </ul>
 
       <div className={styles.fold}>
         <div className={styles.foldLabels} aria-hidden="true">
@@ -48,39 +89,38 @@ export function Hero() {
         </div>
         <DayTicks day={1} size="small" animate={!reduced} />
         <p className={styles.foldText}>
-          Sixty days in three phases, with the same check-in questions coming back on Day 30 and Day 60.{" "}
-          <a href="#days">See the 60 days</a>
+          Sixty days in three phases, with the same check-in questions coming
+          back on Day 30 and Day 60. <a href="#days">See the 60 days</a>
         </p>
       </div>
     </section>
   );
 }
 
-const HERO_STILL = "/videos/day-01/day01-hero-still.jpg";
-
-/**
- * Until the commissioned photo exists, the hero shows a still from our Day 1 test clip, labelled as such.
- * If the still is missing, the labelled photo placeholder takes its place.
- */
-function HeroStill() {
-  const [missing, setMissing] = useState(false);
-  if (missing) {
-    return (
-      <Placeholder
-        className={styles.media}
-        tone="dark"
-        label="A woman about 60 to 65 rising from a sturdy dining chair by a bright window, mid-movement and at ease. Her own home, natural light."
-      />
-    );
-  }
+/** Full-height, bottom-aligned, edges masked into the gradient. No card, no frame. */
+function Portrait() {
+  const [failed, setFailed] = useState(false);
+  const src = failed ? null : HERO_PORTRAIT.src;
   return (
-    <figure className={`${styles.media} ${styles.still}`}>
-      <img
-        src={HERO_STILL}
-        alt="Our Day 1 instructor sitting tall on a sturdy chair against the wall, slowly straightening one knee."
-        onError={() => setMissing(true)}
-      />
-      <figcaption>Still from our Day 1 clip. AI-generated instructor; photo to come.</figcaption>
+    <figure className={styles.portrait}>
+      {src ? (
+        <img
+          src={src}
+          alt={HERO_PORTRAIT.alt}
+          onError={() => setFailed(true)}
+        />
+      ) : (
+        <span
+          className={styles.slot}
+          role="img"
+          aria-label="Photo placeholder: hero portrait to come."
+        >
+          Portrait slot: your chosen Higgsfield portrait goes here
+        </span>
+      )}
+      <figcaption className={styles.caption}>
+        {src ? "AI-generated portrait" : "Photo placeholder"}
+      </figcaption>
     </figure>
   );
 }
