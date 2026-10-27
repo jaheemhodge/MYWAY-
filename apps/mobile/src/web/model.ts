@@ -294,10 +294,14 @@ export function emptySafetyAnswers(): SafetyAnswers {
   };
 }
 
+/**
+ * Yes, or I’m not sure, to any question pauses straight away: the remaining questions are not needed.
+ * Continuing needs every question answered No.
+ */
 export function safetyOutcome(answers: SafetyAnswers): SafetyOutcome {
   const values = SAFETY_QUESTION_IDS.map((id) => answers[id]);
-  if (values.some((value) => value == null)) return "incomplete";
   if (values.some((value) => value === "yes" || value === "not_sure")) return "pause";
+  if (values.some((value) => value == null)) return "incomplete";
   return "continue";
 }
 

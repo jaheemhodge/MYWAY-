@@ -97,7 +97,7 @@
   position: absolute;
   top: 0;
   transform: translateX(-50%);
-  font-size: 1.1rem;
+  font-size: 1.15rem;
   font-weight: 600;
   color: var(--light-ink);
   white-space: nowrap;
@@ -116,7 +116,7 @@
 
 .pill {
   appearance: none;
-  min-height: 3rem;
+  min-height: 3.5rem;
   padding: 0.4rem 1.15rem;
   border-radius: 999px;
   border: 1.5px solid rgba(247, 243, 236, 0.55);
@@ -172,7 +172,7 @@
 
 .range.range {
   margin: 0;
-  font-size: 1.1rem;
+  font-size: 1.15rem;
   font-weight: 600;
   color: var(--light-soft);
 }

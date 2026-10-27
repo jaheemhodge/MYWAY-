@@ -281,26 +281,6 @@ body:has(.web-root),
   margin: 0.35rem 0 0.6rem;
 }
 
-.web-q {
-  border: 1px solid var(--web-line);
-  background: #fff;
-  border-radius: 20px;
-  padding: 1.15rem 1.1rem 1.15rem;
-  margin: 0 0 1rem;
-  min-inline-size: 0;
-}
-
-.web-q legend {
-  font-size: 1.4rem;
-  font-weight: 600;
-  padding: 0 0.15rem;
-  color: var(--web-ink);
-}
-
-.web-q p {
-  margin: 0.45rem 0 0.9rem;
-}
-
 .web-choices {
   display: grid;
   gap: 0.75rem;
@@ -467,9 +447,6 @@ body:has(.web-root),
 }
 
 @media (min-width: 800px) {
-  .web-q .web-choices {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
 
   .web-actions {
     grid-template-columns: 1fr 1fr;

@@ -83,3 +83,13 @@ describe("movement check-in record", () => {
     expect(toggleSelection(["none_yet"], "chair", "none_yet")).toEqual(["chair"]);
   });
 });
+
+describe("safety screen, one question at a time", () => {
+  it("pauses as soon as one answer is yes or not sure, before the rest are answered", () => {
+    const answers = emptySafetyAnswers();
+    answers.recent_surgery = "no";
+    answers.clinician_restriction = "not_sure";
+    expect(safetyOutcome(answers)).toBe("pause");
+    expect(normalizeSafetyScreen({ schemaVersion: 1, answeredAt: "2026-10-27T00:00:00Z", answers, outcome: "continue" })?.outcome).toBe("pause");
+  });
+});

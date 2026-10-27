@@ -47,7 +47,7 @@
 .nav a {
   display: flex;
   align-items: center;
-  min-height: 3rem;
+  min-height: 3.5rem;
   border-bottom: 1px solid #2a4034;
   color: #f7f3ec;
   font-weight: 600;

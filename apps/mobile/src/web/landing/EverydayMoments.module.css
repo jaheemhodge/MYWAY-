@@ -112,7 +112,7 @@
 }
 
 .when {
-  font-size: 1.1rem;
+  font-size: 1.15rem;
   color: var(--light-soft);
 }
 
@@ -137,7 +137,7 @@
 
 .illustrative.illustrative {
   margin: 0;
-  font-size: 1.1rem;
+  font-size: 1.15rem;
   line-height: 1.45;
   color: var(--light-soft);
 }
@@ -157,7 +157,7 @@
   appearance: none;
   display: inline-flex;
   align-items: center;
-  min-height: 3rem;
+  min-height: 3.5rem;
   margin-top: 0.75rem;
   padding: 0.4rem 1.15rem;
   border-radius: 999px;

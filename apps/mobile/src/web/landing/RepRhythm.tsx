@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { Placeholder } from "./Placeholder";
+import { DayOneClip } from "./DayOneClip";
 import { cx, useInView, useReducedMotion } from "./hooks";
 import ui from "./ui.module.css";
 import styles from "./RepRhythm.module.css";
@@ -88,11 +88,9 @@ export function RepRhythm() {
         </div>
 
         <div className={styles.player} ref={viewRef}>
-          <Placeholder
-            kind="Film"
-            tone="dark"
+          <DayOneClip
             className={styles.film}
-            label="Day 1, seated knee extension. Our own instructor, a woman about 60 to 65, sits tall on a sturdy chair without wheels, its back against the wall, and slowly straightens one knee: 2 s lift, 1 s hold, 3 s lower, 5 times each side. Locked-off camera, voice-over. The Day 1 film is still being prepared."
+            fallbackLabel="Day 1, seated knee extension. Our own instructor, a woman about 60 to 65, sits tall on a sturdy chair without wheels, its back against the wall, and slowly straightens one knee: 2 s lift, 1 s hold, 3 s lower, 5 times each side. Locked-off camera, voice-over. The Day 1 film is still being prepared."
           />
 
           <div className={styles.rhythm}>

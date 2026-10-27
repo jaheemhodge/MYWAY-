@@ -27,8 +27,12 @@
 }
 
 .film {
-  aspect-ratio: 16 / 9;
   width: 100%;
+}
+
+/* The fallback placeholder keeps the film's 16:9 frame. */
+.film[role="img"] {
+  aspect-ratio: 16 / 9;
   border: 1px solid var(--line-dark);
 }
 
@@ -83,7 +87,7 @@
 .label {
   padding-top: 0.6rem;
   border-top: 2px solid var(--line-dark);
-  font-size: 1.2rem;
+  font-size: 1.25rem;
   color: var(--light-soft);
   transition:
     color 200ms var(--ease),
@@ -184,6 +188,7 @@
 
 .list {
   margin: 1rem 0 0;
+  font-size: 1.25rem;
   padding-left: 1.25rem;
   display: grid;
   gap: 0.4rem;
@@ -196,7 +201,7 @@
 
 .small.small {
   margin: 0.75rem 0 0;
-  font-size: 1.15rem;
+  font-size: 1.2rem;
 }
 
 .stop {
