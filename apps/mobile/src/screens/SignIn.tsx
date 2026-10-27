@@ -51,7 +51,7 @@ export function SignIn() {
         ))}
       </div>
       <Notice>Demonstration profiles are fictional and clearly labeled. They are not patient records.</Notice>
-      <Button variant="ghost" onClick={() => navigate("/")}>
+      <Button variant="ghost" onClick={() => navigate("/welcome")}>
         Back
       </Button>
     </section>

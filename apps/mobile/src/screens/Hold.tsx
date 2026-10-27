@@ -55,7 +55,7 @@ export function Hold() {
         variant="ghost"
         onClick={async () => {
           await resetApp(dispatch);
-          navigate("/");
+          navigate("/welcome");
         }}
       >
         Back to the start
