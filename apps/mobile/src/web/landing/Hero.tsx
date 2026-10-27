@@ -14,8 +14,8 @@ const HERO_PORTRAIT = {
   base: "/images/hero/hero-portrait-woman",
   width: 1536,
   height: 2048,
-  backdrop: "#6e765e",
-  glow: "#7a8166",
+  backdrop: "#6c765d",
+  glow: "#757f66",
   alt: "A smiling woman in her sixties with long grey hair.",
 } as const;
 
@@ -38,45 +38,46 @@ export function Hero() {
         } as CSSProperties
       }
     >
-      <div className={styles.top}>
+      <div className={styles.stage}>
         <div className={styles.haze} aria-hidden="true" />
         <Portrait />
-
-        <div className={styles.grid}>
-          <div className={styles.copy}>
-            <h1 id="hero-title" className={styles.title}>
-              <span className={styles.line}>Feel like</span>
-              <em className={styles.line}>yourself</em>
-              <span className={`${styles.line} ${styles.again}`}>again.</span>
-            </h1>
-            <p className={styles.lede}>
-              Short video sessions for adults about 50 to 70. You practice at
-              home, at your own pace, with conservative movements and clear stop
-              rules.
-            </p>
-            <div className={styles.actions}>
-              <LiquidMetalLink to={routes.safety} tone="cream">
-                Take the free movement check-in
-              </LiquidMetalLink>
-              <a className={styles.secondary} href="#how">
-                See how it works
-              </a>
+        <div className={styles.top}>
+          <div className={styles.grid}>
+            <div className={styles.copy}>
+              <h1 id="hero-title" className={styles.title}>
+                <span className={styles.line}>Feel like</span>
+                <em className={styles.line}>yourself</em>
+                <span className={`${styles.line} ${styles.again}`}>again.</span>
+              </h1>
+              <p className={styles.lede}>
+                Short video sessions for adults about 50 to 70. You practice at
+                home, at your own pace, with conservative movements and clear
+                stop rules.
+              </p>
+              <div className={styles.actions}>
+                <LiquidMetalLink to={routes.safety} tone="cream">
+                  Take the free movement check-in
+                </LiquidMetalLink>
+                <a className={styles.secondary} href="#how">
+                  See how it works
+                </a>
+              </div>
+              <p className={styles.note}>
+                Free. About a dozen short screens. No account needed.
+              </p>
             </div>
-            <p className={styles.note}>
-              Free. About a dozen short screens. No account needed.
-            </p>
           </div>
         </div>
-      </div>
 
-      <ul className={styles.proof}>
-        {PROOF.map((item) => (
-          <li key={item}>
-            <span className={styles.proofDot} aria-hidden="true" />
-            {item}
-          </li>
-        ))}
-      </ul>
+        <ul className={styles.proof}>
+          {PROOF.map((item) => (
+            <li key={item}>
+              <span className={styles.proofDot} aria-hidden="true" />
+              {item}
+            </li>
+          ))}
+        </ul>
+      </div>
 
       <div className={styles.fold}>
         <div className={styles.foldLabels} aria-hidden="true">
@@ -100,7 +101,7 @@ export function Hero() {
   );
 }
 
-/** Full-height, bottom-aligned, edges dissolving into the glow. No card, no frame. If the photo fails, the glow stays and nothing else shows. */
+/** Anchored to the bottom of the hero like a studio portrait: shoulders run off the bottom edge, only the left and top-right edges fade. No card, no frame. If the photo fails, the glow stays and nothing else shows. */
 function Portrait() {
   const [failed, setFailed] = useState(false);
   if (failed) return null;
@@ -108,8 +109,16 @@ function Portrait() {
   return (
     <figure className={styles.portrait}>
       <picture>
-        <source media="(max-width: 899px)" type="image/webp" srcSet={`${base}-768.webp`} />
-        <source media="(max-width: 899px)" type="image/jpeg" srcSet={`${base}-768.jpg`} />
+        <source
+          media="(max-width: 899px)"
+          type="image/webp"
+          srcSet={`${base}-768.webp`}
+        />
+        <source
+          media="(max-width: 899px)"
+          type="image/jpeg"
+          srcSet={`${base}-768.jpg`}
+        />
         <source type="image/webp" srcSet={`${base}.webp`} />
         <img
           src={`${base}.jpg`}
