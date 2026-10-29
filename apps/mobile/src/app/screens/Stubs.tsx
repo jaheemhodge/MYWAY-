@@ -5,9 +5,9 @@ function Stub({ title, children }: { title: string; children: React.ReactNode })
   usePageTitle(title);
   return (
     <div className="mob-wrap mob-page mob-stub">
-      <h1 className="mob-display">{title}</h1>
+      <h1 className="mob-title">{title}</h1>
       <div className="mob-stub__body">{children}</div>
-      <Link to="/app/today" className="mob-btn mob-btn--secondary">
+      <Link to="/app/today" className="mob-pill">
         Go to Today
       </Link>
     </div>

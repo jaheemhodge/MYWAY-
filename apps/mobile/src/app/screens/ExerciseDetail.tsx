@@ -5,6 +5,7 @@ import { SessionPlayer } from "../components/SessionPlayer";
 import { StopNotice } from "../components/StopNotice";
 import { ExerciseTags } from "../components/Tags";
 import { VideoSlot } from "../components/VideoSlot";
+import { imageFor } from "../data/images";
 import { AREA_LABEL, getExercise } from "../data/library";
 import { PHASE_INFO, opensOnDay } from "../data/plan";
 import { useDay } from "../DayState";
@@ -24,7 +25,7 @@ export function ExerciseDetail() {
   if (!exercise) {
     return (
       <div className="mob-wrap mob-page">
-        <h1 className="mob-display">We couldn't find that exercise</h1>
+        <h1 className="mob-title">We couldn't find that exercise</h1>
         <p className="mob-lede">It may have been renamed. The Library has all of them.</p>
         <Link to="/app/library" className="mob-btn mob-btn--primary">
           Go to the Library
@@ -53,13 +54,13 @@ export function ExerciseDetail() {
 
       <div className="mob-detail__grid">
         <div className="mob-detail__media">
-          <VideoSlot label={exercise.name} />
+          <VideoSlot poster={imageFor(exercise)} ratio="portrait" />
           <StopNotice />
         </div>
 
         <div className="mob-detail__text">
           <ExerciseTags exercise={exercise} currentDay={currentDay} />
-          <h1 id="detail-title" className="mob-display">
+          <h1 id="detail-title" className="mob-title">
             {exercise.name}
           </h1>
           {exercise.subtitle ? <p className="mob-lede">{exercise.subtitle}</p> : null}

@@ -4,6 +4,7 @@ import { Icon } from "./Icon";
 import { StopNotice } from "./StopNotice";
 import { Tag } from "./Tags";
 import { VideoSlot } from "./VideoSlot";
+import { imageFor } from "../data/images";
 
 /**
  * Simple local step-through: one exercise per screen, its clip, setup and cues,
@@ -35,7 +36,7 @@ export function SessionPlayer({
         <div className="mob-player__done-mark" aria-hidden="true">
           <Icon name="check" size={40} />
         </div>
-        <h1 id="player-done" ref={headingRef} tabIndex={-1} className="mob-h1">
+        <h1 id="player-done" ref={headingRef} tabIndex={-1} className="mob-title">
           That's {title.toLowerCase()} done
         </h1>
         <p className="mob-lede">
@@ -83,11 +84,11 @@ export function SessionPlayer({
 
       <div className="mob-player__grid">
         <div className="mob-player__media">
-          <VideoSlot label={exercise.name} />
+          <VideoSlot poster={imageFor(exercise)} ratio="hero" />
           <StopNotice />
         </div>
         <div className="mob-player__text">
-          <h1 id="player-title" ref={headingRef} tabIndex={-1} className="mob-h1">
+          <h1 id="player-title" ref={headingRef} tabIndex={-1} className="mob-title">
             {exercise.name}
           </h1>
           {exercise.subtitle ? <p className="mob-lede">{exercise.subtitle}</p> : null}

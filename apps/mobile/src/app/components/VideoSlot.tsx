@@ -1,35 +1,41 @@
 import { Icon } from "./Icon";
 
+export type MediaRatio = "hero" | "portrait" | "wide";
+
 /**
- * Where each exercise's AI clip will play. Until a clip exists (no src), it renders a
- * Forest placeholder with a play mark and a visible "Video clip goes here" label.
+ * Where each exercise's AI clip will play. Until clips exist it shows the exercise still
+ * (or the forest placeholder when there is no image) with one round Play mark.
+ * Nothing is ever written on top of the image.
  * TODO(video): pass src per exercise once clips are generated.
  */
 export function VideoSlot({
   src,
-  label,
-  size = "large",
+  poster,
+  alt = "",
+  ratio = "wide",
+  showPlay = true,
 }: {
   src?: string;
-  /** Accessible name of the clip, usually the exercise name. */
-  label: string;
-  size?: "large" | "hero" | "thumb";
+  /** Still image shown until a clip exists. */
+  poster?: string;
+  /** Alt text for the still. Empty when nearby text already names the exercise. */
+  alt?: string;
+  ratio?: MediaRatio;
+  showPlay?: boolean;
 }) {
   if (src) {
     return (
-      <div className={`mob-video mob-video--${size}`}>
-        <video src={src} controls={size !== "thumb"} playsInline preload="metadata" aria-label={label} />
+      <div className={`mob-media mob-media--${ratio}`}>
+        <video src={src} poster={poster} controls playsInline preload="metadata" aria-label={alt || undefined} />
       </div>
     );
   }
   return (
-    <div className={`mob-video mob-video--${size} is-placeholder`} role="img" aria-label={`${label}: video clip goes here`}>
-      <span className="mob-video__play" aria-hidden="true">
-        <Icon name="play" size={size === "thumb" ? 24 : 32} />
-      </span>
-      {size !== "thumb" ? (
-        <span className="mob-video__note" aria-hidden="true">
-          Video clip goes here
+    <div className={`mob-media mob-media--${ratio}${poster ? "" : " is-empty"}`}>
+      {poster ? <img src={poster} alt={alt} loading="lazy" decoding="async" /> : null}
+      {showPlay ? (
+        <span className="mob-media__play" aria-hidden="true">
+          <Icon name="play" size={30} />
         </span>
       ) : null}
     </div>

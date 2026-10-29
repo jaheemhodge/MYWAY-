@@ -56,7 +56,7 @@ Lives in `apps/mobile/src/app`. Local state only: no backend, auth or analytics.
 
 | Route | What it is |
 |---|---|
-| `/app/today` | Today: day strip (stepper on phones), today's session, Up next, prototype day control |
+| `/app/today` | Today: hero, day strip (stepper on phones), session picture row, Up next. Add `?dev=1` for the prototype day control |
 | `/app/library` | Library rows; `?area=&position=&phase=&q=` shows the filtered grid |
 | `/app/library/:id` | Exercise detail (preview only for later phases) |
 | `/app/plan`, `/app/progress`, `/app/account` | Stubs |

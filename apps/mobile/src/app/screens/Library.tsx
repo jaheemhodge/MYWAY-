@@ -33,6 +33,27 @@ const ROWS = {
   balance: () => BALANCE_IDS.map(requireExercise),
 };
 
+const ROW_DEFS = [
+  {
+    title: `For your ${AREA_LABEL[FOCUS_AREA].toLowerCase()}`,
+    description: "Your focus area, in phase order.",
+    items: ROWS.focus,
+    to: `/app/library?area=${FOCUS_AREA}`,
+  },
+  {
+    title: "Sit down and do these",
+    description: "Everything you can do from a sturdy chair.",
+    items: ROWS.chair,
+    to: "/app/library?position=chair",
+  },
+  {
+    title: "Balance practice",
+    description: "Standing drills. Keep a counter or chair within reach.",
+    items: ROWS.balance,
+    to: "/app/library?collection=balance",
+  },
+];
+
 export function Library() {
   const [params, setParams] = useSearchParams();
   const navigate = useNavigate();
@@ -70,7 +91,7 @@ export function Library() {
   return (
     <div className="mob-wrap mob-page mob-library">
       <header className="mob-pagehead">
-        <h1 className="mob-display">Library</h1>
+        <h1 className="mob-title">Library</h1>
         <p className="mob-lede">
           All {EXERCISES.length} exercises. Your plan picks from these each day; here you can look at any of them.
         </p>
@@ -106,7 +127,7 @@ export function Library() {
             <button
               key={position}
               type="button"
-              className="mob-chip"
+              className="mob-chip mob-chip--quick"
               aria-pressed={filters.position.includes(position)}
               onClick={() => setFilters(toggleValue(filters, "position", position))}
             >
@@ -119,7 +140,7 @@ export function Library() {
           <button
             ref={filtersButton}
             type="button"
-            className="mob-btn mob-btn--secondary mob-filters-btn"
+            className="mob-pill mob-filters-btn"
             aria-haspopup="dialog"
             onClick={() => setDialogOpen(true)}
           >
@@ -137,27 +158,17 @@ export function Library() {
 
       {browsing ? (
         <div className="mob-rows">
-          <CarouselRow
-            title={`For your ${AREA_LABEL[FOCUS_AREA].toLowerCase()}`}
-            description="Your focus area, in phase order."
-            exercises={ROWS.focus()}
-            seeAllTo={`/app/library?area=${FOCUS_AREA}`}
-            currentDay={currentDay}
-          />
-          <CarouselRow
-            title="Sit down and do these"
-            description="Everything you can do from a sturdy chair."
-            exercises={ROWS.chair()}
-            seeAllTo="/app/library?position=chair"
-            currentDay={currentDay}
-          />
-          <CarouselRow
-            title="Balance practice"
-            description="Standing drills. Keep a counter or chair within reach."
-            exercises={ROWS.balance()}
-            seeAllTo="/app/library?collection=balance"
-            currentDay={currentDay}
-          />
+          {ROW_DEFS.map((row) => (
+            <CarouselRow
+              key={row.title}
+              title={row.title}
+              description={row.description}
+              items={row.items()}
+              getKey={(exercise) => exercise.id}
+              seeAll={{ to: row.to, label: `See all ${row.items().length}` }}
+              renderItem={(exercise) => <ExerciseCard exercise={exercise} currentDay={currentDay} />}
+            />
+          ))}
         </div>
       ) : (
         <Results
@@ -223,7 +234,7 @@ function Results({
   return (
     <section className="mob-results" aria-labelledby="results-title">
       <div className="mob-results__head">
-        <h2 id="results-title" className="mob-h2">
+        <h2 id="results-title" className="mob-section-title">
           {collection === "balance" ? `Balance practice: ${results.length} ${noun}` : `${results.length} ${noun}`}
           {query.trim() ? ` for “${query.trim()}”` : ""}
         </h2>
@@ -271,7 +282,7 @@ function Results({
           <h3 className="mob-h3">No exercises match</h3>
           <p>Try removing a filter or searching for a simpler word, like “knee” or “chair”.</p>
           <div className="mob-empty__actions">
-            <button type="button" className="mob-btn mob-btn--secondary" onClick={onEdit}>
+            <button type="button" className="mob-pill" onClick={onEdit}>
               Change filters
             </button>
             <button type="button" className="mob-btn mob-btn--text" onClick={onClearAll}>
