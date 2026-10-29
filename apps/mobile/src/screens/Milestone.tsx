@@ -34,10 +34,10 @@ export function Milestone() {
           <strong>Build Strength, Days 15 to 30</strong>
         </div>
       </div>
-      <Button variant="light" onClick={() => navigate("/app/home")}>
+      <Button variant="light" onClick={() => navigate("/preview/home")}>
         Continue my journey
       </Button>
-      <Button variant="ghost" onClick={() => navigate("/app/progress")}>
+      <Button variant="ghost" onClick={() => navigate("/preview/progress")}>
         See my progress
       </Button>
       <p className="muted">{phase === "foundation" ? "Milestone recorded from your completed days — not a promised result." : ""}</p>

@@ -18,8 +18,8 @@ describe("route split", () => {
     expect(isPrototypePath("/session/1")).toBe(true);
     expect(isPrototypePath("/player/1")).toBe(true);
     expect(isPrototypePath("/checkin/1")).toBe(true);
-    expect(isPrototypePath("/app/home")).toBe(true);
-    expect(isPrototypePath("/app/plan")).toBe(true);
+    expect(isPrototypePath("/preview/home")).toBe(true);
+    expect(isPrototypePath("/preview/plan")).toBe(true);
     expect(isPrototypePath("/legal")).toBe(true);
   });
 });

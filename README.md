@@ -50,6 +50,19 @@ Open http://localhost:5173. The public front door is the landing page. The free 
 | `/session/1` | Existing Day 1 session screen |
 | `/welcome` | Existing in-app welcome |
 
+### Logged-in app shell (prototype)
+
+Lives in `apps/mobile/src/app`. Local state only: no backend, auth or analytics. Uses a hardcoded sample Knees plan and the draft exercise data in `apps/mobile/src/data/library-slim.json` (not clinically reviewed).
+
+| Route | What it is |
+|---|---|
+| `/app/today` | Today: day strip (stepper on phones), today's session, Up next, prototype day control |
+| `/app/library` | Library rows; `?area=&position=&phase=&q=` shows the filtered grid |
+| `/app/library/:id` | Exercise detail (preview only for later phases) |
+| `/app/plan`, `/app/progress`, `/app/account` | Stubs |
+
+The older phone-framed tab screens moved from `/app/*` to `/preview/home`, `/preview/progress`, `/preview/plan` and `/preview/profile`.
+
 Answers stay in this browser under `mobility.movement-checkin.v1` and `mobility.safety-screen.v1`. To POST the same check-in JSON later, set `VITE_CHECKIN_API` to the endpoint URL and rebuild. A missing or failed endpoint does not erase the local copy.
 
 `npm run build` writes a static Vite bundle. The repo `vercel.json` builds `apps/mobile` and rewrites client-side routes to `index.html`. If the Vercel project root is `apps/mobile`, that folder’s `vercel.json` does the rewrite.

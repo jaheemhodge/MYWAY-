@@ -43,7 +43,7 @@ export function Reveal() {
           </div>
         ))}
       </div>
-      <Button onClick={() => navigate("/app/home")}>
+      <Button onClick={() => navigate("/preview/home")}>
         View my plan →
       </Button>
     </section>

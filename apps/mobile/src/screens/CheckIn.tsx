@@ -93,7 +93,7 @@ export function CheckIn() {
             return;
           }
           if (dayNum === 1) {
-            navigate("/app/progress");
+            navigate("/preview/progress");
             return;
           }
           if (dayNum === 14 && !state.seenMilestones.includes("foundation")) {
@@ -101,7 +101,7 @@ export function CheckIn() {
             navigate("/milestone/foundation");
             return;
           }
-          navigate("/app/home");
+          navigate("/preview/home");
         }}
       >
         Save and continue

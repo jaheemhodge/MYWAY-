@@ -20,10 +20,12 @@ import { SignIn } from "./screens/SignIn";
 import { Welcome } from "./screens/Welcome";
 import { useApp } from "./store/AppState";
 import { MarketingApp } from "./web/MarketingApp";
-import { isPrototypePath, routes } from "./web/routes";
+import { isAppPath, isPrototypePath, routes } from "./web/routes";
+import { MobilityApp } from "./app/MobilityApp";
 
 export function App() {
   const { pathname } = useLocation();
+  if (isAppPath(pathname)) return <MobilityApp />;
   if (!isPrototypePath(pathname)) return <MarketingApp />;
   return <PrototypeApp />;
 }
@@ -56,7 +58,7 @@ function PrototypeApp() {
         <Route path="/milestone/:phase" element={<Milestone />} />
         <Route path={routes.legal} element={<Legal />} />
         <Route path="/profile/details" element={<Details />} />
-        <Route path="/app" element={<AppShell />}>
+        <Route path="/preview" element={<AppShell />}>
           <Route path="home" element={<Home />} />
           <Route path="progress" element={<Progress />} />
           <Route path="plan" element={<Plan />} />

@@ -1,4 +1,5 @@
-/** Public web funnel and the existing in-app routes that must stay phone-framed. */
+/** Public web funnel and the existing in-app routes that must stay phone-framed.
+ * The logged-in web app lives under /app (see src/app); the old phone-framed tab screens moved to /preview. */
 
 export const routes = {
   landing: "/",
@@ -22,7 +23,7 @@ const PROTOTYPE_EXACT = new Set<string>([
   routes.legal,
 ]);
 
-const PROTOTYPE_PREFIXES = ["/onboarding", "/session", "/player", "/guide", "/checkin", "/milestone", "/profile", "/app"];
+const PROTOTYPE_PREFIXES = ["/onboarding", "/session", "/player", "/guide", "/checkin", "/milestone", "/profile", "/preview"];
 
 export function isPrototypePath(pathname: string): boolean {
   if (PROTOTYPE_EXACT.has(pathname)) return true;
@@ -33,4 +34,9 @@ export function checkInPath(stepId: string, occasion: string = "baseline"): stri
   const path = `${routes.checkIn}/${stepId}`;
   if (occasion === "baseline") return path;
   return `${path}?occasion=${encodeURIComponent(occasion)}`;
+}
+
+/** Logged-in web app shell (src/app/MobilityApp.tsx). */
+export function isAppPath(pathname: string): boolean {
+  return pathname === "/app" || pathname.startsWith("/app/");
 }

@@ -21,7 +21,7 @@ export function SignIn() {
       {state.profile && state.onboarded ? (
         <Button
           onClick={() =>
-            navigate(state.outcome === "provisionally_eligible" ? "/app/home" : "/hold")
+            navigate(state.outcome === "provisionally_eligible" ? "/preview/home" : "/hold")
           }
         >
           Continue as {state.profile.firstName}
@@ -38,7 +38,7 @@ export function SignIn() {
             style={{ textAlign: "left", border: 0, width: "100%" }}
             onClick={() => {
               dispatch({ type: "LOAD_PERSONA", persona });
-              navigate("/app/home");
+              navigate("/preview/home");
             }}
           >
             <strong>

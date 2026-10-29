@@ -129,7 +129,7 @@ export function Day1Player({ locked }: { locked: boolean }) {
       <section className="screen">
         <h1 className="display">Preview closed</h1>
         <p className="lede">Day 1 stays in internal preview and is not delivered until safety review allows it.</p>
-        <Button onClick={() => navigate("/app/home")}>Back home</Button>
+        <Button onClick={() => navigate("/preview/home")}>Back home</Button>
       </section>
     );
   }

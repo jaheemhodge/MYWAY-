@@ -1,0 +1,1353 @@
+{
+ "note": "Slim derived copy of library.json for UI prototyping. DRAFT, not clinically reviewed. Display name = text before the parenthesis; subtitle = text inside it.",
+ "exercises": [
+  {
+   "id": "K01",
+   "name": "Seated knee extension",
+   "subtitle": "quad squeeze in a chair",
+   "areas": [
+    "knees"
+   ],
+   "primaryArea": "knees",
+   "position": "chair",
+   "positionDetail": "Seated",
+   "phase": 1,
+   "equipment": "Sturdy dining chair",
+   "setup": "Sit in a comfortable dining chair and lean back against the chair back. Free one foot off the floor.",
+   "cues": [
+    "Straighten that leg as far as you can.",
+    "Pull your toes up toward you.",
+    "Tighten the thigh muscle as hard as you can and picture pushing the back of the knee down into the chair.",
+    "Hold, then bend the knee and straighten again."
+   ],
+   "safetyNotes": [
+    "Source says these exercises are not suitable for everyone; avoid them if they cause pain (00:51).",
+    "TT _YO4VV6Jl6g: the long arc quad puts a little more compressive force on the knee joint and could aggravate it; if so, go back to the short arc quad (K12)."
+   ],
+   "difficulty": 1
+  },
+  {
+   "id": "K02",
+   "name": "Straight leg raise",
+   "subtitle": "lying on back",
+   "areas": [
+    "knees",
+    "hips-balance"
+   ],
+   "primaryArea": "knees",
+   "position": "floor",
+   "positionDetail": "Lying on back (bed OK)",
+   "phase": 1,
+   "equipment": "Bed or mat; resistance-band loop optional (HT progression)",
+   "setup": "Lie on your back on a bed or mat. Bend one knee for support and keep the working leg straight out in front.",
+   "cues": [
+    "Pull the toes toward you and tighten the thigh so the leg is flat and straight.",
+    "Draw the belly button toward the spine / press the lower back down so the back stays steady.",
+    "Lift the straight leg until it is level with the other thigh, then lower slowly.",
+    "Keep the leg straight the whole time; if it starts to bend, the quad needs more work."
+   ],
+   "safetyNotes": [
+    "HT: not suitable for everyone; get checked out first and avoid any exercise that causes pain (00:44).",
+    "HT (context, not a warning): chosen for people whose knees hurt when squatting, because it works the quads without bending the knee (02:55).",
+    "FR: ease up on the foot pull if you feel a pull in the calf (01:43)."
+   ],
+   "difficulty": 1
+  },
+  {
+   "id": "K03",
+   "name": "Quad set",
+   "subtitle": "push the knee down",
+   "areas": [
+    "knees"
+   ],
+   "primaryArea": "knees",
+   "position": "floor",
+   "positionDetail": "Long sitting / lying",
+   "phase": 1,
+   "equipment": "Floor or bed",
+   "setup": "Sit with the legs stretched out in front of you (or lie back).",
+   "cues": [
+    "Tighten the thigh muscle on top of the leg.",
+    "Hold, then relax.",
+    "Picture pushing your knee straight down into the floor to connect the mind to the muscle."
+   ],
+   "safetyNotes": [
+    "No safety note stated for this exercise."
+   ],
+   "difficulty": 1
+  },
+  {
+   "id": "K04",
+   "name": "Sit to stand from a chair",
+   "subtitle": "",
+   "areas": [
+    "knees",
+    "hips-balance"
+   ],
+   "primaryArea": "knees",
+   "position": "chair",
+   "positionDetail": "Seated to standing",
+   "phase": 1,
+   "equipment": "Sturdy dining chair (cushions/towels to raise the seat if needed)",
+   "setup": "Sit near the front edge of a stable chair on your sitting bones. Feet flat, under your knees. Arms across your chest (or hands on your thighs to start).",
+   "cues": [
+    "Lean forward 'nose over toes', then stand up.",
+    "Reverse it: push your bottom back, bend the knees and lower slowly until you touch the seat.",
+    "Keep your head up and your weight over your legs.",
+    "Keep the knees from drifting inward.",
+    "Don't wedge the back of your legs against the chair to push off.",
+    "HT S9t3: lean from the hips, not the back, until your nose is over your toes, then push the floor away. If that is hard, rock forward and make a small bump off the seat first."
+   ],
+   "safetyNotes": [
+    "HT: not suitable for everyone; avoid if it gives you pain (rQgM 00:20).",
+    "FR wQvX: keep head up the whole way; don't wedge knees against the chair back.",
+    "FR IrXi: keep the back neutral, no rounding of the lower back."
+   ],
+   "difficulty": 1
+  },
+  {
+   "id": "K05",
+   "name": "Staggered sit to stand",
+   "subtitle": "",
+   "areas": [
+    "knees",
+    "hips-balance"
+   ],
+   "primaryArea": "knees",
+   "position": "chair",
+   "positionDetail": "Seated to standing",
+   "phase": 2,
+   "equipment": "Sturdy dining chair",
+   "setup": "As for sit to stand, but slide the foot of the leg you want to focus on back about 2 inches and the other foot forward, so your feet are staggered.",
+   "cues": [
+    "Keep your back tall, nose over toes, stand up.",
+    "Lower very slowly.",
+    "The back foot does about 70% of the work, so you can train one leg at a time without equipment.",
+    "Swap feet and repeat."
+   ],
+   "safetyNotes": [
+    "HT: not suitable for everyone; avoid if it gives you pain."
+   ],
+   "difficulty": 2
+  },
+  {
+   "id": "K06",
+   "name": "Mini squat holding a support",
+   "subtitle": "",
+   "areas": [
+    "knees",
+    "hips-balance"
+   ],
+   "primaryArea": "knees",
+   "position": "standing",
+   "positionDetail": "Standing",
+   "phase": 1,
+   "equipment": "Counter or chair back",
+   "setup": "Hold the back of a chair or the kitchen counter.",
+   "cues": [
+    "Keep the thigh muscles tight and squeeze the glutes.",
+    "Don't go straight down - sit back a little, then stand up.",
+    "Go only a little way down; go lower as you get stronger."
+   ],
+   "safetyNotes": [
+    "FR: choose a pain-free depth."
+   ],
+   "difficulty": 1
+  },
+  {
+   "id": "K07",
+   "name": "Heel raises",
+   "subtitle": "wall / counter / forward-lean calf raise",
+   "areas": [
+    "knees",
+    "hips-balance"
+   ],
+   "primaryArea": "knees",
+   "position": "standing",
+   "positionDetail": "Standing",
+   "phase": 1,
+   "equipment": "Wall, counter or chair",
+   "setup": "Stand facing a wall or counter. HT's version: stand about a metre from the wall with hands on it and lean forward with feet flat. FR: fingertip balance only; don't lean on the counter.",
+   "cues": [
+    "Rise up onto your toes as high as you can, slowly come down.",
+    "HT: lean in so the shoulders move toward the wall - this stretches the calf first and gives a fuller range.",
+    "Keep the glute tight and don't let the hip sneak out (single-leg)."
+   ],
+   "safetyNotes": [
+    "HT: not suitable for everyone; avoid if painful.",
+    "FR wQvX: use counter for balance but don't lean on it."
+   ],
+   "difficulty": 1
+  },
+  {
+   "id": "K08",
+   "name": "Wall calf stretch",
+   "subtitle": "",
+   "areas": [
+    "knees"
+   ],
+   "primaryArea": "knees",
+   "position": "standing",
+   "positionDetail": "Standing",
+   "phase": 1,
+   "equipment": "Wall or door frame",
+   "setup": "Face a wall (or door), hands on it. Step one foot back with the heel flat and that leg straight; bend the front knee.",
+   "cues": [
+    "Keep the back heel down and the foot pointing straight at the wall.",
+    "Lean in until you feel a stretch in the calf.",
+    "HT: improves how straight the knee can get, which takes pressure off the joint."
+   ],
+   "safetyNotes": [
+    "HT: not suitable for everyone; get checked out first and avoid anything that causes pain (00:44)."
+   ],
+   "difficulty": 1
+  },
+  {
+   "id": "K09",
+   "name": "Hamstring bridge",
+   "subtitle": "heels on a chair or long-lever bridge",
+   "areas": [
+    "knees"
+   ],
+   "primaryArea": "knees",
+   "position": "floor",
+   "positionDetail": "Lying on back",
+   "phase": 2,
+   "equipment": "Mat or bed; dining chair for the heels version",
+   "setup": "Version A (HT qiWP): lie on a mat with the backs of your lower legs resting on a dining-chair seat, about a 45-degree angle between body and thigh. Version B (HT rQgM): on a bed, walk the feet out further than a normal bridge, toes up, heels dug in.",
+   "cues": [
+    "Press the lower back flat into the floor/bed.",
+    "Push through the heels and lift the hips, feeling the back of the thigh work.",
+    "Hold about 1 s, then lower slowly."
+   ],
+   "safetyNotes": [
+    "HT rQgM: stop before hamstring cramp, rest, then repeat (04:14).",
+    "HT: not suitable for everyone; avoid if painful."
+   ],
+   "difficulty": 2
+  },
+  {
+   "id": "K10",
+   "name": "Standing terminal knee extension",
+   "subtitle": "",
+   "areas": [
+    "knees"
+   ],
+   "primaryArea": "knees",
+   "position": "standing",
+   "positionDetail": "Standing",
+   "phase": 2,
+   "equipment": "None (support nearby advisable)",
+   "setup": "Shift your weight onto the painful (or working) leg with the knee slightly bent.",
+   "cues": [
+    "Tighten the quad to straighten the knee - don't snap it straight.",
+    "Control the muscle on the way back to the bend.",
+    "Keep the knee in line with the toe."
+   ],
+   "safetyNotes": [
+    "TT: don't snap the knee straight - it can cause pain and stress in the knee (02:45)."
+   ],
+   "difficulty": 2
+  },
+  {
+   "id": "K11",
+   "name": "Standing quad stretch",
+   "subtitle": "with support",
+   "areas": [
+    "knees"
+   ],
+   "primaryArea": "knees",
+   "position": "standing",
+   "positionDetail": "Standing",
+   "phase": 2,
+   "equipment": "Counter/chair; second firm chair or bed (non-rolling) if you can't reach your foot",
+   "setup": "Hold something for balance and stand tall. Pull one foot up behind you, or rest the foot on a chair/bed behind you.",
+   "cues": [
+    "Keep the knee behind the hip - that is critical for the stretch.",
+    "Squeeze the buttocks and bring the hips forward.",
+    "Don't use a rolling chair.",
+    "FR H-txHpHcOKk: if you can't reach your foot, rest it on a chair or your bed behind you, then stand tall; a slight bend of the support leg or a higher prop deepens it. Breathe out slowly."
+   ],
+   "safetyNotes": [
+    "FR: use something firm - not a rolling chair.",
+    "FR H-txHpHcOKk: the stretch should be solid but not face-cringing; hold something firm; do not use a rolling chair.",
+    "FR H-txHpHcOKk: with a very painful knee, strengthening can irritate the joint; this physio starts with stretching first."
+   ],
+   "difficulty": 2
+  },
+  {
+   "id": "G01",
+   "name": "Clamshell",
+   "subtitle": "side-lying",
+   "areas": [
+    "knees",
+    "lower-back",
+    "hips-balance"
+   ],
+   "primaryArea": "hips-balance",
+   "position": "floor",
+   "positionDetail": "Side-lying (bed OK)",
+   "phase": 1,
+   "equipment": "Bed or mat; band around knees optional",
+   "setup": "Lie on your side with the leg you want to work on top. Hips and knees bent about 90 degrees, feet together. Head on your hand or a pillow. Put the top hand on the bed and roll your body slightly forward.",
+   "cues": [
+    "Keep everything still except the top knee.",
+    "Lift the top knee like opening a clam, as far as you can without rolling backward, then lower slowly.",
+    "Small movement is fine - rolling back to make it bigger takes the work off the target muscle.",
+    "You should feel a working ache at the side/back of the hip, below the belt line - not in the lower back."
+   ],
+   "safetyNotes": [
+    "HT: feeling it above the belt line means the lower back is doing the work - reset your position (7R-N 08:03).",
+    "FR Szp4: pain-free range of motion only."
+   ],
+   "difficulty": 1
+  },
+  {
+   "id": "G02",
+   "name": "Side-lying hip lift",
+   "subtitle": "hip abduction, leg straight",
+   "areas": [
+    "knees",
+    "hips-balance"
+   ],
+   "primaryArea": "hips-balance",
+   "position": "floor",
+   "positionDetail": "Side-lying (bed OK)",
+   "phase": 2,
+   "equipment": "Bed or mat; ankle weight/band optional",
+   "setup": "Lie on your side in a straight line like a pencil (shoulders, hips, knees, ankles in line). Roll the top hip slightly forward, top hand on the bed. Bottom leg bent for support (TT/FR).",
+   "cues": [
+    "Keep the top leg straight, foot parallel to the floor (toes not pointing up).",
+    "Lift it up and slightly behind you - HT says only about 2 inches back.",
+    "Don't lift too high - the low back starts moving.",
+    "Feel it just below the belt line in the glute, not above it."
+   ],
+   "safetyNotes": [
+    "HT: not suitable for everyone; avoid if it causes pain (02:01).",
+    "TT: if the hip abductors are weak you may roll backward - keep strict form."
+   ],
+   "difficulty": 2
+  },
+  {
+   "id": "G03",
+   "name": "Standing side leg lift",
+   "subtitle": "hip abduction, holding a support",
+   "areas": [
+    "knees",
+    "hips-balance"
+   ],
+   "primaryArea": "hips-balance",
+   "position": "standing",
+   "positionDetail": "Standing",
+   "phase": 1,
+   "equipment": "Counter, wall or chair; light band/ankle weight optional",
+   "setup": "Hold a kitchen counter, wall or chair. Put your weight on one leg ('strong pillar') with a slight bend in that knee and your back tall.",
+   "cues": [
+    "Take the other leg out to the side and slightly behind, pause, bring it back.",
+    "Don't lean - keep the back still; only the leg moves.",
+    "Small range; don't lift so high that the pelvis shifts.",
+    "Feel it in the side-hip just below the belt line."
+   ],
+   "safetyNotes": [
+    "FR: if the knee is locked straight you lose the quad work - keep a slight bend.",
+    "HT: not suitable for everyone; avoid if painful."
+   ],
+   "difficulty": 1
+  },
+  {
+   "id": "G04",
+   "name": "Glute bridge",
+   "subtitle": "lying on back, knees bent",
+   "areas": [
+    "lower-back",
+    "hips-balance",
+    "knees"
+   ],
+   "primaryArea": "lower-back",
+   "position": "floor",
+   "positionDetail": "Lying on back (bed OK)",
+   "phase": 1,
+   "equipment": "Mat or bed",
+   "setup": "Lie on your back with knees bent and feet flat.",
+   "cues": [
+    "Squeeze your buttocks and lift the hips toward the ceiling.",
+    "Stop at a neutral, flat back - don't push so high that the back arches or rounds.",
+    "Hold briefly, then lower slowly.",
+    "Shoulder blades gently back and down (FR)."
+   ],
+   "safetyNotes": [
+    "TT: don't lift so high that the back rounds - it can compress the back (gEOw 07:24).",
+    "TT 2v7b: lifting too high adds a lot of curve in the lower back."
+   ],
+   "difficulty": 1
+  },
+  {
+   "id": "B01",
+   "name": "Knee rolls",
+   "subtitle": "lying lumbar rotation",
+   "areas": [
+    "lower-back",
+    "hips-balance"
+   ],
+   "primaryArea": "lower-back",
+   "position": "floor",
+   "positionDetail": "Lying on back (bed OK)",
+   "phase": 1,
+   "equipment": "Mat or bed",
+   "setup": "Lie on your back with head and shoulders supported and knees bent about halfway. Gently flatten your lower back.",
+   "cues": [
+    "Let both knees roll slowly to one side as far as feels comfortable, then back to centre.",
+    "Start with small movements (about 6 inches each way) - small movements teach the brain that movement is safe.",
+    "Keep the shoulders down; don't force it."
+   ],
+   "safetyNotes": [
+    "TT 5cRb: keep it in a pain-free range - if you push into pain, back off (08:03).",
+    "HT: not all exercises suit everyone; get checked out and avoid any that cause pain (01:26)."
+   ],
+   "difficulty": 1
+  },
+  {
+   "id": "B02",
+   "name": "Seated forward bend",
+   "subtitle": "hands slide down the legs",
+   "areas": [
+    "lower-back"
+   ],
+   "primaryArea": "lower-back",
+   "position": "chair",
+   "positionDetail": "Seated",
+   "phase": 1,
+   "equipment": "Firm dining chair",
+   "setup": "Sit on a firm chair with hips and knees at about 90 degrees, feet flat and a little wider apart than usual. Hands on your thighs (you can take some weight through your hands if the back is sore).",
+   "cues": [
+    "Starting from the top of the neck, slowly bend forward, sliding your hands down your legs.",
+    "Go only as far as is comfortable - stop at the first sign of pain / before a spasm.",
+    "As you breathe out, let the back relax and try for another inch.",
+    "Use your hands to help you back up."
+   ],
+   "safetyNotes": [
+    "HT: stop before pain or spasm and come back up (05:08); not all exercises suit everyone - get checked out first (01:26)."
+   ],
+   "difficulty": 1
+  },
+  {
+   "id": "B03",
+   "name": "Double knees to chest",
+   "subtitle": "",
+   "areas": [
+    "lower-back",
+    "hips-balance"
+   ],
+   "primaryArea": "lower-back",
+   "position": "floor",
+   "positionDetail": "Lying on back",
+   "phase": 1,
+   "equipment": "Mat or bed",
+   "setup": "Lie on your back and bring both knees toward your chest.",
+   "cues": [
+    "Hold the knees or wrap hands behind them and pull gently in until the lower back stretches.",
+    "Stay relaxed and let the back open up.",
+    "You can rock a little, or pull slightly to one side to bias the stretch."
+   ],
+   "safetyNotes": [
+    "TT 5cRb: keep within a pain-free range."
+   ],
+   "difficulty": 1
+  },
+  {
+   "id": "B04",
+   "name": "Single knee to chest",
+   "subtitle": "hip flexion stretch",
+   "areas": [
+    "hips-balance",
+    "lower-back"
+   ],
+   "primaryArea": "hips-balance",
+   "position": "floor",
+   "positionDetail": "Lying on back",
+   "phase": 1,
+   "equipment": "Bed or mat; strap optional",
+   "setup": "Lie on your back. Bring one knee up toward the chest (a little toward the same-side shoulder gives more range with less pinching). Other leg straight if you can tolerate it, or bent.",
+   "cues": [
+    "Go to the barrier, a slight pinch is OK in this source, but not pain.",
+    "Hold behind the knee or use a strap if you can't reach the top of the knee."
+   ],
+   "safetyNotes": [
+    "FR JIAb: some pinching at the end of range is not uncommon; go into the barrier 'just a little bit' (01:55)."
+   ],
+   "difficulty": 1
+  },
+  {
+   "id": "B05",
+   "name": "Cat-cow",
+   "subtitle": "hands and knees",
+   "areas": [
+    "lower-back"
+   ],
+   "primaryArea": "lower-back",
+   "position": "floor",
+   "positionDetail": "Hands and knees",
+   "phase": 2,
+   "equipment": "Mat",
+   "setup": "On hands and knees: knees under hips, hands under shoulders.",
+   "cues": [
+    "Breathe in and round the back up toward the ceiling (cat), hold.",
+    "Breathe out and let the back and stomach drop toward the floor (cow), hold.",
+    "Move slowly through the whole spine."
+   ],
+   "safetyNotes": [
+    "No specific safety note stated."
+   ],
+   "difficulty": 2
+  },
+  {
+   "id": "B06",
+   "name": "Figure-four stretch",
+   "subtitle": "lying, piriformis",
+   "areas": [
+    "lower-back",
+    "hips-balance"
+   ],
+   "primaryArea": "lower-back",
+   "position": "floor",
+   "positionDetail": "Lying on back",
+   "phase": 2,
+   "equipment": "Mat or bed",
+   "setup": "Lie on your back. Cross one ankle over the opposite knee. Hold behind the supporting knee and pull it up toward your chest until you feel a stretch in the buttock.",
+   "cues": [
+    "Feel it deep in the glute / piriformis.",
+    "It should feel like stretching, not painful.",
+    "Breathe and relax; back off and re-enter (dynamic)."
+   ],
+   "safetyNotes": [
+    "TT 1xOp: should feel like stretching, not painful (03:10)."
+   ],
+   "difficulty": 2
+  },
+  {
+   "id": "B07",
+   "name": "Seated figure-four stretch",
+   "subtitle": "in a chair",
+   "areas": [
+    "hips-balance",
+    "lower-back"
+   ],
+   "primaryArea": "hips-balance",
+   "position": "chair",
+   "positionDetail": "Seated",
+   "phase": 1,
+   "equipment": "Chair",
+   "setup": "Sit in a chair. Cross one leg over the other and lean on the knee a little.",
+   "cues": [
+    "Feel the stretch in the back of the hip.",
+    "You might feel a little pinching in the groin - OK only if not painful (Ed's words)."
+   ],
+   "safetyNotes": [
+    "FR: as long as it's not painful."
+   ],
+   "difficulty": 1
+  },
+  {
+   "id": "B08",
+   "name": "Hamstring stretch with a strap",
+   "subtitle": "lying",
+   "areas": [
+    "lower-back",
+    "hips-balance"
+   ],
+   "primaryArea": "lower-back",
+   "position": "floor",
+   "positionDetail": "Lying on back",
+   "phase": 1,
+   "equipment": "Belt, towel or sheet (non-stretchy)",
+   "setup": "Lie on your back. Loop a belt/towel around one foot and use the ends to pull the foot toward your chest until you feel the back of the thigh stretch.",
+   "cues": [
+    "The strap lets you control how much stretch you get - and you aren't weight-bearing.",
+    "Pull the foot across the body to feel it on the outside of the hamstring/glute, or take the foot outward for the inner hamstring/groin."
+   ],
+   "safetyNotes": [
+    "TT: should feel like stretch, not pain (03:10)."
+   ],
+   "difficulty": 1
+  },
+  {
+   "id": "B09",
+   "name": "Seated hamstring stretch",
+   "subtitle": "chair",
+   "areas": [
+    "knees",
+    "lower-back"
+   ],
+   "primaryArea": "knees",
+   "position": "chair",
+   "positionDetail": "Seated",
+   "phase": 1,
+   "equipment": "Chair",
+   "setup": "Sit tall in a comfortable chair, one leg extended out in front as far as you can, foot pulled up slightly.",
+   "cues": [
+    "Keep the spine tall with its natural curve and lean forward from the hips - don't round the back.",
+    "Reach toward the foot only as far as you feel a solid hamstring stretch.",
+    "Tight hamstrings can stop an arthritic knee from straightening (source's explanation)."
+   ],
+   "safetyNotes": [
+    "FR: avoid rounding the spine; people with osteoporosis/osteopenia should avoid certain spinal flexion movements (Ed points to his own video on this)."
+   ],
+   "difficulty": 1
+  },
+  {
+   "id": "B10",
+   "name": "Hip hinge",
+   "subtitle": "dowel for back position / basket",
+   "areas": [
+    "lower-back",
+    "hips-balance"
+   ],
+   "primaryArea": "lower-back",
+   "position": "standing",
+   "positionDetail": "Standing",
+   "phase": 2,
+   "equipment": "Broom/dowel/golf club (TT) or sturdy laundry basket with handles (FR)",
+   "setup": "Stand tall. TT: hold a dowel along your back so it touches the back of the head, the upper back and the pelvis. FR: stand next to a sturdy basket with handles.",
+   "cues": [
+    "Push your hips straight back (like closing a drawer behind you) so the back stays straight - don't round forward.",
+    "TT: keep all three points of contact with the dowel; go down only until the hamstrings tighten.",
+    "Squeeze the glutes to stand back up.",
+    "FR: think 'push the floor away' instead of lifting with your arms; engage the core."
+   ],
+   "safetyNotes": [
+    "TT: protect the spine by keeping the back neutral and hinging at the hips (05:56).",
+    "FR: avoid lifting with a rounded back (08:33)."
+   ],
+   "difficulty": 2
+  },
+  {
+   "id": "B11",
+   "name": "Posterior pelvic tilt",
+   "subtitle": "lying",
+   "areas": [
+    "lower-back"
+   ],
+   "primaryArea": "lower-back",
+   "position": "floor",
+   "positionDetail": "Lying on back, knees bent",
+   "phase": 1,
+   "equipment": "Mat or bed",
+   "setup": "Lie on your back with knees bent. Notice the natural arch in your lower back.",
+   "cues": [
+    "Tighten the core to rock the pelvis backward and press the lower back into the floor.",
+    "Brace the abs and hold about 5 seconds.",
+    "Come back to a neutral position (don't arch high - it may hurt)."
+   ],
+   "safetyNotes": [
+    "TT: don't go too high when arching back to neutral - that might be painful.",
+    "FR Dak0jm0DZn8: keep it pain-free; slow, controlled, easy rocking."
+   ],
+   "difficulty": 1
+  },
+  {
+   "id": "B12",
+   "name": "Bird dog",
+   "subtitle": "hands and knees",
+   "areas": [
+    "lower-back"
+   ],
+   "primaryArea": "lower-back",
+   "position": "floor",
+   "positionDetail": "Hands and knees",
+   "phase": 3,
+   "equipment": "Mat",
+   "setup": "On hands and knees with a neutral back (neither arched nor rounded).",
+   "cues": [
+    "Extend one leg straight back while lifting the opposite arm.",
+    "Don't arch the back and don't let the hips twist open - keep them flat.",
+    "Hold 2 s, return, then switch sides."
+   ],
+   "safetyNotes": [
+    "TT: keep the back in a safe neutral position."
+   ],
+   "difficulty": 3
+  },
+  {
+   "id": "B13",
+   "name": "Seated spine rotation",
+   "subtitle": "loosening",
+   "areas": [
+    "lower-back"
+   ],
+   "primaryArea": "lower-back",
+   "position": "chair",
+   "positionDetail": "Seated",
+   "phase": 1,
+   "equipment": "Chair",
+   "setup": "Sit tall in a chair.",
+   "cues": [
+    "Rotate slowly through the spine in each direction, using your hands to help.",
+    "This is loosening only, not strengthening."
+   ],
+   "safetyNotes": [
+    "FR: talk to your physician and get the green light before starting any exercise program (02:17)."
+   ],
+   "difficulty": 1
+  },
+  {
+   "id": "B14",
+   "name": "Seated lean-back core hold",
+   "subtitle": "",
+   "areas": [
+    "lower-back"
+   ],
+   "primaryArea": "lower-back",
+   "position": "chair",
+   "positionDetail": "Seated",
+   "phase": 2,
+   "equipment": "Sturdy chair",
+   "setup": "Sit tall: chin tucked slightly, shoulder blades back and down, belly button drawn in toward the spine.",
+   "cues": [
+    "Lean back ever so slightly like a straight board (don't collapse the spine) until you feel the core work.",
+    "Hold 3 s, then slowly return to upright neutral.",
+    "Keep the spine in a neutral position."
+   ],
+   "safetyNotes": [
+    "FR: talk to your physician and get the green light first (02:17). Start by strengthening the core in neutral before adding rotation (00:57)."
+   ],
+   "difficulty": 2
+  },
+  {
+   "id": "B15",
+   "name": "Seated arm-push unloading",
+   "subtitle": "for a sore, acute back",
+   "areas": [
+    "lower-back"
+   ],
+   "primaryArea": "lower-back",
+   "position": "chair",
+   "positionDetail": "Seated",
+   "phase": 1,
+   "equipment": "Firm chair (armrests help)",
+   "setup": "Sit on a firm chair, ideally with armrests.",
+   "cues": [
+    "Slowly take a little weight onto your hands and breathe.",
+    "You should feel a little separation in the small of the back; keep the spine long and relax the stomach.",
+    "When done, take the weight back onto the spine slowly, keeping the core engaged, then stand and walk a bit."
+   ],
+   "safetyNotes": [
+    "FR: for acute back pain - it should not make your pain worse (02:13).",
+    "FR: letting go too fast can cause rebound pain."
+   ],
+   "difficulty": 1
+  },
+  {
+   "id": "H01",
+   "name": "Seated hip rotation",
+   "subtitle": "foot swings in and out",
+   "areas": [
+    "hips-balance",
+    "lower-back"
+   ],
+   "primaryArea": "hips-balance",
+   "position": "chair",
+   "positionDetail": "Seated",
+   "phase": 1,
+   "equipment": "Sturdy dining chair",
+   "setup": "Sit near the edge of a dining chair with hips and knees at about 90 degrees and your back tall. Lift one foot off the floor.",
+   "cues": [
+    "Gently rotate the thigh inward (foot swings outward), then outward (foot swings across).",
+    "Hold 1-2 seconds at each end; slow and controlled.",
+    "Try to feel the rotating muscles work rather than just wiggling the leg."
+   ],
+   "safetyNotes": [
+    "HT: not suitable for everyone; avoid the ones that cause you pain (03:33)."
+   ],
+   "difficulty": 1
+  },
+  {
+   "id": "H02",
+   "name": "Lying hip rotation",
+   "subtitle": "thigh rotates in and out",
+   "areas": [
+    "hips-balance",
+    "lower-back"
+   ],
+   "primaryArea": "hips-balance",
+   "position": "floor",
+   "positionDetail": "Lying on back (bed OK)",
+   "phase": 1,
+   "equipment": "Bed or mat",
+   "setup": "HT: lie on your bed on your back, one knee bent up and the other thigh raised so it is about 90 degrees to your body. FR: both knees bent, rotate one knee toward the opposite ankle (windshield-wiper).",
+   "cues": [
+    "Rotate the thigh bone inward (shin swings outward) then outward (shin crosses the body).",
+    "Hold about 2 seconds at the ends (HT).",
+    "Go to your limit but not into pain; keep the movement slow."
+   ],
+   "safetyNotes": [
+    "HT: avoid exercises that cause pain.",
+    "FR: go to the 'barrier' - if you don't, hips will be stiffer tomorrow (his view); pinching at the end of range is common."
+   ],
+   "difficulty": 1
+  },
+  {
+   "id": "H03",
+   "name": "Standing hip rotation",
+   "subtitle": "holding the counter",
+   "areas": [
+    "hips-balance"
+   ],
+   "primaryArea": "hips-balance",
+   "position": "standing",
+   "positionDetail": "Standing on one leg",
+   "phase": 3,
+   "equipment": "Kitchen counter or wall",
+   "setup": "Hold a worktop or wall. Lift one leg so the thigh is at about 90 degrees to the body.",
+   "cues": [
+    "Alternate turning the thigh inward and outward while keeping your back tall.",
+    "Connect to the muscles doing the turning - don't just wiggle the leg.",
+    "Feeling like the hip is about to cramp is normal, according to HT."
+   ],
+   "safetyNotes": [
+    "HT: avoid exercises that cause pain (03:33)."
+   ],
+   "difficulty": 3
+  },
+  {
+   "id": "H04",
+   "name": "Sit-back hip opener",
+   "subtitle": "hands and knees",
+   "areas": [
+    "hips-balance",
+    "lower-back"
+   ],
+   "primaryArea": "hips-balance",
+   "position": "floor",
+   "positionDetail": "Hands and knees",
+   "phase": 2,
+   "equipment": "Mattress or mat",
+   "setup": "Start on all fours with knees a bit wider than hips and feet turned so the insides of the feet are close to the mattress.",
+   "cues": [
+    "Sit back toward a squat until you feel a stretch in the hips, then return to neutral.",
+    "Wider knees = more stretch.",
+    "If it's easy, try going forward and lowering toward the bed, then sitting back."
+   ],
+   "safetyNotes": [
+    "HT: not suitable for everyone; avoid if painful."
+   ],
+   "difficulty": 2
+  },
+  {
+   "id": "H05",
+   "name": "Seated-on-floor hip rotation switch",
+   "subtitle": "90/90",
+   "areas": [
+    "hips-balance",
+    "lower-back"
+   ],
+   "primaryArea": "hips-balance",
+   "position": "floor",
+   "positionDetail": "Sitting on the floor",
+   "phase": 2,
+   "equipment": "Mat",
+   "setup": "Sit on the floor with feet wider than hips and knees bent.",
+   "cues": [
+    "Drop both knees over to one side, so each leg ends up with a 90-degree bend.",
+    "Hold 2-5 seconds, come back to centre and go to the other side.",
+    "Go only as far as you can; you don't need to touch the floor."
+   ],
+   "safetyNotes": [
+    "TT GIui: some people can't get the knees down - go as far as you can (04:16)."
+   ],
+   "difficulty": 2
+  },
+  {
+   "id": "H06",
+   "name": "Wide-stance side-to-side adductor stretch",
+   "subtitle": "standing",
+   "areas": [
+    "hips-balance"
+   ],
+   "primaryArea": "hips-balance",
+   "position": "standing",
+   "positionDetail": "Standing",
+   "phase": 2,
+   "equipment": "None (a counter nearby is sensible - not stated by source)",
+   "setup": "Stand with your feet as far apart as is comfortable.",
+   "cues": [
+    "Shift your weight over one foot until you feel a stretch deep in the inner thigh.",
+    "Pause in the middle for 1-2 seconds, then shift to the other side.",
+    "TT: 'we're not going to be doing the splits.'"
+   ],
+   "safetyNotes": [
+    "No safety note stated."
+   ],
+   "difficulty": 2
+  },
+  {
+   "id": "H07",
+   "name": "Standing hip extension",
+   "subtitle": "leg back, with chair support",
+   "areas": [
+    "hips-balance"
+   ],
+   "primaryArea": "hips-balance",
+   "position": "standing",
+   "positionDetail": "Standing",
+   "phase": 2,
+   "equipment": "Chair or counter",
+   "setup": "Turn a chair sideways and hold it. Stand tall.",
+   "cues": [
+    "Take one leg straight back, pause, and return.",
+    "Stay nice and tall; don't lean forward.",
+    "It is not a huge motion - go back as far as you can."
+   ],
+   "safetyNotes": [
+    "FR: don't lean forward."
+   ],
+   "difficulty": 2
+  },
+  {
+   "id": "H08",
+   "name": "Standing four-way hip with a band",
+   "subtitle": "",
+   "areas": [
+    "hips-balance"
+   ],
+   "primaryArea": "hips-balance",
+   "position": "standing",
+   "positionDetail": "Standing on one leg",
+   "phase": 3,
+   "equipment": "Resistance band anchored low (e.g. door/furniture); something to hold for balance (counter, cane/broom)",
+   "setup": "Anchor the band low and put it around one foot. Hold something for balance. Keep your torso tall.",
+   "cues": [
+    "Always pull away from the anchor.",
+    "Move the foot in four directions: back, out to the side, forward, and across in front of the other leg.",
+    "Hold 2 s then return slowly.",
+    "Don't go so far that you lean; keep the motion in the hip.",
+    "If the hip flexors are tight, don't start with the leg too far behind - keep it in a comfortable position."
+   ],
+   "safetyNotes": [
+    "No safety note stated beyond the form cues above."
+   ],
+   "difficulty": 3
+  },
+  {
+   "id": "H09",
+   "name": "Standing hip flexor stretch with a chair",
+   "subtitle": "stride",
+   "areas": [
+    "hips-balance",
+    "lower-back"
+   ],
+   "primaryArea": "hips-balance",
+   "position": "standing",
+   "positionDetail": "Standing, split stance",
+   "phase": 2,
+   "equipment": "Chair or support",
+   "setup": "Take a big stride and hold a chair for balance.",
+   "cues": [
+    "Squeeze the glutes or tuck the tail under slightly.",
+    "Move forward over the front leg until you feel a stretch in the front of the back hip.",
+    "If you feel it in the calf instead, come up onto the toes of the back foot and sink a bit further.",
+    "Open the trunk slightly until you feel the pull."
+   ],
+   "safetyNotes": [
+    "No safety note stated."
+   ],
+   "difficulty": 2
+  },
+  {
+   "id": "H10",
+   "name": "Bent-knee fall-out",
+   "subtitle": "lying",
+   "areas": [
+    "hips-balance"
+   ],
+   "primaryArea": "hips-balance",
+   "position": "floor",
+   "positionDetail": "Lying on back (bed OK)",
+   "phase": 1,
+   "equipment": "Bed",
+   "setup": "Lie on a bed with one leg bent up.",
+   "cues": [
+    "Let the knee drop out to the side as far as it will go.",
+    "Keep your pelvis flat and your lower back pressed against the bed.",
+    "You may feel a stretch inside the thigh as long as nothing is painful."
+   ],
+   "safetyNotes": [
+    "FR: as long as nothing is painful."
+   ],
+   "difficulty": 1
+  },
+  {
+   "id": "H11",
+   "name": "Seated marching",
+   "subtitle": "",
+   "areas": [
+    "hips-balance",
+    "lower-back"
+   ],
+   "primaryArea": "hips-balance",
+   "position": "chair",
+   "positionDetail": "Seated",
+   "phase": 1,
+   "equipment": "Chair",
+   "setup": "Sit tall at the front of a chair with arms folded so you aren't cheating with them.",
+   "cues": [
+    "Bring knees up as far as you can, alternating legs.",
+    "Then reach each leg out to the side."
+   ],
+   "safetyNotes": [
+    "FR XIE0: talk to your physician and get the green light first (02:17)."
+   ],
+   "difficulty": 1
+  },
+  {
+   "id": "H12",
+   "name": "Towel toe grab",
+   "subtitle": "standing",
+   "areas": [
+    "hips-balance"
+   ],
+   "primaryArea": "hips-balance",
+   "position": "standing",
+   "positionDetail": "Standing",
+   "phase": 2,
+   "equipment": "Towel, chair to hold",
+   "setup": "Fold a towel in four and lay it on the floor with the thick edge toward you. Stand with your toes on the towel and feet together, with a chair in front to hold.",
+   "cues": [
+    "Stand tall and spread your toes, as if spreading your fingers.",
+    "Grasp the towel with your toes and pull it toward you (about a 5-second job), then open the toes and repeat.",
+    "Don't lose your balance."
+   ],
+   "safetyNotes": [
+    "HT: not suitable for everyone; get checked out by your doctor and avoid if painful (00:48)."
+   ],
+   "difficulty": 2
+  },
+  {
+   "id": "H13",
+   "name": "Tightrope walk",
+   "subtitle": "heel-to-toe along a wall",
+   "areas": [
+    "hips-balance"
+   ],
+   "primaryArea": "hips-balance",
+   "position": "standing",
+   "positionDetail": "Walking",
+   "phase": 2,
+   "equipment": "Clear hallway or room, wall alongside; chairs on the other side if wobbly",
+   "setup": "Set up in a space about 15 feet long with a wall on one side (and chairs or something to grab on the other if you are especially unsteady).",
+   "cues": [
+    "Imagine a tightrope on the floor and walk heel to toe, keeping your feet narrow.",
+    "Go as slowly as you can - slower is harder and better for balance (like riding a bike slowly).",
+    "Head up; at the end turn around and come back."
+   ],
+   "safetyNotes": [
+    "HT: make sure you can grab a wall quickly (06:33).",
+    "FR: safety is paramount - have something stable to hold (04:21).",
+    "HT: not suitable for everyone; avoid if painful.",
+    "FR Ag-HYahriog: use common sense; have a chair, walker or wall within reach; work the weaker side a little more; barefoot at home gives better feedback from the toes."
+   ],
+   "difficulty": 2
+  },
+  {
+   "id": "H14",
+   "name": "Feet-together stand",
+   "subtitle": "narrow base hold",
+   "areas": [
+    "hips-balance"
+   ],
+   "primaryArea": "hips-balance",
+   "position": "standing",
+   "positionDetail": "Standing",
+   "phase": 1,
+   "equipment": "Counter or chair to hold",
+   "setup": "Hold on to something stable and bring your feet together.",
+   "cues": [
+    "Stand tall, engage the core.",
+    "Once stable, let go with one hand, then the other, and try to hold the position.",
+    "Work at the 'upper edge' of your balance - where you can safely correct."
+   ],
+   "safetyNotes": [
+    "FR: please be safe working on balance - take support as needed (00:55).",
+    "FR Ag-HYahriog: use common sense; have a chair, walker or wall within reach; work the weaker side a little more; barefoot at home gives better feedback from the toes."
+   ],
+   "difficulty": 1
+  },
+  {
+   "id": "H15",
+   "name": "Tandem stance hold",
+   "subtitle": "one foot in front of the other",
+   "areas": [
+    "hips-balance"
+   ],
+   "primaryArea": "hips-balance",
+   "position": "standing",
+   "positionDetail": "Standing",
+   "phase": 2,
+   "equipment": "Counter or chair to hold",
+   "setup": "Start with a partial tandem (one foot in front of the other but a little apart), then a full tandem (heel directly in front of toes).",
+   "cues": [
+    "Stand tall, core engaged, look straight ahead.",
+    "Let go of the support only when steady."
+   ],
+   "safetyNotes": [
+    "FR: be safe, have support available.",
+    "FR Ag-HYahriog: use common sense; have a chair, walker or wall within reach; work the weaker side a little more; barefoot at home gives better feedback from the toes."
+   ],
+   "difficulty": 2
+  },
+  {
+   "id": "H16",
+   "name": "Single-leg stand with support",
+   "subtitle": "",
+   "areas": [
+    "hips-balance"
+   ],
+   "primaryArea": "hips-balance",
+   "position": "standing",
+   "positionDetail": "Standing on one leg",
+   "phase": 3,
+   "equipment": "Counter or chair to hold",
+   "setup": "Hold on to a counter or chair and stand tall.",
+   "cues": [
+    "Shift your weight fully onto the standing leg first, before lifting the other foot.",
+    "Feel the glute, quad and foot gripping the floor; keep the glutes tight so the hip doesn't sneak out.",
+    "Then try letting go of one arm and then the other."
+   ],
+   "safetyNotes": [
+    "FR: you should be on the edge of balance where you can still safely correct.",
+    "FR Ag-HYahriog: use common sense; have a chair, walker or wall within reach; work the weaker side a little more; barefoot at home gives better feedback from the toes."
+   ],
+   "difficulty": 3
+  },
+  {
+   "id": "H17",
+   "name": "Grapevine",
+   "subtitle": "side-stepping with a cross-over, holding the couch",
+   "areas": [
+    "hips-balance"
+   ],
+   "primaryArea": "hips-balance",
+   "position": "standing",
+   "positionDetail": "Walking sideways",
+   "phase": 3,
+   "equipment": "Couch or sturdy furniture to hold",
+   "setup": "Stand next to a couch and hold on.",
+   "cues": [
+    "Cross one leg behind, straighten, then cross in front, straighten, and repeat.",
+    "Try without holding on only if comfortable and something is still within reach."
+   ],
+   "safetyNotes": [
+    "FR: be safe; have something to hold on to."
+   ],
+   "difficulty": 3
+  },
+  {
+   "id": "H18",
+   "name": "Feet-on-wall pelvic press",
+   "subtitle": "lying",
+   "areas": [
+    "hips-balance",
+    "lower-back"
+   ],
+   "primaryArea": "hips-balance",
+   "position": "floor",
+   "positionDetail": "Lying on back, feet on wall",
+   "phase": 1,
+   "equipment": "Bed or mat, wall, pillow",
+   "setup": "Lie on your back (your bed is fine), feet resting on the wall, palms up, pillow under the neck if needed. Keep the angle so there is no strain on your hips.",
+   "cues": [
+    "Press your lower back against the mat/bed and feel the deep core engage.",
+    "Hold 5 seconds, relax.",
+    "Keep breathing."
+   ],
+   "safetyNotes": [
+    "HT: slight tension but definitely not pain (04:39)."
+   ],
+   "difficulty": 1
+  },
+  {
+   "id": "H19",
+   "name": "Feet-on-wall pillow squeeze",
+   "subtitle": "inner thigh",
+   "areas": [
+    "hips-balance"
+   ],
+   "primaryArea": "hips-balance",
+   "position": "floor",
+   "positionDetail": "Lying on back, feet on wall",
+   "phase": 1,
+   "equipment": "Bed or mat, wall, pillow",
+   "setup": "Fold a pillow and hold it between the knees, feet on the wall.",
+   "cues": [
+    "Press the lower back down, squeeze the pillow for about 3 seconds, then relax.",
+    "Don't hold your breath - keep the breathing going."
+   ],
+   "safetyNotes": [
+    "HT: don't hold your breath (06:45)."
+   ],
+   "difficulty": 1
+  },
+  {
+   "id": "H20",
+   "name": "Feet-on-wall hip rotation and knee drop",
+   "subtitle": "",
+   "areas": [
+    "hips-balance"
+   ],
+   "primaryArea": "hips-balance",
+   "position": "floor",
+   "positionDetail": "Lying on back, feet on wall",
+   "phase": 2,
+   "equipment": "Bed or mat, wall",
+   "setup": "Lie on your back with feet on the wall; press the lower back down.",
+   "cues": [
+    "Lift one foot and turn it outward (thigh rotates inward), then return - to the point of tension, not pain.",
+    "Knee drop: leave one foot on the wall and let that leg drop out to the side as far as it goes, using the thigh muscles (no hands), then change legs."
+   ],
+   "safetyNotes": [
+    "HT: not to the pain, just to the feeling of tension (10:33).",
+    "HT: it's normal for one hip to be stiffer than the other."
+   ],
+   "difficulty": 2
+  },
+  {
+   "id": "H21",
+   "name": "Feet-on-wall single leg lift",
+   "subtitle": "hip flexion",
+   "areas": [
+    "hips-balance"
+   ],
+   "primaryArea": "hips-balance",
+   "position": "floor",
+   "positionDetail": "Lying on back, feet on wall",
+   "phase": 1,
+   "equipment": "Bed or mat, wall",
+   "setup": "Lie on your back, feet on the wall, lower back pressed down.",
+   "cues": [
+    "Lift one foot off the wall just until you feel slight tension, not pain.",
+    "Hold 1 second, lower, relax the core briefly.",
+    "Aim for slow technique over counting."
+   ],
+   "safetyNotes": [
+    "HT: not pain."
+   ],
+   "difficulty": 1
+  },
+  {
+   "id": "H22",
+   "name": "Lying knee raise",
+   "subtitle": "hip flexion, on your back",
+   "areas": [
+    "hips-balance"
+   ],
+   "primaryArea": "hips-balance",
+   "position": "floor",
+   "positionDetail": "Lying on back (bed OK)",
+   "phase": 1,
+   "equipment": "Bed or mat",
+   "setup": "Lie on your back with both legs flat (a bed is fine).",
+   "cues": [
+    "Push your lower back into the bed first so your tummy switches on.",
+    "Bring one knee up as high as you can with the knee bent, then lower it.",
+    "About 1 second up and 2-3 seconds down.",
+    "Do all the reps on one leg, then swap."
+   ],
+   "safetyNotes": [
+    "HT: not suitable for everyone; avoid any movement that causes pain."
+   ],
+   "difficulty": 1
+  },
+  {
+   "id": "K12",
+   "name": "Short arc quad",
+   "subtitle": "heel lift over a roll",
+   "areas": [
+    "knees"
+   ],
+   "primaryArea": "knees",
+   "position": "floor",
+   "positionDetail": "Lying or semi-reclined (bed OK)",
+   "phase": 1,
+   "equipment": "Foam roller, rolled-up towel or doubled-over pillow",
+   "setup": "Lie back or semi-recline with a roll under the knee so the knee has a slight bend.",
+   "cues": [
+    "Fire the thigh muscle on top of the leg.",
+    "Lift the heel and straighten the leg as far as you can.",
+    "Hold about 3 seconds, then lower slowly.",
+    "Focus on feeling the quad contract."
+   ],
+   "safetyNotes": [
+    "TT _YO4VV6Jl6g: most knee conditions are very tolerant to this."
+   ],
+   "difficulty": 1
+  },
+  {
+   "id": "K13",
+   "name": "Standing hamstring curl",
+   "subtitle": "holding a support",
+   "areas": [
+    "knees"
+   ],
+   "primaryArea": "knees",
+   "position": "standing",
+   "positionDetail": "Standing",
+   "phase": 2,
+   "equipment": "Counter, table, chair or wall",
+   "setup": "Hold a counter, table, chair or wall where you feel safe. Stand on the unaffected leg.",
+   "cues": [
+    "Bend the working knee and pull the heel up toward your bottom.",
+    "Hold about 3 seconds at the top, then slowly lower."
+   ],
+   "safetyNotes": [
+    "TT: do it somewhere you can keep your balance and feel safe."
+   ],
+   "difficulty": 2
+  },
+  {
+   "id": "K14",
+   "name": "Band-push sit to stand",
+   "subtitle": "resistance band above the knees",
+   "areas": [
+    "knees",
+    "hips-balance"
+   ],
+   "primaryArea": "hips-balance",
+   "position": "chair",
+   "positionDetail": "Seated to standing",
+   "phase": 2,
+   "equipment": "Resistance-band loop or a buckled belt; sturdy chair",
+   "setup": "Put the band around both legs just above the knees (or buckle a belt there) while seated.",
+   "cues": [
+    "Push the knees gently outward into the band; you should feel the back of the hips switch on.",
+    "Keep pushing out while you go nose over toes and stand.",
+    "Keep pushing out as you lower slowly back down."
+   ],
+   "safetyNotes": [
+    "not stated in this transcript"
+   ],
+   "difficulty": 2
+  },
+  {
+   "id": "B16",
+   "name": "Standing lumbar extension",
+   "subtitle": "hands on hips",
+   "areas": [
+    "lower-back"
+   ],
+   "primaryArea": "lower-back",
+   "position": "standing",
+   "positionDetail": "Standing",
+   "phase": 2,
+   "equipment": "None",
+   "setup": "Stand with your hands on your hips.",
+   "cues": [
+    "Slowly shift the hips forward so the lower back moves into extension (a gentle backward bend).",
+    "Go only as far as you can without pain."
+   ],
+   "safetyNotes": [
+    "FR: do not go into pain.",
+    "Reviewer flag (editorial): TT 2v7bwMfeYRw says back-bending can close down the back joints for people with stenosis, disc thinning or facet arthritis (01:26), so a professional should decide who this suits."
+   ],
+   "difficulty": 1
+  }
+ ]
+}
