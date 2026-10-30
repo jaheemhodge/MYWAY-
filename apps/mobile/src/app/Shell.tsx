@@ -1,24 +1,26 @@
 import { useEffect, useRef } from "react";
 import { Link, NavLink, Outlet, useLocation } from "react-router-dom";
 import { LogoMark } from "@/components/illustrations";
-import { Icon, type IconName } from "./components/Icon";
+import { LiquidNavbar, type LiquidNavItem } from "@/components/ui/liquid-glass-navbar";
+import { Icon } from "./components/Icon";
 
-const TABS: { to: string; label: string; icon: IconName }[] = [
-  { to: "/app/today", label: "Today", icon: "today" },
-  { to: "/app/plan", label: "My plan", icon: "plan" },
-  { to: "/app/library", label: "Library", icon: "library" },
-  { to: "/app/progress", label: "Progress", icon: "progress" },
+const TABS: LiquidNavItem[] = [
+  { to: "/app/today", label: "Today", icon: <Icon name="today" size={22} />, fx: "glow" },
+  { to: "/app/plan", label: "My plan", icon: <Icon name="plan" size={22} />, fx: "pop" },
+  { to: "/app/library", label: "Library", icon: <Icon name="library" size={22} />, fx: "spin" },
+  { to: "/app/progress", label: "Progress", icon: <Icon name="progress" size={22} />, fx: "wave" },
 ];
 
 /**
- * Logged-in shell. One markup for both layouts: at 900px and up the tabs sit in the top bar
- * (Forest pill for the active tab); below that the same four tabs move to a 72px bottom bar
- * (Brass top bar and bold label for the active tab).
+ * Logged-in shell. At 900px and up the liquid glass tabs sit centred in the top bar, between the
+ * wordmark and Account. Below that the same four tabs float at the bottom as a full-width glass bar,
+ * icon over label.
  */
 export function Shell() {
   const { pathname } = useLocation();
   const mainRef = useRef<HTMLElement>(null);
   const first = useRef(true);
+  const active = TABS.findIndex((tab) => pathname === tab.to || pathname.startsWith(`${tab.to}/`));
 
   // Move focus to the page on route changes so keyboard and screen reader users land on the content.
   useEffect(() => {
@@ -40,9 +42,9 @@ export function Shell() {
           <Link to="/app/today" className="mob-wordmark" aria-label="Mobility, Today">
             <LogoMark />
           </Link>
-          <nav className="mob-tabs mob-tabs--top" aria-label="Main">
-            <TabLinks variant="top" />
-          </nav>
+          <div className="mob-topnav">
+            <LiquidNavbar items={TABS} active={active} />
+          </div>
           <NavLink to="/app/account" className={({ isActive }) => `mob-account${isActive ? " is-active" : ""}`}>
             <span className="mob-avatar" aria-hidden="true">
               <Icon name="user" size={22} />
@@ -56,24 +58,9 @@ export function Shell() {
         <Outlet />
       </main>
 
-      <nav className="mob-tabs mob-tabs--bottom" aria-label="Main">
-        <TabLinks variant="bottom" />
-      </nav>
+      <div className="mob-bottomnav">
+        <LiquidNavbar items={TABS} active={active} layout="stacked" />
+      </div>
     </div>
-  );
-}
-
-function TabLinks({ variant }: { variant: "top" | "bottom" }) {
-  return (
-    <ul>
-      {TABS.map((tab) => (
-        <li key={tab.to}>
-          <NavLink to={tab.to} className={({ isActive }) => `mob-tab${isActive ? " is-active" : ""}`}>
-            {variant === "bottom" ? <Icon name={tab.icon} /> : null}
-            <span className="mob-tab__label">{tab.label}</span>
-          </NavLink>
-        </li>
-      ))}
-    </ul>
   );
 }
