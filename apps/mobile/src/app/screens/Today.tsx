@@ -1,12 +1,9 @@
 import { useEffect, useRef, useState } from "react";
 import { useSearchParams } from "react-router-dom";
-import { AREA_LABEL, POSITION_LABEL } from "../data/library";
+import { POSITION_LABEL } from "../data/library";
 import { imageFor } from "../data/images";
 import {
-  FOCUS_AREA,
   MINUTES_PER_EXERCISE,
-  PHASE_INFO,
-  RECHECK_DAYS,
   TOTAL_DAYS,
   clampDay,
   formatMonthDay,
@@ -20,7 +17,6 @@ import { usePageTitle } from "../hooks";
 import { BentoCard, BentoGrid } from "@/components/ui/bento";
 import { Icon } from "../components/Icon";
 import { SessionPlayer } from "../components/SessionPlayer";
-import { VideoSlot } from "../components/VideoSlot";
 
 const STRIP_SIZE = 7;
 
@@ -67,7 +63,6 @@ export function Today() {
   }
 
   const session = getSession(selected);
-  const first = session[0];
   const isToday = selected === currentDay;
   const selectedDone = isDone(selected);
   const phase = phaseForDay(currentDay);
@@ -100,25 +95,23 @@ export function Today() {
         <DayStepper selected={selected} currentDay={currentDay} isDone={isDone} onSelect={setSelected} />
       </div>
 
-      <div className="mob-wrap mob-today__main">
-        <section className="mob-hero" aria-labelledby="session-title">
-          <VideoSlot poster={imageFor(first)} ratio="hero" />
-          <div className="mob-hero__caption">
-            <h2 id="session-title" className="mob-section-title">
+      <section className="mob-wrap mob-today__row" aria-labelledby="bento-title">
+        <div className="mob-today__rowhead">
+          <div className="mob-today__rowtext">
+            <h2 id="bento-title" className="mob-section-title">
               {isToday ? "Today's session" : `Day ${selected} session`}
             </h2>
             <p className="mob-muted">
-              {session.length} exercises · about {sessionMinutes(session.length)} min · {AREA_LABEL[FOCUS_AREA]}. First
-              up: {first.name.toLowerCase()}.
+              {session.length} exercises, in this order · about {sessionMinutes(session.length)} min
             </p>
           </div>
           {isToday ? (
-            <button ref={startRef} type="button" className="mob-cta" onClick={() => setPlaying(true)}>
+            <button ref={startRef} type="button" className="mob-cta mob-today__start" onClick={() => setPlaying(true)}>
               <Icon name="play" />
               {selectedDone ? "Do today's session again" : "Start today's session"}
             </button>
           ) : (
-            <div className="mob-hero__other">
+            <div className="mob-today__other">
               <p className="mob-muted">
                 {selectedDone
                   ? `You finished Day ${selected}.`
@@ -129,19 +122,6 @@ export function Today() {
               </button>
             </div>
           )}
-        </section>
-
-        <UpNext currentDay={currentDay} onPreview={(day) => setSelected(day)} />
-      </div>
-
-      <section className="mob-wrap mob-today__row" aria-labelledby="bento-title">
-        <div className="mob-today__rowhead">
-          <h2 id="bento-title" className="mob-section-title">
-            {isToday ? "In today's session" : `In the Day ${selected} session`}
-          </h2>
-          <p className="mob-muted">
-            {session.length} exercises, in this order · about {sessionMinutes(session.length)} min
-          </p>
         </div>
         <BentoGrid label="Exercises in order">
           {session.map((exercise, i) => (
@@ -284,62 +264,6 @@ function DayStepper({
         <span className="sr-only">Next day</span>
       </button>
     </div>
-  );
-}
-
-function UpNext({ currentDay, onPreview }: { currentDay: number; onPreview: (day: number) => void }) {
-  const tomorrow = currentDay < TOTAL_DAYS ? currentDay + 1 : null;
-  const tomorrowSession = tomorrow ? getSession(tomorrow) : [];
-  const nextPhase = ([2, 3] as const).map((n) => PHASE_INFO[n]).find((p) => p.startDay > currentDay);
-  const nextRecheck = RECHECK_DAYS.find((d) => d > currentDay);
-  const inDays = (day: number) => (day - currentDay === 1 ? "tomorrow" : `in ${day - currentDay} days`);
-
-  return (
-    <section className="mob-upnext" aria-labelledby="upnext-title">
-      <h2 id="upnext-title" className="mob-section-title">
-        Up next
-      </h2>
-      <ul className="mob-upnext__list">
-        {tomorrow ? (
-          <li>
-            <p className="mob-upnext__when">
-              Tomorrow · {formatWeekday(tomorrow)} {formatMonthDay(tomorrow)}
-            </p>
-            <h3 className="mob-upnext__title">Day {tomorrow} session</h3>
-            <p className="mob-muted">
-              {tomorrowSession.length} exercises · about {sessionMinutes(tomorrowSession.length)} min
-            </p>
-            <button type="button" className="mob-textlink" onClick={() => onPreview(tomorrow)}>
-              Preview Day {tomorrow}
-            </button>
-          </li>
-        ) : null}
-        {nextPhase ? (
-          <li>
-            <p className="mob-upnext__when">
-              Day {nextPhase.startDay} · {inDays(nextPhase.startDay)}
-            </p>
-            <h3 className="mob-upnext__title">
-              Phase {nextPhase.number} starts: {nextPhase.name}
-            </h3>
-            <p className="mob-muted">
-              Days {nextPhase.startDay}–{nextPhase.endDay}. New exercises open in the Library.
-            </p>
-          </li>
-        ) : null}
-        {nextRecheck ? (
-          <li>
-            <p className="mob-upnext__when">
-              Day {nextRecheck} · {inDays(nextRecheck)}
-            </p>
-            <h3 className="mob-upnext__title">Day {nextRecheck} re-check</h3>
-            <p className="mob-muted">
-              {formatWeekday(nextRecheck)} {formatMonthDay(nextRecheck)}. The same short check you did at the start.
-            </p>
-          </li>
-        ) : null}
-      </ul>
-    </section>
   );
 }
 

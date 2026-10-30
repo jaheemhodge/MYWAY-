@@ -13,3 +13,8 @@ backend/__pycache__
 *.pyc
 .env
 .coverage
+
+# Local scrollable preview build (not part of the app)
+apps/mobile/.preview/
+apps/mobile/.preview-dist/
+apps/mobile/vite.preview.config.ts
