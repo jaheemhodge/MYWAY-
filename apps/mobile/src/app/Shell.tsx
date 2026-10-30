@@ -19,7 +19,8 @@ function activeTab(pathname: string) {
 }
 
 /**
- * Logged-in shell. At 900px and up the five tabs sit centred in the top bar beside the wordmark.
+ * Events ("Near you") shell, kept exactly as it was apart from the "At home" link back to the
+ * exercise side. Logged-in shell. At 900px and up the five tabs sit centred in the top bar beside the wordmark.
  * Below that the same tabs float 16px above the bottom of the screen, icon over label.
  */
 export function Shell() {
@@ -58,6 +59,10 @@ export function Shell() {
           <div className="mob-topnav">
             <LiquidNavbar items={TABS} active={active} />
           </div>
+          <Link to="/app/home" className="mob-pill mob-athome">
+            <Icon name="chevronLeft" />
+            At home
+          </Link>
         </div>
       </header>
 

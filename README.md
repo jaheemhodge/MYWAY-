@@ -56,10 +56,11 @@ Lives in `apps/mobile/src/app`. Local state only: no backend, auth or analytics.
 
 | Route | What it is |
 |---|---|
-| `/app/home` | Home (default): greeting, today's session card, Up next, More workouts, Challenges. Add `?dev=1` for the prototype day control |
-| `/app/events`, `/app/events/:id` | Events: sample local listings (not real) and event detail |
-| `/app/library` | Library rows; `?area=&position=&phase=&q=` shows the filtered grid |
-| `/app/library/:id` | Exercise detail (preview only for later phases) |
+| `/app/home` | At home (default): split hero for today's session, then rows (Today's session, Knees, Lower back, Hips & balance, Sit down and do these, Your plan). Add `?dev=1` for the prototype day control |
+| `/app/library/:area` | See all: `all`, `today`, `knees`, `lower-back`, `hips-balance` or `chair`; `?position=&time=&phase=&q=` filters the grid |
+| `/app/exercise/:id` | Exercise detail as a panel over the current page (Esc or ✕ closes) |
+| `/app/session`, `/app/session/:id` | Today's session, or one exercise |
+| `/app/events`, `/app/events/:id` | Near you: sample local listings (not real) and event detail. Unchanged; has an "At home" link back |
 | `/app/plan`, `/app/progress`, `/app/account` | Stubs |
 | `/app/today` | Redirects to `/app/home` |
 

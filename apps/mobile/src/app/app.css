@@ -2387,3 +2387,8 @@ body:has(.mob-home),
     flex: none;
   }
 }
+
+/* Way back from Events to the exercise side. */
+.mob-athome {
+  justify-self: end;
+}
