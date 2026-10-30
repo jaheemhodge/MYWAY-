@@ -1,20 +1,20 @@
 import { useEffect, useRef, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
-import { ExerciseThumb } from "../components/ExerciseThumb";
 import { Icon, type IconName } from "../components/Icon";
 import { SessionPlayer } from "../components/SessionPlayer";
-import { imageFor } from "../data/images";
-import { AREA_LABEL, displayName, type Area } from "../data/library";
+import { imageFor, PLACEHOLDER_WORD } from "../data/images";
+import { AREA_LABEL, displayName, type Area, type Exercise } from "../data/library";
 import {
   FOCUS_AREA,
   MINUTES_PER_EXERCISE,
   PHASE_INFO,
   TOTAL_DAYS,
   clampDay,
+  dateForDay,
+  formatWeekday,
   getSession,
   phaseForDay,
   sessionMinutes,
-  type PhaseInfo,
 } from "../data/plan";
 import { SAMPLE_FIRST_NAME } from "../data/profile";
 import { useDay } from "../DayState";
@@ -22,17 +22,20 @@ import { usePageTitle } from "../hooks";
 
 const BASE = import.meta.env.BASE_URL;
 
-/** Decorative photos for the three phase cards (our own exercise stills). */
+/** Decorative photo behind each phase panel (our own exercise stills). */
 const PHASE_IMAGES: Record<number, string> = {
   1: `${BASE}exercises/heel-raises.jpg`,
   2: `${BASE}exercises/wall-calf-stretch.jpg`,
   3: `${BASE}exercises/clamshell.jpg`,
 };
 
-const AREA_BUTTONS: { area: Area; icon: IconName }[] = [
-  { area: "knees", icon: "knee" },
-  { area: "lower-back", icon: "back" },
-  { area: "hips-balance", icon: "balance" },
+const WORKOUTS: { to: string; label: string; icon: IconName }[] = [
+  ...(["knees", "lower-back", "hips-balance"] as Area[]).map((area) => ({
+    to: `/app/library?area=${area}`,
+    label: AREA_LABEL[area],
+    icon: (area === "knees" ? "knee" : area === "lower-back" ? "back" : "balance") as IconName,
+  })),
+  { to: "/app/library", label: "All exercises", icon: "library" },
 ];
 
 function greeting(now = new Date()) {
@@ -42,6 +45,11 @@ function greeting(now = new Date()) {
   return "Evening";
 }
 
+/**
+ * Home: one tight stack of soft panels on a warm page.
+ * Desktop: left 2/3 (Today, More workouts, Challenges), right 1/3 (Up next, This week).
+ * Phones: one column in the order greeting, Today, More workouts, Up next, Challenges, This week.
+ */
 export function Home() {
   usePageTitle("Home");
   const [params] = useSearchParams();
@@ -59,8 +67,8 @@ export function Home() {
 
   const session = getSession(currentDay);
   const phase = phaseForDay(currentDay);
-  const first = session[0];
   const done = isDone(currentDay);
+  const heroImg = imageFor(session[0]);
 
   if (playing) {
     return (
@@ -80,162 +88,205 @@ export function Home() {
 
   return (
     <div className="mob-wrap mob-home">
-      <header className="mob-home__head">
-        <h1 className="mob-greeting">
-          {greeting()}, {SAMPLE_FIRST_NAME}
-        </h1>
-        <p className="mob-muted">
-          Phase {phase.number} · Day {currentDay} of {TOTAL_DAYS}
-        </p>
-      </header>
+      <h1 className="mob-greeting">
+        {greeting()}, {SAMPLE_FIRST_NAME}
+      </h1>
+      <h2 className="mob-home__label">Today</h2>
 
-      <section className="mob-home__today" aria-labelledby="today-title">
-        <h2 id="today-title" className="mob-section-title">
-          Today
-        </h2>
-        <div className="mob-home__todaygrid">
-          <div className="mob-hero2">
-            {/* Mouse convenience: the whole picture starts the session. Keyboard and screen readers use the button below. */}
-            <div className="mob-hero2__card" onClick={() => setPlaying(true)}>
-              {imageFor(first) ? <img src={imageFor(first)} alt="" /> : null}
-              <div className="mob-hero2__shade" aria-hidden="true" />
-              <div className="mob-hero2__text">
-                <p className="mob-hero2__title">
+      <div className="mob-home__grid">
+        <div className="mob-home__col mob-home__col--main">
+          {/* Today hero */}
+          <section className="mob-hero3" aria-label="Today's session" style={{ order: 1 }}>
+            {/* The picture is a mouse shortcut; the Start button is the control. */}
+            <div className="mob-hero3__media" onClick={() => setPlaying(true)}>
+              {heroImg ? <img src={heroImg} alt="" /> : null}
+            </div>
+            <p className="mob-frost-chip">
+              Phase {phase.number} · Day {currentDay} of {TOTAL_DAYS}
+            </p>
+            <div className="mob-hero3__strip">
+              <div className="mob-hero3__text">
+                <p className="mob-hero3__title">
                   Day {currentDay} · {AREA_LABEL[FOCUS_AREA]}
                 </p>
-                <p className="mob-hero2__meta">
+                <p className="mob-hero3__meta">
                   {session.length} exercises · {sessionMinutes(session.length)} min
                 </p>
               </div>
+              <button ref={startRef} type="button" className="mob-hero3__start" onClick={() => setPlaying(true)}>
+                <Icon name="play" />
+                {done ? "Do today's session again" : "Start today's session"}
+              </button>
             </div>
-            <button ref={startRef} type="button" className="mob-cta mob-hero2__start" onClick={() => setPlaying(true)}>
-              <Icon name="play" />
-              {done ? "Do today's session again" : "Start today's session"}
-            </button>
-          </div>
+          </section>
 
-          <div className="mob-upnext2">
-            <h3 className="mob-upnext2__title">Up next</h3>
-            <ol className="mob-upnext2__list">
+          {/* More workouts */}
+          <section className="mob-glass mob-more" aria-labelledby="more-title" style={{ order: 2 }}>
+            <h2 id="more-title" className="mob-glass__title">
+              More workouts
+            </h2>
+            <ul className="mob-more__row">
+              {WORKOUTS.map((w) => (
+                <li key={w.to}>
+                  <Link to={w.to} className="mob-area">
+                    <span className="mob-area__circle" aria-hidden="true">
+                      <Icon name={w.icon} size={30} />
+                    </span>
+                    <span className="mob-area__label">{w.label}</span>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </section>
+
+          {/* Challenges */}
+          <section className="mob-home__challenges" aria-labelledby="ch-title" style={{ order: 4 }}>
+            <h2 id="ch-title" className="mob-home__label">
+              Challenges
+            </h2>
+            <ChallengePanel currentDay={currentDay} isDone={isDone} />
+            <div className="mob-later">
+              {([2, 3] as const)
+                .map((n) => PHASE_INFO[n])
+                .filter((p) => p.number > phase.number)
+                .map((p) => (
+                  <div key={p.number} className="mob-glass mob-later__panel">
+                    <p className="mob-later__name">{p.name}</p>
+                    <p className="mob-muted">Opens Day {p.startDay}</p>
+                  </div>
+                ))}
+            </div>
+          </section>
+        </div>
+
+        <div className="mob-home__col mob-home__col--side">
+          {/* Up next */}
+          <section className="mob-glass mob-next" aria-labelledby="next-title" style={{ order: 3 }}>
+            <h2 id="next-title" className="mob-glass__title">
+              Up next
+            </h2>
+            <ol className="mob-next__list">
               {session.map((exercise, i) => (
                 <li key={exercise.id}>
-                  <Link to={`/app/library/${exercise.id}`} className="mob-upnext2__row">
-                    <span className="mob-upnext2__thumb">
-                      <ExerciseThumb exercise={exercise} />
-                    </span>
-                    <span className="mob-upnext2__name">
+                  <Link to={`/app/library/${exercise.id}`} className="mob-next__row">
+                    <NextThumb exercise={exercise} />
+                    <span className="mob-next__name">
                       <span className="sr-only">{i + 1}. </span>
                       {displayName(exercise)}
                     </span>
-                    <span className="mob-upnext2__min">{MINUTES_PER_EXERCISE} min</span>
+                    <span className="mob-next__min">{MINUTES_PER_EXERCISE} min</span>
                   </Link>
                 </li>
               ))}
             </ol>
-          </div>
-        </div>
-      </section>
+          </section>
 
-      <section className="mob-panel mob-home__more" aria-labelledby="more-title">
-        <h2 id="more-title" className="mob-panel__title">
-          More workouts
-        </h2>
-        <ul className="mob-areas">
-          {AREA_BUTTONS.map(({ area, icon }) => (
-            <li key={area}>
-              <Link to={`/app/library?area=${area}`} className="mob-area">
-                <span className="mob-area__circle" aria-hidden="true">
-                  <Icon name={icon} size={32} />
-                </span>
-                <span className="mob-area__label">{AREA_LABEL[area]}</span>
-              </Link>
-            </li>
-          ))}
-          <li>
-            <Link to="/app/library" className="mob-area">
-              <span className="mob-area__circle" aria-hidden="true">
-                <Icon name="library" size={30} />
+          {/* This week */}
+          <section className="mob-glass mob-week" aria-labelledby="week-title" style={{ order: 5 }}>
+            <h2 id="week-title" className="mob-glass__title">
+              This week
+            </h2>
+            <div className="mob-week__row">
+              <span className={`mob-status${done ? " is-done" : ""}`} aria-hidden="true">
+                {done ? <Icon name="check" size={20} /> : null}
               </span>
-              <span className="mob-area__label">All exercises</span>
-            </Link>
-          </li>
-        </ul>
-      </section>
-
-      <section className="mob-home__challenges" aria-labelledby="ch-title">
-        <h2 id="ch-title" className="mob-section-title">
-          Challenges
-        </h2>
-        <ul className="mob-challenges">
-          {([1, 2, 3] as const).map((n) => (
-            <li key={n}>
-              <PhaseCard phase={PHASE_INFO[n]} currentDay={currentDay} />
-            </li>
-          ))}
-        </ul>
-      </section>
+              <div>
+                <p className="mob-week__name">
+                  {formatWeekday(currentDay)} · Day {currentDay} session
+                </p>
+                <p className="mob-muted">{done ? "Done" : "Not started yet"}</p>
+              </div>
+            </div>
+            <div className="mob-week__actions">
+              <Link to="/app/plan" className="mob-pill">
+                Edit schedule
+              </Link>
+              <Link to="/app/progress" className="mob-pill">
+                View history
+              </Link>
+            </div>
+          </section>
+        </div>
+      </div>
 
       {params.get("dev") === "1" ? <DevDayControl /> : null}
     </div>
   );
 }
 
-function PhaseCard({ phase, currentDay }: { phase: PhaseInfo; currentDay: number }) {
-  const current = phaseForDay(currentDay).number;
-  const state = phase.number < current ? "done" : phase.number === current ? "current" : "next";
-  const span = phase.endDay - phase.startDay + 1;
-  const daysIn = Math.min(span, Math.max(0, currentDay - phase.startDay + 1));
-  const title = `${phase.name} · Days ${phase.startDay}–${phase.endDay}`;
-
-  const inner = (
-    <>
-      <img src={PHASE_IMAGES[phase.number]} alt="" loading="lazy" />
-      <div className="mob-hero2__shade" aria-hidden="true" />
-      <div className="mob-phase__text">
-        <p className="mob-phase__title">{title}</p>
-        <p className="mob-phase__meta">
-          {state === "current"
-            ? `${daysIn} of ${span} days`
-            : state === "done"
-              ? "Done"
-              : `Opens Day ${phase.startDay}`}
-        </p>
-      </div>
-      {state === "current" ? <Ring value={daysIn / span} /> : null}
-      {state === "done" ? (
-        <span className="mob-phase__check" aria-hidden="true">
-          <Icon name="check" size={28} />
-        </span>
-      ) : null}
-    </>
+function NextThumb({ exercise }: { exercise: Exercise }) {
+  const src = imageFor(exercise);
+  return (
+    <span className={`mob-next__thumb${src ? "" : " is-placeholder"}`} aria-hidden="true">
+      {src ? <img src={src} alt="" /> : <span>{PLACEHOLDER_WORD[exercise.position]}</span>}
+    </span>
   );
+}
 
-  if (state === "current") {
-    return (
-      <Link to="/app/plan" className={`mob-phase is-${state}`}>
-        {inner}
-      </Link>
-    );
-  }
-  return <div className={`mob-phase is-${state}`}>{inner}</div>;
+const DOW = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+
+function ChallengePanel({ currentDay, isDone }: { currentDay: number; isDone: (d: number) => boolean }) {
+  const phase = phaseForDay(currentDay);
+  const span = phase.endDay - phase.startDay + 1;
+  const daysIn = currentDay - phase.startDay + 1;
+  const left = phase.endDay - currentDay;
+  // Plan days for this calendar week, Monday to Sunday.
+  const dow = (dateForDay(currentDay).getDay() + 6) % 7;
+  const week = DOW.map((label, i) => ({ label, day: currentDay - dow + i }));
+
+  return (
+    <div className="mob-challenge">
+      <img className="mob-challenge__bg" src={PHASE_IMAGES[phase.number]} alt="" aria-hidden="true" />
+      <div className="mob-challenge__frost">
+        <div className="mob-challenge__top">
+          <div>
+            <p className="mob-challenge__title">{phase.name}</p>
+            <p className="mob-challenge__meta">
+              {left} {left === 1 ? "day" : "days"} left · {daysIn} of {span} days done
+            </p>
+          </div>
+          <Ring value={daysIn / span} />
+        </div>
+        <ol className="mob-weekstrip" aria-label="This week">
+          {week.map(({ label, day }) => {
+            const inPlan = day >= 1 && day <= TOTAL_DAYS;
+            const state = day === currentDay ? "today" : inPlan && isDone(day) ? "done" : "upcoming";
+            return (
+              <li key={label} className={`is-${state}`}>
+                <span className="mob-weekstrip__dow" aria-hidden="true">
+                  {label}
+                </span>
+                <span className="mob-weekstrip__dot" aria-hidden="true">
+                  {state === "done" ? <Icon name="check" size={18} /> : null}
+                </span>
+                <span className="sr-only">
+                  {label}: {state === "today" ? "today" : state === "done" ? "done" : "coming up"}
+                </span>
+              </li>
+            );
+          })}
+        </ol>
+      </div>
+    </div>
+  );
 }
 
 function Ring({ value }: { value: number }) {
-  const r = 22;
+  const r = 24;
   const c = 2 * Math.PI * r;
   return (
-    <svg className="mob-ring" width="56" height="56" viewBox="0 0 56 56" aria-hidden="true">
-      <circle cx="28" cy="28" r={r} fill="none" stroke="rgb(255 255 255 / 0.35)" strokeWidth="5" />
+    <svg className="mob-ring" width="64" height="64" viewBox="0 0 64 64" aria-hidden="true">
+      <circle cx="32" cy="32" r={r} fill="none" stroke="rgb(26 46 36 / 0.12)" strokeWidth="6" />
       <circle
-        cx="28"
-        cy="28"
+        cx="32"
+        cy="32"
         r={r}
         fill="none"
         stroke="#c9a45c"
-        strokeWidth="5"
+        strokeWidth="6"
         strokeLinecap="round"
         strokeDasharray={`${c * value} ${c}`}
-        transform="rotate(-90 28 28)"
+        transform="rotate(-90 32 32)"
       />
     </svg>
   );

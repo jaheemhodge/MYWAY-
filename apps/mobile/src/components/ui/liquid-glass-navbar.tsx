@@ -22,6 +22,8 @@ export type LiquidNavItem = {
   label: string;
   to: string;
   icon?: React.ReactNode;
+  /** Shorter label for the stacked phone bar (the full label is still read out). */
+  shortLabel?: string;
   /** the little scene the icon plays when picked */
   fx?: LiquidFx;
 };
@@ -66,7 +68,9 @@ const NAV_CSS = `
 .lq-nav[data-layout="stacked"] ul{flex:1}
 .lq-nav[data-layout="stacked"]{padding:4px}
 .lq-nav[data-layout="stacked"] li{flex:1 1 auto}
-.lq-nav[data-layout="stacked"] .lq-label{white-space:nowrap;letter-spacing:-.01em}
+.lq-nav[data-layout="stacked"] .lq-label{white-space:nowrap;font-size:16px;letter-spacing:0}
+.lq-nav[data-layout="stacked"] .lq-ico svg{width:24px;height:24px}
+.lq-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 .lq-nav[data-layout="stacked"] .lq-item{flex:1;flex-direction:column;gap:2px;min-height:64px;padding:4px 2px;border-radius:26px;text-align:center}
 .lq-ico{position:relative;display:inline-flex;flex:none}
 .lq-ico svg{transition:transform .45s cubic-bezier(.3,1.6,.5,1)}
@@ -552,7 +556,14 @@ export function LiquidNavbar({ items, active, layout = "inline", label = "Main",
                     {it.icon}
                   </span>
                 ) : null}
-                <span className="lq-label">{it.label}</span>
+                {layout === "stacked" && it.shortLabel ? (
+                  <>
+                    <span className="lq-label">{it.shortLabel}</span>
+                    <span className="lq-sr">, {it.label}</span>
+                  </>
+                ) : (
+                  <span className="lq-label">{it.label}</span>
+                )}
               </Link>
             </li>
           );

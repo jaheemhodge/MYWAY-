@@ -9,7 +9,7 @@ const TABS: LiquidNavItem[] = [
   { to: "/app/plan", label: "My plan", icon: <Icon name="plan" size={22} />, fx: "pop" },
   { to: "/app/events", label: "Events", icon: <Icon name="ticket" size={22} />, fx: "spin" },
   { to: "/app/progress", label: "Progress", icon: <Icon name="progress" size={22} />, fx: "wave" },
-  { to: "/app/account", label: "Account", icon: <Icon name="user" size={22} />, fx: "pop" },
+  { to: "/app/account", label: "Account", shortLabel: "You", icon: <Icon name="user" size={22} />, fx: "pop" },
 ];
 
 /** Pages reached from Home (the Library) keep Home highlighted. */
