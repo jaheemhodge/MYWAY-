@@ -1,43 +1,45 @@
 import { Link } from "react-router-dom";
-import { imageFor } from "../data/images";
-import type { Exercise } from "../data/library";
-import { ExerciseTags } from "./Tags";
+import { POSITION_LABEL, type Exercise } from "../data/library";
+import { opensOnDay } from "../data/plan";
+import { ExerciseThumb } from "./ExerciseThumb";
 
 /**
- * Picture card: 4:5 image with rounded corners, then tags, name and one quiet line.
- * Text never sits on the image. The whole card is one link named by the exercise.
+ * The image is the card: a 4:5 picture, then plain text on the page underneath
+ * (one meta line, the name, one quiet line). No container, border or shadow.
+ * The whole card is one link named by the exercise.
  */
 export function ExerciseCard({
   exercise,
   currentDay,
-  meta,
-  showPhase = true,
-  index,
+  eyebrow,
+  line,
+  srPrefix,
 }: {
   exercise: Exercise;
   currentDay: number;
-  /** Quiet line under the name; defaults to the exercise subtitle. */
-  meta?: string;
-  showPhase?: boolean;
-  /** Position in a session, shown before the name for screen readers. */
-  index?: number;
+  /** Meta line above the name. Defaults to "Chair · Phase 1". */
+  eyebrow?: string;
+  /** Quiet line under the name. Defaults to the exercise subtitle. */
+  line?: string;
+  /** Read before the name, e.g. "Exercise 2: ". */
+  srPrefix?: string;
 }) {
   const titleId = `card-${exercise.id}-title`;
-  const line = meta ?? exercise.subtitle;
+  const opens = opensOnDay(exercise.phase, currentDay);
+  const meta = eyebrow ?? `${POSITION_LABEL[exercise.position]} · Phase ${exercise.phase}`;
+  const quiet = line ?? exercise.subtitle;
   return (
     <article className="mob-card" aria-labelledby={titleId}>
-      <div className="mob-card__img">
-        <img src={imageFor(exercise)} alt="" loading="lazy" decoding="async" />
-      </div>
+      <ExerciseThumb exercise={exercise} badge={opens ? `Opens Day ${opens}` : undefined} />
       <div className="mob-card__body">
-        <ExerciseTags exercise={exercise} currentDay={currentDay} showPhase={showPhase} />
+        <p className="mob-card__eyebrow">{meta}</p>
         <h3 className="mob-card__title" id={titleId}>
           <Link to={`/app/library/${exercise.id}`} className="mob-card__link">
-            {index ? <span className="sr-only">{index}. </span> : null}
+            {srPrefix ? <span className="sr-only">{srPrefix}</span> : null}
             {exercise.name}
           </Link>
         </h3>
-        {line ? <p className="mob-card__meta">{line}</p> : null}
+        {quiet ? <p className="mob-card__meta">{quiet}</p> : null}
       </div>
     </article>
   );

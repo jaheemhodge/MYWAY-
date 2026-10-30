@@ -4,7 +4,7 @@ import { Icon } from "./Icon";
 import { StopNotice } from "./StopNotice";
 import { Tag } from "./Tags";
 import { VideoSlot } from "./VideoSlot";
-import { imageFor } from "../data/images";
+import { imageFor, PLACEHOLDER_WORD } from "../data/images";
 
 /**
  * Simple local step-through: one exercise per screen, its clip, setup and cues,
@@ -84,7 +84,7 @@ export function SessionPlayer({
 
       <div className="mob-player__grid">
         <div className="mob-player__media">
-          <VideoSlot poster={imageFor(exercise)} ratio="hero" />
+          <VideoSlot poster={imageFor(exercise)} placeholderWord={PLACEHOLDER_WORD[exercise.position]} ratio="hero" />
           <StopNotice />
         </div>
         <div className="mob-player__text">

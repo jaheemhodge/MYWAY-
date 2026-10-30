@@ -5,7 +5,7 @@ import { SessionPlayer } from "../components/SessionPlayer";
 import { StopNotice } from "../components/StopNotice";
 import { ExerciseTags } from "../components/Tags";
 import { VideoSlot } from "../components/VideoSlot";
-import { imageFor } from "../data/images";
+import { imageFor, PLACEHOLDER_WORD } from "../data/images";
 import { AREA_LABEL, getExercise } from "../data/library";
 import { PHASE_INFO, opensOnDay } from "../data/plan";
 import { useDay } from "../DayState";
@@ -54,7 +54,7 @@ export function ExerciseDetail() {
 
       <div className="mob-detail__grid">
         <div className="mob-detail__media">
-          <VideoSlot poster={imageFor(exercise)} ratio="portrait" />
+          <VideoSlot poster={imageFor(exercise)} placeholderWord={PLACEHOLDER_WORD[exercise.position]} ratio="portrait" />
           <StopNotice />
         </div>
 

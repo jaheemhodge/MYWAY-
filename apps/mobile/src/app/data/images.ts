@@ -1,12 +1,6 @@
-import type { Exercise } from "./library";
+import type { Exercise, Position } from "./library";
 
-/**
- * Stand-in image for every exercise that has no still yet.
- * TODO(images): replace with a still (and later a clip) per exercise.
- */
 const BASE = import.meta.env.BASE_URL;
-
-export const IMAGE_PLACEHOLDER = `${BASE}hero/hero-portrait-woman-poster.jpg`;
 
 /** Exercise stills, matched to the library by exercise name. All are 4:5 portrait. */
 const IMAGES_BY_NAME: Record<string, string> = {
@@ -17,10 +11,19 @@ const IMAGES_BY_NAME: Record<string, string> = {
   Clamshell: `${BASE}exercises/clamshell.jpg`,
 };
 
-export function imageFor(exercise: Exercise): string {
-  return IMAGES_BY_NAME[exercise.name] ?? IMAGE_PLACEHOLDER;
+/**
+ * The exercise's own still, or undefined when it has none yet.
+ * Exercises without a still show a soft sage tile with their position word instead,
+ * never another exercise's photo.
+ * TODO(images): add a still (and later a clip) for every exercise.
+ */
+export function imageFor(exercise: Exercise): string | undefined {
+  return IMAGES_BY_NAME[exercise.name];
 }
 
-export function hasOwnImage(exercise: Exercise): boolean {
-  return exercise.name in IMAGES_BY_NAME;
-}
+/** Word shown on the placeholder tile. */
+export const PLACEHOLDER_WORD: Record<Position, string> = {
+  chair: "Chair",
+  standing: "Standing",
+  floor: "Floor",
+};

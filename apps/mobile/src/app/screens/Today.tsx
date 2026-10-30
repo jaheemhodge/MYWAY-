@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { POSITION_LABEL } from "../data/library";
-import { imageFor } from "../data/images";
 import {
   MINUTES_PER_EXERCISE,
   TOTAL_DAYS,
@@ -14,7 +13,8 @@ import {
 } from "../data/plan";
 import { useDay } from "../DayState";
 import { usePageTitle } from "../hooks";
-import { BentoCard, BentoGrid } from "@/components/ui/bento";
+import { ExerciseCard } from "../components/ExerciseCard";
+import { ScrollRow } from "../components/ScrollRow";
 import { Icon } from "../components/Icon";
 import { SessionPlayer } from "../components/SessionPlayer";
 
@@ -95,55 +95,43 @@ export function Today() {
         <DayStepper selected={selected} currentDay={currentDay} isDone={isDone} onSelect={setSelected} />
       </div>
 
-      <section className="mob-wrap mob-today__row" aria-labelledby="bento-title">
-        <div className="mob-today__rowhead">
-          <div className="mob-today__rowtext">
-            <h2 id="bento-title" className="mob-section-title">
-              {isToday ? "Today's session" : `Day ${selected} session`}
-            </h2>
-            <p className="mob-muted">
-              {session.length} exercises, in this order · about {sessionMinutes(session.length)} min
-            </p>
-          </div>
-          {isToday ? (
-            <button ref={startRef} type="button" className="mob-cta mob-today__start" onClick={() => setPlaying(true)}>
-              <Icon name="play" />
-              {selectedDone ? "Do today's session again" : "Start today's session"}
-            </button>
-          ) : (
-            <div className="mob-today__other">
-              <p className="mob-muted">
-                {selectedDone
-                  ? `You finished Day ${selected}.`
-                  : `This session opens on Day ${selected}, ${formatWeekday(selected)} ${formatMonthDay(selected)}.`}
-              </p>
-              <button type="button" className="mob-pill" onClick={() => setSelected(currentDay)}>
-                Back to today
+      <div className="mob-wrap mob-today__row">
+        <ScrollRow
+          title={isToday ? "Today's session" : `Day ${selected} session`}
+          description={`${session.length} exercises, in this order · about ${sessionMinutes(session.length)} min`}
+          label="Exercises in order"
+          action={
+            isToday ? (
+              <button ref={startRef} type="button" className="mob-cta mob-today__start" onClick={() => setPlaying(true)}>
+                <Icon name="play" />
+                {selectedDone ? "Do today's session again" : "Start today's session"}
               </button>
-            </div>
-          )}
-        </div>
-        <BentoGrid label="Exercises in order">
-          {session.map((exercise, i) => (
-            <BentoCard
-              key={exercise.id}
-              to={`/app/library/${exercise.id}`}
-              image={imageFor(exercise)}
-              eyebrow={
-                <>
-                  <span className="bento__num" aria-hidden="true">
-                    {i + 1}
-                  </span>
-                  <span className="sr-only">Exercise {i + 1}: </span>
-                  {POSITION_LABEL[exercise.position]} · about {MINUTES_PER_EXERCISE} min
-                </>
-              }
-              title={exercise.name}
-              description={`You'll need: ${exercise.equipment}`}
+            ) : (
+              <div className="mob-today__other">
+                <p className="mob-muted">
+                  {selectedDone
+                    ? `You finished Day ${selected}.`
+                    : `Opens on Day ${selected}, ${formatWeekday(selected)} ${formatMonthDay(selected)}.`}
+                </p>
+                <button type="button" className="mob-pill" onClick={() => setSelected(currentDay)}>
+                  Back to today
+                </button>
+              </div>
+            )
+          }
+          items={session}
+          getKey={(exercise) => exercise.id}
+          renderItem={(exercise, i) => (
+            <ExerciseCard
+              exercise={exercise}
+              currentDay={currentDay}
+              srPrefix={`Exercise ${i + 1}: `}
+              eyebrow={`${i + 1} · ${POSITION_LABEL[exercise.position]} · about ${MINUTES_PER_EXERCISE} min`}
+              line={`You'll need: ${exercise.equipment}`}
             />
-          ))}
-        </BentoGrid>
-      </section>
+          )}
+        />
+      </div>
 
       {params.get("dev") === "1" ? (
         <div className="mob-wrap">

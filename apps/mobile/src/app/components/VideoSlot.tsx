@@ -14,6 +14,7 @@ export function VideoSlot({
   alt = "",
   ratio = "wide",
   showPlay = true,
+  placeholderWord,
 }: {
   src?: string;
   /** Still image shown until a clip exists. */
@@ -22,6 +23,8 @@ export function VideoSlot({
   alt?: string;
   ratio?: MediaRatio;
   showPlay?: boolean;
+  /** Word on the soft sage tile shown when there is no still yet. */
+  placeholderWord?: string;
 }) {
   if (src) {
     return (
@@ -32,7 +35,13 @@ export function VideoSlot({
   }
   return (
     <div className={`mob-media mob-media--${ratio}${poster ? "" : " is-empty"}`}>
-      {poster ? <img src={poster} alt={alt} loading="lazy" decoding="async" /> : null}
+      {poster ? (
+        <img src={poster} alt={alt} loading="lazy" decoding="async" />
+      ) : placeholderWord ? (
+        <span className="mob-thumb__word" aria-hidden="true">
+          {placeholderWord}
+        </span>
+      ) : null}
       {showPlay ? (
         <span className="mob-media__play" aria-hidden="true">
           <Icon name="play" size={30} />
