@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { useSearchParams } from "react-router-dom";
-import { AREA_LABEL } from "../data/library";
+import { AREA_LABEL, POSITION_LABEL } from "../data/library";
 import { imageFor } from "../data/images";
 import {
   FOCUS_AREA,
@@ -17,8 +17,7 @@ import {
 } from "../data/plan";
 import { useDay } from "../DayState";
 import { usePageTitle } from "../hooks";
-import { CarouselRow } from "../components/CarouselRow";
-import { ExerciseCard } from "../components/ExerciseCard";
+import { BentoCard, BentoGrid } from "@/components/ui/bento";
 import { Icon } from "../components/Icon";
 import { SessionPlayer } from "../components/SessionPlayer";
 import { VideoSlot } from "../components/VideoSlot";
@@ -135,24 +134,36 @@ export function Today() {
         <UpNext currentDay={currentDay} onPreview={(day) => setSelected(day)} />
       </div>
 
-      <div className="mob-wrap mob-today__row">
-        <CarouselRow
-          title={isToday ? "In today's session" : `In the Day ${selected} session`}
-          items={session}
-          getKey={(exercise) => exercise.id}
-          seeAll={{ label: `See all ${session.length}`, expandedLabel: "Show fewer" }}
-          stackOnPhone
-          renderItem={(exercise, i) => (
-            <ExerciseCard
-              exercise={exercise}
-              currentDay={currentDay}
-              showPhase={false}
-              index={i + 1}
-              meta={`about ${MINUTES_PER_EXERCISE} min`}
+      <section className="mob-wrap mob-today__row" aria-labelledby="bento-title">
+        <div className="mob-today__rowhead">
+          <h2 id="bento-title" className="mob-section-title">
+            {isToday ? "In today's session" : `In the Day ${selected} session`}
+          </h2>
+          <p className="mob-muted">
+            {session.length} exercises, in this order · about {sessionMinutes(session.length)} min
+          </p>
+        </div>
+        <BentoGrid label="Exercises in order">
+          {session.map((exercise, i) => (
+            <BentoCard
+              key={exercise.id}
+              to={`/app/library/${exercise.id}`}
+              image={imageFor(exercise)}
+              eyebrow={
+                <>
+                  <span className="bento__num" aria-hidden="true">
+                    {i + 1}
+                  </span>
+                  <span className="sr-only">Exercise {i + 1}: </span>
+                  {POSITION_LABEL[exercise.position]} · about {MINUTES_PER_EXERCISE} min
+                </>
+              }
+              title={exercise.name}
+              description={`You'll need: ${exercise.equipment}`}
             />
-          )}
-        />
-      </div>
+          ))}
+        </BentoGrid>
+      </section>
 
       {params.get("dev") === "1" ? (
         <div className="mob-wrap">
