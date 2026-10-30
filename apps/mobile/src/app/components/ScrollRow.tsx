@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useId, useRef, useState, type ReactNode } from "react";
+import { Link } from "react-router-dom";
 import { Icon } from "./Icon";
 
 /**
@@ -8,7 +9,7 @@ import { Icon } from "./Icon";
 export function ScrollRow<T>({
   title,
   description,
-  action,
+  seeAll,
   items,
   getKey,
   renderItem,
@@ -16,8 +17,8 @@ export function ScrollRow<T>({
 }: {
   title: ReactNode;
   description?: ReactNode;
-  /** Extra control in the heading row, e.g. the Start button. */
-  action?: ReactNode;
+  /** Optional link to the full list, shown beside the arrows. */
+  seeAll?: { to: string; label: string };
   items: readonly T[];
   getKey: (item: T) => string;
   renderItem: (item: T, index: number) => ReactNode;
@@ -64,8 +65,13 @@ export function ScrollRow<T>({
           </h2>
           {description ? <p className="mob-muted">{description}</p> : null}
         </div>
-        {action ? <div className="mob-srow__action">{action}</div> : null}
         <div className="mob-srow__nav">
+          {seeAll ? (
+            <Link to={seeAll.to} className="mob-textlink">
+              {seeAll.label}
+              <span className="sr-only">: {label}</span>
+            </Link>
+          ) : null}
           <button
             type="button"
             className="mob-round mob-round--icon"
@@ -74,7 +80,7 @@ export function ScrollRow<T>({
             onClick={() => !atStart && step(-1)}
           >
             <Icon name="chevronLeft" />
-            <span className="sr-only">Previous exercise</span>
+            <span className="sr-only">Previous: {label}</span>
           </button>
           <button
             type="button"
@@ -84,7 +90,7 @@ export function ScrollRow<T>({
             onClick={() => !atEnd && step(1)}
           >
             <Icon name="chevronRight" />
-            <span className="sr-only">Next exercise</span>
+            <span className="sr-only">Next: {label}</span>
           </button>
         </div>
       </div>

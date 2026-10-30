@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link, NavLink, Outlet, useLocation } from "react-router-dom";
 import { LogoMark } from "@/components/illustrations";
 import { LiquidNavbar, type LiquidNavItem } from "@/components/ui/liquid-glass-navbar";
@@ -20,6 +20,13 @@ export function Shell() {
   const { pathname } = useLocation();
   const mainRef = useRef<HTMLElement>(null);
   const first = useRef(true);
+  const [scrolled, setScrolled] = useState(false);
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 4);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
   const active = TABS.findIndex((tab) => pathname === tab.to || pathname.startsWith(`${tab.to}/`));
 
   // Move focus to the page on route changes so keyboard and screen reader users land on the content.
@@ -37,7 +44,7 @@ export function Shell() {
       <a className="mob-skip" href="#main">
         Skip to content
       </a>
-      <header className="mob-topbar">
+      <header className={`mob-topbar${scrolled ? " is-scrolled" : ""}`}>
         <div className="mob-topbar__inner">
           <Link to="/app/today" className="mob-wordmark" aria-label="Mobility, Today">
             <LogoMark />

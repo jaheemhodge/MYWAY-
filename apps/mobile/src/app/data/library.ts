@@ -56,3 +56,13 @@ export const POSITION_LABEL: Record<Position, string> = {
 export const AREAS: readonly Area[] = ["knees", "lower-back", "hips-balance"];
 export const POSITIONS: readonly Position[] = ["chair", "standing", "floor"];
 export const PHASES: readonly PhaseNumber[] = [1, 2, 3];
+
+/** Shorter names for cards only. The exercise page and player keep the full name. */
+const SHORT_NAMES: Record<string, string> = {
+  "Sit to stand from a chair": "Sit to stand",
+  "Mini squat holding a support": "Mini squat at a chair",
+};
+
+export function displayName(exercise: Exercise): string {
+  return SHORT_NAMES[exercise.name] ?? exercise.name;
+}

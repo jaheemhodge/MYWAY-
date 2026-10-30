@@ -1,9 +1,9 @@
 import { useId, useMemo, useRef, useState } from "react";
 import { Link, useNavigate, useSearchParams } from "react-router-dom";
-import { CarouselRow } from "../components/CarouselRow";
 import { ExerciseCard } from "../components/ExerciseCard";
 import { FilterDialog } from "../components/FilterDialog";
 import { Icon } from "../components/Icon";
+import { ScrollRow } from "../components/ScrollRow";
 import {
   activeCount,
   applyFilters,
@@ -36,19 +36,16 @@ const ROWS = {
 const ROW_DEFS = [
   {
     title: `For your ${AREA_LABEL[FOCUS_AREA].toLowerCase()}`,
-    description: "Your focus area, in phase order.",
     items: ROWS.focus,
     to: `/app/library?area=${FOCUS_AREA}`,
   },
   {
     title: "Sit down and do these",
-    description: "Everything you can do from a sturdy chair.",
     items: ROWS.chair,
     to: "/app/library?position=chair",
   },
   {
     title: "Balance practice",
-    description: "Standing drills. Keep a counter or chair within reach.",
     items: ROWS.balance,
     to: "/app/library?collection=balance",
   },
@@ -159,10 +156,10 @@ export function Library() {
       {browsing ? (
         <div className="mob-rows">
           {ROW_DEFS.map((row) => (
-            <CarouselRow
+            <ScrollRow
               key={row.title}
               title={row.title}
-              description={row.description}
+              label={row.title}
               items={row.items()}
               getKey={(exercise) => exercise.id}
               seeAll={{ to: row.to, label: `See all ${row.items().length}` }}

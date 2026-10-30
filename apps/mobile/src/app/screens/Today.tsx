@@ -73,14 +73,13 @@ export function Today() {
         <h1 className="mob-title">
           {formatWeekday(currentDay)}, {formatMonthDay(currentDay, "long")}
         </h1>
-        <div className="mob-phaseline">
-          <p>
-            Phase {phase.number} · {phase.name} · Day {currentDay} of {TOTAL_DAYS}
-          </p>
-          <div className="mob-phaseline__bar" aria-hidden="true">
-            <span style={{ width: `${(currentDay / TOTAL_DAYS) * 100}%` }} />
-          </div>
-        </div>
+        <p className="mob-muted">
+          Phase {phase.number} · Day {currentDay} of {TOTAL_DAYS}
+        </p>
+        <button ref={startRef} type="button" className="mob-cta mob-today__start" onClick={() => setPlaying(true)}>
+          <Icon name="play" />
+          {isDone(currentDay) ? "Do today's session again" : "Start today's session"}
+        </button>
       </header>
 
       <div className="mob-wrap">
@@ -95,30 +94,13 @@ export function Today() {
         <DayStepper selected={selected} currentDay={currentDay} isDone={isDone} onSelect={setSelected} />
       </div>
 
-      <div className="mob-wrap mob-today__row">
+      <div className="mob-wrap mob-section">
         <ScrollRow
           title={isToday ? "Today's session" : `Day ${selected} session`}
-          description={`${session.length} exercises, in this order · about ${sessionMinutes(session.length)} min`}
+          description={`${session.length} exercises · ${sessionMinutes(session.length)} min${
+            isToday ? "" : selectedDone ? " · Done" : ` · Opens ${formatWeekday(selected, "short")} ${formatMonthDay(selected)}`
+          }`}
           label="Exercises in order"
-          action={
-            isToday ? (
-              <button ref={startRef} type="button" className="mob-cta mob-today__start" onClick={() => setPlaying(true)}>
-                <Icon name="play" />
-                {selectedDone ? "Do today's session again" : "Start today's session"}
-              </button>
-            ) : (
-              <div className="mob-today__other">
-                <p className="mob-muted">
-                  {selectedDone
-                    ? `You finished Day ${selected}.`
-                    : `Opens on Day ${selected}, ${formatWeekday(selected)} ${formatMonthDay(selected)}.`}
-                </p>
-                <button type="button" className="mob-pill" onClick={() => setSelected(currentDay)}>
-                  Back to today
-                </button>
-              </div>
-            )
-          }
           items={session}
           getKey={(exercise) => exercise.id}
           renderItem={(exercise, i) => (
@@ -126,8 +108,7 @@ export function Today() {
               exercise={exercise}
               currentDay={currentDay}
               srPrefix={`Exercise ${i + 1}: `}
-              eyebrow={`${i + 1} · ${POSITION_LABEL[exercise.position]} · about ${MINUTES_PER_EXERCISE} min`}
-              line={`You'll need: ${exercise.equipment}`}
+              eyebrow={`${i + 1} · ${POSITION_LABEL[exercise.position]} · ${MINUTES_PER_EXERCISE} min`}
             />
           )}
         />

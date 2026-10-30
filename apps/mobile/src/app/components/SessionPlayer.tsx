@@ -96,10 +96,10 @@ export function SessionPlayer({
             <li>
               <Tag>{POSITION_LABEL[exercise.position]}</Tag>
             </li>
-            <li>
-              <Tag>{exercise.equipment}</Tag>
-            </li>
           </ul>
+          <p className="mob-need">
+            <strong>You'll need:</strong> {exercise.equipment}
+          </p>
           <h2 className="mob-h3">Get set</h2>
           <p>{exercise.setup}</p>
           <h2 className="mob-h3">How to do it</h2>

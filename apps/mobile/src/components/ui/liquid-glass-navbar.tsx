@@ -40,14 +40,15 @@ const PAD = 14; // canvas bleed around the pill, for shadows and ripples
 
 /* ---------- styles ---------- */
 const NAV_CSS = `
-.lq-nav{--lq-tint:rgba(255,253,249,.55);--lq-fg:#1a2e24;--lq-fg-soft:#43534a;--lq-rim:rgba(255,255,255,.85);
+.lq-nav{--lq-tint:#f7f4ee;--lq-fg:#1a2e24;--lq-fg-soft:#43534a;--lq-rim:rgba(255,255,255,.85);
   position:relative;display:inline-flex;align-items:center;gap:2px;padding:6px;border-radius:999px;isolation:isolate;
   font-family:var(--font-sans,"Source Sans 3",sans-serif);-webkit-font-smoothing:antialiased;-webkit-tap-highlight-color:transparent}
 .lq-nav ul{list-style:none;display:flex;gap:2px;margin:0;padding:0}
 .lq-nav li{display:flex}
 .lq-glass{position:absolute;inset:0;border-radius:inherit;z-index:-2;overflow:hidden;background:var(--lq-tint);
   -webkit-backdrop-filter:blur(14px) saturate(1.25) brightness(1.04);backdrop-filter:blur(14px) saturate(1.25) brightness(1.04);
-  box-shadow:inset 0 1px 1px var(--lq-rim),inset 0 0 0 1px rgba(255,255,255,.45),0 14px 34px -16px rgba(26,46,36,.42),0 2px 6px rgba(26,46,36,.08)}
+  box-shadow:inset 0 1px 1px var(--lq-rim),inset 0 0 0 1px rgba(255,255,255,.45)}
+.lq-nav[data-layout="stacked"] .lq-glass{box-shadow:inset 0 1px 1px var(--lq-rim),0 10px 30px -12px rgba(26,46,36,.35),0 1px 4px rgba(26,46,36,.08)}
 .lq-nav[data-refract="on"] .lq-glass{-webkit-backdrop-filter:url(#lq-refract) blur(3px) saturate(1.25) brightness(1.04);backdrop-filter:url(#lq-refract) blur(3px) saturate(1.25) brightness(1.04)}
 .lq-water{position:absolute;left:${-PAD}px;top:${-PAD}px;z-index:-1;pointer-events:none}
 .lq-nav[data-gl="off"] .lq-water{display:none}
