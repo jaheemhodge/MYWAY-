@@ -1,20 +1,26 @@
 import { useEffect, useRef, useState } from "react";
-import { Link, NavLink, Outlet, useLocation } from "react-router-dom";
+import { Link, Outlet, useLocation } from "react-router-dom";
 import { LogoMark } from "@/components/illustrations";
 import { LiquidNavbar, type LiquidNavItem } from "@/components/ui/liquid-glass-navbar";
 import { Icon } from "./components/Icon";
 
 const TABS: LiquidNavItem[] = [
-  { to: "/app/today", label: "Today", icon: <Icon name="today" size={22} />, fx: "glow" },
+  { to: "/app/home", label: "Home", icon: <Icon name="home" size={22} />, fx: "glow" },
   { to: "/app/plan", label: "My plan", icon: <Icon name="plan" size={22} />, fx: "pop" },
-  { to: "/app/library", label: "Library", icon: <Icon name="library" size={22} />, fx: "spin" },
+  { to: "/app/events", label: "Events", icon: <Icon name="ticket" size={22} />, fx: "spin" },
   { to: "/app/progress", label: "Progress", icon: <Icon name="progress" size={22} />, fx: "wave" },
+  { to: "/app/account", label: "Account", icon: <Icon name="user" size={22} />, fx: "pop" },
 ];
 
+/** Pages reached from Home (the Library) keep Home highlighted. */
+function activeTab(pathname: string) {
+  if (pathname.startsWith("/app/library")) return 0;
+  return TABS.findIndex((tab) => pathname === tab.to || pathname.startsWith(`${tab.to}/`));
+}
+
 /**
- * Logged-in shell. At 900px and up the liquid glass tabs sit centred in the top bar, between the
- * wordmark and Account. Below that the same four tabs float at the bottom as a full-width glass bar,
- * icon over label.
+ * Logged-in shell. At 900px and up the five tabs sit centred in the top bar beside the wordmark.
+ * Below that the same tabs float 16px above the bottom of the screen, icon over label.
  */
 export function Shell() {
   const { pathname } = useLocation();
@@ -27,7 +33,7 @@ export function Shell() {
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
-  const active = TABS.findIndex((tab) => pathname === tab.to || pathname.startsWith(`${tab.to}/`));
+  const active = activeTab(pathname);
 
   // Move focus to the page on route changes so keyboard and screen reader users land on the content.
   useEffect(() => {
@@ -46,18 +52,12 @@ export function Shell() {
       </a>
       <header className={`mob-topbar${scrolled ? " is-scrolled" : ""}`}>
         <div className="mob-topbar__inner">
-          <Link to="/app/today" className="mob-wordmark" aria-label="Mobility, Today">
+          <Link to="/app/home" className="mob-wordmark" aria-label="Mobility, Home">
             <LogoMark />
           </Link>
           <div className="mob-topnav">
             <LiquidNavbar items={TABS} active={active} />
           </div>
-          <NavLink to="/app/account" className={({ isActive }) => `mob-account${isActive ? " is-active" : ""}`}>
-            <span className="mob-avatar" aria-hidden="true">
-              <Icon name="user" size={22} />
-            </span>
-            <span>Account</span>
-          </NavLink>
         </div>
       </header>
 

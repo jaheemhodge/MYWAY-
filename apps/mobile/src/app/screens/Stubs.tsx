@@ -7,8 +7,8 @@ function Stub({ title, children }: { title: string; children: React.ReactNode })
     <div className="mob-wrap mob-page mob-stub">
       <h1 className="mob-title">{title}</h1>
       <div className="mob-stub__body">{children}</div>
-      <Link to="/app/today" className="mob-pill">
-        Go to Today
+      <Link to="/app/home" className="mob-pill">
+        Go to Home
       </Link>
     </div>
   );

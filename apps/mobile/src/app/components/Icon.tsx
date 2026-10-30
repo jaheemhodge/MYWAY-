@@ -24,6 +24,43 @@ const PATHS = {
     </>
   ),
   progress: <path d="M4 20V13M10 20V8M16 20v-9M21 20H3" />,
+  home: (
+    <>
+      <path d="M3.5 11 12 4l8.5 7" />
+      <path d="M6 9.5V20h12V9.5" />
+    </>
+  ),
+  ticket: (
+    <>
+      <path d="M4 7.5A1.5 1.5 0 0 1 5.5 6h13A1.5 1.5 0 0 1 20 7.5V10a2 2 0 0 0 0 4v2.5a1.5 1.5 0 0 1-1.5 1.5h-13A1.5 1.5 0 0 1 4 16.5V14a2 2 0 0 0 0-4Z" />
+      <path d="M14 6v12" strokeDasharray="2 2.5" />
+    </>
+  ),
+  pin: (
+    <>
+      <path d="M12 21s-6.5-6-6.5-11a6.5 6.5 0 0 1 13 0c0 5-6.5 11-6.5 11Z" />
+      <circle cx="12" cy="10" r="2.3" />
+    </>
+  ),
+  knee: (
+    <>
+      <path d="M9 2.5 10.5 11 8 21" />
+      <path d="M13.5 2.5 15 11l-2.5 10" />
+      <circle cx="12.7" cy="11" r="1.6" />
+    </>
+  ),
+  back: (
+    <>
+      <path d="M12 2.5c-2 3 2 6 0 9.5s2 6.5 0 9.5" />
+      <path d="M9 6h6M9.5 10h5M9.5 14h5M9 18h6" />
+    </>
+  ),
+  balance: (
+    <>
+      <circle cx="12" cy="4.5" r="1.8" />
+      <path d="M12 7v7M6.5 10h11M12 14v7.5M12 14l4 2.5" />
+    </>
+  ),
   chevronLeft: <path d="M14.5 6 8.5 12l6 6" />,
   chevronRight: <path d="M9.5 6l6 6-6 6" />,
   arrowRight: <path d="M5 12h14M13 6l6 6-6 6" />,

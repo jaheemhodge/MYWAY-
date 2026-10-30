@@ -1,0 +1,149 @@
+{
+  "note": "SAMPLE listings for UI prototyping only. Not real events: organizers and places are generic on purpose. Replace with real local events later.",
+  "events": [
+    {
+      "id": "e01",
+      "title": "Gentle morning walk",
+      "organizer": "Neighborhood walking group",
+      "category": "walking",
+      "tileWord": "Walking",
+      "dayOffset": 3,
+      "time": "09:00",
+      "price": "Free",
+      "place": "A local park",
+      "whatToExpect": "An easy-paced walk of about 45 minutes on flat paths, with a stop halfway. Come in comfortable shoes and bring water. You can turn back at any point."
+    },
+    {
+      "id": "e02",
+      "title": "Easy walk-run evening",
+      "organizer": "Community running club",
+      "category": "walking",
+      "tileWord": "Walk-run",
+      "dayOffset": 1,
+      "time": "18:30",
+      "price": "Free",
+      "place": "Riverside path",
+      "whatToExpect": "Mix walking and light jogging at your own pace. Walkers are welcome the whole way. The group waits at the end so nobody is left behind."
+    },
+    {
+      "id": "e03",
+      "title": "Nordic walking for beginners",
+      "organizer": "Local Nordic walking group",
+      "category": "walking",
+      "tileWord": "Nordic walking",
+      "dayOffset": 4,
+      "time": "10:00",
+      "price": "Pay what you can",
+      "place": "Sports ground",
+      "whatToExpect": "A short introduction to walking with poles, then a slow loop together. Poles can be borrowed for the first session."
+    },
+    {
+      "id": "e04",
+      "title": "Sunrise loop",
+      "organizer": "Early risers walking club",
+      "category": "walking",
+      "tileWord": "Walking",
+      "dayOffset": 6,
+      "time": "07:30",
+      "price": "Free",
+      "place": "A local park",
+      "whatToExpect": "One quiet loop before the day starts, about 30 minutes. Coffee nearby afterwards for anyone who wants it."
+    },
+    {
+      "id": "e05",
+      "title": "Pétanque afternoon",
+      "organizer": "Neighborhood pétanque club",
+      "category": "gentle",
+      "tileWord": "Pétanque",
+      "dayOffset": 2,
+      "time": "15:00",
+      "price": "Free",
+      "place": "Town square",
+      "whatToExpect": "Friendly games in small teams. Boules are shared, and someone will show you the rules if you are new."
+    },
+    {
+      "id": "e06",
+      "title": "Tai chi in the park",
+      "organizer": "Community tai chi group",
+      "category": "gentle",
+      "tileWord": "Tai chi",
+      "dayOffset": 3,
+      "time": "10:30",
+      "price": "Pay what you can",
+      "place": "A local park",
+      "whatToExpect": "Slow, flowing movements done standing, led step by step. Stand at the back and follow along, or watch first."
+    },
+    {
+      "id": "e07",
+      "title": "Seated stretch class",
+      "organizer": "Community centre class",
+      "category": "gentle",
+      "tileWord": "Stretch",
+      "dayOffset": 5,
+      "time": "11:00",
+      "price": "Pay what you can",
+      "place": "Community centre",
+      "whatToExpect": "A relaxed class done mostly from a chair. Chairs are provided. Wear clothes you can move in."
+    },
+    {
+      "id": "e08",
+      "title": "Lawn bowls taster",
+      "organizer": "Local bowls club",
+      "category": "gentle",
+      "tileWord": "Bowls",
+      "dayOffset": 8,
+      "time": "14:00",
+      "price": "Free",
+      "place": "Sports ground",
+      "whatToExpect": "Try a few ends with club members. Flat-soled shoes please; bowls are provided."
+    },
+    {
+      "id": "e09",
+      "title": "Coffee and a stroll",
+      "organizer": "Neighborhood social club",
+      "category": "social",
+      "tileWord": "Coffee",
+      "dayOffset": 1,
+      "time": "10:00",
+      "price": "Free",
+      "place": "Café near the town square",
+      "whatToExpect": "Meet for coffee, then a short stroll around the square for those who want to. Easy to join on your own."
+    },
+    {
+      "id": "e10",
+      "title": "Line dancing social",
+      "organizer": "Community dance group",
+      "category": "social",
+      "tileWord": "Dancing",
+      "dayOffset": 4,
+      "time": "16:00",
+      "price": "Pay what you can",
+      "place": "Community centre",
+      "whatToExpect": "Simple steps taught slowly, then a few songs together. No partner needed. Sit out any song you like."
+    },
+    {
+      "id": "e11",
+      "title": "Board games afternoon",
+      "organizer": "Local games club",
+      "category": "social",
+      "tileWord": "Games",
+      "dayOffset": 2,
+      "time": "14:30",
+      "price": "Free",
+      "place": "Public library hall",
+      "whatToExpect": "Card and board games at shared tables. Bring a favourite game or learn a new one."
+    },
+    {
+      "id": "e12",
+      "title": "Community garden morning",
+      "organizer": "Neighborhood garden group",
+      "category": "social",
+      "tileWord": "Garden",
+      "dayOffset": 7,
+      "time": "09:30",
+      "price": "Free",
+      "place": "Community garden",
+      "whatToExpect": "Light jobs around the beds, done at your own pace, with a tea break. Gloves and tools are shared."
+    }
+  ]
+}

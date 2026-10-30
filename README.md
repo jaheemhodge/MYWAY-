@@ -56,10 +56,12 @@ Lives in `apps/mobile/src/app`. Local state only: no backend, auth or analytics.
 
 | Route | What it is |
 |---|---|
-| `/app/today` | Today: hero, day strip (stepper on phones), session picture row, Up next. Add `?dev=1` for the prototype day control |
+| `/app/home` | Home (default): greeting, today's session card, Up next, More workouts, Challenges. Add `?dev=1` for the prototype day control |
+| `/app/events`, `/app/events/:id` | Events: sample local listings (not real) and event detail |
 | `/app/library` | Library rows; `?area=&position=&phase=&q=` shows the filtered grid |
 | `/app/library/:id` | Exercise detail (preview only for later phases) |
 | `/app/plan`, `/app/progress`, `/app/account` | Stubs |
+| `/app/today` | Redirects to `/app/home` |
 
 The older phone-framed tab screens moved from `/app/*` to `/preview/home`, `/preview/progress`, `/preview/plan` and `/preview/profile`.
 

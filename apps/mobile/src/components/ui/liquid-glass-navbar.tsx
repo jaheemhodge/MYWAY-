@@ -64,8 +64,10 @@ const NAV_CSS = `
 .lq-item:focus-visible{outline:3px solid #1a2e24;outline-offset:3px;box-shadow:0 0 0 3px #f7f4ee}
 .lq-nav[data-layout="stacked"]{--lq-tint:rgba(251,249,245,.86);display:flex;width:100%;border-radius:32px}
 .lq-nav[data-layout="stacked"] ul{flex:1}
-.lq-nav[data-layout="stacked"] li{flex:1}
-.lq-nav[data-layout="stacked"] .lq-item{flex:1;flex-direction:column;gap:2px;min-height:64px;padding:4px 6px;border-radius:26px;text-align:center}
+.lq-nav[data-layout="stacked"]{padding:4px}
+.lq-nav[data-layout="stacked"] li{flex:1 1 auto}
+.lq-nav[data-layout="stacked"] .lq-label{white-space:nowrap;letter-spacing:-.01em}
+.lq-nav[data-layout="stacked"] .lq-item{flex:1;flex-direction:column;gap:2px;min-height:64px;padding:4px 2px;border-radius:26px;text-align:center}
 .lq-ico{position:relative;display:inline-flex;flex:none}
 .lq-ico svg{transition:transform .45s cubic-bezier(.3,1.6,.5,1)}
 .lq-item[aria-current="page"] .lq-ico svg{transform:translateY(-1px) scale(1.08)}
