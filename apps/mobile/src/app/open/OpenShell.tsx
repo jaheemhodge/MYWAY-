@@ -1,7 +1,7 @@
 import "@fontsource/inter-tight/400.css";
 import { useEffect, useId, useRef, useState } from "react";
 import { Link, Outlet, useLocation, useNavigate, useSearchParams } from "react-router-dom";
-import { HandwritingText } from "@/components/ui/handwriting-text";
+import { GradientText } from "@/components/ui/gradient-text";
 import { LiquidNavbar, type LiquidNavItem } from "@/components/ui/liquid-glass-navbar";
 import { Icon } from "../components/Icon";
 import { TOTAL_DAYS } from "../data/plan";
@@ -68,7 +68,7 @@ export function OpenShell() {
       <header className="o-bar1">
         <div className="o-wrap o-bar1__inner">
           <Link to="/app/home" className="o-wordmark">
-            <HandwritingText text="Mobility" height="1.15em" duration={1.2} />
+            <GradientText>Mobility</GradientText>
           </Link>
           <div className="o-topnav">
             <LiquidNavbar items={TABS} active={active} tone="mist" />
@@ -88,7 +88,7 @@ export function OpenShell() {
       <footer className="o-foot">
         <div className="o-wrap">
           <Link to="/app/home" className="o-foot__mark">
-            <HandwritingText text="Mobility" height="1.15em" duration={1.2} />
+            <GradientText>Mobility</GradientText>
           </Link>
         </div>
       </footer>
