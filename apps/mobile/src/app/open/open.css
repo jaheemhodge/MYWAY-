@@ -1,37 +1,64 @@
 /*
- * Exercise side ("At home"): Open's structure with a Qoves-style light palette.
- * Everything here is scoped to .t-open, so the Events pages keep their own look.
+ * Exercise side ("At home"): a structural copy of Open's web library (o-p-e-n.com/all).
+ * The only change from Open is colour: a soft Qoves-style blue-grey gradient instead of black.
+ * Everything is scoped to .t-open so the Events pages keep their own look.
  *
- * Palette: warm off-white page, near-black ink, no accent in the chrome (colour comes from the
- * pictures); Brass only for progress. One sans (Source Sans 3) for the UI; Fraunces only for the
- * wordmark and the hero title. Controls are pills, media has sharp 4px corners, no shadows.
- * Sized for 50–70: 18px minimum text, 56px minimum controls.
+ * One sans (Inter Tight) at weight 400 for everything, as Open does. Sized for 50–70:
+ * nothing under 18px, every control at least 56px tall. No shadows, no cards, no accent colour:
+ * the photos carry the colour.
  */
 
 .t-open {
-  --o-bg: #f4f2ed;
-  --o-panel: #ece9e2;
-  --o-tile: #e6e2da;
-  --o-ink: #141414;
-  --o-ink2: #5a5a57; /* 6.4:1 on the page */
-  --o-line: #d9d5cc;
-  --o-brass: #c9a45c;
-  --o-gutter: 1rem;
-  --o-max: 90rem;
-  --o-sans: var(--font-sans);
-  --o-serif: var(--font-serif);
+  --bg-top: #7e93a0;
+  --bg-mid: #9fb4c2;
+  --bg-bottom: #b6cad7;
+  --ink: #0f1418;
+  /* Brief asked for 62%; at the top of the gradient (#7E93A0) that is 3.1:1. 84% holds 4.7:1 everywhere. */
+  --ink-2: rgb(15 20 24 / 0.84);
+  /* Brief asked for 28%; raised so the search field and outlined pills stay visible at the dark top. */
+  --line: rgb(15 20 24 / 0.4);
+  --pill-active-bg: #f5f6f4;
+  --pill-group-bg: rgb(255 255 255 / 0.22);
+  --footer-bg: rgb(15 20 24 / 0.1);
 
-  background: var(--o-bg);
-  color: var(--o-ink);
+  --o-gutter: 20px;
+  --o-sans: "Inter Tight", "Helvetica Neue", Arial, sans-serif;
+  /* Legacy shell rules read --font-sans/--font-serif; point both at the one face. */
+  --font-sans: var(--o-sans);
+  --font-serif: var(--o-sans);
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+
+  /* Older aliases still used by the overlay and filter panel rules below. */
+  --o-ink: var(--ink);
+  --o-ink2: var(--ink-2);
+  --o-bg: var(--pill-active-bg);
+  --o-panel: rgb(255 255 255 / 0.22);
+  --o-line: var(--line);
+
+  position: relative;
+  min-height: 100dvh;
+  background: transparent;
+  color: var(--ink);
   font-family: var(--o-sans);
   font-size: 1.125rem;
-  line-height: 1.5;
+  font-weight: 400;
+  line-height: 1.4;
 }
 
-@media (min-width: 56.25em) {
+@media (min-width: 64em) {
   .t-open {
-    --o-gutter: 2rem;
+    --o-gutter: 24px;
   }
+}
+
+/* The page gradient, pinned to the viewport (background-attachment: fixed is ignored on iOS). */
+.t-open::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(180deg, var(--bg-top) 0%, var(--bg-mid) 45%, var(--bg-bottom) 100%);
+  pointer-events: none;
 }
 
 /* The legacy root rules make html, body and #root scroll containers, which stops the sticky bar. */
@@ -39,51 +66,59 @@ html:root:has(.t-open),
 html body:has(.t-open),
 html body #root:has(.t-open) {
   overflow: visible;
-  background: #f4f2ed;
+  background: #9fb4c2;
 }
 
 .t-open ::selection {
-  background: #141414;
-  color: #f4f2ed;
+  background: var(--ink);
+  color: var(--pill-active-bg);
 }
 
 .t-open :focus-visible {
-  outline: 3px solid var(--o-ink);
+  outline: 2px solid var(--ink);
   outline-offset: 3px;
-  box-shadow: 0 0 0 3px var(--o-bg);
+  box-shadow: none;
 }
 
 .mob-root.t-open h1,
 .mob-root.t-open h2,
 .mob-root.t-open h3 {
   font-family: var(--o-sans);
-  color: var(--o-ink);
+  font-weight: 400;
+  color: var(--ink);
   letter-spacing: 0;
+  margin: 0;
 }
 
-.t-open a {
-  color: var(--o-ink);
+.t-open p {
+  margin: 0;
 }
 
+.mob-root.t-open a,
+.mob-root.t-open button {
+  color: var(--ink);
+}
+
+/* Plan, Progress and Account stubs render inside this shell. */
 .t-open .mob-title {
   font-family: var(--o-sans);
-  font-weight: 300;
-  font-size: 2.75rem;
+  font-weight: 400;
+  font-size: 2.25rem;
 }
 
 .t-open .mob-lede,
 .t-open .mob-muted {
-  color: var(--o-ink2);
+  color: var(--ink-2);
 }
 
 .t-open .mob-pill {
   background: transparent;
-  border: 1px solid var(--o-ink);
-  color: var(--o-ink);
+  border: 1px solid var(--line);
+  color: var(--ink);
 }
 
 .o-wrap {
-  width: min(var(--o-max), 100% - 2 * var(--o-gutter));
+  width: calc(100% - 2 * var(--o-gutter));
   margin-inline: auto;
 }
 
@@ -99,39 +134,40 @@ html body #root:has(.t-open) {
   border: 1px solid transparent;
   border-radius: 999px;
   background: transparent;
-  color: var(--o-ink);
+  color: var(--ink);
   font-family: var(--o-sans);
   font-size: 1.125rem;
-  font-weight: 600;
+  font-weight: 400;
   line-height: 1.2;
   text-decoration: none;
   white-space: nowrap;
   cursor: pointer;
   transition:
     background-color 160ms ease,
-    color 160ms ease;
+    transform 160ms var(--ease-out);
+}
+
+.o-pill:active {
+  transform: scale(0.97);
 }
 
 .t-open .o-pill--solid {
-  background: var(--o-ink);
-  color: var(--o-bg);
-}
-
-.t-open .o-pill--solid:hover {
-  background: #2c2c2a;
+  background: var(--pill-active-bg);
+  color: var(--ink);
 }
 
 .o-pill--outline {
-  border-color: var(--o-ink);
+  border-color: var(--line);
 }
 
-.o-pill--outline:hover,
-.o-pill--plain:hover {
-  background: var(--o-panel);
-}
+@media (hover: hover) and (pointer: fine) {
+  .t-open .o-pill--solid:hover {
+    background: #ffffff;
+  }
 
-.o-pill--plain {
-  font-weight: 500;
+  .o-pill--outline:hover {
+    background: rgb(255 255 255 / 0.18);
+  }
 }
 
 .o-pill--ghost {
@@ -152,113 +188,112 @@ html body #root:has(.t-open) {
 }
 
 .o-pill[aria-disabled="true"] {
-  opacity: 0.35;
+  opacity: 0.4;
   cursor: not-allowed;
 }
 
 .o-caps {
   text-transform: uppercase;
-  letter-spacing: 0.06em;
-  font-weight: 600;
+  letter-spacing: 0.02em;
 }
 
 .o-meta {
   font-size: 1.125rem;
-  color: var(--o-ink2);
+  color: var(--ink-2);
 }
 
-/* ---------- Bar 1: logo row (scrolls away) ---------- */
+/* ---------- Logo row (scrolls away, like Open's) ---------- */
 
 .o-bar1__inner {
   display: grid;
   grid-template-columns: 1fr auto 1fr;
   align-items: center;
   gap: 1rem;
-  min-height: 88px;
+  min-height: 104px;
 }
 
 .o-bar1__day {
   font-size: 1.125rem;
-  color: var(--o-ink2);
+  color: var(--ink);
 }
 
 .o-wordmark {
-  font-family: var(--o-serif);
-  font-size: 2.125rem;
-  font-weight: 500;
-  letter-spacing: 0.02em;
-  text-decoration: none;
-  min-height: 56px;
   display: inline-flex;
   align-items: center;
+  min-height: 56px;
+  font-size: 2.5rem;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  text-decoration: none;
 }
 
 .o-bar1__right {
   justify-self: end;
   display: flex;
   align-items: center;
-  gap: 0.75rem;
+  gap: 2.5rem;
 }
 
 .o-switch {
   display: inline-flex;
-  padding: 3px;
-  border: 1px solid var(--o-ink);
-  border-radius: 999px;
+  align-items: center;
+  gap: 0.375rem;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
 }
 
 .o-switch__opt {
   display: inline-flex;
   align-items: center;
-  min-height: 48px;
-  padding: 0 1.25rem;
-  border-radius: 999px;
-  font-size: 1.125rem;
-  font-weight: 600;
+  min-height: 56px;
+  padding-inline: 0.25rem;
   text-decoration: none;
 }
 
-/* Two halves make one 56px control. */
-.o-switch {
-  min-height: 56px;
-}
-
-.t-open .o-switch__opt.is-on {
-  background: var(--o-ink);
-  color: var(--o-bg);
+.o-switch__opt.is-on {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.3em;
 }
 
 .o-acct {
   position: relative;
 }
 
-.t-open .o-avatar {
-  display: grid;
-  place-items: center;
-  width: 56px;
-  height: 56px;
+.o-me {
+  min-width: 56px;
+  min-height: 56px;
+  padding: 0 0.25rem;
   border: 0;
-  border-radius: 50%;
-  background: var(--o-ink);
-  color: var(--o-bg);
-  font-family: var(--o-sans);
-  font-size: 1.25rem;
-  font-weight: 600;
+  background: transparent;
+  color: var(--ink);
+  font: inherit;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
   cursor: pointer;
 }
 
 .o-acct__menu {
   position: absolute;
   right: 0;
-  top: calc(100% + 0.5rem);
+  top: calc(100% + 0.25rem);
   z-index: 60;
   list-style: none;
   margin: 0;
   padding: 0.5rem;
   min-width: 14rem;
-  border: 1px solid var(--o-ink);
-  border-radius: 4px;
-  background: var(--o-bg);
+  border: 1px solid var(--line);
+  border-radius: 2px;
+  background: var(--pill-active-bg);
+  transform-origin: top right;
+  transition:
+    opacity 180ms var(--ease-out),
+    transform 180ms var(--ease-out);
+
+  @starting-style {
+    opacity: 0;
+    transform: scale(0.96);
+  }
 }
 
 .o-acct__menu a {
@@ -267,42 +302,34 @@ html body #root:has(.t-open) {
   min-height: 56px;
   padding: 0 1rem;
   border-radius: 999px;
-  font-size: 1.125rem;
-  font-weight: 600;
   text-decoration: none;
 }
 
 .o-acct__menu a:hover {
-  background: var(--o-panel);
+  background: rgb(15 20 24 / 0.06);
 }
 
-@media (max-width: 56.24em) {
-  .o-bar1__inner {
-    grid-template-columns: 1fr auto;
-    min-height: 72px;
-  }
-
-  .o-bar1__day {
-    display: none;
-  }
-
-  .o-wordmark {
-    font-size: 1.75rem;
-  }
-
-  .o-switch {
-    display: none;
-  }
-}
-
-/* ---------- Bar 2: search, categories, filter (sticky) ---------- */
+/* ---------- Sticky bar: search, categories, filter ---------- */
 
 .o-bar2 {
   position: sticky;
   top: 0;
   z-index: 40;
-  background: var(--o-bg);
-  border-bottom: 1px solid transparent;
+  background: transparent;
+}
+
+/* Transparent over the gradient. The blur only shows when tiles scroll underneath, and its lower
+   edge fades out instead of ending in a hard line. */
+.o-bar2::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 -20px;
+  z-index: -1;
+  -webkit-backdrop-filter: blur(24px);
+  backdrop-filter: blur(24px);
+  -webkit-mask-image: linear-gradient(to bottom, #000 70%, transparent);
+  mask-image: linear-gradient(to bottom, #000 70%, transparent);
+  pointer-events: none;
 }
 
 .o-bar2__inner {
@@ -310,23 +337,31 @@ html body #root:has(.t-open) {
   grid-template-columns: 1fr auto 1fr;
   align-items: center;
   gap: 1rem;
-  padding-block: 0.625rem;
+  padding-block: 12px;
 }
 
 .o-search {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  width: min(18rem, 100%);
+  gap: 0.625rem;
+  width: clamp(12rem, 24vw, 300px);
   min-height: 56px;
   padding: 0 1.25rem;
-  border: 1px solid var(--o-ink);
+  border: 1px solid var(--line);
   border-radius: 999px;
 }
 
 .o-search:focus-within {
-  outline: 3px solid var(--o-ink);
+  outline: 2px solid var(--ink);
   outline-offset: 3px;
+}
+
+.o-search__icon {
+  display: inline-flex;
+}
+
+.o-search__toggle {
+  display: none;
 }
 
 .o-search input {
@@ -335,27 +370,74 @@ html body #root:has(.t-open) {
   min-height: 54px;
   border: 0;
   background: transparent;
-  color: var(--o-ink);
+  color: var(--ink);
   font: inherit;
   font-size: 1.125rem;
 }
 
-.o-search input:focus {
+/* The field's ring is drawn on the whole pill (:focus-within above), not on the bare input. */
+.mob-root.t-open .o-search input:focus,
+.mob-root.t-open .o-search input:focus-visible {
   outline: none;
+  box-shadow: none;
 }
 
 .o-search input::placeholder {
-  color: var(--o-ink2);
+  color: var(--ink);
   opacity: 1;
 }
 
+.o-search input::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+}
+
+/* Like Open: "All" stands on its own, the focus areas share one track. */
 .o-cats {
   display: flex;
-  gap: 0.25rem;
+  gap: 12px;
+}
+
+.o-cats__group {
+  display: flex;
+  border-radius: 999px;
+  background: var(--pill-group-bg);
+}
+
+.o-cat--all:not(.is-on) {
+  background: var(--pill-group-bg);
+}
+
+.o-cat {
+  display: inline-flex;
+  align-items: center;
+  min-height: 56px;
+  padding: 0 1.75rem;
+  border-radius: 999px;
+  font-size: 1.125rem;
+  text-decoration: none;
+  white-space: nowrap;
+  transition:
+    background-color 160ms ease,
+    transform 160ms var(--ease-out);
+}
+
+.o-cat:active {
+  transform: scale(0.97);
+}
+
+.o-cat.is-on {
+  background: var(--pill-active-bg);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .o-cat:not(.is-on):hover {
+    background: rgb(255 255 255 / 0.2);
+  }
 }
 
 .o-filterbtn {
   justify-self: end;
+  padding-inline: 1.5rem 1.25rem;
 }
 
 .o-fbadge {
@@ -365,52 +447,56 @@ html body #root:has(.t-open) {
   height: 28px;
   padding: 0 0.375rem;
   border-radius: 999px;
-  background: var(--o-ink);
-  color: var(--o-bg);
+  background: var(--ink);
+  color: var(--pill-active-bg);
   font-size: 1.125rem;
+  letter-spacing: 0;
 }
 
-@media (max-width: 56.24em) {
-  .o-bar2__inner {
-    display: flex;
-    overflow-x: auto;
-    scrollbar-width: none;
-    width: 100%;
-    padding-inline: var(--o-gutter);
-  }
-
-  .o-bar2__inner::-webkit-scrollbar {
-    display: none;
-  }
-
-  .o-bar2__inner > * {
-    flex: none;
-  }
-
-  .o-search {
-    width: 11rem;
-  }
-}
-
-/* ---------- Main, bottom bar ---------- */
+/* ---------- Main, footer, bottom tab bar ---------- */
 
 .o-main {
   display: block;
-  padding-bottom: 6rem;
 }
 
-.o-main:focus-visible {
+/* Main takes focus after each navigation (for screen readers); it never shows a ring. */
+.mob-root.t-open .o-main:focus,
+.mob-root.t-open .o-main:focus-visible {
   outline: none;
   box-shadow: none;
+}
+
+.o-foot {
+  margin-top: 96px;
+  background: var(--footer-bg);
+}
+
+.o-foot .o-wrap {
+  display: flex;
+  align-items: center;
+  min-height: 88px;
+}
+
+.o-foot__mark {
+  display: inline-flex;
+  align-items: center;
+  min-height: 56px;
+  font-size: 1.75rem;
+  letter-spacing: -0.02em;
+  text-decoration: none;
 }
 
 .o-bottom {
   display: none;
 }
 
-@media (max-width: 56.24em) {
+@media (max-width: 63.99em) {
   .o-main {
-    padding-bottom: calc(120px + env(safe-area-inset-bottom, 0px));
+    padding-bottom: calc(144px + env(safe-area-inset-bottom, 0px));
+  }
+
+  .o-foot {
+    display: none;
   }
 
   .o-bottom {
@@ -418,8 +504,10 @@ html body #root:has(.t-open) {
     position: fixed;
     inset: auto 0 0;
     z-index: 50;
-    background: var(--o-bg);
-    border-top: 1px solid var(--o-line);
+    background: rgb(182 202 215 / 0.86);
+    -webkit-backdrop-filter: blur(24px) saturate(140%);
+    backdrop-filter: blur(24px) saturate(140%);
+    border-top: 1px solid rgb(15 20 24 / 0.12);
     padding-bottom: env(safe-area-inset-bottom, 0px);
   }
 
@@ -437,16 +525,21 @@ html body #root:has(.t-open) {
     align-items: center;
     justify-content: center;
     gap: 0.125rem;
-    min-height: 72px;
-    color: var(--o-ink2);
-    font-size: 1rem; /* 16px tab label exception */
-    font-weight: 500;
+    min-height: 76px;
+    color: var(--ink-2);
+    font-size: 1.125rem;
+    line-height: 1.2;
     text-decoration: none;
   }
 
   .t-open .o-bottom__item.is-active {
-    color: var(--o-ink);
-    font-weight: 700;
+    color: var(--ink);
+  }
+
+  .o-bottom__item.is-active span {
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.25em;
   }
 
   .o-bottom__item:focus-visible {
@@ -454,197 +547,163 @@ html body #root:has(.t-open) {
   }
 }
 
+@media (prefers-reduced-transparency: reduce) {
+  .o-bar2::before {
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+
+  .o-bottom {
+    background: var(--bg-bottom);
+  }
+}
+
 .t-open:has(dialog[open]) .o-bottom {
   visibility: hidden;
 }
 
-/* ---------- Hero (Open's split card) ---------- */
+/* ---------- Phones and small tablets: icon search, pills scroll under it ---------- */
+
+@media (max-width: 63.99em) {
+  .o-bar2__inner {
+    grid-template-columns: auto 1fr auto;
+    grid-template-areas:
+      "search . filter"
+      "cats cats cats";
+    gap: 8px 12px;
+    padding-block: 8px 12px;
+  }
+
+  .o-search {
+    grid-area: search;
+    width: 56px;
+    padding: 0;
+    gap: 0;
+  }
+
+  .o-search__icon,
+  .o-search input {
+    display: none;
+  }
+
+  .o-search__toggle {
+    display: grid;
+    place-items: center;
+    flex: none;
+    width: 54px;
+    height: 54px;
+    border: 0;
+    border-radius: 999px;
+    background: transparent;
+    color: var(--ink);
+    cursor: pointer;
+  }
+
+  .o-search.is-open {
+    grid-column: 1 / 3;
+    width: auto;
+    padding-right: 1.25rem;
+  }
+
+  .o-search.is-open input {
+    display: block;
+  }
+
+  /* The pills run off the right edge like the tile rows; only this strip scrolls. */
+  .o-cats {
+    grid-area: cats;
+    margin-inline-end: calc(-1 * var(--o-gutter));
+    padding-inline-end: var(--o-gutter);
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .o-cats > * {
+    flex: none;
+  }
+
+  .o-cats::-webkit-scrollbar {
+    display: none;
+  }
+
+  .o-cat {
+    padding-inline: 1.375rem;
+  }
+
+  .o-filterbtn {
+    grid-area: filter;
+  }
+}
+
+@media (max-width: 47.99em) {
+  .o-bar1__inner {
+    grid-template-columns: 1fr auto;
+    min-height: 80px;
+  }
+
+  .o-bar1__day,
+  .o-switch {
+    display: none;
+  }
+
+  .o-wordmark {
+    font-size: 2rem;
+  }
+}
+
+/* ---------- Rows (Open's Breathe / Move rows) ---------- */
 
 .o-page {
-  padding-top: 1rem;
+  padding-top: 40px;
 }
-
-.o-hero {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  aspect-ratio: 3 / 1;
-  overflow: hidden;
-  border-radius: 4px;
-  background: var(--o-panel);
-}
-
-.o-hero__pic {
-  position: relative;
-  min-height: 0;
-}
-
-.o-hero__pic img {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center 22%;
-}
-
-.o-hero__pic.is-tile {
-  display: grid;
-  place-items: center;
-  background: var(--o-tile);
-}
-
-.o-hero__side {
-  position: relative;
-  overflow: hidden;
-  isolation: isolate;
-  display: flex;
-  align-items: center;
-}
-
-.o-hero__blur {
-  position: absolute;
-  inset: -80px;
-  width: calc(100% + 160px);
-  height: calc(100% + 160px);
-  object-fit: cover;
-  filter: blur(40px);
-  z-index: -2;
-}
-
-.o-hero__side::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: rgb(244 242 237 / 0.7);
-  z-index: -1;
-}
-
-.o-hero__body {
-  display: grid;
-  gap: 0.5rem;
-  justify-items: start;
-  padding: 2rem 3rem;
-}
-
-.o-kicker {
-  font-size: 1.125rem;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: var(--o-ink2);
-}
-
-.mob-root.t-open .o-hero__title {
-  font-family: var(--o-serif);
-  font-weight: 400;
-  font-size: 2.75rem; /* 44px */
-  line-height: 1.08;
-  letter-spacing: -0.015em;
-}
-
-.o-hero__meta {
-  font-size: 1.25rem;
-  font-weight: 600;
-}
-
-.o-hero__line {
-  color: var(--o-ink2);
-  max-width: 34ch;
-}
-
-.o-hero__actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.75rem;
-  margin-top: 0.75rem;
-}
-
-@media (max-width: 56.24em) {
-  .o-hero {
-    grid-template-columns: 1fr;
-    aspect-ratio: auto;
-  }
-
-  .o-hero__pic {
-    aspect-ratio: 1 / 1;
-  }
-
-  .o-hero__body {
-    padding: 1.5rem;
-  }
-
-  .mob-root.t-open .o-hero__title {
-    font-size: 2.25rem;
-  }
-}
-
-/* ---------- Rows ---------- */
 
 .o-rows {
   display: grid;
-  gap: 4rem;
-  margin-top: 4rem;
+  gap: 96px;
 }
 
 .o-row {
   min-width: 0;
 }
 
-.o-row__head {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: flex-end;
-  justify-content: space-between;
-  gap: 0.75rem 1.5rem;
-  margin-bottom: 1.25rem;
-}
-
-.o-row__titles {
+.o-head {
   display: grid;
-  gap: 0.25rem;
-  min-width: 0;
-}
-
-.t-open .o-row__title {
-  font-size: 2.125rem; /* 34px */
-  font-weight: 300;
-  line-height: 1.15;
-}
-
-.o-row__line {
-  color: var(--o-ink2);
-  font-size: 1.125rem;
-}
-
-.o-row__controls {
-  display: flex;
+  grid-template-columns: minmax(0, 1fr) auto;
   align-items: center;
-  gap: 0.5rem;
+  column-gap: 1.5rem;
+  row-gap: 4px;
+  margin-bottom: 24px;
 }
 
-.o-row__arrows {
-  display: flex;
-  gap: 0.5rem;
+.t-open .o-head__title {
+  font-size: 3rem; /* 48px */
+  line-height: 1.1;
+  letter-spacing: -0.01em;
 }
 
-@media (max-width: 56.24em) {
-  .o-row__arrows {
-    display: none;
-  }
+.o-head__all {
+  padding-inline: 2rem;
 }
 
-/* The track lines up with the page edge on the left and runs off the right edge. */
+.o-head__line {
+  grid-column: 1 / -1;
+  max-width: 900px;
+  font-size: 1.25rem; /* 20px */
+  line-height: 1.4;
+  color: var(--ink-2);
+}
+
+/* The track starts at the page padding and runs off the right edge. Only the rows scroll. */
 .o-track {
-  --o-inset: max(var(--o-gutter), calc((100% - var(--o-max)) / 2));
   list-style: none;
   display: flex;
   gap: 16px;
   margin: 0;
-  padding: 4px var(--o-inset) 8px;
+  padding: 0 var(--o-gutter);
   overflow-x: auto;
+  overscroll-behavior-x: contain;
   scroll-snap-type: x mandatory;
-  scroll-padding-inline: var(--o-inset);
-  scroll-behavior: smooth;
+  scroll-padding-inline: var(--o-gutter);
   scrollbar-width: none;
 }
 
@@ -653,42 +712,54 @@ html body #root:has(.t-open) {
 }
 
 .o-track > li {
-  flex: 0 0 220px;
+  flex: 0 0 240px;
   min-width: 0;
   scroll-snap-align: start;
 }
 
 .o-track--wide > li {
-  flex-basis: 400px;
+  flex-basis: 430px;
 }
 
-@media (max-width: 56.24em) {
+@media (max-width: 47.99em) {
+  .o-rows {
+    gap: 64px;
+  }
+
+  .t-open .o-head__title {
+    font-size: 2.25rem; /* 36px */
+  }
+
+  .o-head__all {
+    padding-inline: 1.5rem;
+  }
+
   .o-track > li {
-    flex-basis: 44vw;
+    flex-basis: 170px;
   }
 
   .o-track--wide > li {
-    flex-basis: 80vw;
+    flex-basis: 300px;
   }
 }
 
-/* ---------- Cards ---------- */
+/* ---------- Tiles ---------- */
 
 .o-media {
   position: relative;
   overflow: hidden;
-  border-radius: 4px;
-  background: var(--o-tile);
+  border-radius: 2px;
   aspect-ratio: 1 / 1;
   max-width: 100%;
 }
 
-.o-media--portrait {
-  aspect-ratio: 4 / 5;
+.o-media--wide {
+  aspect-ratio: 430 / 240;
 }
 
-.o-media--wide {
-  aspect-ratio: 16 / 9;
+.o-media--portrait {
+  aspect-ratio: 4 / 5;
+  background-color: var(--bg-mid);
 }
 
 .o-media img {
@@ -696,23 +767,11 @@ html body #root:has(.t-open) {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center 28%;
-  transition: transform 400ms ease;
+  object-position: center 30%;
+  transition: transform 300ms var(--ease-out);
 }
 
-.o-media.is-tile {
-  display: grid;
-  place-items: center;
-}
-
-.o-media__word {
-  font-family: var(--o-sans);
-  font-weight: 300;
-  font-size: 2.5rem;
-  letter-spacing: -0.01em;
-  color: var(--o-ink);
-}
-
+/* Shown only in the exercise panel (the tiles put "Opens Day N" in the text under them). */
 .o-lock {
   position: absolute;
   left: 50%;
@@ -720,53 +779,53 @@ html body #root:has(.t-open) {
   transform: translate(-50%, -50%);
   display: inline-flex;
   align-items: center;
-  min-height: 36px;
-  padding: 0 0.875rem;
+  min-height: 40px;
+  padding: 0 1rem;
   border-radius: 999px;
-  background: var(--o-bg);
-  color: var(--o-ink);
+  background: #f5f6f4;
+  color: #0f1418;
   font-size: 1.125rem;
-  font-weight: 600;
   white-space: nowrap;
 }
 
-.o-card,
-.o-plan {
+.o-card {
   position: relative;
-  display: grid;
-  gap: 0.625rem;
   min-width: 0;
 }
 
-.o-card:hover .o-media img,
-.o-plan:hover .o-media img {
-  transform: scale(1.03);
+@media (hover: hover) and (pointer: fine) {
+  .o-card:hover .o-media img {
+    transform: scale(1.03);
+  }
 }
 
 .o-card__row {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
-  align-items: start;
-  gap: 0.25rem;
-}
-
-.o-card__text {
-  min-width: 0;
+  grid-template-columns: minmax(0, 1fr) 24px;
+  align-items: center;
+  gap: 8px;
+  margin-top: 12px;
 }
 
 .t-open .o-card__title {
   font-size: 1.25rem; /* 20px */
-  font-weight: 600;
   line-height: 1.3;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
+.o-card__meta {
+  font-size: 1.125rem;
+  line-height: 1.3;
+  color: var(--ink-2);
+}
+
 .o-card__link {
   text-decoration: none;
 }
 
+/* The whole tile opens the exercise. */
 .o-card__link::after {
   content: "";
   position: absolute;
@@ -775,116 +834,116 @@ html body #root:has(.t-open) {
 
 .t-open .o-card__link:focus-visible {
   outline: none;
-  box-shadow: none;
 }
 
-.o-card:has(.o-card__link:focus-visible) .o-media,
-.o-plan:has(.o-card__link:focus-visible) .o-media {
-  outline: 3px solid var(--o-ink);
+.o-card:has(.o-card__link:focus-visible) .o-media {
+  outline: 2px solid var(--ink);
   outline-offset: 3px;
 }
 
-.o-card:hover .o-card__link,
-.o-plan:hover .o-card__link {
-  text-decoration: underline;
-  text-underline-offset: 0.18em;
-}
-
+/* 24px icon with a 56px tap area that grows left, so it never pokes past the page edge. */
 .o-heart {
   position: relative;
   z-index: 2;
   display: grid;
   place-items: center;
-  width: 56px;
-  height: 56px;
-  margin: -0.75rem -0.75rem 0 0;
+  width: 24px;
+  height: 24px;
+  padding: 0;
   border: 0;
-  border-radius: 50%;
   background: transparent;
-  color: var(--o-ink);
+  color: var(--ink);
   cursor: pointer;
+  transition: transform 160ms var(--ease-out);
 }
 
-.o-heart:hover {
-  background: var(--o-panel);
+.o-heart::before {
+  content: "";
+  position: absolute;
+  inset: -16px 0 -16px -32px;
 }
 
-/* Plan cards */
-
-.o-progress {
-  display: grid;
-  gap: 0.375rem;
-}
-
-.o-progress__bar {
-  height: 6px;
-  border-radius: 999px;
-  background: var(--o-panel);
-  overflow: hidden;
-}
-
-.o-progress__bar > span {
-  display: block;
-  height: 100%;
-  background: var(--o-brass);
-}
-
-.o-plan.is-next .o-media img {
-  filter: saturate(0.6);
-  opacity: 0.75;
+.o-heart:active {
+  transform: scale(0.9);
 }
 
 /* ---------- See all grid ---------- */
 
-.o-grid-section {
-  margin-top: 4rem;
+.o-results {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem 1.5rem;
+  margin-bottom: 24px;
+  color: var(--ink-2);
 }
 
 .o-grid {
   list-style: none;
-  margin: 0;
+  margin-block: 0;
   padding: 0;
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 2rem 1rem;
+  gap: 48px 16px;
 }
 
-@media (min-width: 37.5em) {
+.o-grid--square {
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+}
+
+.o-grid--wide {
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, 380px), 1fr));
+}
+
+@media (max-width: 47.99em) {
   .o-grid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 32px 12px;
   }
-}
 
-@media (min-width: 56.25em) {
-  .o-grid {
-    grid-template-columns: repeat(5, minmax(0, 1fr));
+  .o-grid--square {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .o-grid--wide {
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr));
   }
 }
 
 .o-empty {
-  color: var(--o-ink2);
+  color: var(--ink-2);
   padding-block: 2rem;
 }
 
 /* ---------- Exercise panel (overlay) ---------- */
 
+/* The panel is rendered outside .t-open, so it carries the tokens its pills and tiles use. */
+.o-overlay {
+  --ink: #0f1418;
+  --ink-2: rgb(15 20 24 / 0.78);
+  --line: rgb(15 20 24 / 0.4);
+  --pill-active-bg: #f5f6f4;
+  --bg-mid: #9fb4c2;
+  --o-sans: "Inter Tight", "Helvetica Neue", Arial, sans-serif;
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+}
+
 .o-overlay {
   padding: 0;
   border: 0;
   background: transparent;
-  color: #141414;
+  color: #0f1418;
   width: 480px;
   max-width: 100vw;
   height: calc(100dvh - 3rem);
   max-height: none;
   overflow: visible;
-  font-family: var(--font-sans);
+  font-family: "Inter Tight", "Helvetica Neue", Arial, sans-serif;
   font-size: 1.125rem;
   line-height: 1.5;
 }
 
 .o-overlay::backdrop {
-  background: rgb(244 242 237 / 0.45);
+  background: rgb(126 147 160 / 0.45);
   -webkit-backdrop-filter: blur(18px);
   backdrop-filter: blur(18px);
 }
@@ -893,9 +952,9 @@ html body #root:has(.t-open) {
   position: relative;
   height: 100%;
   border-radius: 4px;
-  background: #f4f2ed;
+  background: #f5f6f4;
   overflow: hidden;
-  outline: 1px solid #d9d5cc;
+  outline: 1px solid #d5dce1;
 }
 
 .o-overlay__scroll {
@@ -910,7 +969,7 @@ html body #root:has(.t-open) {
   top: 12px;
   right: 12px;
   z-index: 3;
-  background: rgb(244 242 237 / 0.9);
+  background: rgb(245 246 244 / 0.9);
 }
 
 .o-overlay__body {
@@ -922,9 +981,9 @@ html body #root:has(.t-open) {
 
 .t-open .o-overlay__title,
 .o-overlay .o-overlay__title {
-  font-family: var(--font-sans);
+  font-family: "Inter Tight", "Helvetica Neue", Arial, sans-serif;
   font-size: 1.75rem; /* 28px */
-  font-weight: 600;
+  font-weight: 400;
   line-height: 1.2;
   margin: 0;
 }
@@ -944,7 +1003,7 @@ html body #root:has(.t-open) {
 
 .o-tags li {
   padding: 0.25rem 0.875rem;
-  border: 1px solid #141414;
+  border: 1px solid #0f1418;
   border-radius: 999px;
   font-size: 1.125rem;
 }
@@ -952,12 +1011,12 @@ html body #root:has(.t-open) {
 .o-note {
   padding: 0.75rem 1rem;
   border-radius: 4px;
-  background: #ece9e2;
+  background: #e9ecee;
 }
 
 .o-h3,
 .o-overlay h3 {
-  font-family: var(--font-sans);
+  font-family: "Inter Tight", "Helvetica Neue", Arial, sans-serif;
   font-size: 1.25rem;
   font-weight: 600;
   margin: 0.75rem 0 0;
@@ -972,8 +1031,8 @@ html body #root:has(.t-open) {
 
 .o-safety {
   margin-top: 0.75rem;
-  border-top: 1px solid #d9d5cc;
-  border-bottom: 1px solid #d9d5cc;
+  border-top: 1px solid #d5dce1;
+  border-bottom: 1px solid #d5dce1;
 }
 
 .o-safety summary {
@@ -1049,15 +1108,14 @@ html body #root:has(.t-open) {
 }
 
 .o-overlay .o-pill--solid {
-  background: #141414;
-  color: #f4f2ed;
+  background: #0f1418;
+  color: #f5f6f4;
 }
 
 .o-overlay :focus-visible,
 .o-fpanel :focus-visible {
-  outline: 3px solid #141414;
+  outline: 2px solid #0f1418;
   outline-offset: 3px;
-  box-shadow: 0 0 0 3px #f4f2ed;
 }
 
 @media (max-width: 37.49em) {
@@ -1079,17 +1137,17 @@ html body #root:has(.t-open) {
   padding: 0;
   border: 0;
   background: transparent;
-  color: #141414;
+  color: #0f1418;
   width: min(36rem, 100% - 2rem);
   max-width: none;
   max-height: min(48rem, 100dvh - 3rem);
-  font-family: var(--font-sans);
+  font-family: "Inter Tight", "Helvetica Neue", Arial, sans-serif;
   font-size: 1.125rem;
   overflow: visible;
 }
 
 .o-fpanel::backdrop {
-  background: rgb(244 242 237 / 0.5);
+  background: rgb(126 147 160 / 0.5);
   -webkit-backdrop-filter: blur(12px);
   backdrop-filter: blur(12px);
 }
@@ -1099,8 +1157,8 @@ html body #root:has(.t-open) {
   flex-direction: column;
   max-height: inherit;
   border-radius: 4px;
-  background: #f4f2ed;
-  outline: 1px solid #141414;
+  background: #f5f6f4;
+  outline: 1px solid #0f1418;
   overflow: hidden;
 }
 
@@ -1112,7 +1170,7 @@ html body #root:has(.t-open) {
 }
 
 .o-fpanel__title {
-  font-family: var(--font-sans);
+  font-family: "Inter Tight", "Helvetica Neue", Arial, sans-serif;
   font-size: 1.75rem;
   font-weight: 300;
   margin: 0;
@@ -1153,8 +1211,8 @@ html body #root:has(.t-open) {
 }
 
 .o-fpanel .o-pill--solid {
-  background: #141414;
-  color: #f4f2ed;
+  background: #0f1418;
+  color: #f5f6f4;
 }
 
 .o-fpanel__foot {
@@ -1163,7 +1221,7 @@ html body #root:has(.t-open) {
   justify-content: space-between;
   gap: 0.75rem;
   padding: 0.75rem 1.5rem 1rem;
-  border-top: 1px solid #d9d5cc;
+  border-top: 1px solid #d5dce1;
 }
 
 @media (max-width: 37.49em) {
@@ -1187,12 +1245,13 @@ html body #root:has(.t-open) {
     scroll-behavior: auto !important;
   }
 
-  .o-track {
-    scroll-behavior: auto;
+  .o-card:hover .o-media img {
+    transform: none;
   }
 
-  .o-card:hover .o-media img,
-  .o-plan:hover .o-media img {
+  .o-pill:active,
+  .o-cat:active,
+  .o-heart:active {
     transform: none;
   }
 }

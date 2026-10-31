@@ -1,4 +1,4 @@
-import "@fontsource/source-sans-3/300.css";
+import "@fontsource/inter-tight/400.css";
 import { useEffect, useId, useRef, useState } from "react";
 import { Link, NavLink, Outlet, useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import { Icon, type IconName } from "../components/Icon";
@@ -9,12 +9,13 @@ import { AREA_SLUGS, COLLECTION_TITLE, openActiveCount, openFiltersFromParams, o
 import { FilterPanel } from "./FilterPanel";
 import "./open.css";
 
-const CATEGORIES: { label: string; to: string; match: (path: string) => boolean }[] = [
-  { label: "All", to: "/app/home", match: (p) => p === "/app/home" || p === "/app/library/all" },
+/** Category pills narrow Home to one section; on a See all page the matching pill shows as on. */
+const CATEGORIES: { label: string; to: string; match: (path: string, area: string | null) => boolean }[] = [
+  { label: "All", to: "/app/home", match: (p, area) => (p === "/app/home" && !area) || p === "/app/library/all" || p === "/app/library/today" },
   ...AREA_SLUGS.map((slug) => ({
     label: COLLECTION_TITLE[slug],
-    to: `/app/library/${slug}`,
-    match: (p: string) => p === `/app/library/${slug}`,
+    to: `/app/home?area=${slug}`,
+    match: (p: string, area: string | null) => (p === "/app/home" && area === slug) || p === `/app/library/${slug}`,
   })),
 ];
 
@@ -38,6 +39,7 @@ export function OpenShell() {
   const mainRef = useRef<HTMLElement>(null);
   const first = useRef(true);
   const { currentDay } = useDay();
+  const onEvents = pagePath.startsWith("/app/events");
 
   useEffect(() => {
     if (first.current) {
@@ -64,9 +66,10 @@ export function OpenShell() {
           </Link>
           <div className="o-bar1__right">
             <nav className="o-switch" aria-label="Where">
-              <NavLink to="/app/home" className={() => `o-switch__opt${pagePath.startsWith("/app/events") ? "" : " is-on"}`} aria-current={pagePath.startsWith("/app/events") ? undefined : "page"}>
+              <NavLink to="/app/home" className={() => `o-switch__opt${onEvents ? "" : " is-on"}`} aria-current={onEvents ? undefined : "page"}>
                 At home
               </NavLink>
+              <span aria-hidden="true">/</span>
               <NavLink to="/app/events" className="o-switch__opt">
                 Near you
               </NavLink>
@@ -81,6 +84,14 @@ export function OpenShell() {
       <main id="main" ref={mainRef} tabIndex={-1} className="o-main">
         <Outlet />
       </main>
+
+      <footer className="o-foot">
+        <div className="o-wrap">
+          <Link to="/app/home" className="o-foot__mark">
+            Mobility
+          </Link>
+        </div>
+      </footer>
 
       <nav className="o-bottom" aria-label="Main">
         <ul>
@@ -102,13 +113,16 @@ function SubBar({ pagePath }: { pagePath: string }) {
   const navigate = useNavigate();
   const [params] = useSearchParams();
   const [open, setOpen] = useState(false);
+  const [searching, setSearching] = useState(false);
   const [q, setQ] = useState(params.get("q") ?? "");
   const filterBtn = useRef<HTMLButtonElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
   const searchId = useId();
   const onLibrary = pagePath.startsWith("/app/library/");
+  const area = pagePath === "/app/home" ? params.get("area") : null;
   const filters: OpenFilters = onLibrary ? openFiltersFromParams(params) : { area: [], position: [], phase: [], time: [] };
   const count = openActiveCount(filters);
-  const target = onLibrary ? pagePath : "/app/library/all";
+  const target = onLibrary ? pagePath : area ? `/app/library/${area}` : "/app/library/all";
 
   useEffect(() => {
     setQ(onLibrary ? params.get("q") ?? "" : "");
@@ -120,35 +134,61 @@ function SubBar({ pagePath }: { pagePath: string }) {
       <div className="o-wrap o-bar2__inner">
         <form
           role="search"
-          className="o-search"
+          className={`o-search${searching ? " is-open" : ""}`}
           onSubmit={(e) => {
             e.preventDefault();
             const p = openParams(filters, q);
             navigate(`${target}${p.toString() ? `?${p}` : ""}`);
           }}
         >
+          {/* Phones: the field folds into an icon button. */}
+          <button
+            type="button"
+            className="o-search__toggle"
+            aria-expanded={searching}
+            aria-controls={searchId}
+            onClick={() => {
+              setSearching((v) => !v);
+              requestAnimationFrame(() => inputRef.current?.focus());
+            }}
+          >
+            <SearchIcon />
+            <span className="sr-only">{searching ? "Close search" : "Search exercises"}</span>
+          </button>
+          <span className="o-search__icon" aria-hidden="true">
+            <SearchIcon />
+          </span>
           <label htmlFor={searchId} className="sr-only">
             Search exercises
           </label>
-          <Icon name="search" />
-          <input id={searchId} type="search" value={q} onChange={(e) => setQ(e.target.value)} placeholder="Search" autoComplete="off" />
+          <input
+            ref={inputRef}
+            id={searchId}
+            type="search"
+            value={q}
+            onChange={(e) => setQ(e.target.value)}
+            onKeyDown={(e) => e.key === "Escape" && setSearching(false)}
+            placeholder="Search"
+            autoComplete="off"
+            enterKeyHint="search"
+          />
         </form>
 
         <nav className="o-cats" aria-label="Categories">
-          {CATEGORIES.map((c) => {
-            const on = c.match(pagePath);
-            return (
-              <Link key={c.to} to={c.to} className={`o-pill ${on ? "o-pill--solid" : "o-pill--plain"}`} aria-current={on ? "page" : undefined}>
-                {c.label}
-              </Link>
-            );
-          })}
+          {CATEGORIES.slice(0, 1).map((c) => (
+            <CatLink key={c.to} label={c.label} to={c.to} on={c.match(pagePath, area)} all />
+          ))}
+          <div className="o-cats__group">
+            {CATEGORIES.slice(1).map((c) => (
+              <CatLink key={c.to} label={c.label} to={c.to} on={c.match(pagePath, area)} />
+            ))}
+          </div>
         </nav>
 
-        <button ref={filterBtn} type="button" className="o-pill o-pill--outline o-filterbtn" aria-haspopup="dialog" onClick={() => setOpen(true)}>
+        <button ref={filterBtn} type="button" className="o-pill o-pill--solid o-caps o-filterbtn" aria-haspopup="dialog" onClick={() => setOpen(true)}>
           Filter
           {count ? <span className="o-fbadge">{count}<span className="sr-only"> on</span></span> : null}
-          <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+          <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
             <path d="m6 9 6 6 6-6" />
           </svg>
         </button>
@@ -169,6 +209,23 @@ function SubBar({ pagePath }: { pagePath: string }) {
         }}
       />
     </div>
+  );
+}
+
+function CatLink({ label, to, on, all = false }: { label: string; to: string; on: boolean; all?: boolean }) {
+  return (
+    <Link to={to} className={`o-cat${all ? " o-cat--all" : ""}${on ? " is-on" : ""}`} aria-current={on ? "page" : undefined}>
+      {label}
+    </Link>
+  );
+}
+
+function SearchIcon() {
+  return (
+    <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round">
+      <circle cx="11" cy="11" r="6.5" />
+      <path d="m16 16 4.5 4.5" />
+    </svg>
   );
 }
 
@@ -198,9 +255,8 @@ function AccountMenu() {
 
   return (
     <div className="o-acct" ref={ref}>
-      <button type="button" className="o-avatar" aria-expanded={open} aria-controls={menuId} onClick={() => setOpen((v) => !v)}>
-        <span aria-hidden="true">{SAMPLE_FIRST_NAME[0]}</span>
-        <span className="sr-only">Account menu</span>
+      <button type="button" className="o-me" aria-expanded={open} aria-controls={menuId} onClick={() => setOpen((v) => !v)}>
+        Me<span className="sr-only">: {SAMPLE_FIRST_NAME}'s account menu</span>
       </button>
       {open ? (
         <ul id={menuId} className="o-acct__menu">

@@ -1,17 +1,21 @@
-import { useCallback, useEffect, useId, useRef, useState, type ReactNode } from "react";
+import { useId, type ReactNode } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Icon } from "../components/Icon";
-import { imageFor, PLACEHOLDER_WORD } from "../data/images";
-import { displayName, POSITION_LABEL, type Exercise } from "../data/library";
+import { imageFor } from "../data/images";
+import { AREA_LABEL, displayName, type Area, type Exercise } from "../data/library";
 import { opensOnDay } from "../data/plan";
-import { minutesFor, useSaved } from "./data";
+import { minutesFor, toneFor, useSaved, type TileShape } from "./data";
 
-/** Square (or given ratio) picture with sharp 4px corners; a quiet word tile when there is no still. */
-export function OMedia({ exercise, children, ratio = "square" }: { exercise: Exercise; children?: ReactNode; ratio?: "square" | "portrait" }) {
+type Ratio = TileShape | "portrait";
+
+/**
+ * The exercise's own photo, cropped to the tile shape. Exercises without a photo get a soft solid
+ * tone from the palette: never another exercise's photo, never text over the tile.
+ */
+export function OMedia({ exercise, children, ratio = "square" }: { exercise: Exercise; children?: ReactNode; ratio?: Ratio }) {
   const src = imageFor(exercise);
   return (
-    <div className={`o-media o-media--${ratio}${src ? "" : " is-tile"}`}>
-      {src ? <img src={src} alt="" loading="lazy" decoding="async" /> : <span className="o-media__word">{PLACEHOLDER_WORD[exercise.position]}</span>}
+    <div className={`o-media o-media--${ratio}`} style={src ? undefined : { backgroundColor: toneFor(exercise.id) }}>
+      {src ? <img src={src} alt="" loading="lazy" decoding="async" /> : null}
       {children}
     </div>
   );
@@ -44,106 +48,82 @@ export function useOverlayLink() {
   return (id: string) => ({ to: `/app/exercise/${id}`, state: { background } });
 }
 
-export function OCard({ exercise, currentDay, meta }: { exercise: Exercise; currentDay: number; meta?: string }) {
+/**
+ * Open's library tile: picture, then title + heart on one line, source line, duration.
+ * The source line is the focus area (there are no instructors). Locked exercises add "Opens Day N".
+ */
+export function OCard({ exercise, currentDay, shape = "square", area }: { exercise: Exercise; currentDay: number; shape?: TileShape; area?: Area }) {
   const link = useOverlayLink()(exercise.id);
   const opens = opensOnDay(exercise.phase, currentDay);
   const titleId = `o-${exercise.id}-${useId().replace(/:/g, "")}`;
   return (
     <article className="o-card" aria-labelledby={titleId}>
-      <OMedia exercise={exercise}>{opens ? <span className="o-lock">Opens Day {opens}</span> : null}</OMedia>
+      <OMedia exercise={exercise} ratio={shape} />
       <div className="o-card__row">
-        <div className="o-card__text">
-          <h3 className="o-card__title" id={titleId}>
-            <Link {...link} className="o-card__link">
-              {displayName(exercise)}
-            </Link>
-          </h3>
-          <p className="o-meta">{meta ?? `${POSITION_LABEL[exercise.position]} · ${minutesFor(exercise)} min`}</p>
-        </div>
+        <h3 className="o-card__title" id={titleId}>
+          <Link {...link} className="o-card__link">
+            {displayName(exercise)}
+          </Link>
+        </h3>
         <Heart id={exercise.id} name={exercise.name} />
       </div>
+      <p className="o-card__meta">{AREA_LABEL[area ?? exercise.primaryArea]}</p>
+      <p className="o-card__meta">
+        {minutesFor(exercise)} min{opens ? ` · Opens Day ${opens}` : ""}
+      </p>
     </article>
   );
 }
 
-/** Horizontal row: heading, one grey line, See all pill and arrows; the track bleeds off the right edge. */
-export function ORow<T>({
+/** Row head shared by Home rows and the See all page: big title, SEE ALL pill, one line under it. */
+export function OHead({ id, title, line, seeAll, as: Tag = "h2" }: { id: string; title: string; line: string; seeAll?: string; as?: "h1" | "h2" }) {
+  return (
+    <div className="o-wrap o-head">
+      <Tag id={id} className="o-head__title">
+        {title}
+      </Tag>
+      {seeAll ? (
+        <Link to={seeAll} className="o-pill o-pill--outline o-caps o-head__all">
+          See all
+          <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+            <path d="M5 12h14M13 6l6 6-6 6" />
+          </svg>
+          <span className="sr-only">: {title}</span>
+        </Link>
+      ) : null}
+      <p className="o-head__line">{line}</p>
+    </div>
+  );
+}
+
+/** Horizontal row: the track lines up with the page padding and bleeds off the right edge. */
+export function ORow({
   title,
   line,
   seeAll,
   items,
-  getKey,
-  renderItem,
-  wide = false,
+  currentDay,
+  shape,
+  area,
 }: {
   title: string;
   line: string;
   seeAll?: string;
-  items: readonly T[];
-  getKey: (item: T) => string;
-  renderItem: (item: T, i: number) => ReactNode;
-  wide?: boolean;
+  items: readonly Exercise[];
+  currentDay: number;
+  shape: TileShape;
+  /** Focus area of the row, used as every tile's source line. */
+  area?: Area;
 }) {
-  const trackRef = useRef<HTMLOListElement>(null);
-  const [atStart, setAtStart] = useState(true);
-  const [atEnd, setAtEnd] = useState(false);
   const headingId = useId();
-  const trackId = useId();
-
-  const update = useCallback(() => {
-    const el = trackRef.current;
-    if (!el) return;
-    setAtStart(el.scrollLeft <= 2);
-    setAtEnd(el.scrollLeft + el.clientWidth >= el.scrollWidth - 2);
-  }, []);
-
-  useEffect(() => {
-    update();
-    const el = trackRef.current;
-    if (!el) return;
-    const ro = new ResizeObserver(update);
-    ro.observe(el);
-    return () => ro.disconnect();
-  }, [update, items.length]);
-
-  const step = (dir: 1 | -1) => {
-    const el = trackRef.current;
-    const card = el?.querySelector("li");
-    if (!el || !card) return;
-    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    el.scrollBy({ left: dir * (card.getBoundingClientRect().width + 16) * 2, behavior: reduce ? "auto" : "smooth" });
-  };
-
   return (
     <section className="o-row" aria-labelledby={headingId}>
-      <div className="o-wrap o-row__head">
-        <div className="o-row__titles">
-          <h2 id={headingId} className="o-row__title">
-            {title}
-          </h2>
-          <p className="o-row__line">{line}</p>
-        </div>
-        <div className="o-row__controls">
-          <div className="o-row__arrows">
-            <button type="button" className="o-pill o-pill--outline o-pill--icon" aria-controls={trackId} aria-disabled={atStart} onClick={() => !atStart && step(-1)}>
-              <Icon name="chevronLeft" />
-              <span className="sr-only">Scroll back: {title}</span>
-            </button>
-            <button type="button" className="o-pill o-pill--outline o-pill--icon" aria-controls={trackId} aria-disabled={atEnd} onClick={() => !atEnd && step(1)}>
-              <Icon name="chevronRight" />
-              <span className="sr-only">Scroll on: {title}</span>
-            </button>
-          </div>
-          {seeAll ? (
-            <Link to={seeAll} className="o-pill o-pill--outline o-caps">
-              See all →<span className="sr-only">: {title}</span>
-            </Link>
-          ) : null}
-        </div>
-      </div>
-      <ol id={trackId} ref={trackRef} className={`o-track${wide ? " o-track--wide" : ""}`} aria-label={title} onScroll={update}>
-        {items.map((item, i) => (
-          <li key={getKey(item)}>{renderItem(item, i)}</li>
+      <OHead id={headingId} title={title} line={line} seeAll={seeAll} />
+      <ol className={`o-track o-track--${shape}`} aria-label={title}>
+        {items.map((e) => (
+          <li key={e.id}>
+            <OCard exercise={e} currentDay={currentDay} shape={shape} area={area} />
+          </li>
         ))}
       </ol>
     </section>

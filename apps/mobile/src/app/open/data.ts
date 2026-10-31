@@ -32,12 +32,32 @@ export const COLLECTION_TITLE: Record<Slug, string> = {
 
 export const COLLECTION_LINE: Record<Slug, string> = {
   all: "Every exercise in the library, in phase order.",
-  today: "Your five for today, in the order you'll do them.",
+  today: "Your exercises for today, in the order you'll do them.",
   chair: "Everything you can do from a sturdy chair.",
-  knees: "Strength and ease for the knees, from gentle to steady.",
-  "lower-back": "Loosen and support the lower back, one slow move at a time.",
-  "hips-balance": "Hip strength and balance practice, with something to hold.",
+  knees: "Gentle strength and control for stairs, standing up and walking with ease.",
+  "lower-back": "Easy movements to loosen up, support your spine and move with less stiffness.",
+  "hips-balance": "Steadier on your feet, with hips that move freely through your day.",
 };
+
+/** Tile shape per collection, alternating down Home like Open's rows (square, wide, square, wide). */
+export type TileShape = "square" | "wide";
+export const COLLECTION_SHAPE: Record<Slug, TileShape> = {
+  today: "square",
+  knees: "wide",
+  "lower-back": "square",
+  "hips-balance": "wide",
+  all: "square",
+  chair: "square",
+};
+
+/** Soft solid tones from the page palette, for exercises that have no photo yet. */
+const TILE_TONES = ["#8EA3B0", "#A7BAC6", "#C2D2DC", "#98A9B3", "#B3C3CD"];
+
+export function toneFor(id: string): string {
+  let h = 0;
+  for (const ch of id) h = (h * 31 + ch.charCodeAt(0)) >>> 0;
+  return TILE_TONES[h % TILE_TONES.length];
+}
 
 /* ---------- Time filter (every exercise is about 3 minutes for now) ---------- */
 
