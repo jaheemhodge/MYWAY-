@@ -1,0 +1,102 @@
+.fub {
+  --fub-c: #394481;
+  --fub-ease: cubic-bezier(0.23, 1, 0.32, 1);
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 56px;
+  overflow: hidden;
+  border: 2px solid var(--fub-c);
+  border-radius: 6px;
+  background: transparent;
+  color: var(--ink, #0f1418);
+  font-size: 1.125rem;
+  line-height: 1;
+  text-decoration: none;
+  white-space: nowrap;
+  isolation: isolate;
+  transition: transform 160ms var(--fub-ease);
+}
+
+.fub:active {
+  transform: scale(0.97);
+}
+
+.fub__front {
+  display: inline-flex;
+  align-items: center;
+  height: 100%;
+  padding: 0 1.5rem;
+  transition: transform 500ms var(--fub-ease);
+}
+
+.fub__back {
+  position: absolute;
+  inset: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  transform: translateY(100%);
+  transition: transform 500ms var(--fub-ease);
+}
+
+.fub__fill {
+  position: absolute;
+  inset: 0;
+  background: var(--fub-c);
+  transform: translateY(100%) skewY(12deg) scaleY(0);
+  transition: transform 500ms var(--fub-ease);
+}
+
+.fub__label {
+  position: relative;
+  z-index: 1;
+}
+
+/* Hover (mouse only) and the selected state share the filled look. */
+@media (hover: hover) and (pointer: fine) {
+  .fub:hover .fub__front {
+    transform: translateY(-150%);
+  }
+
+  .fub:hover .fub__back,
+  .fub:hover .fub__fill {
+    transform: translateY(0) skewY(12deg) scale(1.5);
+  }
+
+  .fub:hover .fub__back {
+    transform: translateY(0);
+  }
+}
+
+.fub.is-on .fub__front {
+  transform: translateY(-150%);
+}
+
+.fub.is-on .fub__back {
+  transform: translateY(0);
+}
+
+.fub.is-on .fub__fill {
+  transform: translateY(0) skewY(12deg) scale(1.5);
+}
+
+.fub:focus-visible {
+  outline: 2px solid var(--ink, #0f1418);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fub,
+  .fub__front,
+  .fub__back,
+  .fub__fill {
+    transition: opacity 150ms ease;
+  }
+
+  .fub:active {
+    transform: none;
+  }
+}

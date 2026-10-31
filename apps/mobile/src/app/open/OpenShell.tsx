@@ -2,6 +2,7 @@ import "@fontsource/inter-tight/400.css";
 import { useEffect, useRef } from "react";
 import { Link, Outlet, useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import ExpandableSearchBar from "@/components/ui/expandable-search-bar";
+import { FillUpLink } from "@/components/ui/fill-up-button";
 import { LiquidNavbar, type LiquidNavItem } from "@/components/ui/liquid-glass-navbar";
 import { Icon } from "../components/Icon";
 import { TOTAL_DAYS } from "../data/plan";
@@ -126,25 +127,20 @@ function SubBar({ pagePath }: { pagePath: string }) {
         />
 
         <nav className="o-cats" aria-label="Categories">
-          {CATEGORIES.slice(0, 1).map((c) => (
-            <CatLink key={c.to} label={c.label} to={c.to} on={c.match(pagePath, area)} all />
+          {CATEGORIES.map((c) => (
+            <CatLink key={c.to} label={c.label} to={c.to} on={c.match(pagePath, area)} />
           ))}
-          <div className="o-cats__group">
-            {CATEGORIES.slice(1).map((c) => (
-              <CatLink key={c.to} label={c.label} to={c.to} on={c.match(pagePath, area)} />
-            ))}
-          </div>
         </nav>
       </div>
     </div>
   );
 }
 
-function CatLink({ label, to, on, all = false }: { label: string; to: string; on: boolean; all?: boolean }) {
+function CatLink({ label, to, on }: { label: string; to: string; on: boolean; all?: boolean }) {
   return (
-    <Link to={to} className={`o-cat${all ? " o-cat--all" : ""}${on ? " is-on" : ""}`} aria-current={on ? "page" : undefined}>
+    <FillUpLink to={to} active={on} className="o-cat">
       {label}
-    </Link>
+    </FillUpLink>
   );
 }
 

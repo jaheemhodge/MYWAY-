@@ -316,49 +316,10 @@ html body #root:has(.t-open) {
   }
 }
 
-/* Like Open: "All" stands on its own, the focus areas share one track. */
+/* Category buttons: outlined, fill up in indigo on hover; the chosen one stays filled. */
 .o-cats {
   display: flex;
-  gap: 12px;
-}
-
-.o-cats__group {
-  display: flex;
-  border-radius: 999px;
-  background: var(--pill-group-bg);
-}
-
-.o-cat--all:not(.is-on) {
-  background: var(--pill-group-bg);
-}
-
-.o-cat {
-  display: inline-flex;
-  align-items: center;
-  min-height: 56px;
-  padding: 0 1.75rem;
-  border-radius: 999px;
-  font-size: 1.125rem;
-  text-decoration: none;
-  white-space: nowrap;
-  transition:
-    background-color 160ms ease,
-    transform 160ms var(--ease-out);
-}
-
-.o-cat:active {
-  transform: scale(0.97);
-}
-
-.mob-root.t-open .o-cat.is-on {
-  background: var(--pill-active-bg);
-  color: var(--pill-active-fg);
-}
-
-@media (hover: hover) and (pointer: fine) {
-  .o-cat:not(.is-on):hover {
-    background: rgb(15 20 24 / 0.06);
-  }
+  gap: 10px;
 }
 
 /* ---------- Main, footer, bottom tab bar ---------- */
@@ -437,10 +398,6 @@ html body #root:has(.t-open) {
 
   .o-cats > * {
     flex: none;
-  }
-
-  .o-cat {
-    padding-inline: 1.375rem;
   }
 
   /* While the search bar is open it takes the whole row. */
