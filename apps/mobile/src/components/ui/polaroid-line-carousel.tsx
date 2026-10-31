@@ -89,7 +89,7 @@ const PEG_GAP = 10; // print starts this far below the peg top
 
 const PL_CSS = `
 .pl-root{position:relative;width:100%;color:var(--pl-ink)}
-.pl-stage{position:relative;width:100%;overflow:hidden;user-select:none;-webkit-user-select:none;touch-action:pan-y;outline:none;cursor:grab}
+.pl-stage{position:relative;isolation:isolate;width:100%;overflow:hidden;user-select:none;-webkit-user-select:none;touch-action:pan-y;outline:none;cursor:grab}
 .pl-stage[data-drag='1']{cursor:grabbing}
 .pl-stage:focus-visible{outline:2px solid var(--pl-ink);outline-offset:-2px}
 .pl-string{position:absolute;left:0;top:0;width:100%;height:100%;pointer-events:none;overflow:visible}

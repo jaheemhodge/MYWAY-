@@ -357,33 +357,10 @@ html body #root:has(.t-open) {
   box-shadow: none;
 }
 
-.o-foot {
-  margin-top: 96px;
-  background: var(--footer-bg);
-}
-
-.o-foot .o-wrap {
-  display: flex;
-  align-items: center;
-  min-height: 88px;
-}
-
-.o-foot__mark {
-  display: inline-flex;
-  align-items: center;
-  min-height: 56px;
-  font-size: 1.75rem;
-  letter-spacing: -0.02em;
-  text-decoration: none;
-}
-
+/* Phones and tablets: room under the footer for the floating tab bar. */
 @media (max-width: 63.99em) {
-  .o-main {
-    padding-bottom: calc(120px + env(safe-area-inset-bottom, 0px));
-  }
-
-  .o-foot {
-    display: none;
+  .t-open .fs {
+    padding-bottom: calc(104px + env(safe-area-inset-bottom, 0px));
   }
 }
 

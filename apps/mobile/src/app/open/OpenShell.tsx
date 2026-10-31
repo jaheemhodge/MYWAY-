@@ -3,6 +3,8 @@ import { useEffect, useRef, useState } from "react";
 import { Link, Outlet, useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import ExpandableSearchBar from "@/components/ui/expandable-search-bar";
 import { FillUpLink } from "@/components/ui/fill-up-button";
+import { FooterSection } from "@/components/ui/footer-section";
+import { FOOTER_COMPANY, FOOTER_CONTACT, FOOTER_NEWSLETTER_URL, FOOTER_SOCIAL } from "../data/footer";
 import { LiquidNavbar, type LiquidNavItem } from "@/components/ui/liquid-glass-navbar";
 import { Icon } from "../components/Icon";
 import { TOTAL_DAYS } from "../data/plan";
@@ -96,13 +98,17 @@ export function OpenShell() {
         <Outlet />
       </main>
 
-      <footer className="o-foot">
-        <div className="o-wrap">
-          <Link to="/app/home" className="o-foot__mark">
-            Mobility
-          </Link>
-        </div>
-      </footer>
+      <FooterSection
+        brand="Mobility"
+        tagline="Feel like yourself again."
+        note="A 60-day home movement program for adults about 50 to 70. It is not medical advice, physiotherapy or emergency care."
+        links={TABS.map((t) => ({ label: t.label, to: t.to }))}
+        contact={FOOTER_CONTACT}
+        social={FOOTER_SOCIAL}
+        newsletterUrl={FOOTER_NEWSLETTER_URL}
+        legal={[{ label: "Privacy and legal", to: "/legal" }]}
+        copyright={`© ${new Date().getFullYear()} ${FOOTER_COMPANY}. All rights reserved.`}
+      />
 
       <div className="o-bottomnav">
         <LiquidNavbar items={TABS} active={active} layout="stacked" tone="mist" />
