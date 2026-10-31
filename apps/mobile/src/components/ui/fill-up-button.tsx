@@ -11,6 +11,8 @@ import "./fill-up-button.css";
  * - 56px tall, 18px text; plain CSS (no Tailwind), the same 500ms slide on a strong ease-out.
  * - Hover motion only on devices with a mouse; reduced motion swaps colour without sliding.
  * - The second copy of the label is hidden from screen readers so it is read once.
+ * - Colours come from CSS variables (--fub-c, --fub-on, --fub-border, --fub-bg, --fub-shadow,
+ *   --fub-shadow-on) so a page can match its own chrome.
  */
 export function FillUpLink({
   active = false,

@@ -325,10 +325,23 @@ html body #root:has(.t-open) {
   }
 }
 
-/* Category buttons: outlined, fill up in indigo on hover; the chosen one stays filled. */
+/* Category buttons: the nav bar's frosted glass. On hover a brighter white fills up from the
+   bottom; the chosen one stays bright with a soft shadow, like the nav's active drop. */
 .o-cats {
   display: flex;
   gap: 10px;
+}
+
+.o-cat.fub {
+  --fub-c: #ffffff;
+  --fub-on: var(--ink);
+  --fub-border: 1px solid rgb(255 255 255 / 0.95);
+  --fub-bg: rgb(255 255 255 / 0.6);
+  --fub-shadow: inset 0 0 0 1px rgb(15 20 24 / 0.09), 0 8px 24px -14px rgb(15 20 24 / 0.35);
+  --fub-shadow-on: inset 0 0 0 1px rgb(15 20 24 / 0.12), inset 0 -2px 6px rgb(15 20 24 / 0.12),
+    0 6px 16px -6px rgb(15 20 24 / 0.35);
+  -webkit-backdrop-filter: blur(14px) saturate(1.25);
+  backdrop-filter: blur(14px) saturate(1.25);
 }
 
 /* ---------- Main, footer, bottom tab bar ---------- */
