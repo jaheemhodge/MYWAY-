@@ -65,11 +65,14 @@ export function ExerciseOverlay() {
       }}
     >
       <div className="o-overlay__panel">
-        <button type="button" className="o-pill o-pill--icon o-overlay__close" onClick={close}>
-          <Icon name="close" />
-          <span className="sr-only">Close</span>
-        </button>
         <div className="o-overlay__scroll">
+          {/* Its own sticky strip: always reachable, never over the video or the Start button. */}
+          <div className="o-overlay__topbar">
+            <button type="button" className="o-pill o-pill--icon o-overlay__close" onClick={close}>
+              <Icon name="close" />
+              <span className="sr-only">Close</span>
+            </button>
+          </div>
           <div className="o-overlay__media">
             <VideoPlayer
               key={exercise.id}
@@ -77,7 +80,6 @@ export function ExerciseOverlay() {
               poster={imageFor(exercise)}
               tone={toneFor(exercise.id)}
               label={`${exercise.name}, demonstration`}
-              emptyText={opens ? `Opens Day ${opens} · video coming soon` : "Video coming soon"}
             />
           </div>
           <div className="o-overlay__body">

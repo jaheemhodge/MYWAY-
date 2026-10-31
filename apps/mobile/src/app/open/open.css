@@ -1,7 +1,7 @@
 /*
  * Exercise side ("At home"): a structural copy of Open's web library (o-p-e-n.com/all).
- * The page is the "Core Glow" gradient (21st.dev): paper grey at the centre, mid grey at the
- * edges, with a fine grain. All text stays near-black.
+ * The page is the Qoves-style blue-grey gradient (#7E93A0 → #9FB4C2 → #B6CAD7), fixed to the
+ * viewport. All text stays near-black.
  * Everything is scoped to .t-open so the Events pages keep their own look.
  *
  * One sans (Inter Tight) at weight 400 for everything, as Open does. Sized for 50–70:
@@ -10,11 +10,13 @@
  */
 
 .t-open {
-  --bg-mid: #c4c4c4; /* used by overlays and fallbacks */
+  --bg-top: #7e93a0;
+  --bg-mid: #9fb4c2;
+  --bg-bottom: #b6cad7;
   --ink: #0f1418;
-  /* 92%: 6:1+ in the middle of the page, about 4.3:1 where the edges reach full #808080. */
-  --ink-2: rgb(15 20 24 / 0.92);
-  --line: rgb(15 20 24 / 0.5);
+  /* 84%: 4.7:1 on the darkest part (#7E93A0, the top of the screen), 6:1+ on the lightest. */
+  --ink-2: rgb(15 20 24 / 0.84);
+  --line: rgb(15 20 24 / 0.35);
   /* On a white page the selected pill and FILTER are ink with white text. */
   --pill-active-bg: #0f1418;
   --pill-active-fg: #ffffff;
@@ -57,14 +59,7 @@
   position: fixed;
   inset: 0;
   z-index: -1;
-  /* Core Glow, as exported from 21st.dev; the grain is an SVG noise tile blended with overlay. */
-  background-color: #808080;
-  background-image:
-    url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)' opacity='0.080'/></svg>"),
-    radial-gradient(circle at 50% 50%, rgba(0, 0, 0, 0) 52%, rgba(0, 0, 0, 0.016) 100%),
-    radial-gradient(circle at 48% 56%, #111111 0%, #f2f2f2 0%, #808080 80%);
-  background-size: 120px 120px, auto, auto;
-  background-blend-mode: overlay, normal, normal;
+  background: linear-gradient(180deg, var(--bg-top) 0%, var(--bg-mid) 45%, var(--bg-bottom) 100%);
   pointer-events: none;
 }
 
@@ -73,7 +68,7 @@ html:root:has(.t-open),
 html body:has(.t-open),
 html body #root:has(.t-open) {
   overflow: visible;
-  background: #808080;
+  background: #9fb4c2;
 }
 
 .t-open ::selection {
@@ -325,23 +320,24 @@ html body #root:has(.t-open) {
   }
 }
 
-/* Category buttons: the nav bar's frosted glass. On hover a brighter white fills up from the
-   bottom; the chosen one stays bright with a soft shadow, like the nav's active drop. */
+/* Category buttons: inactive ones are outlined (clearly clickable), the chosen one is solid
+   #F5F6F4; on hover that same fill sweeps up from the bottom. */
 .o-cats {
   display: flex;
   gap: 10px;
 }
 
 .o-cat.fub {
-  --fub-c: #ffffff;
+  --fub-c: #f5f6f4;
   --fub-on: var(--ink);
-  --fub-border: 1px solid rgb(255 255 255 / 0.95);
-  --fub-bg: rgb(255 255 255 / 0.6);
-  --fub-shadow: inset 0 0 0 1px rgb(15 20 24 / 0.09), 0 8px 24px -14px rgb(15 20 24 / 0.35);
-  --fub-shadow-on: inset 0 0 0 1px rgb(15 20 24 / 0.12), inset 0 -2px 6px rgb(15 20 24 / 0.12),
-    0 6px 16px -6px rgb(15 20 24 / 0.35);
-  -webkit-backdrop-filter: blur(14px) saturate(1.25);
-  backdrop-filter: blur(14px) saturate(1.25);
+  --fub-border: 1px solid var(--line);
+  --fub-bg: transparent;
+  --fub-shadow: none;
+  --fub-shadow-on: none;
+}
+
+.o-cat.fub.is-on {
+  border-color: #f5f6f4;
 }
 
 /* ---------- Main, footer, bottom tab bar ---------- */
@@ -460,25 +456,6 @@ html body #root:has(.t-open) {
   }
 }
 
-/* Story tiles keep white text over the photo (beats the shell's dark link colour). */
-.mob-root.t-open .story__link {
-  color: #ffffff;
-}
-
-/* The save heart on a story tile: white on a dark glass disc, 56px tap area. */
-.story__action .o-heart {
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  background: rgb(17 17 17 / 0.5);
-  -webkit-backdrop-filter: blur(8px);
-  backdrop-filter: blur(8px);
-  color: #ffffff;
-}
-
-.story__action .o-heart::before {
-  inset: -6px;
-}
 
 .o-head__line {
   grid-column: 1 / -1;
@@ -654,6 +631,17 @@ html body #root:has(.t-open) {
   transition: transform 160ms var(--ease-out);
 }
 
+/* The heart is a 24px icon on the title line (the shell's 44px button minimum would push the
+   meta line down); ::before keeps a 56px tap area around it. */
+.mob-root .story__action .o-heart,
+.o-overlay .story__action .o-heart {
+  width: 24px;
+  height: 24px;
+  min-width: 0;
+  min-height: 0;
+  padding: 0;
+}
+
 .o-heart::before {
   content: "";
   position: absolute;
@@ -747,20 +735,29 @@ html body #root:has(.t-open) {
   overscroll-behavior: contain;
 }
 
-/* Close sits over the video: white cross on dark glass. */
-.o-overlay .o-overlay__close {
-  position: absolute;
-  top: 28px;
-  right: 28px;
-  z-index: 3;
-  background: rgb(17 17 17 / 0.6);
+/* Close lives in its own sticky strip at the top of the panel, 16px from everything else. */
+.o-overlay__topbar {
+  position: sticky;
+  top: 0;
+  z-index: 5;
+  display: flex;
+  justify-content: flex-end;
+  padding: 16px;
+  background: rgb(245 246 244 / 0.94);
   -webkit-backdrop-filter: blur(12px);
   backdrop-filter: blur(12px);
-  color: #ffffff;
+}
+
+.o-overlay .o-overlay__close {
+  width: 56px;
+  min-height: 56px;
+  border: 1px solid rgb(15 20 24 / 0.2);
+  background: #ffffff;
+  color: #0f1418;
 }
 
 .o-overlay__media {
-  padding: 16px 16px 0;
+  padding: 0 16px;
 }
 
 .o-overlay__body {
@@ -940,9 +937,8 @@ html body #root:has(.t-open) {
     border-radius: 0;
   }
 
-  .o-overlay .o-overlay__close {
-    top: 12px;
-    right: 12px;
+  .o-overlay__topbar {
+    padding: 12px 16px;
   }
 }
 

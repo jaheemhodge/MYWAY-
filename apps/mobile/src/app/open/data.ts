@@ -50,13 +50,12 @@ export const COLLECTION_SHAPE: Record<Slug, TileShape> = {
   chair: "square",
 };
 
-/** Soft solid tones from the page palette (paper to mid grey), for exercises that have no photo yet. */
-const TILE_TONES = ["#E6E6E6", "#DADADA", "#CFCFCF", "#E0E0E0", "#C6C6C6"];
+/** Flat soft tones for exercises with no photo yet, rotated by the exercise's place in the library. */
+const TILE_TONES = ["#DCE3E8", "#E7E2DA", "#D9DFD6", "#E3DEE6"];
+const INDEX = new Map(EXERCISES.map((e, i) => [e.id, i]));
 
 export function toneFor(id: string): string {
-  let h = 0;
-  for (const ch of id) h = (h * 31 + ch.charCodeAt(0)) >>> 0;
-  return TILE_TONES[h % TILE_TONES.length];
+  return TILE_TONES[(INDEX.get(id) ?? 0) % TILE_TONES.length];
 }
 
 /* ---------- Time filter (every exercise is about 3 minutes for now) ---------- */

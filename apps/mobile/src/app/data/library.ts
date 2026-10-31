@@ -2,10 +2,11 @@
  * Exercise library for the logged-in shell.
  *
  * Source: src/data/library-slim.json (56 exercises, derived from library.json).
- * Status: DRAFT, not clinically reviewed. Names, setup, cues and safety notes are shown verbatim;
- * do not edit them here or add claims.
+ * Status: DRAFT, not clinically reviewed. Names, setup, cues and safety notes are shown as written
+ * apart from research references, which displayText.ts removes; do not edit them here or add claims.
  */
 import raw from "@/data/library-slim.json";
+import { cleanText } from "./displayText";
 
 export type Area = "knees" | "lower-back" | "hips-balance";
 export type Position = "chair" | "standing" | "floor";
@@ -27,7 +28,19 @@ export interface Exercise {
   difficulty?: number;
 }
 
-export const EXERCISES: readonly Exercise[] = (raw as { exercises: Exercise[] }).exercises;
+/** Source data as stored (keeps research references). Not for display. */
+export const RAW_EXERCISES: readonly Exercise[] = (raw as { exercises: Exercise[] }).exercises;
+
+/** Exercises as every screen shows them: source codes, IDs and timestamps removed (see displayText.ts). */
+export const EXERCISES: readonly Exercise[] = RAW_EXERCISES.map((e) => ({
+  ...e,
+  subtitle: cleanText(e.subtitle),
+  equipment: cleanText(e.equipment),
+  setup: cleanText(e.setup),
+  positionDetail: e.positionDetail ? cleanText(e.positionDetail) : e.positionDetail,
+  cues: e.cues.map(cleanText),
+  safetyNotes: e.safetyNotes.map(cleanText),
+}));
 
 const BY_ID = new Map(EXERCISES.map((exercise) => [exercise.id, exercise]));
 

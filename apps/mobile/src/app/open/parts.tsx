@@ -76,7 +76,8 @@ export function OCard({
       to={link.to}
       state={link.state}
       title={displayName(exercise)}
-      meta={`${AREA_LABEL[area ?? exercise.primaryArea]} · ${minutesFor(exercise)} min${opens ? ` · Opens Day ${opens}` : ""}`}
+      meta={`${AREA_LABEL[area ?? exercise.primaryArea]} · ${minutesFor(exercise)} min`}
+      note={opens ? `Opens Day ${opens}` : undefined}
       image={imageFor(exercise)}
       video={videoFor(exercise)}
       tone={toneFor(exercise.id)}

@@ -14,40 +14,33 @@
   aspect-ratio: 16 / 9;
 }
 
+/* Media sits whole and centred; a blurred, enlarged copy of the same picture fills the frame
+   behind it, so portrait photos and clips never show black bars. */
+.vp__backdrop {
+  position: absolute;
+  inset: -40px;
+  width: calc(100% + 80px);
+  height: calc(100% + 80px);
+  object-fit: cover;
+  filter: blur(28px) saturate(1.1);
+  transform: scale(1.05);
+  opacity: 0.9;
+}
+
 .vp__media {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  object-position: center 30%;
+  object-fit: contain;
   display: block;
 }
 
-video.vp__stage {
-  position: relative;
-  aspect-ratio: 16 / 9;
-}
-
-.vp__media {
-  object-fit: contain;
-  background: #111111;
+video.vp__media {
+  background: transparent;
   cursor: pointer;
 }
 
-.vp__soon {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-  padding: 12px 22px;
-  border-radius: 999px;
-  background: rgb(17 17 17 / 0.62);
-  -webkit-backdrop-filter: blur(12px);
-  backdrop-filter: blur(12px);
-  font-size: 1.125rem;
-  white-space: nowrap;
-}
 
 .vp__big {
   position: absolute;

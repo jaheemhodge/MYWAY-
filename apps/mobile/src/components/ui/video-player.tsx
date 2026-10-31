@@ -11,8 +11,8 @@ import "./video-player.css";
  * - Controls stay visible while paused and whenever a control has keyboard focus (the original
  *   only showed them on mouse hover, which hides them on touch screens).
  * - 56px buttons, 18px text. On phones the control bar sits under the video instead of over it.
- * - With no `src` it shows the poster (or a soft tone) and says the video is coming, rather than
- *   an empty black box.
+ * - With no `src` it shows the poster (or a soft tone) only, with no text over it.
+ * - Media is shown whole over a blurred copy of itself, so portrait pictures get no black bars.
  */
 export type VideoPlayerProps = {
   src?: string;
@@ -21,7 +21,7 @@ export type VideoPlayerProps = {
   tone?: string;
   /** What the video shows, for screen readers. */
   label: string;
-  /** Shown when there is no video yet. */
+  /** Kept for callers; nothing is written over the picture. */
   emptyText?: string;
   className?: string;
 };
@@ -35,7 +35,7 @@ function formatTime(seconds: number) {
   return `${m}:${String(s).padStart(2, "0")}`;
 }
 
-export default function VideoPlayer({ src, poster, tone, label, emptyText = "Video coming soon", className }: VideoPlayerProps) {
+export default function VideoPlayer({ src, poster, tone, label, className }: VideoPlayerProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [playing, setPlaying] = useState(false);
   const [volume, setVolume] = useState(1);
@@ -53,8 +53,8 @@ export default function VideoPlayer({ src, poster, tone, label, emptyText = "Vid
     return (
       <div className={["vp", "vp--empty", className].filter(Boolean).join(" ")}>
         <div className="vp__stage" style={poster ? undefined : { background: tone }}>
+          {poster ? <img className="vp__backdrop" src={poster} alt="" aria-hidden="true" /> : null}
           {poster ? <img className="vp__media" src={poster} alt="" /> : null}
-          <span className="vp__soon">{emptyText}</span>
         </div>
       </div>
     );
@@ -71,6 +71,7 @@ export default function VideoPlayer({ src, poster, tone, label, emptyText = "Vid
   return (
     <div className={["vp", playing ? "is-playing" : "is-paused", className].filter(Boolean).join(" ")}>
       <div className="vp__stage">
+      {poster ? <img className="vp__backdrop" src={poster} alt="" aria-hidden="true" /> : null}
       <video
         ref={videoRef}
         className="vp__media"
