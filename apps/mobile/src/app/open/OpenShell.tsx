@@ -1,12 +1,12 @@
 import "@fontsource/inter-tight/400.css";
-import { useEffect, useId, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { Link, Outlet, useLocation, useNavigate, useSearchParams } from "react-router-dom";
+import ExpandableSearchBar from "@/components/ui/expandable-search-bar";
 import { LiquidNavbar, type LiquidNavItem } from "@/components/ui/liquid-glass-navbar";
 import { Icon } from "../components/Icon";
 import { TOTAL_DAYS } from "../data/plan";
 import { useDay } from "../DayState";
-import { AREA_SLUGS, COLLECTION_TITLE, openActiveCount, openFiltersFromParams, openParams, type OpenFilters } from "./data";
-import { FilterPanel } from "./FilterPanel";
+import { AREA_SLUGS, COLLECTION_TITLE, openFiltersFromParams, openParams, type OpenFilters } from "./data";
 import "./open.css";
 
 /** Category pills narrow Home to one section; on a See all page the matching pill shows as on. */
@@ -102,67 +102,28 @@ export function OpenShell() {
 function SubBar({ pagePath }: { pagePath: string }) {
   const navigate = useNavigate();
   const [params] = useSearchParams();
-  const [open, setOpen] = useState(false);
-  const [searching, setSearching] = useState(false);
-  const [q, setQ] = useState(params.get("q") ?? "");
-  const filterBtn = useRef<HTMLButtonElement>(null);
-  const inputRef = useRef<HTMLInputElement>(null);
-  const searchId = useId();
   const onLibrary = pagePath.startsWith("/app/library/");
   const area = pagePath === "/app/home" ? params.get("area") : null;
   const filters: OpenFilters = onLibrary ? openFiltersFromParams(params) : { area: [], position: [], phase: [], time: [] };
-  const count = openActiveCount(filters);
+  // Search within the page you are on: a See all page, the chosen area, or the whole library.
   const target = onLibrary ? pagePath : area ? `/app/library/${area}` : "/app/library/all";
-
-  useEffect(() => {
-    setQ(onLibrary ? params.get("q") ?? "" : "");
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [pagePath]);
+  const current = onLibrary ? params.get("q") ?? "" : "";
 
   return (
     <div className="o-bar2">
       <div className="o-wrap o-bar2__inner">
-        <form
-          role="search"
-          className={`o-search${searching ? " is-open" : ""}`}
-          onSubmit={(e) => {
-            e.preventDefault();
+        <ExpandableSearchBar
+          key={pagePath}
+          className="o-xsearch"
+          placeholder="Search exercises"
+          label="Search exercises"
+          defaultValue={current}
+          width="var(--o-xs-w)"
+          onSearch={(q) => {
             const p = openParams(filters, q);
             navigate(`${target}${p.toString() ? `?${p}` : ""}`);
           }}
-        >
-          {/* Phones: the field folds into an icon button. */}
-          <button
-            type="button"
-            className="o-search__toggle"
-            aria-expanded={searching}
-            aria-controls={searchId}
-            onClick={() => {
-              setSearching((v) => !v);
-              requestAnimationFrame(() => inputRef.current?.focus());
-            }}
-          >
-            <SearchIcon />
-            <span className="sr-only">{searching ? "Close search" : "Search exercises"}</span>
-          </button>
-          <span className="o-search__icon" aria-hidden="true">
-            <SearchIcon />
-          </span>
-          <label htmlFor={searchId} className="sr-only">
-            Search exercises
-          </label>
-          <input
-            ref={inputRef}
-            id={searchId}
-            type="search"
-            value={q}
-            onChange={(e) => setQ(e.target.value)}
-            onKeyDown={(e) => e.key === "Escape" && setSearching(false)}
-            placeholder="Search"
-            autoComplete="off"
-            enterKeyHint="search"
-          />
-        </form>
+        />
 
         <nav className="o-cats" aria-label="Categories">
           {CATEGORIES.slice(0, 1).map((c) => (
@@ -174,30 +135,7 @@ function SubBar({ pagePath }: { pagePath: string }) {
             ))}
           </div>
         </nav>
-
-        <button ref={filterBtn} type="button" className="o-pill o-pill--solid o-caps o-filterbtn" aria-haspopup="dialog" onClick={() => setOpen(true)}>
-          Filter
-          {count ? <span className="o-fbadge">{count}<span className="sr-only"> on</span></span> : null}
-          <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-            <path d="m6 9 6 6 6-6" />
-          </svg>
-        </button>
       </div>
-      <FilterPanel
-        open={open}
-        initial={filters}
-        query={q}
-        onClose={() => {
-          setOpen(false);
-          requestAnimationFrame(() => filterBtn.current?.focus());
-        }}
-        onApply={(f) => {
-          setOpen(false);
-          const p = openParams(f, q);
-          navigate(`${target}${p.toString() ? `?${p}` : ""}`);
-          requestAnimationFrame(() => filterBtn.current?.focus());
-        }}
-      />
     </div>
   );
 }
@@ -210,11 +148,3 @@ function CatLink({ label, to, on, all = false }: { label: string; to: string; on
   );
 }
 
-function SearchIcon() {
-  return (
-    <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round">
-      <circle cx="11" cy="11" r="6.5" />
-      <path d="m16 16 4.5 4.5" />
-    </svg>
-  );
-}

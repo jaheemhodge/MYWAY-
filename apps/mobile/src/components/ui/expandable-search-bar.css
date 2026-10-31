@@ -1,0 +1,156 @@
+.xs {
+  --xs-size: 56px;
+  --xs-ink: var(--ink, #0f1418);
+  --xs-muted: var(--ink-2, rgb(15 20 24 / 0.84));
+  --xs-line: var(--line, rgb(15 20 24 / 0.3));
+  --xs-ease: cubic-bezier(0.23, 1, 0.32, 1);
+  position: relative;
+  flex: none;
+  width: var(--xs-size);
+  height: var(--xs-size);
+  z-index: 3;
+}
+
+.xs__bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  width: var(--xs-w);
+  height: var(--xs-size);
+  margin: 0;
+  padding: 0 4px 0 calc(var(--xs-size) + 2px);
+  border: 1px solid var(--xs-line);
+  border-radius: 999px;
+  background: #ffffff;
+  /* Closed: only the round button's footprint is visible. */
+  clip-path: inset(0 calc(100% - var(--xs-size)) 0 0 round 999px);
+  opacity: 0;
+  transition:
+    clip-path 260ms var(--xs-ease),
+    opacity 160ms ease 100ms;
+}
+
+.xs[data-dir="left"] .xs__bar {
+  left: auto;
+  right: 0;
+  padding: 0 calc(var(--xs-size) + 2px) 0 4px;
+  flex-direction: row-reverse;
+  clip-path: inset(0 0 0 calc(100% - var(--xs-size)) round 999px);
+}
+
+.xs[data-open="true"] .xs__bar {
+  clip-path: inset(0 0 0 0 round 999px);
+  opacity: 1;
+  transition:
+    clip-path 300ms var(--xs-ease),
+    opacity 120ms ease;
+}
+
+.xs__bar:focus-within {
+  outline: 2px solid var(--xs-ink);
+  outline-offset: 3px;
+}
+
+.xs__input {
+  flex: 1;
+  min-width: 0;
+  height: 54px;
+  border: 0;
+  padding: 0;
+  background: transparent;
+  color: var(--xs-ink);
+  font: inherit;
+  font-size: 1.125rem;
+}
+
+/* The ring is drawn on the whole bar (:focus-within); the bare input never shows one. */
+.xs .xs__input:focus,
+.xs .xs__input:focus-visible {
+  outline: none;
+  box-shadow: none;
+}
+
+.xs__input::placeholder {
+  color: var(--xs-muted);
+  opacity: 1;
+}
+
+.xs__input::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+}
+
+.xs__go,
+.xs__toggle {
+  display: grid;
+  place-items: center;
+  border: 0;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--xs-ink);
+  cursor: pointer;
+  transition:
+    background-color 160ms ease,
+    transform 160ms var(--xs-ease);
+}
+
+.xs__go {
+  flex: none;
+  width: 48px;
+  height: 48px;
+}
+
+.xs__toggle {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  width: var(--xs-size);
+  height: var(--xs-size);
+  border: 1px solid var(--xs-line);
+  background: #ffffff;
+}
+
+.xs[data-dir="left"] .xs__toggle {
+  left: auto;
+  right: 0;
+}
+
+.xs[data-open="true"] .xs__toggle {
+  border-color: transparent;
+  background: transparent;
+}
+
+.xs__go:active,
+.xs__toggle:active {
+  transform: scale(0.96);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .xs__go:hover,
+  .xs__toggle:hover {
+    background: rgb(15 20 24 / 0.06);
+  }
+}
+
+.xs__go:focus-visible,
+.xs__toggle:focus-visible {
+  outline: 2px solid var(--xs-ink);
+  outline-offset: 3px;
+}
+
+.xs__sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .xs__bar,
+  .xs[data-open="true"] .xs__bar {
+    transition: opacity 150ms ease;
+  }
+}
