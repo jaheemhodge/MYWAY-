@@ -630,6 +630,11 @@ html body #root:has(.t-open) {
   }
 }
 
+/* Polaroid line rows: the caption bar lines up with the page padding. */
+.o-line .pl-bar {
+  padding-inline: var(--o-gutter);
+}
+
 /* ---------- Tiles ---------- */
 
 .o-media {

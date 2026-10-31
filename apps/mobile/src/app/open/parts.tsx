@@ -1,5 +1,6 @@
 import { useId, type ReactNode } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import PolaroidLineCarousel from "@/components/ui/polaroid-line-carousel";
 import { imageFor } from "../data/images";
 import { AREA_LABEL, displayName, type Area, type Exercise } from "../data/library";
 import { opensOnDay } from "../data/plan";
@@ -96,14 +97,16 @@ export function OHead({ id, title, line, seeAll, as: Tag = "h2" }: { id: string;
   );
 }
 
-/** Horizontal row: the track lines up with the page padding and bleeds off the right edge. */
+/**
+ * One row of exercises as polaroids pegged to a line (drag, arrows, or ←/→). The print in the middle
+ * is the current one: click it (or its title, or press Enter) to open the exercise panel.
+ */
 export function ORow({
   title,
   line,
   seeAll,
   items,
   currentDay,
-  shape,
   area,
 }: {
   title: string;
@@ -111,21 +114,37 @@ export function ORow({
   seeAll?: string;
   items: readonly Exercise[];
   currentDay: number;
-  shape: TileShape;
-  /** Focus area of the row, used as every tile's source line. */
+  /** Kept for the See all grid; the line always uses square prints. */
+  shape?: TileShape;
+  /** Focus area of the row, used in every caption. */
   area?: Area;
 }) {
   const headingId = useId();
+  const navigate = useNavigate();
+  const overlay = useOverlayLink();
+  const slides = items.map((e) => {
+    const opens = opensOnDay(e.phase, currentDay);
+    return {
+      key: e.id,
+      image: imageFor(e),
+      tone: toneFor(e.id),
+      title: displayName(e),
+      caption: `${AREA_LABEL[area ?? e.primaryArea]} · ${minutesFor(e)} min${opens ? ` · Opens Day ${opens}` : ""}`,
+    };
+  });
   return (
     <section className="o-row" aria-labelledby={headingId}>
       <OHead id={headingId} title={title} line={line} seeAll={seeAll} />
-      <ol className={`o-track o-track--${shape}`} aria-label={title}>
-        {items.map((e) => (
-          <li key={e.id}>
-            <OCard exercise={e} currentDay={currentDay} shape={shape} area={area} />
-          </li>
-        ))}
-      </ol>
+      <PolaroidLineCarousel
+        className="o-line"
+        slides={slides}
+        ariaLabel={title}
+        onOpen={(i) => {
+          const link = overlay(items[i].id);
+          navigate(link.to, { state: link.state });
+        }}
+        actions={(i) => <Heart id={items[i].id} name={items[i].name} />}
+      />
     </section>
   );
 }
