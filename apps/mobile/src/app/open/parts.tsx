@@ -1,6 +1,5 @@
 import { useId, type ReactNode } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { GradientText } from "@/components/ui/gradient-text";
 import { imageFor } from "../data/images";
 import { AREA_LABEL, displayName, type Area, type Exercise } from "../data/library";
 import { opensOnDay } from "../data/plan";
@@ -81,7 +80,7 @@ export function OHead({ id, title, line, seeAll, as: Tag = "h2" }: { id: string;
   return (
     <div className="o-wrap o-head">
       <Tag id={id} className="o-head__title">
-        <GradientText>{title}</GradientText>
+        {title}
       </Tag>
       {seeAll ? (
         <Link to={seeAll} className="o-pill o-pill--outline o-caps o-head__all">

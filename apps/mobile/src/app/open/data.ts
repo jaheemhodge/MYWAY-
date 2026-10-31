@@ -50,8 +50,8 @@ export const COLLECTION_SHAPE: Record<Slug, TileShape> = {
   chair: "square",
 };
 
-/** Soft solid tones from the page palette, for exercises that have no photo yet. */
-const TILE_TONES = ["#8EA3B0", "#A7BAC6", "#C2D2DC", "#98A9B3", "#B3C3CD"];
+/** Soft solid tones from the page palette (white to indigo), for exercises that have no photo yet. */
+const TILE_TONES = ["#E8EAF6", "#DEE1F3", "#D3D7EF", "#E4E6EE", "#CDD2EA"];
 
 export function toneFor(id: string): string {
   let h = 0;
