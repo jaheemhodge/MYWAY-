@@ -1,6 +1,7 @@
 import { useId, type ReactNode } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import PolaroidLineCarousel from "@/components/ui/polaroid-line-carousel";
+import { FlowLink } from "@/components/ui/flow-button";
 import { imageFor } from "../data/images";
 import { AREA_LABEL, displayName, type Area, type Exercise } from "../data/library";
 import { opensOnDay } from "../data/plan";
@@ -84,13 +85,9 @@ export function OHead({ id, title, line, seeAll, as: Tag = "h2" }: { id: string;
         {title}
       </Tag>
       {seeAll ? (
-        <Link to={seeAll} className="o-pill o-pill--outline o-caps o-head__all">
+        <FlowLink to={seeAll} className="o-caps o-head__all" aria-label={`See all: ${title}`}>
           See all
-          <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M5 12h14M13 6l6 6-6 6" />
-          </svg>
-          <span className="sr-only">: {title}</span>
-        </Link>
+        </FlowLink>
       ) : null}
       <p className="o-head__line">{line}</p>
     </div>

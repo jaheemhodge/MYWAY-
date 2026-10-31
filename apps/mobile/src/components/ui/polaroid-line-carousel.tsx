@@ -1,4 +1,5 @@
 import * as React from "react";
+import { FlowIconButton } from "./flow-button";
 
 /*
  * Polaroid Line Carousel: instant photos pegged to a sagging string. Drag the line (or use the
@@ -9,7 +10,8 @@ import * as React from "react";
  * - No painted landscapes: a slide without a photo shows a soft solid tone (`tone`), never an
  *   invented picture.
  * - No autoplay: rows only move when someone drags, clicks or presses an arrow.
- * - Text is 18px minimum in the page's font (no serif, no monospace); arrow buttons are 56px.
+ * - Text is 18px minimum in the page's font (no serif, no monospace); arrow buttons are 56px
+ *   "flow" buttons (see flow-button.tsx).
  * - The caption bar sits below the string in normal flow (not over the prints), with room for
  *   per-slide actions (the heart) and an `onOpen` for the centred print (click or Enter).
  * - Transparent background so the page shows through; the stage height follows the card size.
@@ -364,16 +366,8 @@ export default function PolaroidLineCarousel({
         <span className="pl-count" aria-hidden="true">
           <b>{pad2(active + 1)}</b> / {pad2(n)}
         </span>
-        <button type="button" className="pl-btn" aria-label="Previous exercise" aria-disabled={active === 0} onClick={() => step(-1)}>
-          <svg width="20" height="20" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-            <path d="M10 3 5 8l5 5" stroke="currentColor" strokeWidth="1.4" />
-          </svg>
-        </button>
-        <button type="button" className="pl-btn" aria-label="Next exercise" aria-disabled={active === n - 1} onClick={() => step(1)}>
-          <svg width="20" height="20" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-            <path d="m6 3 5 5-5 5" stroke="currentColor" strokeWidth="1.4" />
-          </svg>
-        </button>
+        <FlowIconButton direction="left" aria-label="Previous exercise" aria-disabled={active === 0} onClick={() => step(-1)} />
+        <FlowIconButton aria-label="Next exercise" aria-disabled={active === n - 1} onClick={() => step(1)} />
       </div>
       <div className="pl-sr" aria-live="polite">
         {s ? `${active + 1} of ${n}: ${s.title}${s.caption ? `, ${s.caption}` : ""}` : ""}

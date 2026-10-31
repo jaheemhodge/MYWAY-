@@ -511,9 +511,6 @@ html body #root:has(.t-open) {
     font-size: 2.25rem; /* 36px */
   }
 
-  .o-head__all {
-    padding-inline: 1.5rem;
-  }
 
   .o-track > li {
     flex-basis: 170px;

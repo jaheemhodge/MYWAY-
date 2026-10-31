@@ -1,0 +1,150 @@
+.flow {
+  --flow-ink: var(--ink, #111111);
+  --flow-line: rgb(51 51 51 / 0.4);
+  --flow-ease: cubic-bezier(0.23, 1, 0.32, 1);
+  --flow-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --flow-circle: cubic-bezier(0.19, 1, 0.22, 1);
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  height: 56px;
+  padding: 0 2rem;
+  overflow: hidden;
+  isolation: isolate;
+  border: 1.5px solid var(--flow-line);
+  border-radius: 100px;
+  background: transparent;
+  color: var(--flow-ink);
+  font: inherit;
+  font-size: 1.125rem;
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+  transition:
+    border-color 600ms var(--flow-ease),
+    color 600ms var(--flow-ease),
+    border-radius 600ms var(--flow-ease),
+    transform 160ms var(--flow-ease);
+}
+
+.flow:active {
+  transform: scale(0.95);
+}
+
+.flow__text {
+  position: relative;
+  z-index: 1;
+  transform: translateX(-12px);
+  transition: transform 800ms ease-out;
+}
+
+.flow__circle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: var(--flow-ink);
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(1);
+  transition:
+    transform 800ms var(--flow-circle),
+    opacity 800ms var(--flow-circle);
+}
+
+.flow__arr {
+  position: absolute;
+  z-index: 9;
+  width: 20px;
+  height: 20px;
+  transition:
+    left 800ms var(--flow-spring),
+    right 800ms var(--flow-spring),
+    color 600ms var(--flow-ease);
+}
+
+.flow__arr--in {
+  left: -25%;
+}
+
+.flow__arr--out {
+  right: 16px;
+}
+
+/* Round icon version (Previous / Next). */
+.flow--icon {
+  width: 56px;
+  padding: 0;
+  justify-content: center;
+}
+
+.flow--icon .flow__arr--in {
+  left: -60%; /* fully outside the 56px circle until hover */
+}
+
+.flow--icon .flow__arr--out {
+  right: 18px;
+}
+
+.flow--left {
+  transform: scaleX(-1);
+}
+
+.flow--left:active {
+  transform: scaleX(-1) scale(0.95);
+}
+
+.flow[aria-disabled="true"] {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.flow:focus-visible {
+  outline: 2px solid var(--flow-ink);
+  outline-offset: 3px;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .flow:not([aria-disabled="true"]):hover {
+    border-color: transparent;
+    color: #ffffff;
+    border-radius: 12px;
+  }
+
+  .flow:not([aria-disabled="true"]):hover .flow__circle {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(14);
+  }
+
+  .flow:not([aria-disabled="true"]):hover .flow__text {
+    transform: translateX(12px);
+  }
+
+  .flow:not([aria-disabled="true"]):hover .flow__arr--in {
+    left: 16px;
+  }
+
+  .flow:not([aria-disabled="true"]):hover .flow__arr--out {
+    right: -25%;
+  }
+
+  .flow--icon:not([aria-disabled="true"]):hover .flow__arr--in {
+    left: 18px;
+  }
+
+  .flow--icon:not([aria-disabled="true"]):hover .flow__arr--out {
+    right: -60%;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .flow,
+  .flow__text,
+  .flow__circle,
+  .flow__arr {
+    transition-property: color, border-color, opacity, background-color;
+    transition-duration: 150ms;
+  }
+}
