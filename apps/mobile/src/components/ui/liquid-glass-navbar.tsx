@@ -12,6 +12,8 @@
  * - "stacked" layout (icon over label) for the phone bottom bar; no icon-only mode.
  * - Arrow keys move focus between items; Enter follows the link. No sound.
  * - Brand fonts from the page instead of the system stack.
+ * - tone="mist": clear water on the blue-grey exercise side (ink text, 400 weight, 18px everywhere,
+ *   2px ink focus ring). The default "cream" tone is unchanged.
  */
 import * as React from "react";
 import { Link } from "react-router-dom";
@@ -35,6 +37,8 @@ export type LiquidNavbarProps = {
   /** "inline": icon beside label (top bar). "stacked": icon above label, full width (phone bottom bar). */
   layout?: "inline" | "stacked";
   label?: string;
+  /** "cream" (default): Cream glass and Brass water. "mist": clear glass and water for the blue-grey pages. */
+  tone?: "cream" | "mist";
   className?: string;
 };
 
@@ -85,6 +89,17 @@ const NAV_CSS = `
 @keyframes lqHop{0%{transform:none}30%{transform:translateY(-5px) scale(1.04,.96)}55%{transform:translateY(0) scale(1.12,.88)}75%{transform:translateY(-2px) scale(.98,1.04)}100%{transform:translateY(-1px) scale(1.08)}}
 .lq-ico[data-fx="wave"] svg{animation:lqWave .9s ease-in-out both;transform-origin:50% 92%}
 @keyframes lqWave{0%{transform:none}20%{transform:rotate(-15deg)}40%{transform:rotate(12deg)}60%{transform:rotate(-8deg)}80%{transform:rotate(4deg)}100%{transform:translateY(-1px) scale(1.08)}}
+.lq-nav[data-tone="mist"]{--lq-tint:rgba(255,255,255,.2);--lq-fg:#0f1418;--lq-fg-soft:rgba(15,20,24,.84);--lq-rim:rgba(255,255,255,.7)}
+.lq-nav[data-tone="mist"] .lq-glass{box-shadow:inset 0 1px 1px var(--lq-rim),inset 0 0 0 1px rgba(255,255,255,.32)}
+.lq-nav[data-tone="mist"][data-layout="stacked"]{--lq-tint:rgba(214,226,233,.72)}
+.lq-nav[data-tone="mist"][data-layout="stacked"] .lq-glass{box-shadow:inset 0 1px 1px var(--lq-rim),inset 0 0 0 1px rgba(255,255,255,.4),0 10px 30px -12px rgba(15,20,24,.35),0 1px 4px rgba(15,20,24,.08)}
+.lq-nav[data-tone="mist"] .lq-item,.lq-nav[data-tone="mist"] .lq-item[aria-current="page"]{font-weight:400;letter-spacing:0}
+.lq-nav[data-tone="mist"] .lq-item{padding:0 20px}
+.lq-nav[data-tone="mist"][data-layout="stacked"] .lq-item{padding:4px 2px}
+.lq-nav[data-tone="mist"][data-layout="stacked"] .lq-label{font-size:18px}
+.lq-nav[data-tone="mist"] .lq-item:focus-visible{outline:2px solid #0f1418;outline-offset:3px;box-shadow:none}
+.lq-nav[data-tone="mist"] .lq-drop{background:radial-gradient(120% 140% at 30% 0%,rgba(255,255,255,.9),rgba(255,255,255,0) 55%),rgba(245,246,244,.55);
+  box-shadow:inset 0 1px 1px rgba(255,255,255,.95),inset 0 -2px 6px rgba(60,84,98,.2),inset 0 0 0 1px rgba(255,255,255,.6),0 6px 16px -6px rgba(15,20,24,.35)}
 @media (prefers-reduced-motion:reduce){.lq-ico svg{animation:none!important;transition:none}.lq-item{transition:none}}
 `;
 
@@ -92,7 +107,7 @@ const NAV_CSS = `
 const VERT = `attribute vec2 a;void main(){gl_Position=vec4(a,0.,1.);}`;
 const FRAG = `precision highp float;
 uniform vec2 uRes;uniform float uDpr;uniform float uTime;uniform vec4 uPill;
-uniform vec4 uBlob[6];uniform float uSy[6];uniform vec4 uRip[6];uniform vec3 uMouse;uniform float uAmb;
+uniform vec4 uBlob[6];uniform float uSy[6];uniform vec4 uRip[6];uniform vec3 uMouse;uniform float uAmb;uniform float uMist;
 float sdRB(vec2 p,vec2 b,float r){vec2 q=abs(p)-b+r;return length(max(q,0.))+min(max(q.x,q.y),0.)-r;}
 float sdCap(vec2 p,vec4 B,float sy){p-=B.xy;p.y/=sy;p.x=max(abs(p.x)-B.z,0.);return(length(p)-B.w)*min(1.,sy);}
 float smin(float a,float b,float k){float h=clamp(.5+.5*(b-a)/k,0.,1.);return mix(b,a,h)-k*h*(1.-h);}
@@ -114,20 +129,20 @@ void main(){
  float spec2=pow(max(dot(reflect(-normalize(vec3(.6,.75,.7)),n),V),0.),22.)*.3;
  float fres=clamp((1.-n.z)*4.,0.,1.);
  vec3 irid=.5+.5*cos(6.2831*(vec3(0.,.33,.67)+fres*.85+p.x*.0028+uTime*.035));
- irid=mix(vec3(1.,.93,.78),irid,.25);
+ irid=mix(mix(vec3(1.,.93,.78),vec3(.94,.97,1.),uMist),irid,.25);
  float pm=smoothstep(1.,-1.,dp);float dm=smoothstep(1.,-1.,dd)*smoothstep(1.,-2.,dp);
  float sh=smoothstep(9.,-9.,dropD(p-vec2(0.,5.)))*(1.-dm)*pm*.12;
- vec3 c=vec3(.10,.18,.14)*sh;float a=sh;
+ vec3 c=mix(vec3(.10,.18,.14),vec3(.06,.08,.10),uMist)*sh;float a=sh;
  float pa=clamp(pm*(fres*.5+spec*.9+spec2),0.,1.);
  c=mix(vec3(1.),irid,.5*fres)*pa+c*(1.-pa);a=pa+a*(1.-pa);
  float th=lens(dd,11.);
  float cs=caus((p+n.xy*th*18.)*.085,uTime*.9);
- vec3 tint=vec3(.97,.90,.74);
+ vec3 tint=mix(vec3(.97,.90,.74),vec3(.96,.97,.97),uMist);
  float rim=dm*(1.-smoothstep(0.,8.,-dd));
  float cres=dm*smoothstep(.12,.55,dot(n.xy,normalize(vec2(.55,.85))))*smoothstep(0.,3.,-dd);
  float body=.5+.5*clamp(-n.y*3.,-1.,1.);
  float da=dm*(.34+.14*body);vec3 dc=mix(tint,vec3(1.),body*.5);
- float la=rim*.3;vec3 lc=vec3(.66,.51,.24);dc=lc*la+dc*da*(1.-la);da=la+da*(1.-la);
+ float la=rim*.3;vec3 lc=mix(vec3(.66,.51,.24),vec3(.33,.43,.50),uMist);dc=lc*la+dc*da*(1.-la);da=la+da*(1.-la);
  la=clamp(cres*.7+smoothstep(.6,1.,cs)*.28*th*dm,0.,1.);dc=vec3(1.)*la+dc*(1.-la);da=la+da*(1.-la);
  la=clamp(dm*(spec*1.2+spec2*.5),0.,1.);dc=vec3(1.)*la+dc*(1.-la);da=la+da*(1.-la);
  la=dm*smoothstep(-2.,0.,dd)*.4;dc=mix(vec3(1.),irid,.35)*la+dc*(1.-la);da=la+da*(1.-la);
@@ -191,7 +206,7 @@ function initGL(canvas: HTMLCanvasElement) {
   gl.enableVertexAttribArray(loc);
   gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
   const u: Record<string, WebGLUniformLocation | null> = {};
-  for (const n of ["uRes", "uDpr", "uTime", "uPill", "uBlob", "uSy", "uRip", "uMouse", "uAmb"]) u[n] = gl.getUniformLocation(p, n);
+  for (const n of ["uRes", "uDpr", "uTime", "uPill", "uBlob", "uSy", "uRip", "uMouse", "uAmb", "uMist"]) u[n] = gl.getUniformLocation(p, n);
   return { gl, u };
 }
 
@@ -201,7 +216,7 @@ function supportsRefraction() {
   return /Chrome\/|Chromium\/|Edg\//.test(ua) && !/Firefox\//.test(ua) && !!CSS.supports?.("backdrop-filter", "url(#a)");
 }
 
-export function LiquidNavbar({ items, active, layout = "inline", label = "Main", className }: LiquidNavbarProps) {
+export function LiquidNavbar({ items, active, layout = "inline", label = "Main", tone = "cream", className }: LiquidNavbarProps) {
   const navRef = React.useRef<HTMLElement>(null);
   const canvasRef = React.useRef<HTMLCanvasElement>(null);
   const dropRef = React.useRef<HTMLSpanElement>(null);
@@ -212,6 +227,8 @@ export function LiquidNavbar({ items, active, layout = "inline", label = "Main",
   const [refract, setRefract] = React.useState(false);
   const [fx, setFx] = React.useState({ i: -1, n: 0 });
   const filterId = React.useId().replace(/:/g, "");
+  const mistRef = React.useRef(tone === "mist" ? 1 : 0);
+  mistRef.current = tone === "mist" ? 1 : 0;
 
   /* ---- drawing ---- */
   const draw = React.useCallback(() => {
@@ -247,6 +264,7 @@ export function LiquidNavbar({ items, active, layout = "inline", label = "Main",
       g.uniform4fv(u.uRip, rips);
       g.uniform3f(u.uMouse, s.mouse.x, s.mouse.y, s.mouse.s);
       g.uniform1f(u.uAmb, s.reduce ? 0 : 1);
+      g.uniform1f(u.uMist, mistRef.current);
       g.clearColor(0, 0, 0, 0);
       g.clear(g.COLOR_BUFFER_BIT);
       g.drawArrays(g.TRIANGLES, 0, 3);
@@ -504,6 +522,7 @@ export function LiquidNavbar({ items, active, layout = "inline", label = "Main",
       className={["lq-nav", className].filter(Boolean).join(" ")}
       data-gl={gl}
       data-layout={layout}
+      data-tone={tone}
       data-refract={refract ? "on" : "off"}
       aria-label={label}
       onKeyDown={onKeyDown}

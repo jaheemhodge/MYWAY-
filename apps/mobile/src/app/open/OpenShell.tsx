@@ -1,9 +1,9 @@
 import "@fontsource/inter-tight/400.css";
 import { useEffect, useId, useRef, useState } from "react";
-import { Link, NavLink, Outlet, useLocation, useNavigate, useSearchParams } from "react-router-dom";
-import { Icon, type IconName } from "../components/Icon";
+import { Link, Outlet, useLocation, useNavigate, useSearchParams } from "react-router-dom";
+import { LiquidNavbar, type LiquidNavItem } from "@/components/ui/liquid-glass-navbar";
+import { Icon } from "../components/Icon";
 import { TOTAL_DAYS } from "../data/plan";
-import { SAMPLE_FIRST_NAME } from "../data/profile";
 import { useDay } from "../DayState";
 import { AREA_SLUGS, COLLECTION_TITLE, openActiveCount, openFiltersFromParams, openParams, type OpenFilters } from "./data";
 import { FilterPanel } from "./FilterPanel";
@@ -19,12 +19,20 @@ const CATEGORIES: { label: string; to: string; match: (path: string, area: strin
   })),
 ];
 
-const BOTTOM: { to: string; label: string; icon: IconName }[] = [
-  { to: "/app/home", label: "Today", icon: "today" },
-  { to: "/app/plan", label: "Plan", icon: "plan" },
-  { to: "/app/events", label: "Near you", icon: "pin" },
-  { to: "/app/progress", label: "Progress", icon: "progress" },
+/** The same five tabs as the Events side, so both halves of the app share one navigation. */
+const TABS: LiquidNavItem[] = [
+  { to: "/app/home", label: "Home", icon: <Icon name="home" size={22} />, fx: "glow" },
+  { to: "/app/plan", label: "My plan", shortLabel: "Plan", icon: <Icon name="plan" size={22} />, fx: "pop" },
+  { to: "/app/events", label: "Events", icon: <Icon name="ticket" size={22} />, fx: "spin" },
+  { to: "/app/progress", label: "Progress", icon: <Icon name="progress" size={22} />, fx: "wave" },
+  { to: "/app/account", label: "Account", shortLabel: "You", icon: <Icon name="user" size={22} />, fx: "pop" },
 ];
+
+/** Library, See all, the exercise panel and the session all belong to Home. */
+function activeTab(path: string) {
+  if (path === "/app/home" || path.startsWith("/app/library") || path.startsWith("/app/exercise") || path.startsWith("/app/session")) return 0;
+  return TABS.findIndex((t) => path === t.to || path.startsWith(`${t.to}/`));
+}
 
 /**
  * Exercise side of the app, laid out like Open's web app: a logo row that scrolls away, a sticky
@@ -39,7 +47,7 @@ export function OpenShell() {
   const mainRef = useRef<HTMLElement>(null);
   const first = useRef(true);
   const { currentDay } = useDay();
-  const onEvents = pagePath.startsWith("/app/events");
+  const active = activeTab(pagePath);
 
   useEffect(() => {
     if (first.current) {
@@ -58,24 +66,15 @@ export function OpenShell() {
       </a>
       <header className="o-bar1">
         <div className="o-wrap o-bar1__inner">
-          <p className="o-bar1__day">
-            Day {currentDay} of {TOTAL_DAYS}
-          </p>
           <Link to="/app/home" className="o-wordmark">
             Mobility
           </Link>
-          <div className="o-bar1__right">
-            <nav className="o-switch" aria-label="Where">
-              <NavLink to="/app/home" className={() => `o-switch__opt${onEvents ? "" : " is-on"}`} aria-current={onEvents ? undefined : "page"}>
-                At home
-              </NavLink>
-              <span aria-hidden="true">/</span>
-              <NavLink to="/app/events" className="o-switch__opt">
-                Near you
-              </NavLink>
-            </nav>
-            <AccountMenu />
+          <div className="o-topnav">
+            <LiquidNavbar items={TABS} active={active} tone="mist" />
           </div>
+          <p className="o-bar1__day">
+            Day {currentDay} of {TOTAL_DAYS}
+          </p>
         </div>
       </header>
 
@@ -93,18 +92,9 @@ export function OpenShell() {
         </div>
       </footer>
 
-      <nav className="o-bottom" aria-label="Main">
-        <ul>
-          {BOTTOM.map((item) => (
-            <li key={item.to}>
-              <NavLink to={item.to} className={({ isActive }) => `o-bottom__item${isActive || (item.to === "/app/home" && pagePath.startsWith("/app/library")) ? " is-active" : ""}`}>
-                <Icon name={item.icon} size={24} />
-                <span>{item.label}</span>
-              </NavLink>
-            </li>
-          ))}
-        </ul>
-      </nav>
+      <div className="o-bottomnav">
+        <LiquidNavbar items={TABS} active={active} layout="stacked" tone="mist" />
+      </div>
     </div>
   );
 }
@@ -226,51 +216,5 @@ function SearchIcon() {
       <circle cx="11" cy="11" r="6.5" />
       <path d="m16 16 4.5 4.5" />
     </svg>
-  );
-}
-
-function AccountMenu() {
-  const [open, setOpen] = useState(false);
-  const ref = useRef<HTMLDivElement>(null);
-  const menuId = useId();
-  const location = useLocation();
-
-  useEffect(() => setOpen(false), [location.pathname]);
-  useEffect(() => {
-    if (!open) return;
-    const onDoc = (e: MouseEvent) => !ref.current?.contains(e.target as Node) && setOpen(false);
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") {
-        setOpen(false);
-        ref.current?.querySelector<HTMLButtonElement>("button")?.focus();
-      }
-    };
-    document.addEventListener("mousedown", onDoc);
-    document.addEventListener("keydown", onKey);
-    return () => {
-      document.removeEventListener("mousedown", onDoc);
-      document.removeEventListener("keydown", onKey);
-    };
-  }, [open]);
-
-  return (
-    <div className="o-acct" ref={ref}>
-      <button type="button" className="o-me" aria-expanded={open} aria-controls={menuId} onClick={() => setOpen((v) => !v)}>
-        Me<span className="sr-only">: {SAMPLE_FIRST_NAME}'s account menu</span>
-      </button>
-      {open ? (
-        <ul id={menuId} className="o-acct__menu">
-          <li>
-            <Link to="/app/plan">My plan</Link>
-          </li>
-          <li>
-            <Link to="/app/progress">Progress</Link>
-          </li>
-          <li>
-            <Link to="/app/account">Account</Link>
-          </li>
-        </ul>
-      ) : null}
-    </div>
   );
 }
