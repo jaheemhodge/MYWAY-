@@ -21,6 +21,19 @@ export function imageFor(exercise: Exercise): string | undefined {
   return IMAGES_BY_NAME[exercise.name];
 }
 
+/**
+ * Exercise clips, matched by exercise name. Only exercises with a real demonstration clip are
+ * listed; everything else shows its still with "Video coming soon".
+ * TODO(video): add each exercise's clip here as it is produced.
+ */
+const VIDEOS_BY_NAME: Record<string, string> = {
+  "Seated knee extension": `${BASE}videos/day-01/day01-test-knee-extension-left-rep-v2.mp4`,
+};
+
+export function videoFor(exercise: Exercise): string | undefined {
+  return VIDEOS_BY_NAME[exercise.name];
+}
+
 /** Word shown on the placeholder tile. */
 export const PLACEHOLDER_WORD: Record<Position, string> = {
   chair: "Chair",

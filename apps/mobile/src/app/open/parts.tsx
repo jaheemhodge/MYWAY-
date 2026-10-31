@@ -1,8 +1,8 @@
-import { useId, type ReactNode } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
-import PolaroidLineCarousel from "@/components/ui/polaroid-line-carousel";
-import { FlowLink } from "@/components/ui/flow-button";
-import { imageFor } from "../data/images";
+import { useCallback, useEffect, useId, useRef, useState, type ReactNode } from "react";
+import { useLocation } from "react-router-dom";
+import { FlowIconButton, FlowLink } from "@/components/ui/flow-button";
+import { Stories, Story } from "@/components/ui/stories-carousel";
+import { imageFor, videoFor } from "../data/images";
 import { AREA_LABEL, displayName, type Area, type Exercise } from "../data/library";
 import { opensOnDay } from "../data/plan";
 import { minutesFor, toneFor, useSaved, type TileShape } from "./data";
@@ -51,43 +51,71 @@ export function useOverlayLink() {
 }
 
 /**
- * Open's library tile: picture, then title + heart on one line, source line, duration.
- * The source line is the focus area (there are no instructors). Locked exercises add "Opens Day N".
+ * Exercise tile ("story"): tall rounded photo with the name and "area · minutes" over a dark fade,
+ * the save heart in the corner, and the clip playing on hover when one exists. Locked exercises
+ * add "Opens Day N". Opens the exercise panel.
  */
-export function OCard({ exercise, currentDay, shape = "square", area }: { exercise: Exercise; currentDay: number; shape?: TileShape; area?: Area }) {
+export function OCard({
+  exercise,
+  currentDay,
+  area,
+  as = "li",
+}: {
+  exercise: Exercise;
+  currentDay: number;
+  /** Kept for callers that still pass a shape; stories are always 3:4. */
+  shape?: TileShape;
+  area?: Area;
+  as?: "li" | "div";
+}) {
   const link = useOverlayLink()(exercise.id);
   const opens = opensOnDay(exercise.phase, currentDay);
-  const titleId = `o-${exercise.id}-${useId().replace(/:/g, "")}`;
   return (
-    <article className="o-card" aria-labelledby={titleId}>
-      <OMedia exercise={exercise} ratio={shape} />
-      <div className="o-card__row">
-        <h3 className="o-card__title" id={titleId}>
-          <Link {...link} className="o-card__link">
-            {displayName(exercise)}
-          </Link>
-        </h3>
-        <Heart id={exercise.id} name={exercise.name} />
-      </div>
-      <p className="o-card__meta">{AREA_LABEL[area ?? exercise.primaryArea]}</p>
-      <p className="o-card__meta">
-        {minutesFor(exercise)} min{opens ? ` · Opens Day ${opens}` : ""}
-      </p>
-    </article>
+    <Story
+      as={as}
+      to={link.to}
+      state={link.state}
+      title={displayName(exercise)}
+      meta={`${AREA_LABEL[area ?? exercise.primaryArea]} · ${minutesFor(exercise)} min${opens ? ` · Opens Day ${opens}` : ""}`}
+      image={imageFor(exercise)}
+      video={videoFor(exercise)}
+      tone={toneFor(exercise.id)}
+      action={<Heart id={exercise.id} name={exercise.name} />}
+    />
   );
 }
 
 /** Row head shared by Home rows and the See all page: big title, SEE ALL pill, one line under it. */
-export function OHead({ id, title, line, seeAll, as: Tag = "h2" }: { id: string; title: string; line: string; seeAll?: string; as?: "h1" | "h2" }) {
+export function OHead({
+  id,
+  title,
+  line,
+  seeAll,
+  controls,
+  as: Tag = "h2",
+}: {
+  id: string;
+  title: string;
+  line: string;
+  seeAll?: string;
+  /** Extra controls beside SEE ALL (the row's scroll arrows). */
+  controls?: ReactNode;
+  as?: "h1" | "h2";
+}) {
   return (
     <div className="o-wrap o-head">
       <Tag id={id} className="o-head__title">
         {title}
       </Tag>
-      {seeAll ? (
-        <FlowLink to={seeAll} className="o-caps o-head__all" aria-label={`See all: ${title}`}>
-          See all
-        </FlowLink>
+      {seeAll || controls ? (
+        <div className="o-head__controls">
+          {controls}
+          {seeAll ? (
+            <FlowLink to={seeAll} className="o-caps o-head__all" aria-label={`See all: ${title}`}>
+              See all
+            </FlowLink>
+          ) : null}
+        </div>
       ) : null}
       <p className="o-head__line">{line}</p>
     </div>
@@ -95,8 +123,8 @@ export function OHead({ id, title, line, seeAll, as: Tag = "h2" }: { id: string;
 }
 
 /**
- * One row of exercises as polaroids pegged to a line (drag, arrows, or ←/→). The print in the middle
- * is the current one: click it (or its title, or press Enter) to open the exercise panel.
+ * One row of exercise stories that scrolls sideways (swipe, trackpad, drag with Shift+wheel). On
+ * desktop, flow arrows beside SEE ALL move it by about two tiles.
  */
 export function ORow({
   title,
@@ -111,37 +139,58 @@ export function ORow({
   seeAll?: string;
   items: readonly Exercise[];
   currentDay: number;
-  /** Kept for the See all grid; the line always uses square prints. */
   shape?: TileShape;
-  /** Focus area of the row, used in every caption. */
+  /** Focus area of the row, used in every tile's meta line. */
   area?: Area;
 }) {
   const headingId = useId();
-  const navigate = useNavigate();
-  const overlay = useOverlayLink();
-  const slides = items.map((e) => {
-    const opens = opensOnDay(e.phase, currentDay);
-    return {
-      key: e.id,
-      image: imageFor(e),
-      tone: toneFor(e.id),
-      title: displayName(e),
-      caption: `${AREA_LABEL[area ?? e.primaryArea]} · ${minutesFor(e)} min${opens ? ` · Opens Day ${opens}` : ""}`,
-    };
-  });
+  const trackRef = useRef<HTMLOListElement>(null);
+  const [atStart, setAtStart] = useState(true);
+  const [atEnd, setAtEnd] = useState(false);
+
+  const update = useCallback(() => {
+    const el = trackRef.current;
+    if (!el) return;
+    setAtStart(el.scrollLeft <= 2);
+    setAtEnd(el.scrollLeft + el.clientWidth >= el.scrollWidth - 2);
+  }, []);
+
+  useEffect(() => {
+    update();
+    const el = trackRef.current;
+    if (!el) return undefined;
+    const ro = new ResizeObserver(update);
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, [update, items.length]);
+
+  const step = (dir: 1 | -1) => {
+    const el = trackRef.current;
+    const tile = el?.querySelector("li");
+    if (!el || !tile) return;
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    el.scrollBy({ left: dir * (tile.getBoundingClientRect().width + 16) * 2, behavior: reduce ? "auto" : "smooth" });
+  };
+
   return (
     <section className="o-row" aria-labelledby={headingId}>
-      <OHead id={headingId} title={title} line={line} seeAll={seeAll} />
-      <PolaroidLineCarousel
-        className="o-line"
-        slides={slides}
-        ariaLabel={title}
-        onOpen={(i) => {
-          const link = overlay(items[i].id);
-          navigate(link.to, { state: link.state });
-        }}
-        actions={(i) => <Heart id={items[i].id} name={items[i].name} />}
+      <OHead
+        id={headingId}
+        title={title}
+        line={line}
+        seeAll={seeAll}
+        controls={
+          <span className="o-row__arrows">
+            <FlowIconButton direction="left" aria-label={`Scroll back: ${title}`} aria-disabled={atStart} onClick={() => !atStart && step(-1)} />
+            <FlowIconButton aria-label={`Scroll on: ${title}`} aria-disabled={atEnd} onClick={() => !atEnd && step(1)} />
+          </span>
+        }
       />
+      <Stories ref={trackRef} label={title} onScroll={update}>
+        {items.map((e) => (
+          <OCard key={e.id} exercise={e} currentDay={currentDay} area={area} />
+        ))}
+      </Stories>
     </section>
   );
 }

@@ -3,7 +3,7 @@ import { getExercise } from "../data/library";
 import { phaseForDay } from "../data/plan";
 import { useDay } from "../DayState";
 import { usePageTitle } from "../hooks";
-import { applyOpen, collection, COLLECTION_LINE, COLLECTION_SHAPE, COLLECTION_TITLE, isSlug, openActiveCount, openFiltersFromParams } from "./data";
+import { applyOpen, collection, COLLECTION_LINE, COLLECTION_TITLE, isSlug, openActiveCount, openFiltersFromParams } from "./data";
 import { OCard, OHead } from "./parts";
 
 /** /app/library/:slug — Open's See all: the row head, then every tile in a grid. Filters and search come from the URL. */
@@ -23,7 +23,6 @@ export function SeeAll() {
   const q = params.get("q") ?? "";
   const items = applyOpen(collection(slug, currentDay), filters, q);
   const filtering = openActiveCount(filters) > 0 || q.trim().length > 0;
-  const shape = COLLECTION_SHAPE[slug];
   const title = slug === "today" ? "Today" : COLLECTION_TITLE[slug];
   const line = slug === "today" ? `Day ${currentDay} · ${phaseForDay(currentDay).name}` : COLLECTION_LINE[slug];
 
@@ -43,11 +42,9 @@ export function SeeAll() {
         </div>
       ) : null}
       {items.length ? (
-        <ul className={`o-wrap o-grid o-grid--${shape}`}>
+        <ul className="o-wrap o-grid">
           {items.map((e) => (
-            <li key={e.id}>
-              <OCard exercise={e} currentDay={currentDay} shape={shape} area={slug === "knees" || slug === "lower-back" || slug === "hips-balance" ? slug : undefined} />
-            </li>
+            <OCard key={e.id} exercise={e} currentDay={currentDay} area={slug === "knees" || slug === "lower-back" || slug === "hips-balance" ? slug : undefined} />
           ))}
         </ul>
       ) : (

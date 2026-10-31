@@ -5,12 +5,15 @@ import { AREA_LABEL, getExercise, POSITION_LABEL } from "../data/library";
 import { opensOnDay, PHASE_INFO } from "../data/plan";
 import { useDay } from "../DayState";
 import { usePageTitle } from "../hooks";
-import { collection, minutesFor } from "./data";
-import { OCard, OMedia } from "./parts";
+import VideoPlayer from "@/components/ui/video-player";
+import { Stories } from "@/components/ui/stories-carousel";
+import { imageFor, videoFor } from "../data/images";
+import { collection, minutesFor, toneFor } from "./data";
+import { OCard } from "./parts";
 
 /**
- * Exercise detail as a panel over the page (native modal dialog: focus stays inside, Esc closes).
- * 480px column on desktop, full screen on phones.
+ * Exercise detail over the page (native modal dialog: focus stays inside, Esc closes): a wide
+ * window with the video player on top and the details underneath; full screen on phones.
  */
 export function ExerciseOverlay() {
   const { id = "" } = useParams();
@@ -67,10 +70,18 @@ export function ExerciseOverlay() {
           <span className="sr-only">Close</span>
         </button>
         <div className="o-overlay__scroll">
-          <OMedia exercise={exercise} ratio="portrait">
-            {opens ? <span className="o-lock">Opens Day {opens}</span> : null}
-          </OMedia>
+          <div className="o-overlay__media">
+            <VideoPlayer
+              key={exercise.id}
+              src={videoFor(exercise)}
+              poster={imageFor(exercise)}
+              tone={toneFor(exercise.id)}
+              label={`${exercise.name}, demonstration`}
+              emptyText={opens ? `Opens Day ${opens} · video coming soon` : "Video coming soon"}
+            />
+          </div>
           <div className="o-overlay__body">
+            <div className="o-overlay__main">
             <h2 id="o-ex-title" className="o-overlay__title">
               {exercise.name}
             </h2>
@@ -98,7 +109,14 @@ export function ExerciseOverlay() {
               ))}
             </ol>
 
-            <details className="o-safety">
+            </div>
+            <div className="o-overlay__side">
+            {!opens ? (
+              <Link to={`/app/session/${exercise.id}`} className="o-pill o-pill--solid o-pill--big o-overlay__start">
+                Start →
+              </Link>
+            ) : null}
+            <details className="o-safety" open>
               <summary>
                 <Icon name="alert" />
                 Stop if this causes pain
@@ -109,6 +127,8 @@ export function ExerciseOverlay() {
                 ))}
               </ul>
             </details>
+            </div>
+          </div>
 
             {more.length ? (
               <section className="o-more" aria-labelledby="o-more-title">
@@ -120,24 +140,14 @@ export function ExerciseOverlay() {
                     See all →
                   </Link>
                 </div>
-                <ul className="o-more__track">
+                <Stories label={`More for your ${AREA_LABEL[exercise.primaryArea].toLowerCase()}`} className="o-more__track">
                   {more.map((e) => (
-                    <li key={e.id}>
-                      <OCard exercise={e} currentDay={currentDay} />
-                    </li>
+                    <OCard key={e.id} exercise={e} currentDay={currentDay} />
                   ))}
-                </ul>
+                </Stories>
               </section>
             ) : null}
-          </div>
         </div>
-        {!opens ? (
-          <div className="o-overlay__cta">
-            <Link to={`/app/session/${exercise.id}`} className="o-pill o-pill--solid o-pill--big">
-              Start →
-            </Link>
-          </div>
-        ) : null}
       </div>
     </dialog>
   );

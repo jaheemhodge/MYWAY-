@@ -1,0 +1,245 @@
+.vp {
+  --vp-ease: cubic-bezier(0.23, 1, 0.32, 1);
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  border-radius: 12px;
+  background: rgb(17 17 17 / 0.6);
+  box-shadow: 0 0 20px rgb(0 0 0 / 0.2);
+  color: #ffffff;
+}
+
+.vp__stage {
+  position: relative;
+  aspect-ratio: 16 / 9;
+}
+
+.vp__media {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 30%;
+  display: block;
+}
+
+video.vp__stage {
+  position: relative;
+  aspect-ratio: 16 / 9;
+}
+
+.vp__media {
+  object-fit: contain;
+  background: #111111;
+  cursor: pointer;
+}
+
+.vp__soon {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  padding: 12px 22px;
+  border-radius: 999px;
+  background: rgb(17 17 17 / 0.62);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  font-size: 1.125rem;
+  white-space: nowrap;
+}
+
+.vp__big {
+  position: absolute;
+  left: 50%;
+  top: 45%;
+  transform: translate(-50%, -50%);
+  display: grid;
+  place-items: center;
+  width: 88px;
+  height: 88px;
+  padding-left: 4px;
+  border: 0;
+  border-radius: 50%;
+  background: rgb(17 17 17 / 0.6);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  color: #ffffff;
+  cursor: pointer;
+  transition: transform 160ms var(--vp-ease), background-color 160ms ease;
+}
+
+.vp__big:active {
+  transform: translate(-50%, -50%) scale(0.95);
+}
+
+/* The floating glass control bar. Visible when paused, on hover, and when a control has focus. */
+.vp__bar {
+  position: absolute;
+  left: 8px;
+  right: 8px;
+  bottom: 8px;
+  max-width: 640px;
+  margin-inline: auto;
+  padding: 10px 14px;
+  border-radius: 16px;
+  background: rgb(17 17 17 / 0.6);
+  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
+  opacity: 1;
+  transform: translateY(0);
+  filter: blur(0);
+  transition:
+    opacity 300ms var(--vp-ease),
+    transform 300ms var(--vp-ease),
+    filter 300ms var(--vp-ease);
+}
+
+.vp.is-playing:not(:hover):not(:focus-within) .vp__bar {
+  opacity: 0;
+  transform: translateY(20px);
+  filter: blur(10px);
+  pointer-events: none;
+}
+
+.vp__row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.vp__row--controls {
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 4px 12px;
+}
+
+.vp__group {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.vp__time {
+  min-width: 3.2em;
+  font-size: 1.125rem;
+  font-variant-numeric: tabular-nums;
+  text-align: center;
+}
+
+.vp__btn {
+  display: grid;
+  place-items: center;
+  min-width: 56px;
+  height: 56px;
+  padding: 0 6px;
+  border: 0;
+  border-radius: 12px;
+  background: transparent;
+  color: #ffffff;
+  font: inherit;
+  font-size: 1.125rem;
+  cursor: pointer;
+  transition: background-color 160ms ease, transform 160ms var(--vp-ease);
+}
+
+.vp__btn:active {
+  transform: scale(0.94);
+}
+
+.vp__speed.is-on {
+  background: rgb(17 17 17 / 0.82);
+  box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.25);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .vp__btn:hover,
+  .vp__big:hover {
+    background: rgb(17 17 17 / 0.82);
+  }
+}
+
+.vp :focus-visible {
+  outline: 2px solid #ffffff;
+  outline-offset: 2px;
+  box-shadow: 0 0 0 4px rgb(17 17 17 / 0.8);
+}
+
+/* Sliders: thin white track, filled to --vp-fill, 32px-tall hit area. */
+.vp__range {
+  -webkit-appearance: none;
+  appearance: none;
+  height: 32px;
+  margin: 0;
+  background: transparent;
+  cursor: pointer;
+}
+
+.vp__seek {
+  flex: 1;
+  min-width: 0;
+}
+
+.vp__vol {
+  width: 96px;
+}
+
+.vp__range::-webkit-slider-runnable-track {
+  height: 4px;
+  border-radius: 999px;
+  background: linear-gradient(to right, #ffffff var(--vp-fill, 0%), rgb(255 255 255 / 0.2) var(--vp-fill, 0%));
+}
+
+.vp__range::-moz-range-track {
+  height: 4px;
+  border-radius: 999px;
+  background: linear-gradient(to right, #ffffff var(--vp-fill, 0%), rgb(255 255 255 / 0.2) var(--vp-fill, 0%));
+}
+
+.vp__range::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 16px;
+  height: 16px;
+  margin-top: -6px;
+  border: 0;
+  border-radius: 50%;
+  background: #ffffff;
+}
+
+.vp__range::-moz-range-thumb {
+  width: 16px;
+  height: 16px;
+  border: 0;
+  border-radius: 50%;
+  background: #ffffff;
+}
+
+/* Phones: the video is too short to cover, so the controls sit underneath it. */
+@media (max-width: 37.49em) {
+  .vp__vol {
+    display: none;
+  }
+
+  .vp__bar,
+  .vp.is-playing:not(:hover):not(:focus-within) .vp__bar {
+    position: static;
+    max-width: none;
+    margin: 0;
+    padding: 6px 8px;
+    border-radius: 0;
+    background: #111111;
+    opacity: 1;
+    transform: none;
+    filter: none;
+    pointer-events: auto;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .vp__bar,
+  .vp.is-playing:not(:hover):not(:focus-within) .vp__bar {
+    transform: none;
+    filter: none;
+    transition: opacity 150ms ease;
+  }
+}

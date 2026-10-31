@@ -443,6 +443,43 @@ html body #root:has(.t-open) {
   padding-inline: 2rem;
 }
 
+.o-head__controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.o-row__arrows {
+  display: flex;
+  gap: 10px;
+}
+
+@media (max-width: 47.99em) {
+  .o-row__arrows {
+    display: none;
+  }
+}
+
+/* Story tiles keep white text over the photo (beats the shell's dark link colour). */
+.mob-root.t-open .story__link {
+  color: #ffffff;
+}
+
+/* The save heart on a story tile: white on a dark glass disc, 56px tap area. */
+.story__action .o-heart {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgb(17 17 17 / 0.5);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  color: #ffffff;
+}
+
+.story__action .o-heart::before {
+  inset: -6px;
+}
+
 .o-head__line {
   grid-column: 1 / -1;
   max-width: 900px;
@@ -642,30 +679,16 @@ html body #root:has(.t-open) {
 .o-grid {
   list-style: none;
   margin-block: 0;
-  padding: 0;
+  padding: 8px 0 0;
   display: grid;
-  gap: 48px 16px;
-}
-
-.o-grid--square {
   grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-}
-
-.o-grid--wide {
-  grid-template-columns: repeat(auto-fill, minmax(min(100%, 380px), 1fr));
+  gap: 24px 16px;
 }
 
 @media (max-width: 47.99em) {
   .o-grid {
-    gap: 32px 12px;
-  }
-
-  .o-grid--square {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .o-grid--wide {
-    grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr));
+    gap: 16px 12px;
   }
 }
 
@@ -692,10 +715,10 @@ html body #root:has(.t-open) {
   border: 0;
   background: transparent;
   color: #0f1418;
-  width: 480px;
-  max-width: 100vw;
-  height: calc(100dvh - 3rem);
-  max-height: none;
+  width: min(1100px, 100vw - 48px);
+  max-width: none;
+  height: auto;
+  max-height: calc(100dvh - 48px);
   overflow: visible;
   font-family: "Inter Tight", "Helvetica Neue", Arial, sans-serif;
   font-size: 1.125rem;
@@ -710,33 +733,59 @@ html body #root:has(.t-open) {
 
 .o-overlay__panel {
   position: relative;
-  height: 100%;
-  border-radius: 4px;
+  max-height: inherit;
+  border-radius: 16px;
   background: #f5f6f4;
   overflow: hidden;
-  outline: 1px solid #d5dce1;
+  outline: 1px solid rgb(255 255 255 / 0.9);
+  box-shadow: 0 30px 80px -30px rgb(0 0 0 / 0.45);
 }
 
 .o-overlay__scroll {
-  height: 100%;
+  max-height: calc(100dvh - 48px);
   overflow-y: auto;
   overscroll-behavior: contain;
-  padding-bottom: 7rem;
 }
 
-.o-overlay__close {
+/* Close sits over the video: white cross on dark glass. */
+.o-overlay .o-overlay__close {
   position: absolute;
-  top: 12px;
-  right: 12px;
+  top: 28px;
+  right: 28px;
   z-index: 3;
-  background: rgb(245 246 244 / 0.9);
+  background: rgb(17 17 17 / 0.6);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  color: #ffffff;
+}
+
+.o-overlay__media {
+  padding: 16px 16px 0;
 }
 
 .o-overlay__body {
   display: grid;
-  grid-template-columns: minmax(0, 1fr);
+  grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr);
+  gap: 24px 40px;
+  padding: 24px;
+}
+
+.o-overlay__main,
+.o-overlay__side {
+  display: grid;
+  align-content: start;
   gap: 0.75rem;
-  padding: 1.5rem;
+  min-width: 0;
+}
+
+.o-overlay__start {
+  width: 100%;
+}
+
+@media (max-width: 47.99em) {
+  .o-overlay__body {
+    grid-template-columns: minmax(0, 1fr);
+  }
 }
 
 .t-open .o-overlay__title,
@@ -828,7 +877,7 @@ html body #root:has(.t-open) {
 }
 
 .o-more {
-  margin-top: 1rem;
+  padding: 0 24px 24px;
 }
 
 .o-more__head {
@@ -836,35 +885,20 @@ html body #root:has(.t-open) {
   align-items: center;
   justify-content: space-between;
   gap: 0.5rem;
-  margin-bottom: 0.75rem;
+  margin-bottom: 0.25rem;
 }
 
 .o-more__head .o-h3 {
   margin: 0;
 }
 
-.o-more__track {
-  list-style: none;
-  margin: 0 -1.5rem;
-  padding: 0 1.5rem 0.5rem;
-  display: flex;
-  gap: 12px;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  scroll-padding-inline: 1.5rem;
-  scrollbar-width: none;
+.o-more .o-more__track {
+  margin: 0 -24px;
+  padding-inline: 24px;
 }
 
-.o-more__track > li {
-  flex: 0 0 180px;
-  scroll-snap-align: start;
-}
-
-.o-overlay__cta {
-  position: absolute;
-  right: 16px;
-  bottom: 16px;
-  z-index: 3;
+.o-more .o-more__track > .story {
+  flex-basis: 190px;
 }
 
 .o-overlay .o-pill--solid {
@@ -882,12 +916,33 @@ html body #root:has(.t-open) {
   .o-overlay {
     width: 100vw;
     height: 100dvh;
+    max-height: none;
     margin: 0;
   }
 
   .o-overlay__panel {
+    height: 100%;
     border-radius: 0;
     outline: 0;
+  }
+
+  .o-overlay__scroll {
+    height: 100%;
+    max-height: none;
+  }
+
+  .o-overlay__media {
+    padding: 0;
+  }
+
+  .o-overlay__media .vp,
+  .o-overlay__media .vp__stage {
+    border-radius: 0;
+  }
+
+  .o-overlay .o-overlay__close {
+    top: 12px;
+    right: 12px;
   }
 }
 
