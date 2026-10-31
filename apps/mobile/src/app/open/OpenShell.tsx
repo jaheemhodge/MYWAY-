@@ -1,5 +1,5 @@
 import "@fontsource/inter-tight/400.css";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link, Outlet, useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import ExpandableSearchBar from "@/components/ui/expandable-search-bar";
 import { FillUpLink } from "@/components/ui/fill-up-button";
@@ -49,6 +49,17 @@ export function OpenShell() {
   const first = useRef(true);
   const { currentDay } = useDay();
   const active = activeTab(pagePath);
+  // The sticky bar only blurs once it is stuck with content passing under it; at rest it is
+  // fully see-through, so the background grain is not smoothed into a visible band.
+  const bar1Ref = useRef<HTMLElement>(null);
+  const [stuck, setStuck] = useState(false);
+  useEffect(() => {
+    const el = bar1Ref.current;
+    if (!el || typeof IntersectionObserver === "undefined") return undefined;
+    const io = new IntersectionObserver(([e]) => setStuck(!e.isIntersecting));
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
 
   useEffect(() => {
     if (first.current) {
@@ -65,7 +76,7 @@ export function OpenShell() {
       <a className="mob-skip" href="#main">
         Skip to content
       </a>
-      <header className="o-bar1">
+      <header className="o-bar1" ref={bar1Ref}>
         <div className="o-wrap o-bar1__inner">
           <Link to="/app/home" className="o-wordmark">
             Mobility
@@ -79,7 +90,7 @@ export function OpenShell() {
         </div>
       </header>
 
-      <SubBar pagePath={pagePath} />
+      <SubBar pagePath={pagePath} stuck={stuck} />
 
       <main id="main" ref={mainRef} tabIndex={-1} className="o-main">
         <Outlet />
@@ -100,7 +111,7 @@ export function OpenShell() {
   );
 }
 
-function SubBar({ pagePath }: { pagePath: string }) {
+function SubBar({ pagePath, stuck }: { pagePath: string; stuck: boolean }) {
   const navigate = useNavigate();
   const [params] = useSearchParams();
   const onLibrary = pagePath.startsWith("/app/library/");
@@ -111,7 +122,7 @@ function SubBar({ pagePath }: { pagePath: string }) {
   const current = onLibrary ? params.get("q") ?? "" : "";
 
   return (
-    <div className="o-bar2">
+    <div className={`o-bar2${stuck ? " is-stuck" : ""}`}>
       <div className="o-wrap o-bar2__inner">
         <ExpandableSearchBar
           key={pagePath}

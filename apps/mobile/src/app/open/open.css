@@ -1,6 +1,7 @@
 /*
  * Exercise side ("At home"): a structural copy of Open's web library (o-p-e-n.com/all).
- * The page is a soft white-to-indigo radial glow; all text stays near-black.
+ * The page is the "Core Glow" gradient (21st.dev): paper grey at the centre, mid grey at the
+ * edges, with a fine grain. All text stays near-black.
  * Everything is scoped to .t-open so the Events pages keep their own look.
  *
  * One sans (Inter Tight) at weight 400 for everything, as Open does. Sized for 50–70:
@@ -9,12 +10,11 @@
  */
 
 .t-open {
-  --bg-glow: #6366f1;
-  --bg-mid: #f1f1fd; /* used by overlays and fallbacks */
+  --bg-mid: #c4c4c4; /* used by overlays and fallbacks */
   --ink: #0f1418;
-  /* 84%: at least 5:1 on most of the page, 3.5:1 only in the deepest indigo corners. */
-  --ink-2: rgb(15 20 24 / 0.84);
-  --line: rgb(15 20 24 / 0.3);
+  /* 92%: 6:1+ in the middle of the page, about 4.3:1 where the edges reach full #808080. */
+  --ink-2: rgb(15 20 24 / 0.92);
+  --line: rgb(15 20 24 / 0.5);
   /* On a white page the selected pill and FILTER are ink with white text. */
   --pill-active-bg: #0f1418;
   --pill-active-fg: #ffffff;
@@ -57,7 +57,14 @@
   position: fixed;
   inset: 0;
   z-index: -1;
-  background: radial-gradient(125% 125% at 50% 10%, #ffffff 40%, var(--bg-glow) 100%);
+  /* Core Glow, as exported from 21st.dev; the grain is an SVG noise tile blended with overlay. */
+  background-color: #808080;
+  background-image:
+    url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)' opacity='0.080'/></svg>"),
+    radial-gradient(circle at 50% 50%, rgba(0, 0, 0, 0) 52%, rgba(0, 0, 0, 0.016) 100%),
+    radial-gradient(circle at 48% 56%, #111111 0%, #f2f2f2 0%, #808080 80%);
+  background-size: 120px 120px, auto, auto;
+  background-blend-mode: overlay, normal, normal;
   pointer-events: none;
 }
 
@@ -66,7 +73,7 @@ html:root:has(.t-open),
 html body:has(.t-open),
 html body #root:has(.t-open) {
   overflow: visible;
-  background: #ffffff;
+  background: #808080;
 }
 
 .t-open ::selection {
@@ -286,6 +293,8 @@ html body #root:has(.t-open) {
   position: absolute;
   inset: 0 0 -20px;
   z-index: -1;
+  opacity: 0;
+  transition: opacity 200ms ease;
   -webkit-backdrop-filter: blur(24px);
   backdrop-filter: blur(24px);
   -webkit-mask-image: linear-gradient(to bottom, #000 70%, transparent);
@@ -363,6 +372,10 @@ html body #root:has(.t-open) {
   .o-foot {
     display: none;
   }
+}
+
+.o-bar2.is-stuck::before {
+  opacity: 1;
 }
 
 @media (prefers-reduced-transparency: reduce) {

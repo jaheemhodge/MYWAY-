@@ -12,7 +12,7 @@
  * - "stacked" layout (icon over label) for the phone bottom bar; no icon-only mode.
  * - Arrow keys move focus between items; Enter follows the link. No sound.
  * - Brand fonts from the page instead of the system stack.
- * - tone="mist": clear glass with a hint of indigo water on the white exercise side (ink text, 400 weight, 18px everywhere,
+ * - tone="mist": clear glass and pale grey water on the grey exercise side (ink text, 400 weight, 18px everywhere,
  *   2px ink focus ring). The default "cream" tone is unchanged.
  */
 import * as React from "react";
@@ -90,16 +90,16 @@ const NAV_CSS = `
 .lq-ico[data-fx="wave"] svg{animation:lqWave .9s ease-in-out both;transform-origin:50% 92%}
 @keyframes lqWave{0%{transform:none}20%{transform:rotate(-15deg)}40%{transform:rotate(12deg)}60%{transform:rotate(-8deg)}80%{transform:rotate(4deg)}100%{transform:translateY(-1px) scale(1.08)}}
 .lq-nav[data-tone="mist"]{--lq-tint:rgba(255,255,255,.6);--lq-fg:#0f1418;--lq-fg-soft:rgba(15,20,24,.84);--lq-rim:rgba(255,255,255,.95)}
-.lq-nav[data-tone="mist"] .lq-glass{box-shadow:inset 0 1px 1px var(--lq-rim),inset 0 0 0 1px rgba(15,20,24,.09),0 8px 24px -14px rgba(67,56,202,.35),0 1px 3px rgba(15,20,24,.05)}
+.lq-nav[data-tone="mist"] .lq-glass{box-shadow:inset 0 1px 1px var(--lq-rim),inset 0 0 0 1px rgba(15,20,24,.09),0 8px 24px -14px rgba(15,20,24,.35),0 1px 3px rgba(15,20,24,.05)}
 .lq-nav[data-tone="mist"][data-layout="stacked"]{--lq-tint:rgba(255,255,255,.82)}
-.lq-nav[data-tone="mist"][data-layout="stacked"] .lq-glass{box-shadow:inset 0 1px 1px var(--lq-rim),inset 0 0 0 1px rgba(15,20,24,.09),0 10px 30px -12px rgba(67,56,202,.4),0 1px 4px rgba(15,20,24,.08)}
+.lq-nav[data-tone="mist"][data-layout="stacked"] .lq-glass{box-shadow:inset 0 1px 1px var(--lq-rim),inset 0 0 0 1px rgba(15,20,24,.09),0 10px 30px -12px rgba(15,20,24,.4),0 1px 4px rgba(15,20,24,.08)}
 .lq-nav[data-tone="mist"] .lq-item,.lq-nav[data-tone="mist"] .lq-item[aria-current="page"]{font-weight:400;letter-spacing:0}
 .lq-nav[data-tone="mist"] .lq-item{padding:0 20px}
 .lq-nav[data-tone="mist"][data-layout="stacked"] .lq-item{padding:4px 2px}
 .lq-nav[data-tone="mist"][data-layout="stacked"] .lq-label{font-size:18px}
 .lq-nav[data-tone="mist"] .lq-item:focus-visible{outline:2px solid #0f1418;outline-offset:3px;box-shadow:none}
-.lq-nav[data-tone="mist"] .lq-drop{background:radial-gradient(120% 140% at 30% 0%,rgba(255,255,255,.9),rgba(255,255,255,0) 55%),rgba(224,231,255,.8);
-  box-shadow:inset 0 1px 1px rgba(255,255,255,.95),inset 0 -2px 6px rgba(99,102,241,.25),inset 0 0 0 1px rgba(255,255,255,.6),0 6px 16px -6px rgba(15,20,24,.35)}
+.lq-nav[data-tone="mist"] .lq-drop{background:radial-gradient(120% 140% at 30% 0%,rgba(255,255,255,.9),rgba(255,255,255,0) 55%),rgba(242,242,242,.85);
+  box-shadow:inset 0 1px 1px rgba(255,255,255,.95),inset 0 -2px 6px rgba(15,20,24,.18),inset 0 0 0 1px rgba(255,255,255,.6),0 6px 16px -6px rgba(15,20,24,.35)}
 @media (prefers-reduced-motion:reduce){.lq-ico svg{animation:none!important;transition:none}.lq-item{transition:none}}
 `;
 
@@ -129,7 +129,7 @@ void main(){
  float spec2=pow(max(dot(reflect(-normalize(vec3(.6,.75,.7)),n),V),0.),22.)*.3;
  float fres=clamp((1.-n.z)*4.,0.,1.);
  vec3 irid=.5+.5*cos(6.2831*(vec3(0.,.33,.67)+fres*.85+p.x*.0028+uTime*.035));
- irid=mix(mix(vec3(1.,.93,.78),vec3(.93,.94,1.),uMist),irid,.25);
+ irid=mix(mix(vec3(1.,.93,.78),vec3(.95,.95,.95),uMist),irid,.25);
  float pm=smoothstep(1.,-1.,dp);float dm=smoothstep(1.,-1.,dd)*smoothstep(1.,-2.,dp);
  float sh=smoothstep(9.,-9.,dropD(p-vec2(0.,5.)))*(1.-dm)*pm*.12;
  vec3 c=mix(vec3(.10,.18,.14),vec3(.06,.08,.10),uMist)*sh;float a=sh;
@@ -137,12 +137,12 @@ void main(){
  c=mix(vec3(1.),irid,.5*fres)*pa+c*(1.-pa);a=pa+a*(1.-pa);
  float th=lens(dd,11.);
  float cs=caus((p+n.xy*th*18.)*.085,uTime*.9);
- vec3 tint=mix(vec3(.97,.90,.74),vec3(.85,.87,1.),uMist);
+ vec3 tint=mix(vec3(.97,.90,.74),vec3(.95,.95,.95),uMist);
  float rim=dm*(1.-smoothstep(0.,8.,-dd));
  float cres=dm*smoothstep(.12,.55,dot(n.xy,normalize(vec2(.55,.85))))*smoothstep(0.,3.,-dd);
  float body=.5+.5*clamp(-n.y*3.,-1.,1.);
  float da=dm*(.34+.14*body);vec3 dc=mix(tint,vec3(1.),body*.5);
- float la=rim*.3;vec3 lc=mix(vec3(.66,.51,.24),vec3(.39,.40,.95),uMist);dc=lc*la+dc*da*(1.-la);da=la+da*(1.-la);
+ float la=rim*.3;vec3 lc=mix(vec3(.66,.51,.24),vec3(.42,.42,.42),uMist);dc=lc*la+dc*da*(1.-la);da=la+da*(1.-la);
  la=clamp(cres*.7+smoothstep(.6,1.,cs)*.28*th*dm,0.,1.);dc=vec3(1.)*la+dc*(1.-la);da=la+da*(1.-la);
  la=clamp(dm*(spec*1.2+spec2*.5),0.,1.);dc=vec3(1.)*la+dc*(1.-la);da=la+da*(1.-la);
  la=dm*smoothstep(-2.,0.,dd)*.4;dc=mix(vec3(1.),irid,.35)*la+dc*(1.-la);da=la+da*(1.-la);
