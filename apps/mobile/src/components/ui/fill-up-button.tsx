@@ -1,4 +1,4 @@
-import type { ReactNode } from "react";
+import type { ButtonHTMLAttributes, ReactNode } from "react";
 import { Link, type LinkProps } from "react-router-dom";
 import "./fill-up-button.css";
 
@@ -28,6 +28,29 @@ export function FillUpLink({
         <span className="fub__label">{children}</span>
       </span>
     </Link>
+  );
+}
+
+/** Toggle version for filters: `pressed` shows the filled look and sets aria-pressed. */
+export function FillUpButton({
+  pressed,
+  children,
+  className,
+  ...props
+}: ButtonHTMLAttributes<HTMLButtonElement> & { pressed?: boolean; children: ReactNode }) {
+  return (
+    <button
+      type="button"
+      {...props}
+      className={["fub", pressed ? "is-on" : "", className].filter(Boolean).join(" ")}
+      aria-pressed={pressed}
+    >
+      <span className="fub__front">{children}</span>
+      <span className="fub__back" aria-hidden="true">
+        <span className="fub__fill" />
+        <span className="fub__label">{children}</span>
+      </span>
+    </button>
   );
 }
 

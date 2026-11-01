@@ -5,6 +5,7 @@ import { CATEGORY_LABEL, getEvent, whenLong } from "../data/events";
 import { useDay } from "../DayState";
 import { usePageTitle } from "../hooks";
 import { useCity } from "../LocationState";
+import "./events.css";
 
 export function EventDetail() {
   const { id = "" } = useParams();

@@ -1,0 +1,236 @@
+/*
+ * Events in Home's theme. Events renders inside OpenShell (.t-open), so the background, fonts,
+ * colours, nav, pills (.o-cat.fub), row heads (.o-head), arrows (.flow) and cards (.story) all come
+ * from Home's own rules. This file only lays out the few Events-only pieces and re-skins the legacy
+ * classes the event detail page still uses, with Home's tokens (no new colours).
+ */
+
+/* ---------- List page ---------- */
+
+.ev-head {
+  margin-bottom: 24px;
+}
+
+.ev-head .o-head__controls {
+  justify-self: end;
+}
+
+.ev-chips {
+  flex-wrap: wrap;
+  align-items: center;
+  margin-bottom: 56px;
+}
+
+.ev-chips__sep {
+  width: 1px;
+  align-self: stretch;
+  margin: 10px 6px;
+  background: var(--line);
+}
+
+.ev-results .o-head {
+  margin-bottom: 24px;
+}
+
+.fub .mob-icon {
+  margin-inline-end: 8px;
+}
+
+/* Phones: the filter pills run in one sideways strip with the next pill peeking in, like Home. */
+@media (max-width: 63.99em) {
+  .ev-chips {
+    flex-wrap: nowrap;
+    margin-inline-end: calc(-1 * var(--o-gutter));
+    padding-inline-end: var(--o-gutter);
+    padding-block: 4px;
+    overflow-x: auto;
+    scrollbar-width: none;
+    margin-bottom: 40px;
+  }
+
+  .ev-chips::-webkit-scrollbar {
+    display: none;
+  }
+
+  .ev-chips > * {
+    flex: none;
+  }
+}
+
+/* Phones: the location pill moves under the heading and note so the title keeps its width. */
+@media (max-width: 47.99em) {
+  .ev-head {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .ev-head .o-head__controls {
+    grid-row: 3;
+    justify-self: start;
+    margin-top: 16px;
+  }
+}
+
+/* Location panel: a light frosted sheet, same radius and border as Home's frames. */
+.t-events .mob-loc {
+  position: relative;
+}
+
+.t-events .mob-loc__panel {
+  border-radius: 14px;
+  border: 1px solid rgb(255 255 255 / 0.6);
+  background: rgb(245 246 244 / 0.94);
+  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
+  box-shadow: 0 18px 40px -18px rgb(15 20 24 / 0.45);
+  color: var(--ink);
+}
+
+.t-events .ev-loc__use {
+  justify-self: start;
+}
+
+.t-events .mob-search__label {
+  color: var(--ink-2);
+  font-weight: 400;
+}
+
+.t-events .mob-input {
+  min-height: 56px;
+  border-radius: 6px;
+  border: 1px solid var(--line);
+  background: #ffffff;
+  color: var(--ink);
+  font-family: var(--o-sans);
+}
+
+.t-events .mob-input::placeholder {
+  color: var(--ink-2);
+}
+
+.t-events .mob-input:hover,
+.t-events .mob-input:focus-visible {
+  border-color: var(--ink);
+}
+
+/* Solid action (Save, Get details): ink with white text, like the panel's Start button. */
+.mob-root.t-events .mob-btn--primary,
+.mob-root.t-events .mob-cta {
+  min-height: 56px;
+  border-radius: 6px;
+  background: var(--ink);
+  color: #f5f6f4;
+  font-family: var(--o-sans);
+  font-weight: 400;
+  font-size: 1.125rem;
+}
+
+.mob-root.t-events .mob-btn--primary:hover:not([aria-disabled="true"]),
+.mob-root.t-events .mob-cta:hover:not([aria-disabled="true"]) {
+  background: #000000;
+}
+
+/* ---------- Event page ---------- */
+
+.t-events .mob-edetail {
+  padding-top: 40px;
+}
+
+/* Back: Home's outline pill. */
+.mob-root.t-events .mob-back {
+  min-height: 56px;
+  margin: 0 0 32px;
+  padding: 0 1.5rem 0 1rem;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: transparent;
+  color: var(--ink);
+  font-family: var(--o-sans);
+  font-weight: 400;
+  font-size: 1.125rem;
+  text-decoration: none;
+  transition: background-color 200ms ease, border-color 200ms ease;
+}
+
+.mob-root.t-events .mob-back:hover {
+  background: #f5f6f4;
+  border-color: #f5f6f4;
+}
+
+.t-events .mob-edetail .mob-title {
+  font-size: 3rem;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+}
+
+.t-events .mob-edetail .mob-h3 {
+  font-size: 1.5rem;
+  margin-top: 2rem;
+}
+
+.t-events .mob-facts--plain {
+  border: 1px solid rgb(255 255 255 / 0.45);
+  border-radius: 14px;
+  background: linear-gradient(160deg, rgb(255 255 255 / 0.32), rgb(255 255 255 / 0.12));
+}
+
+.t-events .mob-facts dt {
+  font-weight: 400;
+  color: var(--ink-2);
+}
+
+/* Picture: the same glass frame and inner picture as Home's cards, without the tilt. */
+.ev-thumb {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border-radius: 8px;
+  outline: 10px solid rgb(255 255 255 / 0.22);
+  box-shadow:
+    0 0 0 11px rgb(255 255 255 / 0.45),
+    0 18px 40px -18px rgb(15 20 24 / 0.45);
+  margin: 11px;
+}
+
+.ev-thumb.is-large {
+  aspect-ratio: 4 / 3;
+}
+
+.ev-thumb img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 18%;
+}
+
+.ev-thumb.is-flat {
+  display: grid;
+  place-items: center;
+  padding: 24px;
+}
+
+.ev-thumb__flat {
+  font-size: 1.375rem;
+  line-height: 1.25;
+  text-align: center;
+  color: var(--ink);
+}
+
+.ev-thumb.is-large .ev-thumb__flat {
+  font-size: 2rem;
+}
+
+@media (max-width: 47.99em) {
+  .t-events .mob-edetail .mob-title {
+    font-size: 2.25rem;
+  }
+}
+
+/* Same side margins as Home's rows. */
+.t-events .mob-wrap {
+  width: calc(100% - 2 * var(--o-gutter));
+  max-width: none;
+  margin-inline: auto;
+  padding-inline: 0;
+}

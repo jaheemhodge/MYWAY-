@@ -97,7 +97,7 @@ export function OHead({
 }: {
   id: string;
   title: string;
-  line: string;
+  line?: string;
   seeAll?: string;
   /** Extra controls beside SEE ALL (the row's scroll arrows). */
   controls?: ReactNode;
@@ -118,7 +118,7 @@ export function OHead({
           ) : null}
         </div>
       ) : null}
-      <p className="o-head__line">{line}</p>
+      {line ? <p className="o-head__line">{line}</p> : null}
     </div>
   );
 }

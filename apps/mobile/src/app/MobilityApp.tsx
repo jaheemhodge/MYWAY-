@@ -1,7 +1,6 @@
 import { Navigate, Route, Routes, useLocation, type Location } from "react-router-dom";
 import { DayProvider } from "./DayState";
 import { LocationProvider } from "./LocationState";
-import { Shell } from "./Shell";
 import { EventDetail } from "./screens/EventDetail";
 import { Events } from "./screens/Events";
 import { AccountStub, PlanStub, ProgressStub } from "./screens/Stubs";
@@ -14,7 +13,7 @@ import "./app.css";
 
 /**
  * Logged-in web app. Every route lives under /app. Local state only: no network calls.
- * Exercise side ("At home") uses the Open-style shell; Events ("Near you") keeps its own shell.
+ * Every page, Events included, uses the Open-style shell so the app looks like one thing.
  * /app/exercise/:id opens as a panel over the page it was opened from.
  */
 export function MobilityApp() {
@@ -35,10 +34,6 @@ function AppRoutes() {
   return (
     <>
       <Routes location={background ?? location}>
-        <Route path="/app/events" element={<Shell />}>
-          <Route index element={<Events />} />
-          <Route path=":id" element={<EventDetail />} />
-        </Route>
         <Route path="/app" element={<OpenShell />}>
           <Route index element={<Navigate to="home" replace />} />
           <Route path="home" element={<OpenHome />} />
@@ -47,6 +42,8 @@ function AppRoutes() {
           <Route path="library/:slug" element={<SeeAll />} />
           {/* Opened directly (no page behind it): show Home underneath the panel. */}
           <Route path="exercise/:id" element={<OpenHome />} />
+          <Route path="events" element={<Events />} />
+          <Route path="events/:id" element={<EventDetail />} />
           <Route path="session" element={<SessionPage />} />
           <Route path="session/:id" element={<SessionPage />} />
           <Route path="plan" element={<PlanStub />} />

@@ -40,7 +40,7 @@ function activeTab(path: string) {
 /**
  * Exercise side of the app, laid out like Open's web app: a logo row that scrolls away, a sticky
  * row of search, categories and Filter, and a bottom bar on phones. Theme lives in open.css,
- * scoped to .t-open so the Events pages keep their own look.
+ * scoped to .t-open. Events renders in this same shell without the search and category bar.
  */
 export function OpenShell() {
   const location = useLocation();
@@ -51,6 +51,8 @@ export function OpenShell() {
   const first = useRef(true);
   const { currentDay } = useDay();
   const active = activeTab(pagePath);
+  // Events shares this frame (background, top bar, footer, tab bar) but not the exercise search.
+  const onEvents = pagePath.startsWith("/app/events");
   // The sticky bar only blurs once it is stuck with content passing under it; at rest it is
   // fully see-through, so the background grain is not smoothed into a visible band.
   const bar1Ref = useRef<HTMLElement>(null);
@@ -74,7 +76,7 @@ export function OpenShell() {
   }, [pathname]);
 
   return (
-    <div className="mob-root t-open">
+    <div className={`mob-root t-open${onEvents ? " t-events" : ""}`}>
       <a className="mob-skip" href="#main">
         Skip to content
       </a>
@@ -92,7 +94,7 @@ export function OpenShell() {
         </div>
       </header>
 
-      <SubBar pagePath={pagePath} stuck={stuck} />
+      {onEvents ? null : <SubBar pagePath={pagePath} stuck={stuck} />}
 
       <main id="main" ref={mainRef} tabIndex={-1} className="o-main">
         <Outlet />

@@ -54,6 +54,10 @@ export type StoryProps = {
   video?: string;
   /** Flat tile colour when there is no photo or clip; the title is centred on it. */
   tone?: string;
+  /** More lines under the note (Events: the place). */
+  extra?: string[];
+  /** Tag on the picture's top-left. Defaults to "Video" when there is a clip. */
+  badge?: string;
   /** Control at the end of the title line (the save heart). */
   action?: ReactNode;
   /** Render as a grid cell instead of a row item. */
@@ -71,9 +75,12 @@ export function Story({
   image,
   video,
   tone,
+  extra,
+  badge,
   action,
   as: Tag = "li",
 }: StoryProps) {
+  const tag = badge ?? (video ? "Video" : undefined);
   const vref = useRef<HTMLVideoElement>(null);
   const boxRef = useRef<HTMLAnchorElement>(null);
   const reduce = () =>
@@ -125,7 +132,9 @@ export function Story({
         onPointerMove={tilt}
         onFocus={play}
         onBlur={stop}
-        aria-label={[title, meta, note].filter(Boolean).join(", ")}
+        aria-label={[title, meta, note, ...(extra ?? [])]
+          .filter(Boolean)
+          .join(", ")}
       >
         <span className="story__box">
           <span
@@ -160,17 +169,19 @@ export function Story({
                 {title}
               </span>
             ) : null}
-            {video ? (
+            {tag ? (
               <span className="story__badge" aria-hidden="true">
-                <svg
-                  width="14"
-                  height="14"
-                  viewBox="0 0 24 24"
-                  fill="currentColor"
-                >
-                  <path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.4-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5Z" />
-                </svg>
-                Video
+                {video ? (
+                  <svg
+                    width="14"
+                    height="14"
+                    viewBox="0 0 24 24"
+                    fill="currentColor"
+                  >
+                    <path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.4-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5Z" />
+                  </svg>
+                ) : null}
+                {tag}
               </span>
             ) : null}
             <span className="story__go" aria-hidden="true">
@@ -207,6 +218,11 @@ export function Story({
             {note}
           </span>
         ) : null}
+        {extra?.map((line) => (
+          <span key={line} className="story__meta" aria-hidden="true">
+            {line}
+          </span>
+        ))}
       </div>
     </Tag>
   );

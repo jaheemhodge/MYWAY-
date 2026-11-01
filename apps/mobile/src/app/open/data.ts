@@ -51,7 +51,7 @@ export const COLLECTION_SHAPE: Record<Slug, TileShape> = {
 };
 
 /** Flat soft tones for exercises with no photo yet, rotated by the exercise's place in the library. */
-const TILE_TONES = ["#DCE3E8", "#E7E2DA", "#D9DFD6", "#E3DEE6"];
+export const TILE_TONES = ["#DCE3E8", "#E7E2DA", "#D9DFD6", "#E3DEE6"];
 const INDEX = new Map(EXERCISES.map((e, i) => [e.id, i]));
 
 export function toneFor(id: string): string {

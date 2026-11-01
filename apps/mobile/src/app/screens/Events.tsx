@@ -1,7 +1,10 @@
-import { useId, useMemo, useState } from "react";
+import { useCallback, useEffect, useId, useMemo, useRef, useState } from "react";
+import { FillUpButton } from "@/components/ui/fill-up-button";
+import { FlowIconButton } from "@/components/ui/flow-button";
+import { Stories } from "@/components/ui/stories-carousel";
 import { EventCard } from "../components/EventCard";
 import { Icon } from "../components/Icon";
-import { ScrollRow } from "../components/ScrollRow";
+import { OHead } from "../open/parts";
 import {
   CATEGORY_LABEL,
   DATE_FILTERS,
@@ -15,6 +18,7 @@ import {
 import { useDay } from "../DayState";
 import { usePageTitle } from "../hooks";
 import { useCity } from "../LocationState";
+import "./events.css";
 
 const ROWS: { title: string; pick: (events: LocalEvent[]) => LocalEvent[] }[] = [
   { title: "This week", pick: (e) => e.filter((x) => x.dayOffset <= 7) },
@@ -37,87 +41,137 @@ export function Events() {
   const filtering = date !== "any" || cats.length > 0;
 
   return (
-    <div className="mob-wrap mob-page mob-events">
-      <header className="mob-events__head">
-        <h1 className="mob-title">Things to do near you</h1>
-        <LocationPill />
-      </header>
+    <div className="o-page ev-page">
+      <div className="o-wrap o-head ev-head">
+        <h1 className="o-head__title">Things to do near you</h1>
+        <div className="o-head__controls">
+          <LocationPill />
+        </div>
+        <p className="o-head__line">Example listings — real local events coming soon.</p>
+      </div>
 
-      <p className="mob-banner">Example listings — real local events coming soon.</p>
-
-      <div className="mob-toolbar__chips mob-events__chips" role="group" aria-label="When">
-        {DATE_FILTERS.map((f) => (
-          <button
-            key={f.id}
-            type="button"
-            className="mob-chip mob-chip--plain"
-            aria-pressed={date === f.id}
-            onClick={() => setDate(f.id)}
-          >
-            {f.label}
-          </button>
-        ))}
-        <span className="mob-chips__sep" aria-hidden="true" />
-        {CATEGORIES.map((c) => (
-          <button
-            key={c}
-            type="button"
-            className="mob-chip mob-chip--plain"
-            aria-pressed={cats.includes(c)}
-            onClick={() => setCats((v) => (v.includes(c) ? v.filter((x) => x !== c) : [...v, c]))}
-          >
-            {CATEGORY_LABEL[c]}
-          </button>
-        ))}
+      <div className="o-wrap">
+        <div className="o-cats ev-chips" role="group" aria-label="When">
+          {DATE_FILTERS.map((f) => (
+            <FillUpButton key={f.id} className="o-cat" pressed={date === f.id} onClick={() => setDate(f.id)}>
+              {f.label}
+            </FillUpButton>
+          ))}
+          <span className="ev-chips__sep" aria-hidden="true" />
+          {CATEGORIES.map((c) => (
+            <FillUpButton
+              key={c}
+              className="o-cat"
+              pressed={cats.includes(c)}
+              onClick={() => setCats((v) => (v.includes(c) ? v.filter((x) => x !== c) : [...v, c]))}
+            >
+              {CATEGORY_LABEL[c]}
+            </FillUpButton>
+          ))}
+        </div>
       </div>
 
       {filtering ? (
-        <section className="mob-section" aria-labelledby="ev-results">
-          <div className="mob-results__head">
-            <h2 id="ev-results" className="mob-section-title">
+        <section className="ev-results" aria-labelledby="ev-results">
+          <div className="o-wrap o-head">
+            <h2 id="ev-results" className="o-head__title">
               {filtered.length} {filtered.length === 1 ? "event" : "events"}
             </h2>
-            <button
-              type="button"
-              className="mob-btn mob-btn--text"
-              onClick={() => {
-                setDate("any");
-                setCats([]);
-              }}
-            >
-              Clear
-            </button>
+            <div className="o-head__controls">
+              <FillUpButton
+                className="o-cat"
+                onClick={() => {
+                  setDate("any");
+                  setCats([]);
+                }}
+              >
+                Clear
+              </FillUpButton>
+            </div>
           </div>
           <p className="sr-only" role="status">
             {filtered.length} events shown
           </p>
           {filtered.length ? (
-            <ul className="mob-grid">
+            <ul className="o-wrap o-grid">
               {filtered.map((e) => (
-                <li key={e.id}>
-                  <EventCard event={e} currentDay={currentDay} city={city} />
-                </li>
+                <EventCard key={e.id} event={e} currentDay={currentDay} city={city} />
               ))}
             </ul>
           ) : (
-            <p className="mob-muted mob-empty-line">Nothing on those days yet. Try “Any day”.</p>
+            <p className="o-wrap o-meta">Nothing on those days yet. Try “Any day”.</p>
           )}
         </section>
       ) : (
-        <div className="mob-rows">
+        <div className="o-rows ev-rows">
           {ROWS.map((row) => (
-            <ScrollRow
-              key={row.title}
-              title={row.title}
-              label={row.title}
-              items={row.pick(all)}
-              getKey={(e) => e.id}
-              renderItem={(e) => <EventCard event={e} currentDay={currentDay} city={city} />}
-            />
+            <EventRow key={row.title} title={row.title} items={row.pick(all)} currentDay={currentDay} city={city} />
           ))}
         </div>
       )}
     </div>
+  );
+}
+
+/** One sideways row of event cards with Home's flow arrows beside the heading. */
+function EventRow({
+  title,
+  items,
+  currentDay,
+  city,
+}: {
+  title: string;
+  items: LocalEvent[];
+  currentDay: number;
+  city: string | null;
+}) {
+  const headingId = useId();
+  const trackRef = useRef<HTMLOListElement>(null);
+  const [atStart, setAtStart] = useState(true);
+  const [atEnd, setAtEnd] = useState(false);
+
+  const update = useCallback(() => {
+    const el = trackRef.current;
+    if (!el) return;
+    setAtStart(el.scrollLeft <= 2);
+    setAtEnd(el.scrollLeft + el.clientWidth >= el.scrollWidth - 2);
+  }, []);
+
+  useEffect(() => {
+    update();
+    const el = trackRef.current;
+    if (!el) return undefined;
+    const ro = new ResizeObserver(update);
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, [update, items.length]);
+
+  const step = (dir: 1 | -1) => {
+    const el = trackRef.current;
+    const tile = el?.querySelector("li");
+    if (!el || !tile) return;
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    el.scrollBy({ left: dir * (tile.getBoundingClientRect().width + 16), behavior: reduce ? "auto" : "smooth" });
+  };
+
+  return (
+    <section className="o-row" aria-labelledby={headingId}>
+      <OHead
+        id={headingId}
+        title={title}
+        controls={
+          <span className="o-row__arrows">
+            <FlowIconButton direction="left" aria-label={`Previous: ${title}`} aria-disabled={atStart} onClick={() => !atStart && step(-1)} />
+            <FlowIconButton aria-label={`Next: ${title}`} aria-disabled={atEnd} onClick={() => !atEnd && step(1)} />
+          </span>
+        }
+      />
+      <Stories ref={trackRef} label={title} onScroll={update}>
+        {items.map((e) => (
+          <EventCard key={e.id} event={e} currentDay={currentDay} city={city} />
+        ))}
+      </Stories>
+    </section>
   );
 }
 
@@ -154,16 +208,16 @@ function LocationPill() {
 
   return (
     <div className="mob-loc">
-      <button type="button" className="mob-pill mob-loc__pill" aria-expanded={open} aria-controls={panelId} onClick={() => setOpen((v) => !v)}>
+      <FillUpButton className="o-cat ev-loc__pill" aria-expanded={open} aria-controls={panelId} onClick={() => setOpen((v) => !v)}>
         <Icon name="pin" />
         {label}
-      </button>
+      </FillUpButton>
       {open ? (
         <div id={panelId} className="mob-loc__panel">
-          <button type="button" className="mob-pill" onClick={useMyLocation}>
+          <FillUpButton className="o-cat ev-loc__use" onClick={useMyLocation}>
             <Icon name="pin" />
             Use my location
-          </button>
+          </FillUpButton>
           <form
             className="mob-loc__form"
             onSubmit={(e) => {
