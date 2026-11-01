@@ -1,4 +1,10 @@
-import { forwardRef, useRef, type HTMLAttributes, type ReactNode } from "react";
+import {
+  forwardRef,
+  useRef,
+  type HTMLAttributes,
+  type PointerEvent,
+  type ReactNode,
+} from "react";
 import { Link, type LinkProps } from "react-router-dom";
 import "./stories-carousel.css";
 
@@ -14,15 +20,23 @@ import "./stories-carousel.css";
  *   note), never on the photo; the image itself is a link with a 3px radius and no overlay.
  *   No author avatar (Mobility has no instructors).
  * - The heart sits at the end of the title line, outside the link, so it is its own button.
+ * - Each picture sits raised inside a glass "3D box" that tilts toward the mouse (21st.dev
+ *   "3d-card", done with CSS variables instead of framer-motion). Touch, keyboard and reduced
+ *   motion get the box without the tilt.
  * - Without a photo the tile shows the clip's frame at 1s, or a flat soft tone with the title
  *   centred on it when there is no clip either. Hover clips do not play under reduced motion.
  */
-export const Stories = forwardRef<HTMLOListElement, HTMLAttributes<HTMLOListElement> & { label: string }>(function Stories(
-  { label, className, children, ...props },
-  ref,
-) {
+export const Stories = forwardRef<
+  HTMLOListElement,
+  HTMLAttributes<HTMLOListElement> & { label: string }
+>(function Stories({ label, className, children, ...props }, ref) {
   return (
-    <ol ref={ref} className={["st", className].filter(Boolean).join(" ")} aria-label={label} {...props}>
+    <ol
+      ref={ref}
+      className={["st", className].filter(Boolean).join(" ")}
+      aria-label={label}
+      {...props}
+    >
       {children}
     </ol>
   );
@@ -46,9 +60,28 @@ export type StoryProps = {
   as?: "li" | "div";
 };
 
-export function Story({ to, state, title, meta, note, image, video, tone, action, as: Tag = "li" }: StoryProps) {
+const TILT = 9; // degrees at the card's edge, as in the 3D card prompt (10.5) but a touch calmer
+
+export function Story({
+  to,
+  state,
+  title,
+  meta,
+  note,
+  image,
+  video,
+  tone,
+  action,
+  as: Tag = "li",
+}: StoryProps) {
   const vref = useRef<HTMLVideoElement>(null);
-  const reduce = () => typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const boxRef = useRef<HTMLAnchorElement>(null);
+  const reduce = () =>
+    typeof window !== "undefined" &&
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const fine = () =>
+    typeof window !== "undefined" &&
+    window.matchMedia("(hover: hover) and (pointer: fine)").matches;
   const play = () => {
     if (video && !reduce()) void vref.current?.play().catch(() => {});
   };
@@ -58,38 +91,103 @@ export function Story({ to, state, title, meta, note, image, video, tone, action
     el.pause();
     el.currentTime = 0;
   };
+  // 3D tilt: the box leans toward the pointer and springs back flat when it leaves.
+  const tilt = (e: PointerEvent<HTMLAnchorElement>) => {
+    const el = boxRef.current;
+    if (!el || e.pointerType !== "mouse" || reduce() || !fine()) return;
+    const r = el.getBoundingClientRect();
+    const x = (e.clientX - r.left) / r.width - 0.5;
+    const y = (e.clientY - r.top) / r.height - 0.5;
+    el.style.setProperty("--rx", `${(-y * 2 * TILT).toFixed(2)}deg`);
+    el.style.setProperty("--ry", `${(x * 2 * TILT).toFixed(2)}deg`);
+    el.dataset.tilt = "on";
+  };
+  const untilt = () => {
+    const el = boxRef.current;
+    if (!el) return;
+    el.style.setProperty("--rx", "0deg");
+    el.style.setProperty("--ry", "0deg");
+    delete el.dataset.tilt;
+  };
   const flat = !image && !video;
   return (
     <Tag className="story">
       <Link
         to={to}
         state={state}
+        ref={boxRef}
         className="story__link"
         onMouseEnter={play}
-        onMouseLeave={stop}
+        onMouseLeave={() => {
+          stop();
+          untilt();
+        }}
+        onPointerMove={tilt}
         onFocus={play}
         onBlur={stop}
         aria-label={[title, meta, note].filter(Boolean).join(", ")}
       >
-        <span className={`story__media${flat ? " is-flat" : ""}`} style={flat ? { background: tone } : undefined}>
-          {image ? <img src={image} alt="" loading="lazy" decoding="async" draggable={false} /> : null}
-          {video ? (
-            // Without a photo, the clip's frame at 1s stands in as the still.
-            <video ref={vref} src={image ? video : `${video}#t=1`} poster={image} muted loop playsInline preload={image ? "none" : "metadata"} aria-hidden="true" tabIndex={-1} />
-          ) : null}
-          {flat ? (
-            <span className="story__flat" aria-hidden="true">
-              {title}
-            </span>
-          ) : null}
-          {video ? (
-            <span className="story__badge" aria-hidden="true">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.4-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5Z" />
+        <span className="story__box">
+          <span
+            className={`story__media${flat ? " is-flat" : ""}`}
+            style={flat ? { background: tone } : undefined}
+          >
+            {image ? (
+              <img
+                src={image}
+                alt=""
+                loading="lazy"
+                decoding="async"
+                draggable={false}
+              />
+            ) : null}
+            {video ? (
+              // Without a photo, the clip's frame at 1s stands in as the still.
+              <video
+                ref={vref}
+                src={image ? video : `${video}#t=1`}
+                poster={image}
+                muted
+                loop
+                playsInline
+                preload={image ? "none" : "metadata"}
+                aria-hidden="true"
+                tabIndex={-1}
+              />
+            ) : null}
+            {flat ? (
+              <span className="story__flat" aria-hidden="true">
+                {title}
+              </span>
+            ) : null}
+            {video ? (
+              <span className="story__badge" aria-hidden="true">
+                <svg
+                  width="14"
+                  height="14"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                >
+                  <path d="M8 5.5v13a1 1 0 0 0 1.5.86l10.4-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5Z" />
+                </svg>
+                Video
+              </span>
+            ) : null}
+            <span className="story__go" aria-hidden="true">
+              <svg
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <path d="M7 17 17 7M7 7h10v10" />
               </svg>
-              Video
             </span>
-          ) : null}
+          </span>
         </span>
       </Link>
       <div className="story__text">
