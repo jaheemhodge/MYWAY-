@@ -207,6 +207,33 @@ describe("core flow", () => {
     expect(fake.db.day_completions.some((c) => c.day_number === 30)).toBe(true);
   });
 
+  it("the exercise panel's Start opens the current day, and exercise ids are not session routes", async () => {
+    const fake = createFakeSupabase();
+    setSupabaseClientForTests(fake.client);
+    await fake.client.auth.signUp({ email: "s@t.test", password: "long enough pw", options: { data: { first_name: "S" } } });
+    const uid = fake.session!.user.id;
+    Object.assign(fake.db.profiles[0], { focus_area: "knees", plan_start_date: "2026-01-01", onboarded_at: new Date().toISOString() });
+    fake.db.questionnaire_responses.push({ id: "q1", user_id: uid, kind: "baseline", answers: {}, created_at: "" });
+    for (let d = 1; d <= 3; d += 1) fake.db.day_completions.push({ id: `c${d}`, user_id: uid, day_number: d, completed_at: "", exercises_done: [], feeling: null });
+
+    // jsdom has no <dialog> modal API; open it the way a browser would.
+    HTMLDialogElement.prototype.showModal ??= function (this: HTMLDialogElement) {
+      this.setAttribute("open", "");
+    };
+    HTMLDialogElement.prototype.close ??= function (this: HTMLDialogElement) {
+      this.removeAttribute("open");
+    };
+
+    renderAt("/app/exercise/K01");
+    const start = await screen.findByRole("link", { name: /^start/i });
+    await waitFor(() => expect(start.getAttribute("href")).toBe("/app/session/4"));
+    cleanup();
+
+    // The old single-exercise player URL now lands on the current day.
+    renderAt("/app/session/K01");
+    await at("/app/session/4");
+  });
+
   it("hearts save locally when signed out and sync to the account on login", async () => {
     const fake = createFakeSupabase();
     setSupabaseClientForTests(fake.client);

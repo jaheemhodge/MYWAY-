@@ -50,7 +50,7 @@ function AppRoutes() {
           {/* Opened directly (no page behind it): show Home underneath the panel. */}
           <Route path="exercise/:id" element={<OpenHome />} />
           <Route path="session" element={<SessionPage />} />
-          <Route path="session/:id" element={<SessionPage />} />
+          <Route path="session/:day" element={<SessionPage />} />
           <Route path="session/:day/done" element={<SessionDoneScreen />} />
           <Route path="recheck/:kind" element={<RecheckScreen />} />
           <Route path="plan" element={<PlanScreen />} />

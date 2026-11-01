@@ -1042,12 +1042,6 @@ html body #root:has(.t-open) {
   }
 }
 
-/* ---------- Session route ---------- */
-
-.o-session {
-  padding-block: 2rem 4rem;
-}
-
 @media (prefers-reduced-motion: reduce) {
   .t-open *,
   .o-overlay *,

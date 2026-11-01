@@ -117,7 +117,7 @@ export function ExerciseOverlay() {
             </div>
             <div className="o-overlay__side">
             {!opens ? (
-              <Link to={`/app/session/${exercise.id}`} className="o-pill o-pill--solid o-pill--big o-overlay__start">
+              <Link to={`/app/session/${currentDay}`} className="o-pill o-pill--solid o-pill--big o-overlay__start">
                 Start →
               </Link>
             ) : null}
