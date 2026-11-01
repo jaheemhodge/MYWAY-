@@ -1,5 +1,24 @@
 import { describe, expect, it } from "vitest";
-import { isPrototypePath } from "./routes";
+import { isCoreFlowPath, isPrototypePath } from "./routes";
+
+describe("core flow split", () => {
+  it("routes account pages and /app to CoreFlowApp", () => {
+    expect(isCoreFlowPath("/login")).toBe(true);
+    expect(isCoreFlowPath("/signup")).toBe(true);
+    expect(isCoreFlowPath("/reset-password")).toBe(true);
+    expect(isCoreFlowPath("/onboarding")).toBe(true);
+    expect(isCoreFlowPath("/app")).toBe(true);
+    expect(isCoreFlowPath("/app/session/3/done")).toBe(true);
+  });
+
+  it("leaves the funnel and the phone prototype alone", () => {
+    expect(isCoreFlowPath("/")).toBe(false);
+    expect(isCoreFlowPath("/plan")).toBe(false);
+    expect(isCoreFlowPath("/onboarding/1")).toBe(false);
+    expect(isCoreFlowPath("/session/1")).toBe(false);
+    expect(isCoreFlowPath("/application")).toBe(false);
+  });
+});
 
 describe("route split", () => {
   it("keeps the public funnel outside the phone prototype", () => {
