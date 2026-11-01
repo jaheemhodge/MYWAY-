@@ -439,8 +439,13 @@ function StageVideo({ src, poster, playing, still }: { src: string; poster?: str
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
-    if (playing && !still) void el.play().catch(() => {});
-    else el.pause();
+    // play() returns a promise in modern browsers but nothing in some older ones (and in tests).
+    try {
+      if (playing && !still) void el.play()?.catch(() => {});
+      else el.pause();
+    } catch {
+      /* playback not available: the poster or first frame stays */
+    }
   }, [playing, still, src]);
   return (
     <video
