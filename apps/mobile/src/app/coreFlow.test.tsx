@@ -90,8 +90,14 @@ describe("core flow", () => {
     await at("/onboarding");
     expect(fake.db.profiles[0]).toMatchObject({ first_name: "Jaheem", onboarded_at: null });
 
-    fireEvent.click(screen.getByLabelText("60–70"));
-    fireEvent.click(screen.getByLabelText("Knees"));
+    // One question per screen: day to day → age → what's harder (skippable) → focus area
+    fireEvent.click(await screen.findByLabelText("Stiff most days"));
+    fireEvent.click(screen.getByRole("button", { name: /^continue$/i }));
+    fireEvent.click(await screen.findByLabelText("60–70"));
+    fireEvent.click(screen.getByRole("button", { name: /^continue$/i }));
+    fireEvent.click(await screen.findByLabelText("Climb the stairs"));
+    fireEvent.click(screen.getByRole("button", { name: /^continue$/i }));
+    fireEvent.click(await screen.findByLabelText("Knees"));
     fireEvent.click(screen.getByRole("button", { name: /start my 60 days/i }));
 
     // Home: "Day 1 · Get familiar" row label and "Day 1 of 60" in the top bar
@@ -100,7 +106,10 @@ describe("core flow", () => {
     expect(fake.db.profiles[0].onboarded_at).toBeTruthy();
     expect(fake.db.profiles[0].plan_start_date).toMatch(/^\d{4}-\d{2}-\d{2}$/);
     expect(fake.db.questionnaire_responses).toHaveLength(1);
-    expect(fake.db.questionnaire_responses[0]).toMatchObject({ kind: "baseline" });
+    expect(fake.db.questionnaire_responses[0]).toMatchObject({
+      kind: "baseline",
+      answers: { day_to_day: "most_days", age_range: "60–70", easier: ["stairs"] },
+    });
     await screen.findByText("Day 1 · Get familiar");
     expect(screen.getByText(/Day 1 of 60/)).toBeTruthy();
 
@@ -174,10 +183,13 @@ describe("core flow", () => {
 
     renderAt("/app/session/30");
     await at("/app/recheck/day30");
-    fireEvent.click(screen.getByLabelText("3"));
-    fireEvent.click(screen.getByRole("button", { name: /save and start day 30/i }));
+    fireEvent.click(await screen.findByLabelText("A bit stiff some days"));
+    fireEvent.click(screen.getByRole("button", { name: /^continue$/i }));
+    fireEvent.click(await screen.findByLabelText("Easier than when I started"));
+    fireEvent.click(screen.getByRole("button", { name: /^continue$/i }));
+    fireEvent.click(await screen.findByRole("button", { name: /save and start day 30/i }));
     await at("/app/session/30");
-    expect(fake.db.questionnaire_responses.some((q) => q.kind === "day30")).toBe(true);
+    expect(fake.db.questionnaire_responses.find((q) => q.kind === "day30")?.answers).toMatchObject({ day_to_day: "some_days", compared: "easier" });
 
     await screen.findByText("Today's session");
     expect(screen.getByText("Exercise 1 of 5")).toBeTruthy();
