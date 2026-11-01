@@ -118,15 +118,21 @@ describe("core flow", () => {
     await at("/app/session/1");
 
     // Step through Day 1 and finish
-    await screen.findByText("Today's session");
+    await screen.findByText(/Day 1 · Get familiar/);
     expect(screen.getByText("Exercise 1 of 5")).toBeTruthy();
+    fireEvent.click(screen.getByRole("button", { name: /^start$/i }));
     for (let i = 0; i < 4; i += 1) fireEvent.click(screen.getByRole("button", { name: /next exercise/i }));
-    fireEvent.click(screen.getByRole("button", { name: /finish session/i }));
+    fireEvent.click(screen.getByRole("button", { name: /done with this exercise/i }));
+    fireEvent.click(screen.getByLabelText("4"));
+    fireEvent.click(screen.getByRole("button", { name: /finish day/i }));
 
     await at("/app/session/1/done");
     expect(fake.db.day_completions).toHaveLength(1);
-    expect(fake.db.day_completions[0]).toMatchObject({ day_number: 1 });
-    expect(fake.db.day_completions[0].exercises_done).toHaveLength(5);
+    expect(fake.db.day_completions[0]).toMatchObject({ day_number: 1, feeling: 4 });
+    const done = fake.db.day_completions[0].exercises_done as { status: string }[];
+    expect(done).toHaveLength(5);
+    expect(done.every((e) => e.status === "completed")).toBe(true);
+    expect(window.localStorage.getItem("mobility.session.v1")).toBeNull();
 
     // Done page offers Day 2, which is unlocked immediately
     const startNext = await screen.findByRole("link", { name: /start day 2/i });
@@ -191,10 +197,12 @@ describe("core flow", () => {
     await at("/app/session/30");
     expect(fake.db.questionnaire_responses.find((q) => q.kind === "day30")?.answers).toMatchObject({ day_to_day: "some_days", compared: "easier" });
 
-    await screen.findByText("Today's session");
+    await screen.findByText(/Day 30 · Practice them/);
     expect(screen.getByText("Exercise 1 of 5")).toBeTruthy();
+    fireEvent.click(screen.getByRole("button", { name: /^start$/i }));
     for (let i = 0; i < 4; i += 1) fireEvent.click(screen.getByRole("button", { name: /next exercise/i }));
-    fireEvent.click(screen.getByRole("button", { name: /finish session/i }));
+    fireEvent.click(screen.getByRole("button", { name: /done with this exercise/i }));
+    fireEvent.click(screen.getByRole("button", { name: /finish day/i }));
     await at("/app/session/30/done");
     expect(fake.db.day_completions.some((c) => c.day_number === 30)).toBe(true);
   });

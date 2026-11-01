@@ -1,5 +1,5 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useState, type ReactNode } from "react";
-import type { Answers, DayCompletionRow, QuestionnaireKind, QuestionnaireResponseRow } from "@/lib/database.types";
+import type { Answers, DayCompletionRow, ExerciseDoneEntry, QuestionnaireKind, QuestionnaireResponseRow } from "@/lib/database.types";
 import {
   completeDay as completeDayRequest,
   EMPTY_PROGRESS,
@@ -29,7 +29,7 @@ export interface ProgressContextValue {
   isDayCompleted: (day: number) => boolean;
   refresh: () => Promise<void>;
   /** Calls complete_day(); throws ProgressError with a friendly message when refused. */
-  completeDay: (day: number, exercises: readonly string[], feeling?: number | null) => Promise<DayCompletionRow>;
+  completeDay: (day: number, exercises: readonly ExerciseDoneEntry[], feeling?: number | null) => Promise<DayCompletionRow>;
   saveQuestionnaire: (kind: QuestionnaireKind, answers: Answers) => Promise<QuestionnaireResponseRow>;
 }
 

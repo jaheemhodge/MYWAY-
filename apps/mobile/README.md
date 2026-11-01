@@ -83,4 +83,9 @@ The app sends people back to `/login` after magic links and OAuth, and to `/rese
   a day unless the previous one is done, rejects Days 30/60 without the matching `questionnaire_responses`
   row, rejects anyone not onboarded, and updates (never duplicates) a replayed day.
 - `get_progress()` returns `{ current_day, completed_days, phase, recheck_due, all_done }`.
+- The session player (`useSession` in `src/app/state/useSession.ts`, engine in `src/lib/session.ts`) is what
+  calls `complete_day`. Each `p_exercises` entry is `{ id, status: "completed" | "skipped", setsDone }`
+  (older rows may be bare id strings). An in-progress session lives only on this device
+  (`localStorage` key `mobility.session.v1`: day, exercise index, set, exercises done) and is removed
+  after a successful save. Optional sound cues default off (`mobility.session.cues.v1`).
 - Every table has RLS: a user only reads and writes their own rows.

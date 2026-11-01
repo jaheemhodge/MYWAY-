@@ -9,6 +9,7 @@ export { ProfileProvider, useProfile, type ProfileContextValue, type ProfileStat
 export { ProgressProvider, useProgress, type ProgressContextValue, type ProgressStatus } from "./ProgressProvider";
 export { FavoritesProvider, useFavorites, type FavoritesContextValue } from "./FavoritesProvider";
 export { useDayPlan } from "./useDayPlan";
+export { useSession, KEY_BINDINGS, CUES_SETTING_KEY, type UseSessionResult, type SessionStatus, type SessionActions } from "./useSession";
 export * from "./returnTo";
 
 /** Auth → Profile → Progress → Favorites, in dependency order. */
