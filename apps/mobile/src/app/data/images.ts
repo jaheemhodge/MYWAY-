@@ -1,37 +1,23 @@
+import { mediaFor } from "@/data/mediaMap";
 import type { Exercise, Position } from "./library";
 
-const BASE = import.meta.env.BASE_URL;
-
-/** Exercise stills, matched to the library by exercise name. All are 4:5 portrait. */
-const IMAGES_BY_NAME: Record<string, string> = {
-  "Sit to stand from a chair": `${BASE}exercises/k-sit-to-stand.jpg`,
-  "Mini squat holding a support": `${BASE}exercises/k-mini-squat.jpg`,
-  "Heel raises": `${BASE}exercises/heel-raises.jpg`,
-  "Wall calf stretch": `${BASE}exercises/wall-calf-stretch.jpg`,
-  Clamshell: `${BASE}exercises/clamshell.jpg`,
-};
+/**
+ * Exercise stills and clips come from src/data/mediaMap.ts (by exercise id). These helpers keep
+ * the old call sites working; add or swap files in the map, not here.
+ */
 
 /**
  * The exercise's own still, or undefined when it has none yet.
  * Exercises without a still show a soft sage tile with their position word instead,
  * never another exercise's photo.
- * TODO(images): add a still (and later a clip) for every exercise.
  */
-export function imageFor(exercise: Exercise): string | undefined {
-  return IMAGES_BY_NAME[exercise.name];
+export function imageFor(exercise: Pick<Exercise, "id">): string | undefined {
+  return mediaFor(exercise.id).imageUrl;
 }
 
-/**
- * Exercise clips, matched by exercise name. Only exercises with a real demonstration clip are
- * listed; everything else shows its still with "Video coming soon".
- * TODO(video): add each exercise's clip here as it is produced.
- */
-const VIDEOS_BY_NAME: Record<string, string> = {
-  "Seated knee extension": `${BASE}videos/day-01/day01-test-knee-extension-left-rep-v2.mp4`,
-};
-
-export function videoFor(exercise: Exercise): string | undefined {
-  return VIDEOS_BY_NAME[exercise.name];
+/** The exercise's demonstration clip, or undefined ("Video coming soon"). */
+export function videoFor(exercise: Pick<Exercise, "id">): string | undefined {
+  return mediaFor(exercise.id).videoUrl;
 }
 
 /** Word shown on the placeholder tile. */
