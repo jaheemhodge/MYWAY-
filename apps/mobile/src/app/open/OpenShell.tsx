@@ -8,7 +8,7 @@ import { FOOTER_COMPANY, FOOTER_CONTACT, FOOTER_NEWSLETTER_URL, FOOTER_SOCIAL } 
 import { LiquidNavbar, type LiquidNavItem } from "@/components/ui/liquid-glass-navbar";
 import { Icon } from "../components/Icon";
 import { TOTAL_DAYS } from "../data/plan";
-import { useDay } from "../DayState";
+import { useProgress } from "../state/ProgressProvider";
 import { AREA_SLUGS, COLLECTION_TITLE, openFiltersFromParams, openParams, type OpenFilters } from "./data";
 import "./open.css";
 
@@ -49,7 +49,7 @@ export function OpenShell() {
   const pagePath = background?.pathname ?? pathname;
   const mainRef = useRef<HTMLElement>(null);
   const first = useRef(true);
-  const { currentDay } = useDay();
+  const { currentDay } = useProgress();
   const active = activeTab(pagePath);
   // The sticky bar only blurs once it is stuck with content passing under it; at rest it is
   // fully see-through, so the background grain is not smoothed into a visible band.

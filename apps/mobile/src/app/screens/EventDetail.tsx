@@ -2,14 +2,14 @@ import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 import { EventThumb } from "../components/EventCard";
 import { Icon } from "../components/Icon";
 import { CATEGORY_LABEL, getEvent, whenLong } from "../data/events";
-import { useDay } from "../DayState";
+import { useProgress } from "../state/ProgressProvider";
 import { usePageTitle } from "../hooks";
 import { useCity } from "../LocationState";
 
 export function EventDetail() {
   const { id = "" } = useParams();
   const event = getEvent(id);
-  const { currentDay } = useDay();
+  const { currentDay } = useProgress();
   const { city } = useCity();
   const navigate = useNavigate();
   const location = useLocation();

@@ -12,7 +12,7 @@ import {
   type EventCategory,
   type LocalEvent,
 } from "../data/events";
-import { useDay } from "../DayState";
+import { useProgress } from "../state/ProgressProvider";
 import { usePageTitle } from "../hooks";
 import { useCity } from "../LocationState";
 
@@ -27,7 +27,7 @@ const CATEGORIES: EventCategory[] = ["walking", "gentle", "social"];
 
 export function Events() {
   usePageTitle("Events");
-  const { currentDay } = useDay();
+  const { currentDay } = useProgress();
   const { city } = useCity();
   const [date, setDate] = useState<DateFilter>("any");
   const [cats, setCats] = useState<EventCategory[]>([]);

@@ -2,10 +2,11 @@ import { useCallback, useEffect, useId, useRef, useState, type ReactNode } from 
 import { useLocation } from "react-router-dom";
 import { FlowIconButton, FlowLink } from "@/components/ui/flow-button";
 import { Stories, Story } from "@/components/ui/stories-carousel";
+import { exerciseUnlockDay, isExerciseUnlocked } from "@/lib/plan";
 import { imageFor, videoFor } from "../data/images";
 import { AREA_LABEL, displayName, type Area, type Exercise } from "../data/library";
-import { opensOnDay } from "../data/plan";
-import { minutesFor, toneFor, useSaved, type TileShape } from "./data";
+import { useFavorites } from "../state/FavoritesProvider";
+import { minutesFor, toneFor, type TileShape } from "./data";
 
 type Ratio = TileShape | "portrait";
 
@@ -24,10 +25,10 @@ export function OMedia({ exercise, children, ratio = "square" }: { exercise: Exe
 }
 
 export function Heart({ id, name }: { id: string; name: string }) {
-  const { isSaved, toggle } = useSaved();
-  const on = isSaved(id);
+  const { isFavorite, toggle } = useFavorites();
+  const on = isFavorite(id);
   return (
-    <button type="button" className="o-heart" aria-pressed={on} onClick={() => toggle(id)}>
+    <button type="button" className="o-heart" aria-pressed={on} onClick={() => void toggle(id)}>
       <svg width="24" height="24" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
         <path
           d="M12 20s-7.5-4.6-7.5-10.2A4.3 4.3 0 0 1 12 7.2a4.3 4.3 0 0 1 7.5 2.6C19.5 15.4 12 20 12 20Z"
@@ -69,7 +70,7 @@ export function OCard({
   as?: "li" | "div";
 }) {
   const link = useOverlayLink()(exercise.id);
-  const opens = opensOnDay(exercise.phase, currentDay);
+  const opens = isExerciseUnlocked(exercise, currentDay) ? null : exerciseUnlockDay(exercise);
   return (
     <Story
       as={as}

@@ -40,3 +40,18 @@ export function checkInPath(stepId: string, occasion: string = "baseline"): stri
 export function isAppPath(pathname: string): boolean {
   return pathname === "/app" || pathname.startsWith("/app/");
 }
+
+/** Account pages that share the auth providers with the app (src/app/CoreFlowApp.tsx). */
+export const accountRoutes = {
+  login: "/login",
+  signUp: "/signup",
+  resetPassword: "/reset-password",
+  onboarding: "/onboarding",
+} as const;
+
+const ACCOUNT_EXACT = new Set<string>(Object.values(accountRoutes));
+
+/** Everything rendered by CoreFlowApp: account pages plus /app/*. Checked before the prototype split. */
+export function isCoreFlowPath(pathname: string): boolean {
+  return ACCOUNT_EXACT.has(pathname) || isAppPath(pathname);
+}

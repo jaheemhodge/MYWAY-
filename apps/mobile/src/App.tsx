@@ -20,12 +20,13 @@ import { SignIn } from "./screens/SignIn";
 import { Welcome } from "./screens/Welcome";
 import { useApp } from "./store/AppState";
 import { MarketingApp } from "./web/MarketingApp";
-import { isAppPath, isPrototypePath, routes } from "./web/routes";
-import { MobilityApp } from "./app/MobilityApp";
+import { isCoreFlowPath, isPrototypePath, routes } from "./web/routes";
+import { CoreFlowApp } from "./app/CoreFlowApp";
 
 export function App() {
   const { pathname } = useLocation();
-  if (isAppPath(pathname)) return <MobilityApp />;
+  // Accounts and the logged-in app: /login, /signup, /reset-password, /onboarding, /app/*.
+  if (isCoreFlowPath(pathname)) return <CoreFlowApp />;
   if (!isPrototypePath(pathname)) return <MarketingApp />;
   return <PrototypeApp />;
 }

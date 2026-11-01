@@ -1,7 +1,8 @@
-import { useCallback, useEffect, useState } from "react";
+import type { FocusArea } from "@/lib/database.types";
+import { getDayPlan } from "@/lib/plan";
 import { applyFilters, filtersFromParams, type Filters } from "../data/filters";
 import { AREA_LABEL, EXERCISES, type Area, type Exercise } from "../data/library";
-import { getSession, MINUTES_PER_EXERCISE } from "../data/plan";
+import { MINUTES_PER_EXERCISE } from "../data/plan";
 
 /** Collections that have a row on Home and a See all page at /app/library/:slug. */
 export type Slug = "all" | "today" | Area | "chair";
@@ -14,8 +15,12 @@ export function isSlug(value: string): value is Slug {
 
 const byPhase = (a: Exercise, b: Exercise) => a.phase - b.phase;
 
-export function collection(slug: Slug, currentDay: number): Exercise[] {
-  if (slug === "today") return getSession(currentDay);
+/**
+ * Exercises for a collection. "today" is the signed-in user's plan for `currentDay`, so it needs
+ * their focus area; without one (profile still loading) it is empty.
+ */
+export function collection(slug: Slug, currentDay: number, focusArea?: FocusArea | null): Exercise[] {
+  if (slug === "today") return focusArea ? getDayPlan(focusArea, currentDay).exercises : [];
   if (slug === "chair") return EXERCISES.filter((e) => e.position === "chair").sort(byPhase);
   if (slug === "all") return [...EXERCISES].sort(byPhase);
   return EXERCISES.filter((e) => e.areas.includes(slug)).sort(byPhase);
@@ -111,46 +116,4 @@ export function openActiveCount(f: OpenFilters) {
   return f.position.length + f.time.length + f.phase.length;
 }
 
-/* ---------- Saved (hearts), kept in this browser only ---------- */
-
-const KEY = "mobility.saved.v1";
-/** Fallback when storage is blocked (private windows, previews): remembered for this visit only. */
-let memory: string[] = [];
-
-function readSaved(): string[] {
-  try {
-    const raw = window.localStorage.getItem(KEY);
-    const v = raw ? JSON.parse(raw) : [];
-    memory = Array.isArray(v) ? v.filter((x) => typeof x === "string") : [];
-  } catch {
-    /* keep memory */
-  }
-  return memory;
-}
-
-export function useSaved() {
-  const [saved, setSaved] = useState<string[]>(readSaved);
-  useEffect(() => {
-    const onStorage = (e: StorageEvent) => e.key === KEY && setSaved(readSaved());
-    const onLocal = () => setSaved(readSaved());
-    window.addEventListener("storage", onStorage);
-    window.addEventListener("mobility-saved", onLocal);
-    return () => {
-      window.removeEventListener("storage", onStorage);
-      window.removeEventListener("mobility-saved", onLocal);
-    };
-  }, []);
-  const toggle = useCallback((id: string) => {
-    const current = readSaved();
-    const next = current.includes(id) ? current.filter((x) => x !== id) : [...current, id];
-    memory = next;
-    try {
-      window.localStorage.setItem(KEY, JSON.stringify(next));
-    } catch {
-      /* storage unavailable: keep it for this view only */
-    }
-    setSaved(next);
-    window.dispatchEvent(new Event("mobility-saved"));
-  }, []);
-  return { isSaved: (id: string) => saved.includes(id), toggle };
-}
+/* Saved (hearts) moved to src/lib/favorites.ts + useFavorites(); same localStorage key, synced to the account. */

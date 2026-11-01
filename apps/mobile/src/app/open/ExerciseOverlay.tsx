@@ -1,9 +1,11 @@
 import { useEffect, useRef } from "react";
 import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
+import { exerciseUnlockDay, isExerciseUnlocked } from "@/lib/plan";
 import { Icon } from "../components/Icon";
 import { AREA_LABEL, getExercise, POSITION_LABEL } from "../data/library";
-import { opensOnDay, PHASE_INFO } from "../data/plan";
-import { useDay } from "../DayState";
+import { PHASE_INFO } from "../data/plan";
+import { useProfile } from "../state/ProfileProvider";
+import { useProgress } from "../state/ProgressProvider";
 import { usePageTitle } from "../hooks";
 import VideoPlayer from "@/components/ui/video-player";
 import { Stories } from "@/components/ui/stories-carousel";
@@ -20,7 +22,8 @@ export function ExerciseOverlay() {
   const exercise = getExercise(id.toUpperCase());
   const navigate = useNavigate();
   const location = useLocation();
-  const { currentDay } = useDay();
+  const { currentDay } = useProgress();
+  const { focusArea } = useProfile();
   const ref = useRef<HTMLDialogElement>(null);
   const hasBackground = Boolean((location.state as { background?: unknown } | null)?.background);
   usePageTitle(exercise ? exercise.name : "Exercise");
@@ -48,8 +51,8 @@ export function ExerciseOverlay() {
     );
   }
 
-  const opens = opensOnDay(exercise.phase, currentDay);
-  const more = collection(exercise.primaryArea, currentDay).filter((e) => e.id !== exercise.id).slice(0, 6);
+  const opens = isExerciseUnlocked(exercise, currentDay) ? null : exerciseUnlockDay(exercise);
+  const more = collection(exercise.primaryArea, currentDay, focusArea).filter((e) => e.id !== exercise.id).slice(0, 6);
 
   return (
     <dialog

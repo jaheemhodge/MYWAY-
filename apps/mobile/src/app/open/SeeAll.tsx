@@ -1,7 +1,8 @@
 import { Link, Navigate, useParams, useSearchParams } from "react-router-dom";
 import { getExercise } from "../data/library";
-import { phaseForDay } from "../data/plan";
-import { useDay } from "../DayState";
+import { useProfile } from "../state/ProfileProvider";
+import { useProgress } from "../state/ProgressProvider";
+import { useDayPlan } from "../state/useDayPlan";
 import { usePageTitle } from "../hooks";
 import { applyOpen, collection, COLLECTION_LINE, COLLECTION_TITLE, isSlug, openActiveCount, openFiltersFromParams } from "./data";
 import { OCard, OHead } from "./parts";
@@ -10,7 +11,9 @@ import { OCard, OHead } from "./parts";
 export function SeeAll() {
   const { slug = "all" } = useParams();
   const [params] = useSearchParams();
-  const { currentDay } = useDay();
+  const { currentDay } = useProgress();
+  const { focusArea } = useProfile();
+  const today = useDayPlan(currentDay);
   const exerciseFromOldLink = getExercise(slug.toUpperCase());
   const valid = isSlug(slug);
   usePageTitle(valid ? (slug === "today" ? "Today" : COLLECTION_TITLE[slug]) : "Library");
@@ -21,10 +24,10 @@ export function SeeAll() {
 
   const filters = openFiltersFromParams(params);
   const q = params.get("q") ?? "";
-  const items = applyOpen(collection(slug, currentDay), filters, q);
+  const items = applyOpen(collection(slug, currentDay, focusArea), filters, q);
   const filtering = openActiveCount(filters) > 0 || q.trim().length > 0;
   const title = slug === "today" ? "Today" : COLLECTION_TITLE[slug];
-  const line = slug === "today" ? `Day ${currentDay} · ${phaseForDay(currentDay).name}` : COLLECTION_LINE[slug];
+  const line = slug === "today" ? (today ? `Day ${today.day} · ${today.phaseName}` : `Day ${currentDay}`) : COLLECTION_LINE[slug];
 
   return (
     <section className="o-page" aria-labelledby="o-grid-title">
