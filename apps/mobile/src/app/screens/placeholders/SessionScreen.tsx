@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Navigate } from "react-router-dom";
 import { displayName } from "../../data/library";
 import { Icon } from "../../components/Icon";
@@ -154,16 +154,12 @@ export function SessionView({
           {/* ---------- Stage, timer and controls ---------- */}
           <section className="sp-main" aria-label="Player">
             <div className="sp-stage">
-              {s.media.videoUrl ? (
-                <video
-                  className="sp-stage__media"
+              {s.media.videoUrl && !(s.reducedMotion && stageImage) ? (
+                <StageVideo
                   src={s.media.videoUrl}
                   poster={stageImage}
-                  muted
-                  loop
-                  playsInline
-                  autoPlay={!s.reducedMotion}
-                  controls
+                  playing={s.status === "in-progress" && !s.reducedMotion}
+                  still={s.reducedMotion}
                 />
               ) : stageImage ? (
                 <>
@@ -430,6 +426,38 @@ function FinishCard({
         )}
       </button>
     </section>
+  );
+}
+
+/**
+ * The exercise clip, with no browser controls: the session's Start / Pause button drives it.
+ * It plays while the session runs and pauses otherwise. Under reduced motion it never plays and
+ * shows its still frame (the photo is used instead when the exercise has one).
+ */
+function StageVideo({ src, poster, playing, still }: { src: string; poster?: string; playing: boolean; still: boolean }) {
+  const ref = useRef<HTMLVideoElement>(null);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    if (playing && !still) void el.play().catch(() => {});
+    else el.pause();
+  }, [playing, still, src]);
+  return (
+    <video
+      ref={ref}
+      className="sp-stage__media"
+      src={still && !poster ? `${src}#t=0.1` : src}
+      poster={poster}
+      muted
+      loop
+      playsInline
+      autoPlay={!still}
+      preload={still ? "metadata" : "auto"}
+      disablePictureInPicture
+      disableRemotePlayback
+      aria-hidden="true"
+      tabIndex={-1}
+    />
   );
 }
 
