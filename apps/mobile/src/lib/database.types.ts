@@ -28,12 +28,22 @@ export type QuestionnaireResponseRow = {
   created_at: string;
 }
 
+/** Per-exercise outcome recorded by the session player. */
+export type ExerciseDoneRecord = {
+  id: string;
+  status: "completed" | "skipped";
+  setsDone: number;
+};
+
+/** Older completions stored bare exercise ids; newer ones store records. */
+export type ExerciseDoneEntry = string | ExerciseDoneRecord;
+
 export type DayCompletionRow = {
   id: string;
   user_id: string;
   day_number: number;
   completed_at: string;
-  exercises_done: string[];
+  exercises_done: ExerciseDoneEntry[];
   feeling: number | null;
 }
 

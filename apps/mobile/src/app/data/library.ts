@@ -26,6 +26,13 @@ export interface Exercise {
   cues: string[];
   safetyNotes: string[];
   difficulty?: number;
+  /**
+   * Dose, when the source data specifies one. Not present in library-slim.json today; the session
+   * engine (src/lib/session.ts) falls back to flagged defaults when these are missing.
+   */
+  sets?: number;
+  reps?: number;
+  holdSeconds?: number;
 }
 
 /** Source data as stored (keeps research references). Not for display. */

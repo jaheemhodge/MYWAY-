@@ -4,7 +4,7 @@
  */
 import type { PostgrestError } from "@supabase/supabase-js";
 import { PHASE_INFO } from "@/app/data/plan";
-import type { Answers, DayCompletionRow, ProgressRpcResult, QuestionnaireKind, QuestionnaireResponseRow } from "./database.types";
+import type { Answers, DayCompletionRow, ExerciseDoneEntry, ProgressRpcResult, QuestionnaireKind, QuestionnaireResponseRow } from "./database.types";
 import { getSupabase } from "./supabaseClient";
 import type { CompleteDayDenial } from "./unlock";
 
@@ -89,8 +89,8 @@ export async function getProgress(): Promise<Progress> {
 
 export interface CompleteDayInput {
   day: number;
-  /** Exercise ids done today, in order. */
-  exercises: readonly string[];
+  /** What was done today, in order: ids or { id, status, setsDone } records. */
+  exercises: readonly ExerciseDoneEntry[];
   /** Optional 1–5 self-report. */
   feeling?: number | null;
 }
