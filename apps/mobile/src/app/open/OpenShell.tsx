@@ -53,6 +53,9 @@ export function OpenShell() {
   const active = activeTab(pagePath);
   // The sticky bar only blurs once it is stuck with content passing under it; at rest it is
   // fully see-through, so the background grain is not smoothed into a visible band.
+  // The day's session is a focused full-screen view: no nav, pills, search, footer or tab bar.
+  // (The "done" page after it keeps the normal frame.)
+  const focused = /^\/app\/session\/[^/]+$/.test(pathname);
   const bar1Ref = useRef<HTMLElement>(null);
   const [stuck, setStuck] = useState(false);
   useEffect(() => {
@@ -61,7 +64,7 @@ export function OpenShell() {
     const io = new IntersectionObserver(([e]) => setStuck(!e.isIntersecting));
     io.observe(el);
     return () => io.disconnect();
-  }, []);
+  }, [focused]);
 
   useEffect(() => {
     if (first.current) {
@@ -74,45 +77,51 @@ export function OpenShell() {
   }, [pathname]);
 
   return (
-    <div className="mob-root t-open">
+    <div className={`mob-root t-open${focused ? " t-focus" : ""}`}>
       <a className="mob-skip" href="#main">
         Skip to content
       </a>
-      <header className="o-bar1" ref={bar1Ref}>
-        <div className="o-wrap o-bar1__inner">
-          <Link to="/app/home" className="o-wordmark">
-            Mobility
-          </Link>
-          <div className="o-topnav">
-            <LiquidNavbar items={TABS} active={active} tone="mist" />
+      {focused ? null : (
+        <header className="o-bar1" ref={bar1Ref}>
+          <div className="o-wrap o-bar1__inner">
+            <Link to="/app/home" className="o-wordmark">
+              Mobility
+            </Link>
+            <div className="o-topnav">
+              <LiquidNavbar items={TABS} active={active} tone="mist" />
+            </div>
+            <p className="o-bar1__day">
+              Day {currentDay} of {TOTAL_DAYS}
+            </p>
           </div>
-          <p className="o-bar1__day">
-            Day {currentDay} of {TOTAL_DAYS}
-          </p>
-        </div>
-      </header>
+        </header>
+      )}
 
-      <SubBar pagePath={pagePath} stuck={stuck} />
+      {focused ? null : <SubBar pagePath={pagePath} stuck={stuck} />}
 
       <main id="main" ref={mainRef} tabIndex={-1} className="o-main">
         <Outlet />
       </main>
 
-      <FooterSection
-        brand="Mobility"
-        tagline="Feel like yourself again."
-        note="A 60-day home movement program for adults about 50 to 70. It is not medical advice, physiotherapy or emergency care."
-        links={TABS.map((t) => ({ label: t.label, to: t.to }))}
-        contact={FOOTER_CONTACT}
-        social={FOOTER_SOCIAL}
-        newsletterUrl={FOOTER_NEWSLETTER_URL}
-        legal={[{ label: "Privacy and legal", to: "/legal" }]}
-        copyright={`© ${new Date().getFullYear()} ${FOOTER_COMPANY}. All rights reserved.`}
-      />
+      {focused ? null : (
+        <>
+          <FooterSection
+            brand="Mobility"
+            tagline="Feel like yourself again."
+            note="A 60-day home movement program for adults about 50 to 70. It is not medical advice, physiotherapy or emergency care."
+            links={TABS.map((t) => ({ label: t.label, to: t.to }))}
+            contact={FOOTER_CONTACT}
+            social={FOOTER_SOCIAL}
+            newsletterUrl={FOOTER_NEWSLETTER_URL}
+            legal={[{ label: "Privacy and legal", to: "/legal" }]}
+            copyright={`© ${new Date().getFullYear()} ${FOOTER_COMPANY}. All rights reserved.`}
+          />
 
-      <div className="o-bottomnav">
-        <LiquidNavbar items={TABS} active={active} layout="stacked" tone="mist" />
-      </div>
+          <div className="o-bottomnav">
+            <LiquidNavbar items={TABS} active={active} layout="stacked" tone="mist" />
+          </div>
+        </>
+      )}
     </div>
   );
 }

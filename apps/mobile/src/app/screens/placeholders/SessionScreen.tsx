@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link, Navigate } from "react-router-dom";
 import { displayName } from "../../data/library";
+import { cleanCopy, cleanCopyList } from "../../open/copy";
 import { usePageTitle } from "../../hooks";
 import { useSession } from "../../state/useSession";
 
@@ -40,8 +41,13 @@ export function SessionScreen({ day }: { day: number }) {
         <p>
           Exercise {s.index + 1} of {s.total}
         </p>
+        <progress
+          max={s.total}
+          value={s.exercisesDone.filter(Boolean).length}
+          aria-label={`${s.exercisesDone.filter(Boolean).length} of ${s.total} exercises done`}
+        />
         <button type="button" onClick={actions.exit}>
-          Exit (keeps your place)
+          Save and exit
         </button>
       </header>
 
@@ -53,9 +59,9 @@ export function SessionScreen({ day }: { day: number }) {
           ) : s.media.imageUrl ? (
             <img src={s.media.imageUrl} alt="" />
           ) : null}
-          <p>{exercise.setup}</p>
+          <p>{cleanCopy(exercise.setup)}</p>
           <ul>
-            {exercise.cues.map((cue) => (
+            {cleanCopyList(exercise.cues).map((cue) => (
               <li key={cue}>{cue}</li>
             ))}
           </ul>

@@ -11,6 +11,7 @@ import VideoPlayer from "@/components/ui/video-player";
 import { Stories } from "@/components/ui/stories-carousel";
 import { imageFor, videoFor } from "../data/images";
 import { collection, minutesFor, toneFor } from "./data";
+import { cleanCopy, cleanCopyList } from "./copy";
 import { OCard } from "./parts";
 
 /**
@@ -105,11 +106,11 @@ export function ExerciseOverlay() {
             ) : null}
 
             <h3 className="o-h3">What you'll need</h3>
-            <p>{exercise.equipment}</p>
+            <p>{cleanCopy(exercise.equipment)}</p>
 
             <h3 className="o-h3">How to do it</h3>
             <ol className="o-cues">
-              {exercise.cues.map((c) => (
+              {cleanCopyList(exercise.cues).map((c) => (
                 <li key={c}>{c}</li>
               ))}
             </ol>
@@ -127,7 +128,7 @@ export function ExerciseOverlay() {
                 Stop if this causes pain
               </summary>
               <ul>
-                {exercise.safetyNotes.map((n) => (
+                {cleanCopyList(exercise.safetyNotes).map((n) => (
                   <li key={n}>{n}</li>
                 ))}
               </ul>

@@ -1060,3 +1060,10 @@ html body #root:has(.t-open) {
     transform: none;
   }
 }
+
+/* ---------- Focused session (/app/session/:day): no app chrome, just the player ---------- */
+
+.t-focus .o-main {
+  min-height: 100dvh;
+  padding: 24px var(--o-gutter) 40px;
+}
