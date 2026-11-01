@@ -18,3 +18,7 @@ backend/__pycache__
 apps/mobile/.preview/
 apps/mobile/.preview-dist/
 apps/mobile/vite.preview.config.ts
+.env.local
+.env.*.local
+supabase/.branches
+supabase/.temp
