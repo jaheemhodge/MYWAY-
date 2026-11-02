@@ -17,6 +17,9 @@ describe("mapAuthError", () => {
     expect(mapAuthError({ message: "Auth session missing!" })).toBe(FRIENDLY.sessionMissing);
     expect(mapAuthError({ message: "Email link is invalid or has expired" })).toBe(FRIENDLY.sessionMissing);
     expect(mapAuthError({ message: "New password should be different from the old password." })).toBe(FRIENDLY.samePassword);
+    expect(mapAuthError({ message: "access denied", code: "access_denied" })).toBe(FRIENDLY.googleCancelled);
+    expect(mapAuthError({ message: "Provider is not enabled" })).toBe(FRIENDLY.providerDisabled);
+    expect(mapAuthError({ message: "Unsupported provider: apple" })).toBe(FRIENDLY.unsupportedProvider);
   });
 
   it("maps transport and configuration failures", () => {
@@ -41,6 +44,7 @@ describe("toProgressError", () => {
     expect(toProgressError({ message: "INVALID_DAY" }).code).toBe("INVALID_DAY");
     expect(toProgressError({ message: "INVALID_FEELING" }).code).toBe("INVALID_FEELING");
     expect(toProgressError({ message: "NOT_AUTHENTICATED" }).code).toBe("NOT_AUTHENTICATED");
+    expect(toProgressError({ message: "PAYWALL" })).toMatchObject({ code: "PAYWALL", message: PROGRESS_MESSAGES.PAYWALL });
   });
 
   it("falls back to network / unknown", () => {

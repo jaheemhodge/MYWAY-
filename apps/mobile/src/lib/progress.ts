@@ -15,6 +15,9 @@ export interface Progress {
   phaseName: string;
   recheckDue: "day30" | "day60" | null;
   allDone: boolean;
+  /** Days included before full access. Defaults to 3 when the server omits the key. */
+  freeDaysLimit: number;
+  hasFullAccess: boolean;
 }
 
 export const EMPTY_PROGRESS: Progress = {
@@ -24,6 +27,8 @@ export const EMPTY_PROGRESS: Progress = {
   phaseName: PHASE_INFO[1].name,
   recheckDue: null,
   allDone: false,
+  freeDaysLimit: 3,
+  hasFullAccess: false,
 };
 
 export type ProgressErrorCode = CompleteDayDenial | "NOT_AUTHENTICATED" | "INVALID_FEELING" | "INVALID_EXERCISES" | "NETWORK" | "UNKNOWN";
@@ -44,6 +49,7 @@ export const PROGRESS_MESSAGES: Record<ProgressErrorCode, string> = {
   INVALID_FEELING: "Pick how you feel on the 1 to 5 scale.",
   INVALID_EXERCISES: "We couldn't read the exercise list for this day.",
   DAY_LOCKED: "Finish the day before this one first. Days open one at a time.",
+  PAYWALL: "Days 4 to 60 are part of full access.",
   RECHECK_REQUIRED: "Do the short re-check first, then finish this day.",
   NETWORK: "We couldn't reach the server. Your day wasn't saved; try again in a moment.",
   UNKNOWN: "Something went wrong while saving. Please try again.",
@@ -56,6 +62,7 @@ const TOKENS: readonly ProgressErrorCode[] = [
   "INVALID_FEELING",
   "INVALID_EXERCISES",
   "DAY_LOCKED",
+  "PAYWALL",
   "RECHECK_REQUIRED",
 ];
 
@@ -78,6 +85,8 @@ export function fromRpc(result: ProgressRpcResult): Progress {
     phaseName: PHASE_INFO[phase].name,
     recheckDue: result.recheck_due,
     allDone: result.all_done,
+    freeDaysLimit: typeof result.free_days_limit === "number" ? result.free_days_limit : 3,
+    hasFullAccess: result.has_full_access === true,
   };
 }
 

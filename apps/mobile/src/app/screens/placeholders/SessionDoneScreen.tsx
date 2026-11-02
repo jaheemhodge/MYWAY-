@@ -5,6 +5,7 @@ import { Icon } from "../../components/Icon";
 import { usePageTitle } from "../../hooks";
 import { useDayPlan } from "../../state/useDayPlan";
 import { useProgress } from "../../state/ProgressProvider";
+import { PaywallScreen } from "./PaywallScreen";
 import { ExerciseList, PageState } from "./ui";
 
 /**
@@ -17,7 +18,7 @@ export function SessionDoneScreen() {
   const { day: dayParam = "" } = useParams();
   const day = Number(dayParam);
   usePageTitle(`Day ${day} done`);
-  const { ready, status, error, refresh, progress, isDayCompleted, isDayUnlocked, hasQuestionnaire } = useProgress();
+  const { ready, status, error, refresh, progress, isDayCompleted, isDayUnlocked, hasQuestionnaire, hasFullAccess, freeDaysLimit } = useProgress();
   const nextDay = day + 1;
   const nextPlan = useDayPlan(Math.min(nextDay, TOTAL_DAYS));
 
@@ -42,6 +43,22 @@ export function SessionDoneScreen() {
   if (!isDayCompleted(day)) return <Navigate to={`/app/session/${day}`} replace />;
 
   const hasNext = nextDay <= TOTAL_DAYS && isDayUnlocked(nextDay);
+
+  if (!hasFullAccess && day === freeDaysLimit && day < TOTAL_DAYS) {
+    return (
+      <div className="o-wrap c-page">
+        <div className="c-done">
+          <div className="c-stack">
+            <span className="c-done__mark" aria-hidden="true">
+              <Icon name="check" size={30} />
+            </span>
+            <h1 className="c-done__title">Day {day} done.</h1>
+          </div>
+        </div>
+        <PaywallScreen day={nextDay} />
+      </div>
+    );
+  }
 
   if (day === TOTAL_DAYS || progress.allDone || !hasNext) {
     return (

@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { canCompleteDay, completeDayDenial, currentDayFrom, isDayCompleted, isDayUnlocked, recheckDueFor } from "./unlock";
+import { canCompleteDay, completeDayDenial, currentDayFrom, isDayCompleted, isDayPaywalled, isDayUnlocked, recheckDueFor } from "./unlock";
 
 describe("day unlock rules (mirror of complete_day)", () => {
   it("Day 1 is open with nothing completed", () => {
@@ -64,6 +64,20 @@ describe("day unlock rules (mirror of complete_day)", () => {
     expect(recheckDueFor(60, ["day30"], upTo59)).toBe("day60");
     // Once Day 60 is completed nothing further is due.
     expect(recheckDueFor(60, ["day30", "day60"], [...upTo59, 60])).toBeNull();
+  });
+
+  it("paywalls days past the free limit only when access is known", () => {
+    expect(isDayPaywalled(3, false)).toBe(false);
+    expect(isDayPaywalled(4, false)).toBe(true);
+    expect(isDayPaywalled(4, true)).toBe(false);
+    expect(isDayPaywalled(30, false, 3)).toBe(true);
+    // Older callers omit hasFullAccess, so Day 4 after Days 1–3 stays allowed.
+    expect(completeDayDenial(4, { completedDays: [1, 2, 3] })).toBeNull();
+    expect(completeDayDenial(4, { completedDays: [1, 2, 3], hasFullAccess: false })).toBe("PAYWALL");
+    expect(completeDayDenial(4, { completedDays: [1, 2, 3], hasFullAccess: true })).toBeNull();
+    expect(canCompleteDay(4, { completedDays: [1, 2, 3], hasFullAccess: false })).toBe(false);
+    // A locked day is still DAY_LOCKED, before the paywall.
+    expect(completeDayDenial(5, { completedDays: [1, 2, 3], hasFullAccess: false })).toBe("DAY_LOCKED");
   });
 
   it("checks rules in the same order as the database", () => {

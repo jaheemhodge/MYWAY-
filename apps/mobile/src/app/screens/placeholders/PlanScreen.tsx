@@ -17,7 +17,7 @@ const PHASES = [1, 2, 3] as const;
 export function PlanScreen() {
   usePageTitle("My plan");
   const { focusArea, status: profileStatus } = useProfile();
-  const { currentDay, ready, status, error, refresh, completedDays, isDayCompleted, isDayUnlocked } = useProgress();
+  const { currentDay, ready, status, error, refresh, completedDays, isDayCompleted, isDayUnlocked, isDayPaywalled } = useProgress();
 
   if (status === "error") {
     return (
@@ -85,13 +85,17 @@ export function PlanScreen() {
             <ol className="c-days">
               {days
                 .filter((d) => d.phase === phase)
-                .map((d) => (
-                  <DayTile
-                    key={d.day}
-                    plan={d}
-                    state={isDayCompleted(d.day) ? "done" : isDayUnlocked(d.day) ? "today" : "locked"}
-                  />
-                ))}
+                .map((d) => {
+                  const paywalled = !isDayCompleted(d.day) && isDayPaywalled(d.day);
+                  return (
+                    <DayTile
+                      key={d.day}
+                      plan={d}
+                      state={isDayCompleted(d.day) ? "done" : paywalled || !isDayUnlocked(d.day) ? "locked" : "today"}
+                      note={paywalled ? "Full access" : undefined}
+                    />
+                  );
+                })}
             </ol>
           </section>
         );
@@ -100,7 +104,7 @@ export function PlanScreen() {
   );
 }
 
-function DayTile({ plan, state }: { plan: DayPlan; state: "done" | "today" | "locked" }) {
+function DayTile({ plan, state, note }: { plan: DayPlan; state: "done" | "today" | "locked"; note?: string }) {
   const meta = `${plan.exercises.length} exercises · ${plan.estimatedMinutes} min`;
   const metaEl = (
     <span className="c-day__meta">
@@ -129,6 +133,7 @@ function DayTile({ plan, state }: { plan: DayPlan; state: "done" | "today" | "lo
           {metaEl}
           {recheck}
           <span className="c-day__state">Locked</span>
+          {note ? <span className="c-day__meta">{note}</span> : null}
         </div>
       </li>
     );

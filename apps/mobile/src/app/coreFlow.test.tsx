@@ -188,6 +188,7 @@ describe("core flow", () => {
     Object.assign(fake.db.profiles[0], { focus_area: "lower_back", plan_start_date: "2026-01-01", onboarded_at: new Date().toISOString() });
     fake.db.questionnaire_responses.push({ id: "q1", user_id: uid, kind: "baseline", answers: {}, created_at: "" });
     for (let d = 1; d <= 29; d += 1) fake.db.day_completions.push({ id: `c${d}`, user_id: uid, day_number: d, completed_at: "", exercises_done: [], feeling: null });
+    fake.setSubscriptionStatus(uid, "active");
 
     renderAt("/app/session/30");
     await at("/app/recheck/day30");

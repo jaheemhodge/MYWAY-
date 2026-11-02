@@ -22,6 +22,7 @@ export interface FakeDb {
   questionnaire_responses: Row[];
   day_completions: Row[];
   favorites: Row[];
+  app_events: Row[];
 }
 
 function uuid(n: number): string {
@@ -29,12 +30,32 @@ function uuid(n: number): string {
 }
 
 function sessionFor(user: FakeUser): Session {
-  const u = { id: user.id, email: user.email, user_metadata: { first_name: user.first_name }, app_metadata: {}, aud: "authenticated", created_at: "" } as unknown as User;
+  const u = {
+    id: user.id,
+    email: user.email,
+    user_metadata: { first_name: user.first_name },
+    app_metadata: { provider: "email" },
+    last_sign_in_at: "2026-01-01T00:00:00.000Z",
+    aud: "authenticated",
+    created_at: "",
+  } as unknown as User;
   return { access_token: "t", refresh_token: "r", expires_in: 3600, token_type: "bearer", user: u } as Session;
 }
 
+const FULL_ACCESS = new Set(["active", "trialing", "comped"]);
+
+function logAppEvent(db: FakeDb, userId: string, eventName: string, properties: Row): void {
+  db.app_events.push({
+    id: uuid(db.app_events.length + 1),
+    user_id: userId,
+    event_name: eventName,
+    properties,
+    created_at: new Date().toISOString(),
+  });
+}
+
 class Builder implements PromiseLike<{ data: unknown; error: Err }> {
-  private op: "select" | "upsert" | "update" | "delete" = "select";
+  private op: "select" | "upsert" | "insert" | "update" | "delete" = "select";
   private payload: Row | Row[] | null = null;
   private filters: Array<[string, unknown]> = [];
   private orderBy: string | null = null;
@@ -53,6 +74,11 @@ class Builder implements PromiseLike<{ data: unknown; error: Err }> {
   }
   upsert(payload: Row | Row[], _opts?: unknown) {
     this.op = "upsert";
+    this.payload = payload;
+    return this;
+  }
+  insert(payload: Row | Row[]) {
+    this.op = "insert";
     this.payload = payload;
     return this;
   }
@@ -104,25 +130,39 @@ class Builder implements PromiseLike<{ data: unknown; error: Err }> {
 
     if (this.op === "select") {
       result = this.visible();
-    } else if (this.op === "upsert") {
+    } else if (this.op === "insert" || this.op === "upsert") {
       if (this.table === "day_completions") return { data: null, error: { message: "new row violates row-level security policy", code: "42501" } };
       const items = Array.isArray(this.payload) ? this.payload : [this.payload as Row];
       for (const item of items) {
         if (item[this.ownerCol()] !== uid) return { data: null, error: { message: "new row violates row-level security policy", code: "42501" } };
-        const key = this.table === "profiles" ? ["id"] : this.table === "favorites" ? ["user_id", "exercise_id"] : ["user_id", "kind"];
-        const existing = rows.find((r) => key.every((k) => r[k] === item[k]));
+        if (this.table === "app_events" && item.event_name !== "login" && item.event_name !== "day_started") {
+          return { data: null, error: { message: "new row violates row-level security policy", code: "42501" } };
+        }
+        const key = this.table === "profiles" ? ["id"] : this.table === "favorites" ? ["user_id", "exercise_id"] : this.table === "app_events" ? ["id"] : ["user_id", "kind"];
+        const existing = this.op === "upsert" ? rows.find((r) => key.every((k) => r[k] === item[k])) : undefined;
         if (existing) {
+          const wasOnboarded = existing.onboarded_at;
           if (this.table !== "favorites") Object.assign(existing, item);
+          if (this.table === "profiles" && !wasOnboarded && existing.onboarded_at) {
+            logAppEvent(this.db, String(existing.id), "onboarding_complete", { focus_area: existing.focus_area ?? null });
+          }
           result.push(existing);
         } else {
           const row: Row = { id: uuid(rows.length + 1), created_at: new Date().toISOString(), ...item };
           rows.push(row);
+          if (this.table === "profiles" && row.onboarded_at) {
+            logAppEvent(this.db, String(row.id), "onboarding_complete", { focus_area: row.focus_area ?? null });
+          }
           result.push(row);
         }
       }
     } else if (this.op === "update") {
       for (const row of this.visible()) {
+        const wasOnboarded = row.onboarded_at;
         Object.assign(row, this.payload);
+        if (this.table === "profiles" && !wasOnboarded && row.onboarded_at) {
+          logAppEvent(this.db, String(row.id), "onboarding_complete", { focus_area: row.focus_area ?? null });
+        }
         result.push(row);
       }
     } else if (this.op === "delete") {
@@ -143,8 +183,11 @@ class Builder implements PromiseLike<{ data: unknown; error: Err }> {
 }
 
 export function createFakeSupabase(seed?: Partial<FakeDb>) {
-  const db: FakeDb = { users: [], profiles: [], questionnaire_responses: [], day_completions: [], favorites: [], ...seed };
+  const db: FakeDb = { users: [], profiles: [], questionnaire_responses: [], day_completions: [], favorites: [], app_events: [], ...seed };
   let session: Session | null = null;
+  let requireEmailConfirm = false;
+  const oauthCalls: unknown[] = [];
+  const authCalls: { op: string; args: unknown }[] = [];
   const listeners = new Set<(e: AuthChangeEvent, s: Session | null) => void>();
   const uid = () => session?.user.id ?? null;
   const emit = (e: AuthChangeEvent) => listeners.forEach((l) => l(e, session));
@@ -156,14 +199,31 @@ export function createFakeSupabase(seed?: Partial<FakeDb>) {
       listeners.add(cb);
       return { data: { subscription: { unsubscribe: () => listeners.delete(cb) } } };
     },
-    signUp: async ({ email, password, options }: { email: string; password: string; options?: { data?: { first_name?: string } } }) => {
+    signUp: async ({ email, password, options }: { email: string; password: string; options?: { data?: { first_name?: string }; emailRedirectTo?: string } }) => {
+      authCalls.push({ op: "signUp", args: { email, options } });
       if (db.users.some((u) => u.email === email)) return { data: { user: null, session: null }, error: { message: "User already registered", code: "user_already_exists" } };
       if (password.length < 8) return { data: { user: null, session: null }, error: { message: "Password should be at least 8 characters.", code: "weak_password" } };
       const user: FakeUser = { id: uuid(db.users.length + 1), email, password, first_name: options?.data?.first_name ?? "" };
       db.users.push(user);
       // on_auth_user_created trigger
-      db.profiles.push({ id: user.id, first_name: user.first_name || null, age_range: null, focus_area: null, plan_start_date: null, onboarded_at: null, created_at: new Date().toISOString() });
-      session = sessionFor(user);
+      db.profiles.push({
+        id: user.id,
+        first_name: user.first_name || null,
+        email: user.email,
+        signup_method: "email",
+        subscription_status: "none",
+        age_range: null,
+        focus_area: null,
+        plan_start_date: null,
+        onboarded_at: null,
+        created_at: new Date().toISOString(),
+      });
+      logAppEvent(db, user.id, "signup", { method: "email" });
+      const signed = sessionFor(user);
+      if (requireEmailConfirm) {
+        return { data: { user: signed.user, session: null }, error: null };
+      }
+      session = signed;
       emit("SIGNED_IN");
       return { data: { user: session.user, session }, error: null };
     },
@@ -174,9 +234,18 @@ export function createFakeSupabase(seed?: Partial<FakeDb>) {
       emit("SIGNED_IN");
       return { data: { user: session.user, session }, error: null };
     },
-    signInWithOtp: async () => ({ data: {}, error: null }),
-    signInWithOAuth: async () => ({ data: { provider: "google", url: null }, error: null }),
-    resetPasswordForEmail: async () => ({ data: {}, error: null }),
+    signInWithOtp: async (args: unknown) => {
+      authCalls.push({ op: "otp", args });
+      return { data: {}, error: null };
+    },
+    signInWithOAuth: async (args: unknown) => {
+      oauthCalls.push(args);
+      return { data: { provider: "google", url: null }, error: null };
+    },
+    resetPasswordForEmail: async (email: string, options?: unknown) => {
+      authCalls.push({ op: "reset", args: { email, options } });
+      return { data: {}, error: null };
+    },
     updateUser: async () => ({ data: { user: session?.user ?? null }, error: null }),
     signOut: async () => {
       session = null;
@@ -198,7 +267,20 @@ export function createFakeSupabase(seed?: Partial<FakeDb>) {
       const current = Math.min(max + 1, 60);
       const phase = current <= 20 ? 1 : current <= 40 ? 2 : 3;
       const recheck = current === 30 && !hasRecheck("day30") ? "day30" : current === 60 && max < 60 && !hasRecheck("day60") ? "day60" : null;
-      return Promise.resolve({ data: { current_day: current, completed_days: done().sort((a, b) => a - b), phase, recheck_due: recheck, all_done: max >= 60 }, error: null });
+      const profile = db.profiles.find((p) => p.id === me);
+      const hasFullAccess = FULL_ACCESS.has(String(profile?.subscription_status ?? "none"));
+      return Promise.resolve({
+        data: {
+          current_day: current,
+          completed_days: done().sort((a, b) => a - b),
+          phase,
+          recheck_due: recheck,
+          all_done: max >= 60,
+          free_days_limit: 3,
+          has_full_access: hasFullAccess,
+        },
+        error: null,
+      });
     }
     if (name === "complete_day") {
       const day = args?.p_day as number;
@@ -208,14 +290,17 @@ export function createFakeSupabase(seed?: Partial<FakeDb>) {
       const profile = db.profiles.find((p) => p.id === me);
       if (!profile?.onboarded_at) return fail("NOT_ONBOARDED");
       if (day > 1 && !done().includes(day - 1)) return fail("DAY_LOCKED");
+      if (day > 3 && !FULL_ACCESS.has(String(profile.subscription_status ?? "none"))) return fail("PAYWALL");
       const kind = day === 30 ? "day30" : day === 60 ? "day60" : null;
       if (kind && !hasRecheck(kind)) return fail("RECHECK_REQUIRED");
       let row = db.day_completions.find((r) => r.user_id === me && r.day_number === day);
+      const replay = Boolean(row);
       if (row) Object.assign(row, { completed_at: new Date().toISOString(), exercises_done: args?.p_exercises, feeling: feeling ?? row.feeling });
       else {
         row = { id: uuid(db.day_completions.length + 1), user_id: me, day_number: day, completed_at: new Date().toISOString(), exercises_done: args?.p_exercises, feeling };
         db.day_completions.push(row);
       }
+      logAppEvent(db, me, "day_completed", { day, replay });
       return Promise.resolve({ data: row, error: null });
     }
     return fail(`unknown rpc ${name}`);
@@ -227,5 +312,23 @@ export function createFakeSupabase(seed?: Partial<FakeDb>) {
     from: (table: keyof Omit<FakeDb, "users">) => new Builder(table, db, uid),
   };
 
-  return { client: client as unknown as Supabase, db, get session() { return session; } };
+  return {
+    client: client as unknown as Supabase,
+    db,
+    oauthCalls,
+    authCalls,
+    get session() {
+      return session;
+    },
+    setSubscriptionStatus(userId: string, status: string) {
+      const profile = db.profiles.find((p) => p.id === userId);
+      if (profile) profile.subscription_status = status;
+    },
+    setRequireEmailConfirm(on: boolean) {
+      requireEmailConfirm = on;
+    },
+    emitAuth(event: AuthChangeEvent) {
+      emit(event);
+    },
+  };
 }

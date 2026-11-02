@@ -4,6 +4,7 @@ import { useProfile } from "../state/ProfileProvider";
 import { useProgress } from "../state/ProgressProvider";
 import { useDayPlan } from "../state/useDayPlan";
 import { AREA_SLUGS, collection, COLLECTION_LINE, COLLECTION_SHAPE, COLLECTION_TITLE } from "./data";
+import { CheckoutReturn } from "../screens/placeholders/CheckoutReturn";
 import { ORow } from "./parts";
 
 /**
@@ -11,7 +12,7 @@ import { ORow } from "./parts";
  * area. ?area=knees (set by the category pills) narrows the page to that one section.
  */
 export function OpenHome() {
-  const { currentDay } = useProgress();
+  const { currentDay, isDayPaywalled } = useProgress();
   const { focusArea } = useProfile();
   const today = useDayPlan(currentDay);
   const [params] = useSearchParams();
@@ -21,11 +22,14 @@ export function OpenHome() {
 
   return (
     <div className="o-page o-rows">
+      <div className="o-wrap">
+        <CheckoutReturn />
+      </div>
       {only ? null : (
         <ORow
           title="Today"
           line={today ? `Day ${today.day} · ${today.phaseName}` : `Day ${currentDay}`}
-          seeAll="/app/library/today"
+          seeAll={isDayPaywalled(currentDay) ? `/app/session/${currentDay}` : "/app/library/today"}
           items={today?.exercises ?? []}
           currentDay={currentDay}
           shape={COLLECTION_SHAPE.today}

@@ -1,5 +1,5 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useState, type ReactNode } from "react";
-import type { Answers, FocusArea } from "@/lib/database.types";
+import type { Answers, FocusArea, SubscriptionStatus } from "@/lib/database.types";
 import { getProfile, isOnboarded, saveOnboarding as saveOnboardingRequest, updateProfile as updateProfileRequest, type Profile } from "@/lib/profile";
 import { useAuth } from "./AuthProvider";
 
@@ -12,6 +12,9 @@ export interface ProfileContextValue {
   /** True once the profile row has focus_area and onboarded_at. */
   onboarded: boolean;
   focusArea: FocusArea | null;
+  subscriptionStatus: SubscriptionStatus;
+  /** active, trialing or comped. Mirrors has_full_access(). */
+  hasFullAccess: boolean;
   refresh: () => Promise<void>;
   /** Saves baseline answers + focus area + start date; resolves with the updated profile. */
   saveOnboarding: (answers: Answers, focusArea: FocusArea, extra?: { firstName?: string; ageRange?: string }) => Promise<Profile>;
@@ -33,7 +36,7 @@ export function ProfileProvider({ children }: { children: ReactNode }) {
       setStatus("idle");
       return;
     }
-    setStatus("loading");
+    setStatus((s) => (s === "ready" ? s : "loading"));
     try {
       const next = await getProfile();
       setProfile(next);
@@ -74,6 +77,8 @@ export function ProfileProvider({ children }: { children: ReactNode }) {
       error,
       onboarded: isOnboarded(profile),
       focusArea: profile?.focusArea ?? null,
+      subscriptionStatus: profile?.subscriptionStatus ?? "none",
+      hasFullAccess: profile?.hasFullAccess ?? false,
       refresh,
       saveOnboarding,
       updateProfile,

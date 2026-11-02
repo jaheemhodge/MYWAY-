@@ -12,7 +12,11 @@ export type CompleteDayDenial =
   | "NOT_ONBOARDED"
   | "INVALID_DAY"
   | "DAY_LOCKED"
+  | "PAYWALL"
   | "RECHECK_REQUIRED";
+
+/** Used when get_progress has not reported a limit yet. The database function is the source of truth. */
+export const FREE_DAYS_FALLBACK = 3;
 
 export interface UnlockState {
   /** Days finished so far (any order; duplicates ignored). */
@@ -20,6 +24,17 @@ export interface UnlockState {
   /** Re-checks saved so far. */
   recheckDone?: Iterable<RecheckKind>;
   onboarded?: boolean;
+  /**
+   * When omitted, the paywall check is skipped so older callers keep today's behaviour.
+   * Pass false for a free account and true for active / trialing / comped.
+   */
+  hasFullAccess?: boolean;
+  freeDaysLimit?: number;
+}
+
+/** True when this day sits past the free beta and the account does not have full access. */
+export function isDayPaywalled(day: number, hasFullAccess: boolean, freeDaysLimit = FREE_DAYS_FALLBACK): boolean {
+  return day > freeDaysLimit && !hasFullAccess;
 }
 
 function toSet(days: Iterable<number>): Set<number> {
@@ -62,6 +77,7 @@ export function completeDayDenial(day: number, state: UnlockState): CompleteDayD
   if (!isValidDay(day)) return "INVALID_DAY";
   if (state.onboarded === false) return "NOT_ONBOARDED";
   if (!isDayUnlocked(day, state.completedDays)) return "DAY_LOCKED";
+  if (state.hasFullAccess !== undefined && isDayPaywalled(day, state.hasFullAccess, state.freeDaysLimit ?? FREE_DAYS_FALLBACK)) return "PAYWALL";
   const kind = recheckKindFor(day);
   if (kind && !new Set(state.recheckDone ?? []).has(kind)) return "RECHECK_REQUIRED";
   return null;

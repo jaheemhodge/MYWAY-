@@ -5,6 +5,7 @@ import { usePageTitle } from "../../hooks";
 import { useAuth } from "../../state/AuthProvider";
 import { useProfile } from "../../state/ProfileProvider";
 import { formatDate } from "./ProgressScreen";
+import { CheckoutReturn } from "./CheckoutReturn";
 import { Message, PageHead, PageState, type Notice } from "./ui";
 
 /**
@@ -14,7 +15,7 @@ import { Message, PageHead, PageState, type Notice } from "./ui";
 export function AccountScreen() {
   usePageTitle("Account");
   const { user, signOut } = useAuth();
-  const { profile, status, error, refresh } = useProfile();
+  const { profile, status, error, refresh, hasFullAccess } = useProfile();
   const navigate = useNavigate();
   const [busy, setBusy] = useState(false);
   const [notice, setNotice] = useState<Notice>(null);
@@ -52,12 +53,14 @@ export function AccountScreen() {
     { label: "Focus area", value: profile?.focusArea ? FOCUS_AREA_LABEL[profile.focusArea] : "Not chosen yet" },
     { label: "Age range", value: profile?.ageRange ?? "Not added" },
     { label: "Plan started", value: formatDate(profile?.planStartDate) ?? "Not started" },
+    { label: "Plan", value: hasFullAccess ? "Full access" : "Free beta (Days 1 to 3)" },
   ];
 
   return (
     <div className="o-wrap c-page">
       <div className="c-narrow">
         <PageHead title="Account" line={profile?.firstName ? `Signed in as ${profile.firstName}.` : "Your details."} />
+        <CheckoutReturn />
 
         <dl className="c-details c-glass">
           {rows.map((r) => (

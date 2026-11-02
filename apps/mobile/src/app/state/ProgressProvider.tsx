@@ -8,7 +8,7 @@ import {
   saveQuestionnaire as saveQuestionnaireRequest,
   type Progress,
 } from "@/lib/progress";
-import { isDayCompleted, isDayUnlocked, type RecheckKind } from "@/lib/unlock";
+import { isDayCompleted, isDayPaywalled as dayIsPaywalled, isDayUnlocked, type RecheckKind } from "@/lib/unlock";
 import { useAuth } from "./AuthProvider";
 
 export type ProgressStatus = "idle" | "loading" | "ready" | "error";
@@ -27,6 +27,11 @@ export interface ProgressContextValue {
   hasQuestionnaire: (kind: QuestionnaireKind) => boolean;
   isDayUnlocked: (day: number) => boolean;
   isDayCompleted: (day: number) => boolean;
+  /** Days included with the free beta. From get_progress, or 3 before the first load. */
+  freeDaysLimit: number;
+  hasFullAccess: boolean;
+  /** Past the free beta and this account does not have full access. Separate from sequential unlock. */
+  isDayPaywalled: (day: number) => boolean;
   refresh: () => Promise<void>;
   /** Calls complete_day(); throws ProgressError with a friendly message when refused. */
   completeDay: (day: number, exercises: readonly ExerciseDoneEntry[], feeling?: number | null) => Promise<DayCompletionRow>;
@@ -106,6 +111,9 @@ export function ProgressProvider({ children }: { children: ReactNode }) {
       hasQuestionnaire: (kind) => questionnaires.some((q) => q.kind === kind),
       isDayUnlocked: (day) => isDayUnlocked(day, completed),
       isDayCompleted: (day) => isDayCompleted(day, completed),
+      freeDaysLimit: progress.freeDaysLimit,
+      hasFullAccess: progress.hasFullAccess,
+      isDayPaywalled: (day) => dayIsPaywalled(day, progress.hasFullAccess, progress.freeDaysLimit),
       refresh,
       completeDay,
       saveQuestionnaire,

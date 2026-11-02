@@ -1,10 +1,12 @@
 /**
  * Profile: the one row per user that holds first name, focus area and onboarding state.
  */
-import type { Answers, FocusArea, ProfileRow } from "./database.types";
+import type { Answers, FocusArea, ProfileRow, SubscriptionStatus } from "./database.types";
 import { isFocusArea } from "./plan";
 import { saveQuestionnaire, toProgressError } from "./progress";
 import { getSupabase } from "./supabaseClient";
+
+const FULL_ACCESS: readonly SubscriptionStatus[] = ["active", "trialing", "comped"];
 
 export interface Profile {
   id: string;
@@ -15,9 +17,20 @@ export interface Profile {
   planStartDate: string | null;
   onboardedAt: string | null;
   createdAt: string;
+  email: string | null;
+  signupMethod: string | null;
+  subscriptionStatus: SubscriptionStatus;
+  /** Same rule as has_full_access(): active, trialing or comped. */
+  hasFullAccess: boolean;
+}
+
+function subscriptionStatusOf(value: string | null | undefined): SubscriptionStatus {
+  if (value === "trialing" || value === "active" || value === "past_due" || value === "canceled" || value === "comped") return value;
+  return "none";
 }
 
 export function fromRow(row: ProfileRow): Profile {
+  const subscriptionStatus = subscriptionStatusOf(row.subscription_status);
   return {
     id: row.id,
     firstName: row.first_name,
@@ -26,6 +39,10 @@ export function fromRow(row: ProfileRow): Profile {
     planStartDate: row.plan_start_date,
     onboardedAt: row.onboarded_at,
     createdAt: row.created_at,
+    email: row.email ?? null,
+    signupMethod: row.signup_method ?? null,
+    subscriptionStatus,
+    hasFullAccess: FULL_ACCESS.includes(subscriptionStatus),
   };
 }
 
