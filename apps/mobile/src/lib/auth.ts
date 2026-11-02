@@ -8,7 +8,19 @@ import { getSupabase } from "./supabaseClient";
 
 export type AuthResult<T = undefined> = { ok: true; data: T; message?: string } | { ok: false; message: string };
 
-export const GOOGLE_ENABLED = String(import.meta.env.VITE_ENABLE_GOOGLE ?? "").toLowerCase() === "true";
+let googleOverride: boolean | null = null;
+
+/** Test seam. Pass null to follow VITE_ENABLE_GOOGLE again. */
+export function setGoogleEnabledForTests(value: boolean | null): void {
+  googleOverride = value;
+}
+
+export function isGoogleEnabled(): boolean {
+  if (googleOverride !== null) return googleOverride;
+  return String(import.meta.env.VITE_ENABLE_GOOGLE ?? "").toLowerCase() === "true";
+}
+
+export const GOOGLE_ENABLED = isGoogleEnabled();
 
 /** Where Supabase sends people back after a magic link, OAuth or password reset. */
 function redirectTo(path: string): string | undefined {
@@ -18,6 +30,8 @@ function redirectTo(path: string): string | undefined {
 
 export const AUTH_RETURN_PATHS = {
   afterLogin: "/login",
+  /** Magic links, email confirmation and Google return here. supabase-js exchanges ?code= itself. */
+  afterAuth: "/auth/callback",
   afterReset: "/reset-password",
 } as const;
 
@@ -34,6 +48,9 @@ export const FRIENDLY = {
   rateLimited: "Too many attempts for now. Please wait a minute and try again.",
   network: "We couldn't reach the server. Check your connection and try again.",
   sessionMissing: "Your sign-in link has expired. Please request a new one.",
+  googleCancelled: "Google sign-in was cancelled. Please try again.",
+  providerDisabled: "Google sign-in isn't available on this site.",
+  unsupportedProvider: "That sign-in method isn't available. Please use your email.",
   samePassword: "Please choose a password you haven't used here before.",
   notConfigured: "Sign-in isn't set up on this site yet.",
   unknown: "Something went wrong. Please try again.",
@@ -67,6 +84,9 @@ export function mapAuthError(error: ErrorLike): string {
     text.includes("link is invalid")
   )
     return FRIENDLY.sessionMissing;
+  if (code === "access_denied" || text.includes("access_denied") || text.includes("access denied")) return FRIENDLY.googleCancelled;
+  if (text.includes("provider is not enabled")) return FRIENDLY.providerDisabled;
+  if (text.includes("unsupported provider")) return FRIENDLY.unsupportedProvider;
   if (code === "validation_failed" || text.includes("invalid email") || text.includes("unable to validate email") || text.includes("is invalid"))
     return FRIENDLY.invalidEmail;
   if (text.includes("failed to fetch") || text.includes("networkerror") || text.includes("network request failed") || text.includes("load failed"))
@@ -98,7 +118,7 @@ export function signUp(firstName: string, email: string, password: string): Prom
         password,
         options: {
           data: { first_name: name },
-          emailRedirectTo: redirectTo(AUTH_RETURN_PATHS.afterLogin),
+          emailRedirectTo: redirectTo(AUTH_RETURN_PATHS.afterAuth),
         },
       }),
     "Account created.",
@@ -114,18 +134,21 @@ export function signInWithMagicLink(email: string): Promise<AuthResult<unknown>>
     () =>
       getSupabase().auth.signInWithOtp({
         email: email.trim(),
-        options: { emailRedirectTo: redirectTo(AUTH_RETURN_PATHS.afterLogin) },
+        options: { emailRedirectTo: redirectTo(AUTH_RETURN_PATHS.afterAuth) },
       }),
     "Check your email for a sign-in link.",
   );
 }
 
 export function signInWithGoogle(): Promise<AuthResult<unknown>> {
-  if (!GOOGLE_ENABLED) return Promise.resolve({ ok: false, message: "Google sign-in isn't available on this site." });
+  if (!isGoogleEnabled()) return Promise.resolve({ ok: false, message: "Google sign-in isn't available on this site." });
   return run(() =>
     getSupabase().auth.signInWithOAuth({
       provider: "google",
-      options: { redirectTo: redirectTo(AUTH_RETURN_PATHS.afterLogin) },
+      options: {
+        redirectTo: redirectTo(AUTH_RETURN_PATHS.afterAuth),
+        queryParams: { prompt: "select_account" },
+      },
     }),
   );
 }

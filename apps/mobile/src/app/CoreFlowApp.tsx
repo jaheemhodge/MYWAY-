@@ -3,6 +3,7 @@ import { Landing } from "@/web/landing/Landing";
 import { isAppPath, routes } from "@/web/routes";
 import { RedirectIfAuthed, RequireOnboarded, RequireSession } from "./guards";
 import { MobilityApp } from "./MobilityApp";
+import { AuthCallbackScreen } from "./screens/placeholders/AuthCallbackScreen";
 import { LoginScreen } from "./screens/placeholders/LoginScreen";
 import { OnboardingScreen } from "./screens/placeholders/OnboardingScreen";
 import { ResetPasswordScreen } from "./screens/placeholders/ResetPasswordScreen";
@@ -11,8 +12,9 @@ import { CoreProviders } from "./state";
 
 /**
  * Account + logged-in app. Guards:
- *   /                     → future landing page; today a redirect only (signed in → /app/home, else /sign-in)
+ *   /                     → landing page; signed-in visitors go to /app/home
  *   /login, /signup       → signed-in users bounce to their intended page or /app/home
+ *   /auth/callback        → Google, magic links and email confirmation (not behind RedirectIfAuthed)
  *   /reset-password       → open to everyone (the reset email lands here with a recovery session)
  *   /onboarding           → needs a session; finished users bounce to /app/home
  *   /app/*                → needs a session AND a finished onboarding
@@ -50,6 +52,7 @@ export function CoreFlowApp() {
           <Route path="/login" element={<LoginScreen />} />
           <Route path="/signup" element={<SignUpScreen />} />
         </Route>
+        <Route path="/auth/callback" element={<AuthCallbackScreen />} />
         <Route path="/reset-password" element={<ResetPasswordScreen />} />
         <Route element={<RequireSession />}>
           <Route path="/onboarding" element={<OnboardingScreen />} />

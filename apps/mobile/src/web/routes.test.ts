@@ -8,6 +8,7 @@ describe("core flow split", () => {
     expect(isCoreFlowPath("/signup")).toBe(true);
     expect(isCoreFlowPath("/reset-password")).toBe(true);
     expect(isCoreFlowPath("/onboarding")).toBe(true);
+    expect(isCoreFlowPath("/auth/callback")).toBe(true);
     expect(isCoreFlowPath("/app")).toBe(true);
     expect(isCoreFlowPath("/app/session/3/done")).toBe(true);
   });
