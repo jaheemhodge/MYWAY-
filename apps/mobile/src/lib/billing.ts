@@ -53,9 +53,12 @@ export async function startCheckout(): Promise<AuthResult<{ url: string }>> {
       method: "POST",
       headers: { Authorization: `Bearer ${token}` },
     });
-    const body = (await response.json().catch(() => ({}))) as { url?: string; error?: string };
+    const body = (await response.json().catch(() => ({}))) as { url?: string; error?: string; reason?: string };
     if (response.status === 401) return { ok: false, message: "Please sign in again to continue." };
-    if (response.status === 409 || body.error === "already_subscribed") return { ok: false, message: "You already have full access." };
+    if (response.status === 409 || body.error === "already_subscribed") {
+      if (body.reason === "past_due") return { ok: false, message: "Please update your payment method." };
+      return { ok: false, message: "You already have full access." };
+    }
     if (!response.ok || !body.url) return { ok: false, message: "Billing isn't available right now. Please try again." };
     assignUrl(body.url);
     return { ok: true, data: { url: body.url } };

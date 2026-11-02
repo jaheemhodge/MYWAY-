@@ -4,7 +4,7 @@ begin;
 
 create extension if not exists pgtap;
 
-select plan(24);
+select plan(31);
 
 insert into auth.users (
   id, instance_id, aud, role, email, encrypted_password, email_confirmed_at,
@@ -171,6 +171,55 @@ reset role;
 update public.profiles set subscription_status = 'trialing' where id = '44444444-4444-4444-4444-444444444444';
 select pg_temp.login('44444444-4444-4444-4444-444444444444');
 select lives_ok($$ select public.complete_day(5, '[]'::jsonb, null) $$, 'trialing can replay a day past the free limit');
+
+-- PostgREST upsert is INSERT ... ON CONFLICT DO UPDATE SET id = excluded.id.
+-- The update grant does not include id, so that statement is permission denied.
+select lives_ok(
+  $$ update public.profiles
+     set focus_area = 'knees', plan_start_date = current_date, onboarded_at = now()
+     where id = auth.uid() $$,
+  'authenticated can save onboarding columns'
+);
+
+select throws_ok(
+  $$ insert into public.profiles (id, focus_area)
+     values (auth.uid(), 'knees')
+     on conflict (id) do update set id = excluded.id $$,
+  '42501', null,
+  'upsert that sets id is denied'
+);
+
+select throws_ok(
+  $$ update public.profiles set email = 'other@example.test' where id = auth.uid() $$,
+  '42501', null,
+  'an authenticated user cannot set email'
+);
+
+select throws_ok(
+  $$ update public.profiles set signup_method = 'google' where id = auth.uid() $$,
+  '42501', null,
+  'an authenticated user cannot set signup_method'
+);
+
+select throws_ok(
+  $$ insert into public.app_events (user_id, event_name, properties)
+     values (auth.uid(), 'login', '{"stripe_event_id":"evt_client"}') $$,
+  '42501', null,
+  'a client cannot attach a stripe_event_id'
+);
+
+select throws_ok(
+  $$ insert into public.app_events (user_id, event_name, properties)
+     values (auth.uid(), 'day_started', jsonb_build_object('blob', repeat('x', 5000))) $$,
+  '42501', null,
+  'a client cannot store a huge properties object'
+);
+
+select throws_ok(
+  $$ select public.has_full_access('33333333-3333-3333-3333-333333333333') $$,
+  '42501', null,
+  'a signed-in user cannot probe another user'
+);
 
 select * from finish();
 rollback;

@@ -18,6 +18,6 @@ export default defineConfig({
   },
   test: {
     environment: "jsdom",
-    include: ["src/**/*.{test,spec}.{ts,tsx}", "../../api/**/*.test.ts"],
+    include: ["src/**/*.{test,spec}.{ts,tsx}", "../../api/_tests/**/*.test.ts"],
   },
 });

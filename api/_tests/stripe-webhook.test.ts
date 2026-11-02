@@ -11,10 +11,10 @@ vi.mock("stripe", () => {
   };
 });
 
-import webhook from "./stripe-webhook";
-import checkout from "./create-checkout-session";
+import checkout from "../create-checkout-session.js";
+import webhook from "../stripe-webhook.js";
 
-const ENV_KEYS = ["STRIPE_SECRET_KEY", "STRIPE_WEBHOOK_SECRET", "STRIPE_PRICE_ID", "SUPABASE_URL", "SUPABASE_SERVICE_ROLE_KEY"] as const;
+const ENV_KEYS = ["STRIPE_SECRET_KEY", "STRIPE_WEBHOOK_SECRET", "STRIPE_PRICE_ID", "SUPABASE_URL", "SUPABASE_SERVICE_ROLE_KEY", "APP_URL"] as const;
 
 function blankEnv(): void {
   for (const key of ENV_KEYS) delete process.env[key];
@@ -82,5 +82,13 @@ describe("create checkout handler", () => {
     await checkout({ method: "POST", headers: {} } as never, res as never);
     expect(res.statusCode).toBe(500);
     expect(res.body).toEqual({ error: "Billing isn't configured" });
+  });
+
+  it("returns 400 for an unknown origin", async () => {
+    fillTestEnv();
+    const res = response();
+    await checkout({ method: "POST", headers: { host: "evil.example" } } as never, res as never);
+    expect(res.statusCode).toBe(400);
+    expect(res.body).toEqual({ error: "Unknown origin" });
   });
 });

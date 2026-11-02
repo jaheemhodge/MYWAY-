@@ -65,6 +65,9 @@ describe("startCheckout", () => {
     vi.stubGlobal("fetch", vi.fn(async () => ({ ok: false, status: 409, json: async () => ({ error: "already_subscribed" }) })));
     expect(await startCheckout()).toEqual({ ok: false, message: "You already have full access." });
 
+    vi.stubGlobal("fetch", vi.fn(async () => ({ ok: false, status: 409, json: async () => ({ error: "already_subscribed", reason: "past_due" }) })));
+    expect(await startCheckout()).toEqual({ ok: false, message: "Please update your payment method." });
+
     vi.stubGlobal("fetch", vi.fn(async () => ({ ok: false, status: 500, json: async () => ({ error: "Billing isn't configured" }) })));
     expect(await startCheckout()).toEqual({ ok: false, message: "Billing isn't available right now. Please try again." });
 

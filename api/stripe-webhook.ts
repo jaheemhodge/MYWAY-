@@ -1,8 +1,8 @@
 import type { VercelRequest, VercelResponse } from "@vercel/node";
 import Stripe from "stripe";
-import { applyStripeEvent, type CheckoutStripe, type StripeEvent } from "./_lib/billing";
-import { readBillingEnv } from "./_lib/env";
-import { serviceClient, storeFromSupabase } from "./_lib/supabaseStore";
+import { applyStripeEvent, type BillingStore, type CheckoutStripe, type StripeEvent } from "./_lib/billing.js";
+import { readBillingEnv } from "./_lib/env.js";
+import { serviceClient, storeFromSupabase } from "./_lib/supabaseStore.js";
 
 export const config = { api: { bodyParser: false } };
 
@@ -10,6 +10,7 @@ export const config = { api: { bodyParser: false } };
  * POST /api/stripe-webhook
  * Verifies the Stripe signature, then updates profiles. Test mode only (sk_test_).
  * Comped profiles are never downgraded. The same event id is logged once.
+ * A database failure answers 500 so Stripe retries. The body has no secrets.
  */
 export default async function handler(req: VercelRequest, res: VercelResponse): Promise<void> {
   if (req.method !== "POST") {
@@ -37,8 +38,24 @@ export default async function handler(req: VercelRequest, res: VercelResponse): 
     return;
   }
   const store = storeFromSupabase(serviceClient(billing.env.supabaseUrl, billing.env.serviceRoleKey));
-  const result = await applyStripeEvent(event as unknown as StripeEvent, { store, stripe: stripe as unknown as CheckoutStripe });
+  const result = await processVerifiedEvent(event as unknown as StripeEvent, {
+    store,
+    stripe: stripe as unknown as CheckoutStripe,
+    priceId: billing.env.priceId,
+  });
   res.status(result.status).json(result.body);
+}
+
+export async function processVerifiedEvent(
+  event: StripeEvent,
+  deps: { store: BillingStore; stripe: Pick<CheckoutStripe, "subscriptions">; priceId: string },
+): Promise<{ status: number; body: Record<string, unknown> }> {
+  try {
+    return await applyStripeEvent(event, deps);
+  } catch {
+    console.error(`stripe webhook failed ${event.id} ${event.type}`);
+    return { status: 500, body: { error: "Webhook processing failed" } };
+  }
 }
 
 async function readRaw(req: VercelRequest): Promise<Buffer> {

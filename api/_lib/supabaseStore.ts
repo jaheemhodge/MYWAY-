@@ -1,5 +1,5 @@
 import { createClient, type SupabaseClient } from "@supabase/supabase-js";
-import type { BillingStore, ProfileRec, SubscriptionStatus } from "./billing";
+import type { BillingStore, ProfileRec, SubscriptionStatus } from "./billing.js";
 
 function asStatus(value: string | null | undefined): SubscriptionStatus {
   if (value === "trialing" || value === "active" || value === "past_due" || value === "canceled" || value === "comped") return value;
@@ -16,7 +16,12 @@ function toProfile(row: Record<string, unknown>): ProfileRec {
   };
 }
 
+function raise(error: { message?: string; code?: string } | null): void {
+  if (error) throw error;
+}
+
 export function storeFromSupabase(client: SupabaseClient): BillingStore {
+  const columns = "id, email, subscription_status, stripe_customer_id, stripe_subscription_id";
   return {
     async getUser(token) {
       const { data, error } = await client.auth.getUser(token);
@@ -24,11 +29,13 @@ export function storeFromSupabase(client: SupabaseClient): BillingStore {
       return { id: data.user.id, email: data.user.email ?? null };
     },
     async getProfile(userId) {
-      const { data } = await client.from("profiles").select("id, email, subscription_status, stripe_customer_id, stripe_subscription_id").eq("id", userId).maybeSingle();
+      const { data, error } = await client.from("profiles").select(columns).eq("id", userId).maybeSingle();
+      raise(error);
       return data ? toProfile(data as Record<string, unknown>) : null;
     },
     async getProfileByCustomer(customerId) {
-      const { data } = await client.from("profiles").select("id, email, subscription_status, stripe_customer_id, stripe_subscription_id").eq("stripe_customer_id", customerId).maybeSingle();
+      const { data, error } = await client.from("profiles").select(columns).eq("stripe_customer_id", customerId).maybeSingle();
+      raise(error);
       return data ? toProfile(data as Record<string, unknown>) : null;
     },
     async updateProfile(userId, patch) {
@@ -38,10 +45,12 @@ export function storeFromSupabase(client: SupabaseClient): BillingStore {
       if (patch.stripe_customer_id !== undefined) row.stripe_customer_id = patch.stripe_customer_id;
       if (patch.stripe_subscription_id !== undefined) row.stripe_subscription_id = patch.stripe_subscription_id;
       if (patch.subscription_current_period_end !== undefined) row.subscription_current_period_end = patch.subscription_current_period_end;
-      await client.from("profiles").update(row).eq("id", userId);
+      const { error } = await client.from("profiles").update(row).eq("id", userId);
+      raise(error);
     },
     async hasEvent(stripeEventId) {
-      const { data } = await client.from("app_events").select("id").filter("properties->>stripe_event_id", "eq", stripeEventId).limit(1);
+      const { data, error } = await client.from("app_events").select("id").filter("properties->>stripe_event_id", "eq", stripeEventId).limit(1);
+      raise(error);
       return Array.isArray(data) && data.length > 0;
     },
     async insertEvent(row) {

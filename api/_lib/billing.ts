@@ -3,7 +3,7 @@
  * STRIPE_PRICE_ID selects the Stripe Price. Nothing in the repo creates that Price.
  * Test mode only until STRIPE_TEST_MODE_ONLY in ./env.ts is lifted.
  */
-import type { BillingEnv } from "./env";
+import type { BillingEnv } from "./env.js";
 
 export type SubscriptionStatus = "none" | "trialing" | "active" | "past_due" | "canceled" | "comped";
 
@@ -45,6 +45,12 @@ export interface StripeSubscription {
   status: string;
   current_period_end?: number | null;
   metadata?: { user_id?: string };
+  items?: {
+    data?: Array<{
+      price?: string | { id?: string };
+      current_period_end?: number | null;
+    }>;
+  };
 }
 
 export interface StripeEvent {
@@ -87,9 +93,34 @@ function customerId(value: unknown): string | null {
   return null;
 }
 
+function periodSeconds(subscription: StripeSubscription): number | null {
+  if (typeof subscription.current_period_end === "number" && subscription.current_period_end > 0) return subscription.current_period_end;
+  const fromItem = subscription.items?.data?.[0]?.current_period_end;
+  if (typeof fromItem === "number" && fromItem > 0) return fromItem;
+  return null;
+}
+
 function periodEnd(subscription: StripeSubscription): string | null {
-  if (!subscription.current_period_end) return null;
-  return new Date(subscription.current_period_end * 1000).toISOString();
+  const seconds = periodSeconds(subscription);
+  if (!seconds) return null;
+  return new Date(seconds * 1000).toISOString();
+}
+
+function priceIds(subscription: StripeSubscription): string[] {
+  return (subscription.items?.data ?? [])
+    .map((item) => (typeof item.price === "string" ? item.price : item.price?.id ?? ""))
+    .filter((id) => id.length > 0);
+}
+
+/** Access is only for the Price this deployment sells. A foreign price is ignored. */
+export function grantsOurPrice(subscription: StripeSubscription, priceId: string): boolean {
+  return priceIds(subscription).includes(priceId);
+}
+
+function isNotFound(err: unknown): boolean {
+  if (!err || typeof err !== "object") return false;
+  const status = "statusCode" in err ? (err as { statusCode?: number }).statusCode : "status" in err ? (err as { status?: number }).status : undefined;
+  return status === 404;
 }
 
 async function rememberEvent(
@@ -118,8 +149,10 @@ export async function createCheckoutSession(
   if (!user) return { status: 401, body: { error: "Sign in required" } };
 
   const profile = await deps.store.getProfile(user.id);
-  if (profile && hasFullAccess(profile.subscription_status)) {
-    return { status: 409, body: { error: "already_subscribed" } };
+  if (profile && (hasFullAccess(profile.subscription_status) || profile.subscription_status === "past_due")) {
+    const body: Record<string, unknown> = { error: "already_subscribed" };
+    if (profile.subscription_status === "past_due") body.reason = "past_due";
+    return { status: 409, body };
   }
 
   let customer = profile?.stripe_customer_id ?? null;
@@ -166,20 +199,16 @@ async function saveSubscription(
     stripe_subscription_id: null,
   };
   const end = periodEnd(subscription);
+  const ids = {
+    stripe_customer_id: customerId(subscription.customer) ?? profile.stripe_customer_id,
+    stripe_subscription_id: subscription.id,
+  };
   if (profile.subscription_status === "comped") {
-    await store.updateProfile(userId, {
-      stripe_customer_id: customerId(subscription.customer) ?? profile.stripe_customer_id,
-      stripe_subscription_id: subscription.id,
-      subscription_current_period_end: end,
-    });
+    await store.updateProfile(userId, end ? { ...ids, subscription_current_period_end: end } : ids);
     return profile;
   }
   const mapped = mapStripeStatus(subscription.status);
-  const patch: Partial<ProfileRec> = {
-    stripe_customer_id: customerId(subscription.customer) ?? profile.stripe_customer_id,
-    stripe_subscription_id: subscription.id,
-    subscription_current_period_end: end,
-  };
+  const patch: Partial<ProfileRec> = end ? { ...ids, subscription_current_period_end: end } : ids;
   if (mapped) patch.subscription_status = mapped;
   await store.updateProfile(userId, patch);
   return { ...profile, ...patch };
@@ -196,20 +225,31 @@ async function resolveUserId(store: BillingStore, object: Record<string, unknown
   return profile?.id ?? null;
 }
 
+const received = { status: 200, body: { received: true } };
+
+async function loadSubscription(stripe: Pick<CheckoutStripe, "subscriptions">, id: string): Promise<StripeSubscription | "missing"> {
+  try {
+    return await stripe.subscriptions.retrieve(id);
+  } catch (err) {
+    if (isNotFound(err)) return "missing";
+    throw err;
+  }
+}
+
 export async function applyStripeEvent(
   event: StripeEvent,
-  deps: { store: BillingStore; stripe: Pick<CheckoutStripe, "subscriptions"> },
+  deps: { store: BillingStore; stripe: Pick<CheckoutStripe, "subscriptions">; priceId: string },
 ): Promise<{ status: number; body: Record<string, unknown> }> {
   const object = event.data.object;
 
   if (event.type === "checkout.session.completed") {
     const userId = await resolveUserId(deps.store, object);
-    if (!userId) return { status: 200, body: { received: true } };
+    if (!userId) return received;
     const subscriptionId = typeof object.subscription === "string" ? object.subscription : customerId(object.subscription);
-    if (subscriptionId) {
-      const subscription = await deps.stripe.subscriptions.retrieve(subscriptionId);
-      await saveSubscription(deps.store, userId, subscription);
-    }
+    if (!subscriptionId) return received;
+    const subscription = await loadSubscription(deps.stripe, subscriptionId);
+    if (subscription === "missing" || !grantsOurPrice(subscription, deps.priceId)) return received;
+    await saveSubscription(deps.store, userId, subscription);
     const payment = String(object.payment_status ?? "");
     if (payment === "paid" || payment === "no_payment_required") {
       await rememberEvent(deps.store, event.id, userId, "checkout_paid", {
@@ -217,22 +257,42 @@ export async function applyStripeEvent(
         currency: object.currency ?? null,
       });
     }
-    return { status: 200, body: { received: true } };
+    return received;
   }
 
   if (event.type === "customer.subscription.created" || event.type === "customer.subscription.updated" || event.type === "customer.subscription.deleted") {
-    const subscription = object as unknown as StripeSubscription;
+    const incoming = object as unknown as StripeSubscription;
     const userId =
-      subscription.metadata?.user_id ||
-      (await resolveUserId(deps.store, { customer: subscription.customer, metadata: subscription.metadata }));
-    if (!userId) return { status: 200, body: { received: true } };
-    const status = event.type === "customer.subscription.deleted" ? "canceled" : subscription.status;
-    await saveSubscription(deps.store, userId, { ...subscription, status });
-    const mapped = event.type === "customer.subscription.deleted" ? "canceled" : mapStripeStatus(subscription.status);
-    if (mapped === "canceled") {
-      await rememberEvent(deps.store, event.id, userId, "subscription_canceled", { stripe_subscription_id: subscription.id });
+      incoming.metadata?.user_id ||
+      (await resolveUserId(deps.store, { customer: incoming.customer, metadata: incoming.metadata }));
+    if (!userId || !incoming.id) return received;
+    const profile = await deps.store.getProfile(userId);
+    const storedId = profile?.stripe_subscription_id ?? null;
+    const otherSubscription = Boolean(storedId && storedId !== incoming.id);
+    const newerCreate = event.type === "customer.subscription.created" && !!profile && !hasFullAccess(profile.subscription_status);
+    if (otherSubscription && !newerCreate) return received;
+
+    if (event.type === "customer.subscription.deleted") {
+      const fetched = await loadSubscription(deps.stripe, incoming.id);
+      if (fetched !== "missing" && storedId && storedId !== incoming.id) return received;
+      await saveSubscription(deps.store, userId, { ...incoming, ...(fetched === "missing" ? {} : fetched), status: "canceled" });
+      await rememberEvent(deps.store, event.id, userId, "subscription_canceled", { stripe_subscription_id: incoming.id });
+      return received;
     }
-    return { status: 200, body: { received: true } };
+
+    const fetched = await loadSubscription(deps.stripe, incoming.id);
+    if (fetched === "missing") {
+      if (!storedId || storedId === incoming.id) {
+        await saveSubscription(deps.store, userId, { ...incoming, status: "canceled" });
+      }
+      return received;
+    }
+    if (!grantsOurPrice(fetched, deps.priceId)) return received;
+    await saveSubscription(deps.store, userId, fetched);
+    if (mapStripeStatus(fetched.status) === "canceled") {
+      await rememberEvent(deps.store, event.id, userId, "subscription_canceled", { stripe_subscription_id: fetched.id });
+    }
+    return received;
   }
 
   if (event.type === "invoice.payment_failed") {

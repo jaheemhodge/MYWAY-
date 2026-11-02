@@ -28,12 +28,21 @@ export function readBillingEnv(
   return { ok: true, env: { stripeSecret, webhookSecret, priceId, supabaseUrl, serviceRoleKey } };
 }
 
-export function originFrom(headers: Record<string, string | string[] | undefined>, env: NodeJS.ProcessEnv = process.env): string {
+export type OriginResult = { ok: true; origin: string } | { ok: false; status: 400; body: { error: "Unknown origin" } };
+
+/** APP_URL is trusted. A derived host is only accepted for local dev and Vercel previews. */
+export function originFrom(headers: Record<string, string | string[] | undefined>, env: NodeJS.ProcessEnv = process.env): OriginResult {
   const configured = env.APP_URL?.replace(/\/$/, "");
-  if (configured) return configured;
+  if (configured) return { ok: true, origin: configured };
   const proto = header(headers, "x-forwarded-proto") ?? "http";
-  const host = header(headers, "x-forwarded-host") ?? header(headers, "host") ?? "localhost";
-  return `${proto}://${host}`;
+  const host = header(headers, "x-forwarded-host") ?? header(headers, "host");
+  if (!host || !allowedHost(host)) return { ok: false, status: 400, body: { error: "Unknown origin" } };
+  return { ok: true, origin: `${proto}://${host}` };
+}
+
+function allowedHost(host: string): boolean {
+  const hostname = host.split(":")[0]?.toLowerCase() ?? "";
+  return hostname === "localhost" || hostname === "127.0.0.1" || hostname.endsWith(".vercel.app");
 }
 
 function header(headers: Record<string, string | string[] | undefined>, name: string): string | undefined {
