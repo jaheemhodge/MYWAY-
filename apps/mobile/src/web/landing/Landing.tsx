@@ -1,37 +1,15 @@
-import { usePageTitle } from "../WebLayout";
-import { AloneVsMobility } from "./AloneVsMobility";
-import { Close } from "./Close";
-import { EverydayMoments } from "./EverydayMoments";
-import { Faq } from "./Faq";
-import { FirstQuestion } from "./FirstQuestion";
-import { Hero } from "./Hero";
-import { RepRhythm } from "./RepRhythm";
-import { SafetyPromise } from "./SafetyPromise";
-import { Setup } from "./Setup";
-import { SixtyDayLine } from "./SixtyDayLine";
-import { Sources } from "./Sources";
-import styles from "./Landing.module.css";
+import { Navigate } from "react-router-dom";
+import { useAuth } from "@/app/state/AuthProvider";
+import { routes } from "@/web/routes";
 
 /**
- * Forest Hour. Light/dark rhythm: forest hero and first question, cream "how it works",
- * forest 60-day line, warm everyday moments, deep forest session, cream setup, paper references,
- * cream safety and FAQ, forest close.
+ * Placeholder for the next marketing page at "/".
+ * No UI: a signed-in visitor goes to /app/home, everyone else to /sign-in.
+ * Replace this file when the new landing page is ready.
  */
 export function Landing() {
-  usePageTitle("Mobility — Feel like yourself again");
-  return (
-    <div className={styles.page}>
-      <Hero />
-      <FirstQuestion />
-      <AloneVsMobility />
-      <SixtyDayLine />
-      <EverydayMoments />
-      <RepRhythm />
-      <Setup />
-      <Sources />
-      <SafetyPromise />
-      <Faq />
-      <Close />
-    </div>
-  );
+  const { status } = useAuth();
+  if (status === "loading") return null;
+  if (status === "signedIn") return <Navigate to="/app/home" replace />;
+  return <Navigate to={routes.signIn} replace />;
 }

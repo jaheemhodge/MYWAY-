@@ -234,6 +234,22 @@ describe("core flow", () => {
     await at("/app/session/4");
   });
 
+  it("sends / to /sign-in when nobody is signed in", async () => {
+    const fake = createFakeSupabase();
+    setSupabaseClientForTests(fake.client);
+    renderAt("/");
+    await at("/sign-in");
+  });
+
+  it("sends a signed-in visitor from / to /app/home", async () => {
+    const fake = createFakeSupabase();
+    setSupabaseClientForTests(fake.client);
+    await fake.client.auth.signUp({ email: "home@example.test", password: "long enough pw", options: { data: { first_name: "H" } } });
+    Object.assign(fake.db.profiles[0], { focus_area: "knees", plan_start_date: "2026-01-01", onboarded_at: new Date().toISOString() });
+    renderAt("/");
+    await at("/app/home");
+  });
+
   it("hearts save locally when signed out and sync to the account on login", async () => {
     const fake = createFakeSupabase();
     setSupabaseClientForTests(fake.client);

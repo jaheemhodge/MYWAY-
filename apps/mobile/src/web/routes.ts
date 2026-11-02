@@ -2,6 +2,7 @@
  * The logged-in web app lives under /app (see src/app); the old phone-framed tab screens moved to /preview. */
 
 export const routes = {
+  /** Reserved for the next marketing page. Today "/" only redirects (see landing/Landing.tsx). */
   landing: "/",
   safety: "/safety",
   safetyPause: "/safety/pause",
@@ -51,7 +52,8 @@ export const accountRoutes = {
 
 const ACCOUNT_EXACT = new Set<string>(Object.values(accountRoutes));
 
-/** Everything rendered by CoreFlowApp: account pages plus /app/*. Checked before the prototype split. */
+/** Everything rendered by CoreFlowApp: the "/" placeholder, account pages, and /app/*. Checked before the prototype split. */
 export function isCoreFlowPath(pathname: string): boolean {
-  return ACCOUNT_EXACT.has(pathname) || isAppPath(pathname);
+  // "/" is where the new landing page will go. Until then it only redirects.
+  return pathname === routes.landing || ACCOUNT_EXACT.has(pathname) || isAppPath(pathname);
 }

@@ -1,5 +1,6 @@
 import { Route, Routes, useLocation } from "react-router-dom";
-import { isAppPath } from "@/web/routes";
+import { Landing } from "@/web/landing/Landing";
+import { isAppPath, routes } from "@/web/routes";
 import { RedirectIfAuthed, RequireOnboarded, RequireSession } from "./guards";
 import { MobilityApp } from "./MobilityApp";
 import { LoginScreen } from "./screens/placeholders/LoginScreen";
@@ -10,6 +11,7 @@ import { CoreProviders } from "./state";
 
 /**
  * Account + logged-in app. Guards:
+ *   /                     → future landing page; today a redirect only (signed in → /app/home, else /sign-in)
  *   /login, /signup       → signed-in users bounce to their intended page or /app/home
  *   /reset-password       → open to everyone (the reset email lands here with a recovery session)
  *   /onboarding           → needs a session; finished users bounce to /app/home
@@ -20,6 +22,14 @@ import { CoreProviders } from "./state";
  */
 export function CoreFlowApp() {
   const { pathname } = useLocation();
+
+  if (pathname === routes.landing) {
+    return (
+      <CoreProviders>
+        <Landing />
+      </CoreProviders>
+    );
+  }
 
   if (isAppPath(pathname)) {
     return (

@@ -35,13 +35,13 @@ npm install
 npm run dev
 ```
 
-Open http://localhost:5173. The public front door is the landing page. The free path is `/safety`, then `/check-in`, then the `/plan` preview and `/signup` placeholder. The existing in-app preview, including Day 1, is unchanged at `/welcome` and `/session/1`.
+Open http://localhost:5173. `/` is reserved for the next marketing page; today a signed-in visitor goes to `/app/home` and everyone else goes to `/sign-in`. The free path is `/safety`, then `/check-in`, then the `/plan` preview and `/signup` placeholder. The existing in-app preview, including Day 1, is unchanged at `/welcome` and `/session/1`.
 
 ### Web funnel
 
 | Route | What it is |
 |---|---|
-| `/` | Landing page |
+| `/` | Reserved for the next marketing page. Today it redirects: signed in to `/app/home`, otherwise to `/sign-in` |
 | `/safety` | Safety screen before the check-in |
 | `/safety/pause` | “Please check with your doctor first” |
 | `/check-in/:step` | Free movement check-in, one question per screen |

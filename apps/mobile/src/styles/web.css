@@ -500,30 +500,6 @@ html:has(.web-root) {
   max-width: 40rem;
 }
 
-/* Landing page: the header joins the forest hero. */
-.web-header.is-forest {
-  background: rgba(26, 46, 36, 0.97);
-  border-bottom-color: #2c4a3b;
-}
-
-.web-header.is-forest .web-wordmark {
-  color: #f7f3ec;
-}
-
-.web-header.is-forest .web-btn-primary {
-  background: #f7f3ec;
-  border-color: #f7f3ec;
-  color: #1a1916;
-}
-
-.web-header.is-forest .web-btn-primary:hover {
-  background: #fff;
-}
-
-.web-header.is-forest :focus-visible {
-  outline-color: #c9a45c;
-}
-
 .web-root ::selection {
   background: #c9a45c;
   color: #1a1916;
@@ -535,13 +511,6 @@ body:has(.web-root),
   overflow: visible;
 }
 
-
-/* Phones: the header keeps the logo and the Menu; the check-in button moves into the menu sheet. */
-@media (max-width: 599px) {
-  .web-header.is-forest .web-header-cta {
-    display: none;
-  }
-}
 
 /*
  * Safety screen and check-in: Back and Continue live in a bar that stays on screen.

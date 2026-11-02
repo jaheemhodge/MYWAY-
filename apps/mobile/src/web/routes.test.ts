@@ -2,7 +2,8 @@ import { describe, expect, it } from "vitest";
 import { isCoreFlowPath, isPrototypePath } from "./routes";
 
 describe("core flow split", () => {
-  it("routes account pages and /app to CoreFlowApp", () => {
+  it("routes the front door, account pages and /app to CoreFlowApp", () => {
+    expect(isCoreFlowPath("/")).toBe(true);
     expect(isCoreFlowPath("/login")).toBe(true);
     expect(isCoreFlowPath("/signup")).toBe(true);
     expect(isCoreFlowPath("/reset-password")).toBe(true);
@@ -12,7 +13,6 @@ describe("core flow split", () => {
   });
 
   it("leaves the funnel and the phone prototype alone", () => {
-    expect(isCoreFlowPath("/")).toBe(false);
     expect(isCoreFlowPath("/plan")).toBe(false);
     expect(isCoreFlowPath("/onboarding/1")).toBe(false);
     expect(isCoreFlowPath("/session/1")).toBe(false);

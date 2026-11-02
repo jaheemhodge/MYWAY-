@@ -25,7 +25,7 @@ import { CoreFlowApp } from "./app/CoreFlowApp";
 
 export function App() {
   const { pathname } = useLocation();
-  // Accounts and the logged-in app: /login, /signup, /reset-password, /onboarding, /app/*.
+  // "/", account pages, and the logged-in app. "/" is the future landing page and only redirects for now.
   if (isCoreFlowPath(pathname)) return <CoreFlowApp />;
   if (!isPrototypePath(pathname)) return <MarketingApp />;
   return <PrototypeApp />;
