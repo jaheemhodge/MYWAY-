@@ -48,7 +48,7 @@ export function LandingPrograms() {
 
         <ul className="landing-programs__grid">
           {PROGRAM_CARDS.map((card, i) => (
-            <li key={card.title} className="landing-card landing-reveal landing-reveal--media" style={{ "--i": i } as React.CSSProperties}>
+            <li key={card.title} data-focus={card.focus} className="landing-card landing-reveal landing-reveal--media" style={{ "--i": i } as React.CSSProperties}>
               <img className="landing-card__img" src={card.image} alt={card.alt} width={1344} height={752} loading="lazy" decoding="async" />
               <div className="landing-card__shade" aria-hidden="true" />
               <div className="landing-card__body">

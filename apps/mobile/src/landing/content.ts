@@ -21,10 +21,11 @@ export const SECTION_HREF = {
   coach: "#coach",
 } as const;
 
-export type ProgramCard = { title: string; subtitle: string; image: string; alt: string; cta: string; href: string };
+export type ProgramCard = { focus: "knees" | "back" | "hips"; title: string; subtitle: string; image: string; alt: string; cta: string; href: string };
 
 export const PROGRAM_CARDS: ProgramCard[] = [
   {
+    focus: "knees",
     title: "Knees",
     subtitle: "Gentle moves for standing up, sitting down and stairs",
     image: "/coach/K06.jpg",
@@ -33,6 +34,7 @@ export const PROGRAM_CARDS: ProgramCard[] = [
     href: SIGN_UP_HREF,
   },
   {
+    focus: "back",
     title: "Lower back",
     subtitle: "Slow, simple moves to keep your back moving",
     image: "/coach/B12.jpg",
@@ -41,6 +43,7 @@ export const PROGRAM_CARDS: ProgramCard[] = [
     href: SIGN_UP_HREF,
   },
   {
+    focus: "hips",
     title: "Hips & balance",
     subtitle: "Balance practice with a chair for support",
     image: "/coach/H15.jpg",
