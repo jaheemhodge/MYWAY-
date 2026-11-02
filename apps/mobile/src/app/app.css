@@ -782,6 +782,11 @@ html:has(.mob-root) {
   background: #e9e2d5;
 }
 
+/* Exercise stills are 16:9. Event cards keep the 4:5 frame above. */
+.mob-thumb--wide {
+  aspect-ratio: 16 / 9;
+}
+
 .mob-thumb img {
   display: block;
   width: 100%;

@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useRef, useState, type ReactNode } from "react";
 import { Navigate } from "react-router-dom";
+import { imageFor } from "../../data/images";
 import { displayName } from "../../data/library";
 import { usePageTitle } from "../../hooks";
 import { cleanCopyList } from "../../open/copy";
@@ -33,6 +34,24 @@ export function SessionScreen({ day }: { day: number }) {
 
 const IDLE_MS = 2500;
 
+/** Warm the current still and the next exercise's still so the stage doesn't wait on a swap. */
+function usePreloadImages(urls: readonly (string | undefined)[]) {
+  const key = urls.filter((url): url is string => Boolean(url)).join("\n");
+  useEffect(() => {
+    const links = (key ? key.split("\n") : []).map((href) => {
+      const link = document.createElement("link");
+      link.rel = "preload";
+      link.as = "image";
+      link.href = href;
+      document.head.appendChild(link);
+      return link;
+    });
+    return () => {
+      for (const link of links) link.remove();
+    };
+  }, [key]);
+}
+
 /** True after IDLE_MS without pointer, touch, key or focus activity on the stage, while `enabled`. */
 function useIdle(enabled: boolean) {
   const [idle, setIdle] = useState(false);
@@ -62,6 +81,8 @@ export function SessionView({
   const { idle, wake } = useIdle(running);
   const [pulse, setPulse] = useState(0);
   const day = s.day;
+  const nextExercise = s.plan?.exercises[s.index + 1];
+  usePreloadImages([s.media.imageUrl, nextExercise ? imageFor(nextExercise) : undefined]);
 
   if (s.status === "loading") {
     return (

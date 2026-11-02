@@ -3,7 +3,7 @@ import { imageFor, PLACEHOLDER_WORD } from "../data/images";
 import type { Exercise } from "../data/library";
 
 /**
- * 4:5 picture with 24px corners. The exercise's own still (fades in once loaded), or a soft
+ * 16:9 picture with 24px corners. The exercise's own still (fades in once loaded), or a soft
  * sage-to-cream tile with the position word until a still exists. An optional badge sits on the
  * bottom-left corner.
  */
@@ -11,7 +11,7 @@ export function ExerciseThumb({ exercise, badge }: { exercise: Exercise; badge?:
   const src = imageFor(exercise);
   const [loaded, setLoaded] = useState(false);
   return (
-    <div className={`mob-thumb${src ? "" : " is-placeholder"}`}>
+    <div className={`mob-thumb mob-thumb--wide${src ? "" : " is-placeholder"}`}>
       {src ? (
         <img
           src={src}

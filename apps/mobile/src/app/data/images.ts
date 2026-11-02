@@ -4,6 +4,7 @@ import type { Exercise, Position } from "./library";
 /**
  * Exercise stills and clips come from src/data/mediaMap.ts (by exercise id). These helpers keep
  * the old call sites working; add or swap files in the map, not here.
+ * Stills are the 16:9 coach photos in /coach/<id>.jpg.
  */
 
 /**

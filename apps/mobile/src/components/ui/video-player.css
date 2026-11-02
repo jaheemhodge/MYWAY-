@@ -14,25 +14,14 @@
   aspect-ratio: 16 / 9;
 }
 
-/* Media sits whole and centred; a blurred, enlarged copy of the same picture fills the frame
-   behind it, so portrait photos and clips never show black bars. */
-.vp__backdrop {
-  position: absolute;
-  inset: -40px;
-  width: calc(100% + 80px);
-  height: calc(100% + 80px);
-  object-fit: cover;
-  filter: blur(28px) saturate(1.1);
-  transform: scale(1.05);
-  opacity: 0.9;
-}
-
+/* 16:9 frame. The still or clip covers it; nothing is letterboxed behind a blurred copy. */
 .vp__media {
   position: absolute;
   inset: 0;
   width: 100%;
   height: 100%;
-  object-fit: contain;
+  object-fit: cover;
+  object-position: center;
   display: block;
 }
 
