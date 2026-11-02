@@ -1,6 +1,7 @@
 import type { Session, User } from "@supabase/supabase-js";
 import { createContext, useContext, useEffect, useMemo, useState, type ReactNode } from "react";
 import * as auth from "@/lib/auth";
+import { logEvent } from "@/lib/events";
 import { isSupabaseConfigured } from "@/lib/supabaseClient";
 
 export type AuthStatus = "loading" | "unconfigured" | "signedOut" | "signedIn";
@@ -51,6 +52,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       if (event === "PASSWORD_RECOVERY") setRecovery(true);
       if (event === "SIGNED_OUT") setRecovery(false);
       if (event === "USER_UPDATED") setRecovery(false);
+      if (event === "SIGNED_IN" && s?.user) logSignIn(s);
     });
 
     return () => {
@@ -65,7 +67,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       session,
       user: session?.user ?? null,
       isPasswordRecovery,
-      googleEnabled: auth.GOOGLE_ENABLED,
+      googleEnabled: auth.isGoogleEnabled(),
       signUp: auth.signUp,
       signIn: auth.signIn,
       signInWithMagicLink: auth.signInWithMagicLink,
@@ -78,6 +80,25 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   );
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
+}
+
+const LOGIN_LOG_KEY = "mobility.loginLogged.v1";
+
+/** One row per real sign-in. Tab focus fires SIGNED_IN again with the same last_sign_in_at. */
+function logSignIn(session: Session): void {
+  const user = session.user;
+  const provider = String(user.app_metadata?.provider ?? "");
+  const method = provider === "google" ? "google" : "email";
+  const onCallback = typeof window !== "undefined" && window.location.pathname === "/auth/callback";
+  const via = provider === "google" ? "oauth" : onCallback ? "magic_link" : "password";
+  const stamp = `${user.id}:${user.last_sign_in_at ?? ""}`;
+  try {
+    if (window.sessionStorage.getItem(LOGIN_LOG_KEY) === stamp) return;
+    window.sessionStorage.setItem(LOGIN_LOG_KEY, stamp);
+  } catch {
+    /* sessionStorage blocked: still try to log once */
+  }
+  void logEvent("login", { method, via });
 }
 
 export function useAuth(): AuthContextValue {

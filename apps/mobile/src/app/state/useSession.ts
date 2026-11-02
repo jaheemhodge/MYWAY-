@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import type { Exercise } from "@/app/data/library";
 import type { ExerciseDoneRecord } from "@/lib/database.types";
 import { mediaFor, type ExerciseMedia } from "@/data/mediaMap";
+import { logEvent } from "@/lib/events";
 import { ProgressError, PROGRESS_MESSAGES } from "@/lib/progress";
 import { REP_RHYTHM, type DayPlan } from "@/lib/plan";
 import * as engine from "@/lib/session";
@@ -156,6 +157,8 @@ export function useSession(day: number, options: UseSessionOptions = {}): UseSes
   const [cuesEnabled, setCuesEnabledState] = useState(() => readCuesSetting(storage));
   const [lastCue, setLastCue] = useState<engine.Cue | null>(null);
   const listeners = useRef(new Set<(cue: engine.Cue) => void>());
+  const dayStartLogged = useRef(false);
+  const restoredStarted = useRef(false);
   const stateRef = useRef<engine.SessionState | null>(null);
   stateRef.current = state;
   const cueSnap = useRef<engine.CueSnapshot | null>(null);
@@ -172,11 +175,24 @@ export function useSession(day: number, options: UseSessionOptions = {}): UseSes
     if (!canRun || !plan) return;
     setState((prev) => {
       if (prev && prev.day === day) return prev;
-      return engine.restore(readSaved(storage), day, plan.exercises) ?? engine.createSession(day, plan.exercises);
+      const saved = engine.restore(readSaved(storage), day, plan.exercises);
+      if (saved?.started) restoredStarted.current = true;
+      return saved ?? engine.createSession(day, plan.exercises);
     });
     // `storage` is stable for a mount; `plan` only changes with focus area or day.
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [canRun, plan, day]);
+
+  /* day_started: once per page load, only when a person starts the session. Restoring a saved session does not count. */
+  useEffect(() => {
+    if (!state?.started || dayStartLogged.current) return;
+    dayStartLogged.current = true;
+    if (restoredStarted.current) {
+      restoredStarted.current = false;
+      return;
+    }
+    void logEvent("day_started", { day, replay: isDayCompleted(day) });
+  }, [state, day, isDayCompleted]);
 
   /* ---- persistence: on every state change, and synchronously when the page hides ---- */
   const save = useCallback(

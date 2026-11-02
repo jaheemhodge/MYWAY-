@@ -446,3 +446,25 @@ describe("useSession player", () => {
     expect(result.current.cues.last).toEqual({ type: "start", segment: "rest-set", index: 0, set: 1 });
   });
 });
+
+describe("day_started", () => {
+  it("logs once when the person starts, and not again when that save is restored", async () => {
+    const fake = createFakeSupabase();
+    setSupabaseClientForTests(fake.client);
+    await seed(fake);
+    const first = await mountReady(1, { now: () => T0 });
+    expect(fake.db.app_events.filter((e) => e.event_name === "day_started")).toHaveLength(0);
+    run(first.result, "start");
+    run(first.result, "next");
+    await waitFor(() => expect(fake.db.app_events.filter((e) => e.event_name === "day_started")).toHaveLength(1));
+    expect(fake.db.app_events.find((e) => e.event_name === "day_started")?.properties).toMatchObject({ day: 1, replay: false });
+    first.unmount();
+
+    const restored = await mountReady(1, { now: () => T0 });
+    expect(restored.result.current.status).not.toBe("ready");
+    await act(async () => {
+      await Promise.resolve();
+    });
+    expect(fake.db.app_events.filter((e) => e.event_name === "day_started")).toHaveLength(1);
+  });
+});
