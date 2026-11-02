@@ -11,6 +11,7 @@ export { FavoritesProvider, useFavorites, type FavoritesContextValue } from "./F
 export { useDayPlan } from "./useDayPlan";
 export { useSession, KEY_BINDINGS, CUES_SETTING_KEY, type UseSessionResult, type SessionStatus, type SessionActions } from "./useSession";
 export * from "./returnTo";
+export * from "./focusIntent";
 
 /** Auth → Profile → Progress → Favorites, in dependency order. */
 export function CoreProviders({ children }: { children: ReactNode }) {

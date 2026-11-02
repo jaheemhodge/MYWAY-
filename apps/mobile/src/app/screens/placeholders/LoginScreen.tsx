@@ -1,8 +1,10 @@
-import { useState, type FormEvent } from "react";
-import { Link } from "react-router-dom";
+import { useEffect, useState, type FormEvent } from "react";
+import { Link, useSearchParams } from "react-router-dom";
+import { isFocusArea } from "@/lib/plan";
 import { Icon } from "../../components/Icon";
 import { usePageTitle } from "../../hooks";
 import { useAuth } from "../../state/AuthProvider";
+import { saveFocusIntent } from "../../state/focusIntent";
 import { Field, Frame, GoogleMark, Message, UnconfiguredCard, type Notice } from "./ui";
 
 /**
@@ -18,6 +20,13 @@ export function LoginScreen() {
   const [password, setPassword] = useState("");
   const [busy, setBusy] = useState<null | "password" | "link" | "google">(null);
   const [notice, setNotice] = useState<Notice>(null);
+  const [params] = useSearchParams();
+  const focus = params.get("focus");
+  const focusQuery = isFocusArea(focus) ? `?focus=${focus}` : "";
+
+  useEffect(() => {
+    saveFocusIntent(focus);
+  }, [focus]);
 
   if (status === "unconfigured") {
     return (
@@ -111,7 +120,7 @@ export function LoginScreen() {
           </Link>
           <p>
             New here?{" "}
-            <Link to="/signup" className="c-link">
+            <Link to={`/signup${focusQuery}`} className="c-link">
               Create an account
             </Link>
           </p>

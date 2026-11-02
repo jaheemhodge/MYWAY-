@@ -8,6 +8,7 @@ import { getExercise } from "../../data/library";
 import { usePageTitle } from "../../hooks";
 import { COLLECTION_LINE } from "../../open/data";
 import { useAuth } from "../../state/AuthProvider";
+import { peekFocusIntent, takeFocusIntent } from "../../state/focusIntent";
 import { useProfile } from "../../state/ProfileProvider";
 import { takeReturnTo } from "../../state/returnTo";
 import { AGE_RANGES, DAY_TO_DAY, EASIER } from "./questions";
@@ -41,7 +42,7 @@ export function OnboardingScreen() {
   const [feel, setFeel] = useState("");
   const [ageRange, setAgeRange] = useState<string>(profile?.ageRange ?? "");
   const [easier, setEasier] = useState<string[]>([]);
-  const [focusArea, setFocusArea] = useState<FocusArea | "">("");
+  const [focusArea, setFocusArea] = useState<FocusArea | "">(() => peekFocusIntent() ?? "");
   const [index, setIndex] = useState(0);
   const [busy, setBusy] = useState(false);
   const [notice, setNotice] = useState<Notice>(null);
@@ -114,6 +115,7 @@ export function OnboardingScreen() {
         firstName: firstName.trim() || undefined,
         ageRange,
       });
+      takeFocusIntent();
       navigate(takeReturnTo(), { replace: true });
     } catch (err) {
       setNotice({ tone: "error", text: err instanceof Error ? err.message : "We couldn't save that. Please try again." });

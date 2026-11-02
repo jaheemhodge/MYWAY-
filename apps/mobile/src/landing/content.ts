@@ -4,6 +4,13 @@ import type { PolaroidSlide } from "@/components/ui/PolaroidCarousel";
 export const SIGN_UP_HREF = "/signup";
 export const SIGN_IN_HREF = "/login";
 
+export type SignupFocus = "knees" | "lower_back" | "hips_balance";
+
+/** Sign-up, optionally remembering which focus area the person picked on the landing page. */
+export function signUpHref(focus?: SignupFocus): string {
+  return focus ? `${SIGN_UP_HREF}?focus=${focus}` : SIGN_UP_HREF;
+}
+
 /**
  * Support address shown in the footer's contact column.
  * TODO(jah): fill in our real support address. While it is empty the contact column stays hidden.
@@ -21,7 +28,7 @@ export const SECTION_HREF = {
   coach: "#coach",
 } as const;
 
-export type ProgramCard = { focus: "knees" | "back" | "hips"; title: string; subtitle: string; image: string; alt: string; cta: string; href: string };
+export type ProgramCard = { focus: SignupFocus; title: string; subtitle: string; image: string; alt: string; cta: string; href: string };
 
 export const PROGRAM_CARDS: ProgramCard[] = [
   {
@@ -31,25 +38,25 @@ export const PROGRAM_CARDS: ProgramCard[] = [
     image: "/coach/K06.jpg",
     alt: "Coach doing a small squat, holding the back of a chair",
     cta: "Start with knees",
-    href: SIGN_UP_HREF,
+    href: signUpHref("knees"),
   },
   {
-    focus: "back",
+    focus: "lower_back",
     title: "Lower back",
     subtitle: "Slow, simple moves to keep your back moving",
     image: "/coach/B12.jpg",
     alt: "Coach on hands and knees on a mat, reaching one arm and the opposite leg out",
     cta: "Start with lower back",
-    href: SIGN_UP_HREF,
+    href: signUpHref("lower_back"),
   },
   {
-    focus: "hips",
+    focus: "hips_balance",
     title: "Hips & balance",
     subtitle: "Balance practice with a chair for support",
     image: "/coach/H15.jpg",
     alt: "Coach standing heel to toe beside a chair",
     cta: "Start with hips",
-    href: SIGN_UP_HREF,
+    href: signUpHref("hips_balance"),
   },
 ];
 

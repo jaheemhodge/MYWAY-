@@ -1,8 +1,10 @@
-import { useState, type FormEvent } from "react";
-import { Link } from "react-router-dom";
+import { useEffect, useState, type FormEvent } from "react";
+import { Link, useSearchParams } from "react-router-dom";
+import { isFocusArea } from "@/lib/plan";
 import { Icon } from "../../components/Icon";
 import { usePageTitle } from "../../hooks";
 import { useAuth } from "../../state/AuthProvider";
+import { saveFocusIntent } from "../../state/focusIntent";
 import { Field, Frame, GoogleMark, Message, UnconfiguredCard, type Notice } from "./ui";
 
 /**
@@ -20,6 +22,13 @@ export function SignUpScreen() {
   const [busy, setBusy] = useState(false);
   const [notice, setNotice] = useState<Notice>(null);
   const [awaitingEmail, setAwaitingEmail] = useState(false);
+  const [params] = useSearchParams();
+  const focus = params.get("focus");
+  const focusQuery = isFocusArea(focus) ? `?focus=${focus}` : "";
+
+  useEffect(() => {
+    saveFocusIntent(focus);
+  }, [focus]);
 
   if (status === "unconfigured") {
     return (
@@ -58,7 +67,7 @@ export function SignUpScreen() {
           <p className="c-small" style={{ textAlign: "center" }}>
             Nothing there after a few minutes? Look in your spam or junk folder.
           </p>
-          <Link to="/login" className="o-pill o-pill--outline">
+          <Link to={`/login${focusQuery}`} className="o-pill o-pill--outline">
             Back to sign in
           </Link>
         </section>
@@ -118,7 +127,7 @@ export function SignUpScreen() {
         <div className="c-auth__foot">
           <p>
             Already have an account?{" "}
-            <Link to="/login" className="c-link">
+            <Link to={`/login${focusQuery}`} className="c-link">
               Sign in
             </Link>
           </p>

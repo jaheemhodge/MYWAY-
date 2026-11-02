@@ -1,5 +1,5 @@
 import StickerSlapFooter from "@/components/ui/sticker-slap-footer";
-import { FONT_SANS, SIGN_UP_HREF, SUPPORT_EMAIL } from "../content";
+import { FONT_SANS, SIGN_IN_HREF, SIGN_UP_HREF, SUPPORT_EMAIL, signUpHref } from "../content";
 
 const NOTE = "*mobility is general movement guidance, not medical advice. if something hurts, stop and check with your doctor.";
 
@@ -16,6 +16,11 @@ export function LandingFooter() {
           <span>{NOTE}</span>
         </p>
       )}
+      <p className="landing-disclaimer">
+        <span>
+          Already have an account? <a href={SIGN_IN_HREF}>Log in</a>
+        </span>
+      </p>
       <StickerSlapFooter
         className="landing-footer"
         wordmark="mobility"
@@ -25,9 +30,9 @@ export function LandingFooter() {
         chatHref=""
         jobsLabel="pick your focus"
         jobs={[
-          { title: "knees", href: SIGN_UP_HREF },
-          { title: "lower back", href: SIGN_UP_HREF },
-          { title: "hips & balance", href: SIGN_UP_HREF },
+          { title: "knees", href: signUpHref("knees") },
+          { title: "lower back", href: signUpHref("lower_back") },
+          { title: "hips & balance", href: signUpHref("hips_balance") },
         ]}
         officeLabel="your 60 days"
         address={["one short session a day", "the next day unlocks when you finish"]}
