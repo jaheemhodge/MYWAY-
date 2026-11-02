@@ -140,6 +140,10 @@ select throws_ok(
 -- Re-check gates (fast-forward Alice to Day 29 as the owner role, bypassing RLS)
 -- ---------------------------------------------------------------------------
 reset role;
+-- Days 4+ require full access. Set it as the owner, before the test logs in again.
+update public.profiles
+   set subscription_status = 'active'
+ where id = '11111111-1111-1111-1111-111111111111';
 insert into public.day_completions (user_id, day_number)
 select '11111111-1111-1111-1111-111111111111', d from generate_series(3, 29) as d;
 select pg_temp.login('11111111-1111-1111-1111-111111111111');

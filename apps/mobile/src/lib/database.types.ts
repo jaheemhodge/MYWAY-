@@ -6,6 +6,16 @@
 
 export type FocusArea = "knees" | "lower_back" | "hips_balance";
 export type QuestionnaireKind = "baseline" | "day30" | "day60";
+export type SubscriptionStatus = "none" | "trialing" | "active" | "past_due" | "canceled" | "comped";
+export type AppEventName =
+  | "signup"
+  | "login"
+  | "onboarding_complete"
+  | "day_started"
+  | "day_completed"
+  | "checkout_started"
+  | "checkout_paid"
+  | "subscription_canceled";
 
 /** Free-form answers. The questionnaire screens decide the shape; the database only stores JSON. */
 export type Answers = Record<string, unknown>;
@@ -18,6 +28,12 @@ export type ProfileRow = {
   plan_start_date: string | null;
   onboarded_at: string | null;
   created_at: string;
+  email: string | null;
+  signup_method: string | null;
+  subscription_status: SubscriptionStatus;
+  stripe_customer_id: string | null;
+  stripe_subscription_id: string | null;
+  subscription_current_period_end: string | null;
 }
 
 export type QuestionnaireResponseRow = {
@@ -53,6 +69,14 @@ export type FavoriteRow = {
   created_at: string;
 }
 
+export type AppEventRow = {
+  id: string;
+  user_id: string | null;
+  event_name: AppEventName;
+  properties: Answers;
+  created_at: string;
+}
+
 /** Shape returned by the get_progress() SQL function. */
 export type ProgressRpcResult = {
   current_day: number;
@@ -60,6 +84,9 @@ export type ProgressRpcResult = {
   phase: 1 | 2 | 3;
   recheck_due: "day30" | "day60" | null;
   all_done: boolean;
+  /** Absent on databases that have not applied 20261102000000_access_events.sql yet. */
+  free_days_limit?: number;
+  has_full_access?: boolean;
 }
 
 type Json = string | number | boolean | null | { [key: string]: Json | undefined } | Json[];
@@ -91,6 +118,12 @@ export type Database = {
         Update: Partial<FavoriteRow>;
         Relationships: [];
       };
+      app_events: {
+        Row: AppEventRow;
+        Insert: { user_id: string; event_name: AppEventName; properties?: Answers; id?: string; created_at?: string };
+        Update: never;
+        Relationships: [];
+      };
     };
     Views: Record<string, never>;
     Functions: {
@@ -101,6 +134,14 @@ export type Database = {
       get_progress: {
         Args: Record<string, never>;
         Returns: ProgressRpcResult;
+      };
+      has_full_access: {
+        Args: { p_uid?: string };
+        Returns: boolean;
+      };
+      free_days_limit: {
+        Args: Record<string, never>;
+        Returns: number;
       };
     };
     Enums: Record<string, never>;
