@@ -12,8 +12,12 @@ export default defineConfig({
   server: {
     port: 5173,
     host: true,
+    fs: {
+      allow: [path.resolve(__dirname, "../.."), __dirname],
+    },
   },
   test: {
     environment: "jsdom",
+    include: ["src/**/*.{test,spec}.{ts,tsx}", "../../api/**/*.test.ts"],
   },
 });
