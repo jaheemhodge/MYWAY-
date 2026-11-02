@@ -40,6 +40,20 @@
   font-family: inherit;
 }
 
+/*
+ * Unlock page scrolling. global.css locks html/body/#root to the viewport (height:100%, body overflow:hidden)
+ * for the phone-shell app; the .web-root pages undo that in web.css, but the landing page renders outside
+ * .web-root, so it undoes it here. Scoped with :has(.landing), so the app shell stays locked.
+ */
+html:has(.landing),
+body:has(.landing),
+#root:has(.landing) {
+  height: auto;
+  min-height: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
 @media (prefers-reduced-motion: no-preference) {
   html:has(.landing) {
     scroll-behavior: smooth;
