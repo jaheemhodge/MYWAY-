@@ -7,6 +7,7 @@ import { LandingCoach } from "./sections/LandingCoach";
 import { LandingFooter } from "./sections/LandingFooter";
 import { LandingHero } from "./sections/LandingHero";
 import { LandingNavbar } from "./sections/LandingNavbar";
+import { LandingPrograms } from "./sections/LandingPrograms";
 
 /**
  * Public landing page at "/" for signed-out visitors.
@@ -19,7 +20,9 @@ export function LandingPage() {
       <main>
         <LandingHero />
         <LandingCoach />
-        {/* more sections go here, before the footer */}
+        {/* more sections go here, between the carousel and programs */}
+        <LandingPrograms />
+
       </main>
       <LandingFooter />
     </div>

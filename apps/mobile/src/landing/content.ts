@@ -11,15 +11,44 @@ export const SIGN_IN_HREF = "/login";
 export const SUPPORT_EMAIL = "";
 
 /**
- * Where each navbar item scrolls to. #how and #programs are not built yet, so they point at the
- * carousel for now. TODO: switch to "#how" / "#programs" when those sections land.
+ * Where each navbar item scrolls to. There is no #how section yet, so "How it works" points at the
+ * programs section for now. TODO: switch to "#how" when that section lands.
  */
 export const SECTION_HREF = {
   top: "#top",
-  how: "#coach",
-  programs: "#coach",
+  how: "#programs",
+  programs: "#programs",
   coach: "#coach",
 } as const;
+
+export type ProgramCard = { title: string; subtitle: string; image: string; alt: string; cta: string; href: string };
+
+export const PROGRAM_CARDS: ProgramCard[] = [
+  {
+    title: "Knees",
+    subtitle: "Gentle moves for standing up, sitting down and stairs",
+    image: "/coach/K06.jpg",
+    alt: "Coach doing a small squat, holding the back of a chair",
+    cta: "Start with knees",
+    href: SIGN_UP_HREF,
+  },
+  {
+    title: "Lower back",
+    subtitle: "Slow, simple moves to keep your back moving",
+    image: "/coach/B12.jpg",
+    alt: "Coach on hands and knees on a mat, reaching one arm and the opposite leg out",
+    cta: "Start with lower back",
+    href: SIGN_UP_HREF,
+  },
+  {
+    title: "Hips & balance",
+    subtitle: "Balance practice with a chair for support",
+    image: "/coach/H15.jpg",
+    alt: "Coach standing heel to toe beside a chair",
+    cta: "Start with hips",
+    href: SIGN_UP_HREF,
+  },
+];
 
 export const COACH_SLIDES: PolaroidSlide[] = [
   { image: "/coach/K01.jpg", title: "Seated knee extension", caption: "Knees", alt: "Coach seated on a chair, straightening one knee" },

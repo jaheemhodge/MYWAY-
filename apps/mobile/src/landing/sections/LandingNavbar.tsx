@@ -33,8 +33,8 @@ const ITEMS: LiquidNavItem[] = [
   { label: "The coach", href: SECTION_HREF.coach, icon: NimbusIcons.user, fx: "pop" },
 ];
 
-/** Index of the item that stands for the section in view. */
-const COACH_INDEX = 3;
+/** Which item stands for which section when it fills the screen. Anything else → Home. */
+const SECTION_INDEX: Record<string, number> = { coach: 3, programs: 2 };
 
 export function LandingNavbar() {
   const [active, setActive] = useState(0);
@@ -45,18 +45,22 @@ export function LandingNavbar() {
 
   // Active item follows the scroll position.
   useEffect(() => {
-    const coach = document.getElementById("coach");
-    if (!coach || typeof IntersectionObserver === "undefined") return;
+    const sections = Object.keys(SECTION_INDEX)
+      .map((id) => document.getElementById(id))
+      .filter((el): el is HTMLElement => !!el);
+    if (!sections.length || typeof IntersectionObserver === "undefined") return;
+    const share: Record<string, number> = {};
     const io = new IntersectionObserver(
-      ([entry]) => {
-        if (Date.now() < lockUntil.current) return;
+      (entries) => {
         const vh = window.innerHeight || 800;
-        const share = entry.isIntersecting ? entry.intersectionRect.height / vh : 0;
-        setActive(share > 0.45 ? COACH_INDEX : 0);
+        for (const e of entries) share[e.target.id] = e.isIntersecting ? e.intersectionRect.height / vh : 0;
+        if (Date.now() < lockUntil.current) return;
+        const [id, s] = Object.entries(share).sort((a, b) => b[1] - a[1])[0] ?? ["", 0];
+        setActive(s > 0.45 ? SECTION_INDEX[id] : 0);
       },
       { threshold: Array.from({ length: 11 }, (_, i) => i / 10) },
     );
-    io.observe(coach);
+    sections.forEach((el) => io.observe(el));
     return () => io.disconnect();
   }, []);
 
