@@ -35,18 +35,18 @@ npm install
 npm run dev
 ```
 
-Open http://localhost:5173. `/` is reserved for the next marketing page; today a signed-in visitor goes to `/app/home` and everyone else goes to `/sign-in`. The free path is `/safety`, then `/check-in`, then the `/plan` preview and `/signup` placeholder. The existing in-app preview, including Day 1, is unchanged at `/welcome` and `/session/1`.
+Open http://localhost:5173. `/` is the landing page for a signed-out visitor; a signed-in visitor goes to `/app/home`. Sign-up is `/signup` and sign-in is `/login`. The free path is `/safety`, then `/check-in`, then the `/plan` preview. The existing in-app preview, including Day 1, is unchanged at `/welcome` and `/session/1`. `npm run dev` serves the client only. Billing functions under `/api` need `vercel dev` from the repo root (see `apps/mobile/README.md`).
 
 ### Web funnel
 
 | Route | What it is |
 |---|---|
-| `/` | Reserved for the next marketing page. Today it redirects: signed in to `/app/home`, otherwise to `/sign-in` |
+| `/` | Landing page for a signed-out visitor. A signed-in visitor goes to `/app/home` |
 | `/safety` | Safety screen before the check-in |
 | `/safety/pause` | “Please check with your doctor first” |
 | `/check-in/:step` | Free movement check-in, one question per screen |
 | `/plan` | 60-day plan preview, with “what you told us” |
-| `/signup` | Sign-up and price placeholder |
+| `/signup` | Create an account (email or Google). `?focus=` remembers Knees, Lower back, or Hips & balance for onboarding |
 | `/session/1` | Existing Day 1 session screen |
 | `/welcome` | Existing in-app welcome |
 
