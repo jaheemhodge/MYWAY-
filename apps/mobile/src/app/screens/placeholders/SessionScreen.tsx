@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useRef, useState, type ReactNode } from "react";
 import { Navigate } from "react-router-dom";
-import { imageFor } from "../../data/images";
+import { imageFor, videoFor } from "../../data/images";
 import { displayName } from "../../data/library";
 import { usePageTitle } from "../../hooks";
 import { cleanCopyList } from "../../open/copy";
@@ -82,6 +82,7 @@ export function SessionView({
   const [pulse, setPulse] = useState(0);
   const day = s.day;
   const nextExercise = s.plan?.exercises[s.index + 1];
+  const [brokenVideo, setBrokenVideo] = useState<string | null>(null);
   usePreloadImages([s.media.imageUrl, nextExercise ? imageFor(nextExercise) : undefined]);
 
   if (s.status === "loading") {
@@ -153,7 +154,10 @@ export function SessionView({
   const steps = exercise ? cleanCopyList([exercise.setup, ...exercise.cues]) : [];
   const safety = exercise ? cleanCopyList(exercise.safetyNotes) : [];
   const still = s.media.imageUrl;
-  const showVideo = Boolean(s.media.videoUrl) && !(s.reducedMotion && still);
+  const clip = s.media.videoUrl;
+  const clipBroken = Boolean(clip) && brokenVideo === clip;
+  const showVideo = Boolean(clip) && !clipBroken && !(s.reducedMotion && still);
+  const nextClip = nextExercise ? videoFor(nextExercise) : undefined;
 
   const playPause = () => {
     setPulse((n) => n + 1);
@@ -181,11 +185,14 @@ export function SessionView({
         {/* ---------- Media ---------- */}
         <div className="sp2-media" aria-hidden="true">
           {showVideo ? (
-            <StageVideo src={s.media.videoUrl!} poster={still} playing={running && !s.reducedMotion} still={s.reducedMotion} />
+            <StageVideo src={clip!} poster={still} playing={running && !s.reducedMotion} onError={() => setBrokenVideo(clip!)} />
           ) : still ? (
             <img className={`sp2-media__img sp2-kb${running ? " is-on" : ""}`} src={still} alt="" />
           ) : exercise ? (
             <span className="sp2-media__tone" style={{ backgroundColor: toneFor(exercise.id) }} />
+          ) : null}
+          {!s.reducedMotion && nextClip && nextClip !== clip ? (
+            <video className="sp2-media__preload" src={nextClip} preload="metadata" muted playsInline tabIndex={-1} />
           ) : null}
         </div>
         <div className="sp2-shade" aria-hidden="true" />
@@ -454,36 +461,37 @@ function FinishPanel({
 
 /**
  * The exercise clip, with no browser controls: the session's play/pause drives it.
- * It plays while the session runs and pauses otherwise. Under reduced motion it never plays and
- * shows its still frame (the photo is used instead when the exercise has one).
+ * It plays while the session runs and pauses otherwise. The still is the poster. If the file
+ * fails to load, `onError` lets the stage fall back to that still.
  */
-function StageVideo({ src, poster, playing, still }: { src: string; poster?: string; playing: boolean; still: boolean }) {
+function StageVideo({ src, poster, playing, onError }: { src: string; poster?: string; playing: boolean; onError: () => void }) {
   const ref = useRef<HTMLVideoElement>(null);
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
     // play() returns a promise in modern browsers but nothing in some older ones (and in tests).
     try {
-      if (playing && !still) void el.play()?.catch(() => {});
+      if (playing) void el.play()?.catch(() => {});
       else el.pause();
     } catch {
-      /* playback not available: the poster or first frame stays */
+      /* playback not available: the poster stays */
     }
-  }, [playing, still, src]);
+  }, [playing, src]);
   return (
     <video
       ref={ref}
       className="sp2-media__video"
-      src={still && !poster ? `${src}#t=0.1` : src}
+      src={src}
       poster={poster}
       muted
       loop
       playsInline
-      autoPlay={!still}
-      preload={still ? "metadata" : "auto"}
+      autoPlay={playing}
+      preload="auto"
       disablePictureInPicture
       disableRemotePlayback
       tabIndex={-1}
+      onError={onError}
     />
   );
 }
