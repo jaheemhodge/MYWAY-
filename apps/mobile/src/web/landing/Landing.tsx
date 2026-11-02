@@ -1,15 +1,13 @@
 import { Navigate } from "react-router-dom";
 import { useAuth } from "@/app/state/AuthProvider";
-import { routes } from "@/web/routes";
+import { LandingPage } from "@/landing/LandingPage";
 
 /**
- * Placeholder for the next marketing page at "/".
- * No UI: a signed-in visitor goes to /app/home, everyone else to /sign-in.
- * Replace this file when the new landing page is ready.
+ * "/": signed-in visitors go to /app/home (unchanged); everyone else sees the landing page.
  */
 export function Landing() {
   const { status } = useAuth();
   if (status === "loading") return null;
   if (status === "signedIn") return <Navigate to="/app/home" replace />;
-  return <Navigate to={routes.signIn} replace />;
+  return <LandingPage />;
 }

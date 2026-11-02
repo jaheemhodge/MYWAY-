@@ -63,6 +63,8 @@ beforeEach(() => {
   vi.stubGlobal("matchMedia", (query: string) => ({ matches: false, media: query, addEventListener() {}, removeEventListener() {}, addListener() {}, removeListener() {} }));
   // The liquid-glass navbar draws with WebGL; jsdom has no canvas, and the component degrades when getContext is null.
   HTMLCanvasElement.prototype.getContext = (() => null) as unknown as HTMLCanvasElement["getContext"];
+  // The landing footer measures its script strokes; jsdom has no SVG geometry.
+  (SVGElement.prototype as unknown as { getTotalLength: () => number }).getTotalLength = () => 100;
   window.scrollTo = () => {};
   Element.prototype.scrollTo = () => {};
   Element.prototype.scrollBy = () => {};
@@ -234,11 +236,12 @@ describe("core flow", () => {
     await at("/app/session/4");
   });
 
-  it("sends / to /sign-in when nobody is signed in", async () => {
+  it("shows the landing page at / when nobody is signed in", async () => {
     const fake = createFakeSupabase();
     setSupabaseClientForTests(fake.client);
     renderAt("/");
-    await at("/sign-in");
+    expect(await screen.findByRole("heading", { level: 1, name: /feel like yourself again/i })).toBeTruthy();
+    await at("/");
   });
 
   it("sends a signed-in visitor from / to /app/home", async () => {

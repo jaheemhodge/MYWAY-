@@ -1,0 +1,490 @@
+/*
+ * Mobility landing page ("/", signed-out).
+ * Blue-grey gradient, near-black ink, off-white pills, Inter Tight (same as /app/home).
+ * Accessibility floor: body text 18px+, tap targets 56px+, ink focus rings, reduced motion respected.
+ * The two pasted components (nimbus-liquid-navbar, sticker-slap-footer) are restyled from here only;
+ * their own <style> tags come later in the DOM, so overrides are scoped under .landing to win.
+ */
+
+.landing {
+  --l-ink: #0f1418;
+  --l-slate: #2e4250;
+  --l-paper: #f5f6f4;
+  --l-sans: "Inter Tight", "Helvetica Neue", Arial, sans-serif;
+  min-height: 100vh;
+  overflow-x: clip;
+  background: linear-gradient(180deg, #7e93a0 0%, #9fb4c2 45%, #b6cad7 100%);
+  color: var(--l-ink);
+  font-family: var(--l-sans);
+  font-size: 18px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+.landing *,
+.landing *::before,
+.landing *::after {
+  box-sizing: border-box;
+}
+.landing :focus-visible {
+  outline: 3px solid var(--l-ink);
+  outline-offset: 3px;
+}
+.landing main {
+  display: block;
+}
+/* global.css gives h1/h2/p the app's serif and spacing; the landing page is all Inter Tight */
+.landing h1,
+.landing h2,
+.landing h3,
+.landing p {
+  font-family: inherit;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html:has(.landing) {
+    scroll-behavior: smooth;
+  }
+}
+
+/* ---------- pills (shared) ---------- */
+.landing-pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 56px;
+  padding: 0 26px;
+  border-radius: 999px;
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 1;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+.landing-pill--lg {
+  min-height: 60px;
+  padding: 0 30px;
+}
+.landing-pill--ink {
+  background: var(--l-ink);
+  color: #fff;
+}
+.landing-pill--ink:hover {
+  background: #1f2a32;
+  color: #fff;
+  transform: translateY(-1px);
+}
+.landing-pill--line {
+  border: 1.5px solid var(--l-ink);
+  color: var(--l-ink);
+  background: transparent;
+}
+.landing-pill--line:hover {
+  background: rgba(255, 255, 255, 0.3);
+  color: var(--l-ink);
+}
+.landing-pill:focus-visible {
+  outline-offset: 4px;
+  border-radius: 999px;
+}
+
+/* ---------- 1. navbar ---------- */
+.landing-nav {
+  position: fixed;
+  top: 16px;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  padding: 0 16px;
+  pointer-events: none;
+  transition: opacity 0.35s ease, transform 0.35s ease, visibility 0s linear 0s;
+}
+/* tucked away while the footer (which has its own top bar) fills the screen */
+.landing-nav.is-tucked {
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-16px);
+  transition: opacity 0.35s ease, transform 0.35s ease, visibility 0s linear 0.35s;
+}
+.landing-nav__row {
+  max-width: 1240px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+.landing-nav__row > * {
+  pointer-events: auto;
+}
+.landing-nav__wordmark {
+  display: inline-flex;
+  align-items: center;
+  min-height: 56px;
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  color: var(--l-ink);
+  text-decoration: none;
+}
+.landing-nav__wordmark:focus-visible {
+  border-radius: 8px;
+}
+.landing-nav__actions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.landing-nav__signin {
+  display: inline-flex;
+  align-items: center;
+  min-height: 56px;
+  padding: 0 16px;
+  border-radius: 999px;
+  font-size: 18px;
+  font-weight: 500;
+  color: var(--l-ink);
+  text-decoration: none;
+}
+.landing-nav__signin:hover {
+  background: rgba(255, 255, 255, 0.28);
+  color: var(--l-ink);
+}
+.landing-nav__start-short {
+  display: none;
+}
+
+/* LiquidNavbar restyle */
+.landing .nimbus-nav {
+  --n-fg: #0f1418;
+  --n-fg-soft: rgba(15, 20, 24, 0.62);
+  font-family: inherit;
+}
+.landing .nimbus-nav .nimbus-item {
+  height: 48px;
+  font-size: 16px;
+  font-family: inherit;
+}
+.landing .nimbus-nav .nimbus-item:focus-visible {
+  outline: 3px solid var(--l-ink);
+  outline-offset: 2px;
+}
+
+/* ---------- 2. hero ---------- */
+.landing-hero {
+  padding: 140px 24px 80px;
+  text-align: center;
+}
+.landing-hero__inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.landing-hero__title {
+  margin: 0;
+  max-width: 1100px;
+  font-size: clamp(48px, 6vw, 80px);
+  line-height: 0.98;
+  font-weight: 600;
+  letter-spacing: -0.045em;
+  text-wrap: balance;
+}
+.landing-hero__title span {
+  display: block;
+}
+.landing-hero__title-2 {
+  color: var(--l-slate);
+}
+/* two lines on desktop: each sentence on its own line */
+@media (min-width: 900px) {
+  .landing-hero__title span {
+    white-space: nowrap;
+  }
+}
+.landing-hero__sub {
+  margin: 28px 0 0;
+  max-width: 560px;
+  font-size: 20px;
+  line-height: 1.5;
+  text-wrap: pretty;
+}
+.landing-hero__ctas {
+  margin-top: 36px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+}
+.landing-hero__note {
+  margin: 18px 0 0;
+  font-size: 18px;
+  opacity: 0.85;
+}
+
+/* image fan */
+.landing-fan {
+  margin-top: 64px;
+  width: 100%;
+  height: 450px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+.landing-fan__card {
+  display: block;
+  aspect-ratio: 4 / 5;
+  height: auto;
+  border-radius: 16px;
+  object-fit: cover;
+  object-position: 50% 50%;
+  background: #9fb4c2;
+  box-shadow: 0 34px 60px -24px rgba(15, 20, 24, 0.55), 0 0 0 1px rgba(255, 255, 255, 0.2);
+}
+.landing-fan__card--left,
+.landing-fan__card--right {
+  position: relative;
+  z-index: 1;
+  width: 250px;
+}
+.landing-fan__card--left {
+  margin-right: -56px;
+  transform: translateY(72px) rotate(-6deg);
+}
+.landing-fan__card--right {
+  margin-left: -56px;
+  transform: translateY(72px) rotate(6deg);
+}
+.landing-fan__card--centre {
+  position: relative;
+  z-index: 2;
+  width: 310px;
+}
+
+/* entrance: header fades up with a slight blur, then the side cards slide out from the centre */
+@media (prefers-reduced-motion: no-preference) {
+  .landing-rise {
+    animation: landing-rise 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  }
+  .landing-rise--1 { animation-delay: 0.08s; }
+  .landing-rise--2 { animation-delay: 0.16s; }
+  .landing-rise--3 { animation-delay: 0.24s; }
+  .landing-fan__card--centre {
+    animation: landing-fan-centre 0.8s 0.3s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  }
+  .landing-fan__card--left {
+    animation: landing-fan-left 0.9s 0.45s cubic-bezier(0.2, 0.9, 0.25, 1.05) both;
+  }
+  .landing-fan__card--right {
+    animation: landing-fan-right 0.9s 0.55s cubic-bezier(0.2, 0.9, 0.25, 1.05) both;
+  }
+}
+@keyframes landing-rise {
+  from { opacity: 0; transform: translateY(12px); filter: blur(6px); }
+  to { opacity: 1; transform: none; filter: none; }
+}
+@keyframes landing-fan-centre {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes landing-fan-left {
+  from { opacity: 0; transform: translate(160px, 40px) rotate(0deg); }
+  to { opacity: 1; transform: translateY(72px) rotate(-6deg); }
+}
+@keyframes landing-fan-right {
+  from { opacity: 0; transform: translate(-160px, 40px) rotate(0deg); }
+  to { opacity: 1; transform: translateY(72px) rotate(6deg); }
+}
+
+/* ---------- 3. coach carousel ---------- */
+.landing-coach {
+  padding: 40px 0 96px;
+  scroll-margin-top: 88px;
+}
+.landing-coach__head {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 0 24px;
+  text-align: center;
+}
+.landing-coach__head h2 {
+  margin: 0;
+  font-size: clamp(36px, 4.6vw, 56px);
+  line-height: 1.02;
+  font-weight: 600;
+  letter-spacing: -0.04em;
+}
+.landing-coach__head p {
+  margin: 14px auto 0;
+  max-width: 560px;
+  font-size: 20px;
+}
+.landing-coach .pc {
+  margin-top: 24px;
+}
+
+/* ---------- 4. footer ---------- */
+.landing-disclaimer {
+  margin: 0;
+  padding: 0 24px 40px;
+  text-align: center;
+  font-size: 18px;
+  line-height: 1.5;
+}
+.landing-disclaimer span {
+  display: inline-block;
+  max-width: 640px;
+}
+
+/* StickerSlapFooter accessibility pass: 18px+ text, 56px tap targets, AA focus rings on the slate panel */
+.landing .ssf .ssf-tag {
+  font-size: 18px;
+}
+.landing .ssf .ssf-big {
+  font-size: clamp(22px, 2.4cqw, 34px);
+}
+.landing .ssf .ssf-big a,
+.landing .ssf .ssf-big button {
+  display: inline-flex;
+  align-items: center;
+  min-height: 56px;
+}
+.landing .ssf .ssf-map {
+  display: inline-flex;
+  align-items: center;
+  min-height: 56px;
+  font-size: 18px;
+}
+.landing .ssf .ssf-note {
+  font-size: 18px;
+}
+.landing .ssf .ssf-nav {
+  min-height: 56px;
+  font-size: 18px;
+}
+.landing .ssf .ssf-logo {
+  display: inline-flex;
+  align-items: center;
+  min-height: 56px;
+}
+.landing .ssf .ssf-pill {
+  display: inline-flex;
+  align-items: center;
+  min-height: 48px;
+  padding: 0 18px;
+  font-size: 18px;
+}
+.landing .ssf :focus-visible {
+  outline: 3px solid var(--l-ink);
+  outline-offset: 3px;
+}
+.landing .ssf .ssf-panel :focus-visible {
+  outline-color: var(--l-paper);
+}
+.landing .ssf .ssf-pill:focus-visible {
+  outline-color: var(--l-paper);
+}
+.landing .ssf-socials:empty {
+  display: none;
+}
+/* phone: keep the whole wordmark inside the width (the component lets it overflow by default) */
+@container (max-width: 760px) {
+  .landing .ssf .ssf-stage {
+    width: min(100%, calc(var(--ssf-wmh) * var(--ssf-ar)));
+    margin-left: 0;
+  }
+}
+
+/* ---------- responsive ---------- */
+@media (max-width: 640px) {
+  .landing-nav {
+    top: 10px;
+    padding: 0 10px;
+  }
+  .landing-nav__row {
+    gap: 6px;
+  }
+  .landing-nav__wordmark {
+    font-size: 20px;
+  }
+  .landing-nav__signin {
+    display: none; /* it is in the footer too */
+  }
+  .landing-nav__start {
+    padding: 0 18px;
+  }
+  .landing-nav__start-long {
+    display: none;
+  }
+  .landing-nav__start-short {
+    display: inline;
+  }
+  .landing .nimbus-nav {
+    padding: 4px;
+  }
+  .landing .nimbus-nav .nimbus-item {
+    padding: 0 11px;
+  }
+
+  .landing-hero {
+    padding: 112px 16px 56px;
+  }
+  .landing-hero__title {
+    font-size: 40px;
+    line-height: 1.02;
+  }
+  .landing-hero__sub {
+    margin-top: 20px;
+    font-size: 18px;
+  }
+  .landing-hero__ctas {
+    flex-direction: column;
+    width: 100%;
+    max-width: 420px;
+  }
+  .landing-hero__ctas .landing-pill {
+    width: 100%;
+  }
+  .landing-fan {
+    margin-top: 44px;
+    height: 260px;
+  }
+  .landing-fan__card--left,
+  .landing-fan__card--right {
+    width: 132px;
+  }
+  .landing-fan__card--left {
+    margin-right: -34px;
+  }
+  .landing-fan__card--right {
+    margin-left: -34px;
+  }
+  .landing-fan__card--centre {
+    width: 172px;
+  }
+  @keyframes landing-fan-left {
+    from { opacity: 0; transform: translate(80px, 30px) rotate(0deg); }
+    to { opacity: 1; transform: translateY(72px) rotate(-6deg); }
+  }
+  @keyframes landing-fan-right {
+    from { opacity: 0; transform: translate(-80px, 30px) rotate(0deg); }
+    to { opacity: 1; transform: translateY(72px) rotate(6deg); }
+  }
+  .landing-coach {
+    padding: 24px 0 72px;
+  }
+  /* stacked columns are already tall; 90svh would leave an empty slab above the wordmark */
+  .landing .ssf {
+    min-height: auto !important;
+  }
+  .landing .ssf .ssf-stage {
+    margin-top: 32px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .landing-pill--ink:hover {
+    transform: none;
+  }
+}
