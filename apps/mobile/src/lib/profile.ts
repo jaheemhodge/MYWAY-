@@ -90,8 +90,9 @@ export async function saveOnboarding(answers: Answers, focusArea: FocusArea, ext
   await saveQuestionnaire("baseline", answers);
 
   const existing = await getProfile();
-  const patch: Partial<ProfileRow> & { id: string } = {
-    id: userId,
+  // Column grants allow UPDATE of these fields only. An upsert becomes
+  // INSERT ... ON CONFLICT DO UPDATE SET id = excluded.id, which Postgres rejects.
+  const patch: Partial<ProfileRow> = {
     focus_area: focusArea,
     plan_start_date: existing?.planStartDate ?? todayIsoDate(),
     onboarded_at: existing?.onboardedAt ?? new Date().toISOString(),
@@ -99,9 +100,13 @@ export async function saveOnboarding(answers: Answers, focusArea: FocusArea, ext
   if (extra.firstName?.trim()) patch.first_name = extra.firstName.trim();
   if (extra.ageRange?.trim()) patch.age_range = extra.ageRange.trim();
 
-  const { data, error } = await getSupabase().from("profiles").upsert(patch, { onConflict: "id" }).select().single();
-  if (error) throw toProgressError(error);
-  return fromRow(data as ProfileRow);
+  const updated = await getSupabase().from("profiles").update(patch).eq("id", userId).select().maybeSingle();
+  if (updated.error) throw toProgressError(updated.error);
+  if (updated.data) return fromRow(updated.data as ProfileRow);
+
+  const inserted = await getSupabase().from("profiles").insert({ id: userId, ...patch }).select().single();
+  if (inserted.error) throw toProgressError(inserted.error);
+  return fromRow(inserted.data as ProfileRow);
 }
 
 export async function updateProfile(patch: Partial<Pick<Profile, "firstName" | "ageRange">>): Promise<Profile> {

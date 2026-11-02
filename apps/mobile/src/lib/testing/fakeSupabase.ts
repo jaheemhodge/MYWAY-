@@ -54,6 +54,25 @@ function logAppEvent(db: FakeDb, userId: string, eventName: string, properties: 
   });
 }
 
+/** Columns a signed-in user may UPDATE on profiles. Insert may also set id. */
+const PROFILE_UPDATE_COLUMNS = new Set(["first_name", "age_range", "focus_area", "plan_start_date", "onboarded_at"]);
+const PROFILE_INSERT_COLUMNS = new Set(["id", ...PROFILE_UPDATE_COLUMNS]);
+
+export type ProfileWrite = { op: "insert" | "update" | "upsert"; keys: string[] };
+
+/**
+ * Mirrors the column grants. An upsert/update that SETs id, or any column the
+ * client cannot write (email, signup_method, subscription_status, stripe_*), is denied.
+ */
+function profileColumnDenied(op: "insert" | "update" | "upsert", item: Row): Err {
+  const keys = Object.keys(item);
+  const allowed = op === "insert" ? PROFILE_INSERT_COLUMNS : PROFILE_UPDATE_COLUMNS;
+  if (keys.some((key) => !allowed.has(key))) {
+    return { message: "permission denied for table profiles", code: "42501" };
+  }
+  return null;
+}
+
 class Builder implements PromiseLike<{ data: unknown; error: Err }> {
   private op: "select" | "upsert" | "insert" | "update" | "delete" = "select";
   private payload: Row | Row[] | null = null;
@@ -66,6 +85,7 @@ class Builder implements PromiseLike<{ data: unknown; error: Err }> {
     private readonly table: keyof Omit<FakeDb, "users">,
     private readonly db: FakeDb,
     private readonly uid: () => string | null,
+    private readonly profileWrites: ProfileWrite[],
   ) {}
 
   select(_cols?: string) {
@@ -128,6 +148,15 @@ class Builder implements PromiseLike<{ data: unknown; error: Err }> {
     const rows = this.db[this.table];
     let result: Row[] = [];
 
+    if (this.table === "profiles" && (this.op === "insert" || this.op === "upsert" || this.op === "update")) {
+      const items = this.op === "update" ? [this.payload as Row] : Array.isArray(this.payload) ? this.payload : [this.payload as Row];
+      for (const item of items) {
+        const denied = profileColumnDenied(this.op, item);
+        if (denied) return { data: null, error: denied };
+      }
+      this.profileWrites.push({ op: this.op, keys: Object.keys(items[0] ?? {}) });
+    }
+
     if (this.op === "select") {
       result = this.visible();
     } else if (this.op === "insert" || this.op === "upsert") {
@@ -188,6 +217,7 @@ export function createFakeSupabase(seed?: Partial<FakeDb>) {
   let requireEmailConfirm = false;
   const oauthCalls: unknown[] = [];
   const authCalls: { op: string; args: unknown }[] = [];
+  const profileWrites: ProfileWrite[] = [];
   const listeners = new Set<(e: AuthChangeEvent, s: Session | null) => void>();
   const uid = () => session?.user.id ?? null;
   const emit = (e: AuthChangeEvent) => listeners.forEach((l) => l(e, session));
@@ -309,7 +339,7 @@ export function createFakeSupabase(seed?: Partial<FakeDb>) {
   const client = {
     auth,
     rpc,
-    from: (table: keyof Omit<FakeDb, "users">) => new Builder(table, db, uid),
+    from: (table: keyof Omit<FakeDb, "users">) => new Builder(table, db, uid, profileWrites),
   };
 
   return {
@@ -317,6 +347,7 @@ export function createFakeSupabase(seed?: Partial<FakeDb>) {
     db,
     oauthCalls,
     authCalls,
+    profileWrites,
     get session() {
       return session;
     },
